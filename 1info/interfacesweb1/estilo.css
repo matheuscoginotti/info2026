@@ -14,14 +14,6 @@
     box-sizing: border-box;
 }
 
-.card-cadastro h3 {
-    margin-top: 0;
-    margin-bottom: 20px;
-    color: #1e293b;
-    font-size: 20px;
-    font-weight: 600;
-}
-
 /* 2. O FORMULÁRIO INTERNO - Controlado via FLEXBOX */
 .formulario-trafego {
     display: flex;
