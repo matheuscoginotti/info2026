@@ -1,0 +1,237 @@
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turmas - Informática para Internet</title>
+    <!-- Fonte estilo código e ícones -->
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --card-bg: rgba(22, 27, 34, 0.7);
+            --text-primary: #e6edf3;
+            --text-secondary: #8b949e;
+            --accent-1: #ff7b72; /* Vermelho suave (1º ano) */
+            --accent-2: #79c0ff; /* Azul suave (2º ano) */
+            --accent-3: #7ee787; /* Verde suave (3º ano) */
+            --glow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Fira Code', monospace; /* Fonte monoespaçada */
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            overflow-x: hidden;
+            /* Fundo sutil de grade */
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: 30px 30px;
+        }
+
+        /* --- Header --- */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding: 1rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 10px;
+            background-color: var(--accent-3);
+            animation: blink 1s infinite;
+        }
+
+        p.subtitle {
+            color: var(--text-secondary);
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+        }
+
+        /* --- Container dos Cards --- */
+        .cards-container {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 1rem;
+        }
+
+        /* --- Estilo do Card --- */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #30363d;
+            border-radius: 15px;
+            padding: 2rem;
+            width: 300px;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(10px);
+            box-shadow: var(--glow);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--hover-color);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5), 0 0 15px var(--hover-color);
+        }
+
+        /* Ícones */
+        .icon-box {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--hover-color);
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover .icon-box {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        /* Títulos dos Cards */
+        .card h2 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Botões */
+        .btn-access {
+            display: inline-block;
+            margin-top: 1.5rem;
+            padding: 0.8rem 2rem;
+            background: transparent;
+            color: var(--hover-color);
+            border: 2px solid var(--hover-color);
+            border-radius: 5px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-access:hover {
+            background: var(--hover-color);
+            color: #0d1117;
+            box-shadow: 0 0 15px var(--hover-color);
+        }
+
+        /* Decoração de código no fundo do card */
+        .code-bg {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            font-size: 0.8rem;
+            color: rgba(255,255,255,0.05);
+            pointer-events: none;
+            z-index: 0;
+            text-align: left;
+        }
+
+        /* --- Animações --- */
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8rem; }
+            .cards-container { flex-direction: column; align-items: center; }
+            .card { width: 100%; max-width: 350px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1><span id="typewriter"></span><span class="cursor">&nbsp;</span></h1>
+        <p class="subtitle">&lt; Selecione sua turma para continuar /&gt;</p>
+    </header>
+
+    <div class="cards-container">
+        
+        <!-- 1º INFO -->
+        <div class="card" style="--hover-color: var(--accent-1);">
+            <div class="code-bg">
+                &lt;div&gt;<br>&nbsp;&nbsp;class="iniciante"<br>&lt;/div&gt;
+            </div>
+            <div class="icon-box">
+                <i class="fab fa-html5"></i>
+            </div>
+            <h2>1º Info</h2>
+            <a href="1info/1infomenu.html" class="btn-access" onclick="alert('Acessando painel do 1º Ano...')">Acessar</a>
+        </div>
+
+        <!-- 2º INFO -->
+        <div class="card" style="--hover-color: var(--accent-2);">
+            <div class="code-bg">
+                function dev() {<br>&nbsp;&nbsp;return true;<br>}
+            </div>
+            <div class="icon-box">
+                <i class="fab fa-js"></i>
+            </div>
+            <h2>2º Info</h2>
+            <a href="2info/2infomenu.html" class="btn-access" onclick="alert('Acessando painel do 2º Ano...')">Acessar</a>
+        </div>
+
+        <!-- 3º INFO -->
+        <div class="card" style="--hover-color: var(--accent-3);">
+            <div class="code-bg">
+                SELECT * FROM<br>&nbsp;&nbsp;future_devs;<br>
+            </div>
+            <div class="icon-box">
+                <i class="fas fa-database"></i>
+            </div>
+            <h2>3º Info</h2>
+            <a href="3info/3infomenu.html" class="btn-access" onclick="alert('Acessando painel do 3º Ano...')">Acessar</a>
+        </div>
+
+    </div>
+
+    <script>
+        // Efeito de digitação no título
+        const text = "Informática para Internet";
+        const typewriterElement = document.getElementById('typewriter');
+        let index = 0;
+
+        function type() {
+            if (index < text.length) {
+                typewriterElement.innerHTML += text.charAt(index);
+                index++;
+                setTimeout(type, 100); // Velocidade da digitação
+            }
+        }
+
+        // Inicia a digitação quando a página carrega
+        window.onload = type;
+    </script>
+
+</body>
+</html>
