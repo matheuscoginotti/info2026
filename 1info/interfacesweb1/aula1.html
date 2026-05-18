@@ -23,123 +23,126 @@
         .comment { color: #6a9955; font-style: italic; }
         .tag { color: #569cd6; }
         .attr { color: #9cdcfe; }
-        .val { color: #ce9178; }
-        .selector { color: #dcdcaa; }
-        .prop { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-800 antialiased">
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
 
-    <header class="bg-indigo-950 text-white p-6 shadow-md flex justify-between items-center">
-        <div class="flex items-center space-x-3">
-            <span class="bg-indigo-500 text-white font-bold px-3 py-1 rounded text-sm font-mono">1º INFO</span>
-            <span class="text-indigo-300 font-medium">|</span>
-            <h1 class="text-xl font-bold tracking-tight">Interfaces Web I</h1>
+    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 2: Estética</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 11: As Ruas do Layout</h1>
+            <p class="text-2xl text-indigo-100 opacity-90">Dominando Formulários, Flexbox e Alinhamentos de Tráfego</p>
         </div>
-        <nav class="text-sm font-medium text-indigo-200 font-mono">
-            Aula 11
-        </nav>
     </header>
 
-    <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white py-20 px-6 text-center shadow-inner">
-        <h2 class="text-4xl font-extrabold mt-4 mb-4 tracking-tight">Organizadores de Tráfego (Fluxo de Layout)</h2>
-        <p class="text-slate-300 text-lg max-w-2xl mx-auto font-light">
-            Entendendo a estrutura de coleta de dados e controlando a distribuição espacial de elementos através de folhas de estilo externas.
-        </p>
-    </div>
-
-    <main class="max-w-5xl mx-auto px-6 py-12 space-y-16">
-
-        <section class="space-y-6">
-            <div class="border-b border-slate-200 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900">1. A Caixa de Entrada e as Ruas do Layout</h3>
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Gerenciamento de Tráfego</h2>
             </div>
-            <p class="text-slate-600 leading-relaxed text-lg">
+
+            <p class="text-lg text-slate-600 mb-8">
                 Se as caixas anteriores serviam para exibir conteúdos de forma estática, o formulário (<code class="bg-slate-100 text-indigo-600 px-1.5 py-0.5 rounded font-medium text-sm">&lt;form&gt;</code>) atua como uma verdadeira caixa de correio eletrônica. Para organizar onde cada campo de escrita ficará posicionado nas ruas do navegador, o CSS utiliza gerenciadores de tráfego que ditam as regras do fluxo da página.
             </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg font-mono">&lt;input&gt;</div>
-                    <h4 class="text-lg font-bold text-slate-800">O Espaço de Preenchimento</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        É o elemento que abre uma vaga na tela para o usuário interagir e digitar informações como textos, e-mails ou palavras-passe de segurança.
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">Formulários e Auto</h3>
+                    <p class="text-sm text-slate-600">
+                        O formulário agrupa campos de coleta de dados. Usando a margem automática (<code>margin: 0 auto;</code>), conseguimos estabelecer um equilíbrio perfeito centralizando o bloco inteiro na tela.
                     </p>
                 </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg font-mono">&lt;button&gt;</div>
-                    <h4 class="text-lg font-bold text-slate-800">O Despachante de Lotes</h4>
-                    <p class="text-slate-600 text-sm leading-relaxed">
-                        Funciona como o gatilho final que agrupa todas as informações digitadas e envia o formulário preenchido para o processamento de dados do sistema.
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Flexbox e Float</h3>
+                    <p class="text-sm text-slate-600">
+                        O Flexbox organiza elementos de forma inteligente em linhas ou colunas verticais sem quebras. Já o Float força um desvio intencional de um bloco para a extremidade lateral esquerda ou direita.
                     </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-amber-50 rounded-xl border border-amber-100">
+                <p class="text-amber-900 text-sm">
+                    <strong>Nota Importante:</strong><br>
+                    <em>Para organizar interfaces modernas de forma profissional, separamos o arquivo estrutural HTML das regras de design em uma folha de estilos CSS externa.</em>
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Propriedades de Fluxo</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Tag de Ligação Externa</h3>
+                    <p class="text-slate-600">A tag <code>&lt;link rel="stylesheet" href="estilo.css"&gt;</code> é colocada dentro do cabeçalho HTML para carregar as regras visuais de um arquivo separado.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Direção Flexível</h3>
+                    <p class="text-slate-600">Ao aplicar <code>display: flex;</code> e <code>flex-direction: column;</code> em um formulário, todos os campos internos são empilhados verticalmente de forma automática.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Controle de Espaçamento</h3>
+                    <p class="text-slate-600">A propriedade <code>gap: 15px;</code> do Flexbox cria uma rua de separação idêntica entre todos os elementos internos do contêiner, eliminando cálculos manuais.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Desvio com Float</h3>
+                    <p class="text-slate-600">Utilizar <code>float: right;</code> remove o elemento da ordem linear e joga-o totalmente para o lado direito da caixa onde ele está contido.</p>
                 </div>
             </div>
         </section>
 
-        <section class="space-y-6">
-            <div class="border-b border-slate-200 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900">2. Os Três Fiscais de Alinhamento</h3>
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Prática: Separando Estrutura de Estilo</h2>
             </div>
-            <p class="text-slate-600 leading-relaxed">
-                Para evitar colisões e sobreposições nas caixas de formulário, aplicamos regras de posicionamento no CSS:
-            </p>
 
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 pt-2">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-2">
-                    <span class="text-2xl">🚗</span>
-                    <h4 class="font-bold text-slate-800 text-base">O Guarda do "Auto"</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Calcula o tamanho do navegador, subtrai a largura fixa do bloco e distribui as sobras igualmente nas margens esquerda e direita para centralizar o bloco.
-                    </p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-2">
-                    <span class="text-2xl">🚀</span>
-                    <h4 class="font-bold text-slate-800 text-base">As Faixas do "Flexbox"</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Transforma o elemento pai em uma cabine inteligente, forçando os elementos filhos a se alinharem ordenadamente em formato de colunas ou linhas automáticas.
-                    </p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-2">
-                    <span class="text-2xl">⛵</span>
-                    <h4 class="font-bold text-slate-800 text-base">O Desvio do "Float"</h4>
-                    <p class="text-slate-500 text-sm leading-relaxed">
-                        Retira temporariamente o elemento do fluxo padrão de leitura e joga-o totalmente encostado na margem direita ou esquerda da caixa pai.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="space-y-6">
-            <div class="border-b border-slate-200 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900">3. Código de Exemplo da Aula</h3>
-            </div>
-            <p class="text-slate-600">
-                Veja abaixo como estruturamos o HTML limpo e como separamos as regras de layout em um arquivo externo chamado <code class="bg-slate-100 text-indigo-600 px-1 rounded font-mono text-sm">estilo.css</code>:
-            </p>
+            <p class="mb-8 text-slate-600 text-lg font-light">O exemplo a seguir demonstra a montagem de um formulário limpo no HTML e a sua respectiva folha de estilo externa:</p>
 
             <div class="code-container">
-<pre><span class="comment">&lt;!-- ==========================================
-     ARQUIVO: index.html
-     ========================================== --&gt;</span>
+<pre><code><span class="comment">&lt;!-- =========================================================
+     ARQUIVO: index.html (Estrutura Isolada)
+     ========================================================= --&gt;</span>
 <span class="tag">&lt;!DOCTYPE html&gt;</span>
-<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"pt-br"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;head&gt;</span>
-    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
-    <span class="tag">&lt;title&gt;</span>Formulário Separado com CSS Externo<span class="tag">&lt;/title&gt;</span>
-    <span class="comment">&lt;!-- Ligação com o arquivo de estilização que criaremos abaixo --&gt;</span>
-    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"estilo.css"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Cadastro Técnico de Usuários<span class="tag">&lt;/title&gt;</span>
+    <span class="comment">&lt;!-- Vinculando o arquivo CSS externo que fica na mesma pasta --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"estilo.css"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span>
 
-    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card-cadastro"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"card-cadastro"</span><span class="tag">&gt;</span>
         <span class="tag">&lt;h3&gt;</span>Painel de Cadastro<span class="tag">&lt;/h3&gt;</span>
-        <span class="tag">&lt;form</span> <span class="attr">class</span>=<span class="val">"formulario-trafego"</span><span class="tag">&gt;</span>
-            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">placeholder</span>=<span class="val">"Nome completo"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span><span class="tag">&gt;</span>
-            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"E-mail de acesso"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;form</span> <span class="attr">class</span>=<span class="string">"formulario-trafego"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"Nome completo"</span> <span class="attr">class</span>=<span class="string">"campo-input"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">placeholder</span>=<span class="string">"E-mail de acesso"</span> <span class="attr">class</span>=<span class="string">"campo-input"</span><span class="tag">&gt;</span>
             
             <span class="tag">&lt;div&gt;</span>
-                <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span> <span class="attr">class</span>=<span class="val">"btn-enviar"</span><span class="tag">&gt;</span>Cadastrar<span class="tag">&lt;/button&gt;</span>
-                <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="val">"texto-alerta"</span><span class="tag">&gt;</span>Status: Aguardando preenchimento.<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"btn-enviar"</span><span class="tag">&gt;</span>Cadastrar<span class="tag">&lt;/button&gt;</span>
+                <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"texto-alerta"</span><span class="tag">&gt;</span>Status: Aguardando preenchimento.<span class="tag">&lt;/p&gt;</span>
             <span class="tag">&lt;/div&gt;</span>
         <span class="tag">&lt;/form&gt;</span>
     <span class="tag">&lt;/div&gt;</span>
@@ -148,89 +151,83 @@
 <span class="tag">&lt;/html&gt;</span>
 
 
-<span class="comment">/* ==========================================
-   ARQUIVO EXTERNO: estilo.css
-   ========================================== */</span>
+<span class="comment">/* =========================================================
+   ARQUIVO SEPARADO: estilo.css (Folha de Estilos Externa)
+   ========================================================= */</span>
 
-<span class="comment">/* 1. O CARD PRINCIPAL - Centralizado horizontalmente via AUTO */</span>
-<span class="selector">.card-cadastro</span> {
-    <span class="prop">background-color</span>: #ffffff;
-    <span class="prop">max-width</span>: 400px;             <span class="comment">/* Teto fixo para o limite da rua */</span>
-    <span class="prop">margin</span>: 0 auto;               <span class="comment">/* Centralização Automática nas margens */</span>
-    <span class="prop">padding</span>: 30px;
-    <span class="prop">border-radius</span>: 12px;
-    <span class="prop">border</span>: 1px solid #e2e8f0;
+<span class="css-selector">.card-cadastro</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#ffffff</span>;
+    <span class="css-prop">max-width</span>: <span class="css-val">400px</span>;             <span class="comment">/* Limite máximo fixo de largura */</span>
+    <span class="css-prop">margin</span>: <span class="css-val">0 auto</span>;               <span class="comment">/* CENTRALIZAÇÃO AUTOMÁTICA HORIZONTAL */</span>
+    <span class="css-prop">padding</span>: <span class="css-val">30px</span>;
+    <span class="css-prop">border-radius</span>: <span class="css-val">12px</span>;
+    <span class="css-prop">border</span>: <span class="css-val">1px solid #e2e8f0</span>;
 }
 
-<span class="comment">/* 2. O FORMULÁRIO INTERNO - Controlado via FLEXBOX */</span>
-<span class="selector">.formulario-trafego</span> {
-    <span class="prop">display</span>: flex;
-    <span class="prop">flex-direction</span>: column;       <span class="comment">/* Organiza os filhos em fila vertical */</span>
-    <span class="prop">gap</span>: 15px;                    <span class="comment">/* Cria os espaços de tráfego entre caixas */</span>
+<span class="css-selector">.formulario-trafego</span> {
+    <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+    <span class="css-prop">flex-direction</span>: <span class="css-val">column</span>;       <span class="comment">/* Organiza os campos em formato de fila vertical */</span>
+    <span class="css-prop">gap</span>: <span class="css-val">15px</span>;                    <span class="comment">/* Espaçamento automático entre os elementos */</span>
 }
 
-<span class="selector">.campo-input</span> {
-    <span class="prop">width</span>: 100%;
-    <span class="prop">padding</span>: 12px 15px;
-    <span class="prop">border</span>: 2px solid #cbd5e1;
-    <span class="prop">border-radius</span>: 6px;
+<span class="css-selector">.campo-input</span> {
+    <span class="css-prop">width</span>: <span class="css-val">100%</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">12px 15px</span>;
+    <span class="css-prop">border</span>: <span class="css-val">2px solid #cbd5e1</span>;
+    <span class="css-prop">border-radius</span>: <span class="css-val">6px</span>;
 }
 
-<span class="comment">/* 3. O BOTÃO - Desviado individualmente usando FLOAT */</span>
-<span class="selector">.btn-enviar</span> {
-    <span class="prop">float</span>: right;                 <span class="comment">/* Atraca o botão totalmente à direita */</span>
-    <span class="prop">width</span>: 50%;
-    <span class="prop">background-color</span>: #e67e22;
-    <span class="prop">color</span>: white;
-    <span class="prop">padding</span>: 14px;
-    <span class="prop">border-radius</span>: 6px;
-    <span class="prop">font-weight</span>: bold;
-}</pre>
+<span class="css-selector">.btn-enviar</span> {
+    <span class="css-prop">float</span>: <span class="css-val">right</span>;                 <span class="comment">/* DESVIO: Atraca o botão totalmente à direita */</span>
+    <span class="css-prop">width</span>: <span class="css-val">50%</span>;                   <span class="comment">/* Ocupa metade da largura interna do card */</span>
+    <span class="css-prop">background-color</span>: <span class="css-val">#e67e22</span>;
+    <span class="css-prop">color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">14px</span>;
+    <span class="css-prop">border-radius</span>: <span class="css-val">6px</span>;
+    <span class="css-prop">font-weight</span>: <span class="css-val">bold</span>;
+    <span class="css-prop">border</span>: <span class="css-val">none</span>;
+}
+
+<span class="css-selector">.texto-alerta</span> {
+    <span class="css-prop">font-size</span>: <span class="css-val">12px</span>;
+    <span class="css-prop">color</span>: <span class="css-val">#7f8c8d</span>;
+    <span class="css-prop">margin-top</span>: <span class="css-val">5px</span>;
+}</code></pre>
             </div>
         </section>
 
-        <section class="space-y-6">
-            <div class="border-b border-slate-200 pb-4">
-                <h3 class="text-2xl font-bold text-slate-900">4. Atividade Prática de Fluxo</h3>
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Mestre do Tráfego</h2>
             </div>
-            <p class="text-slate-600">
-                Com base no código acima montado de forma isolada nos seus arquivos, faça as seguintes alterações e registre as respostas técnicas:
-            </p>
 
-            <div class="grid grid-cols-1 gap-4">
+            <p class="mb-10 text-indigo-100 text-lg font-light">Para concluir o estudo do fluxo de layout, aplique estas alterações locais nos seus arquivos isolados:</p>
+
+            <div class="space-y-6 text-indigo-950">
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
                     <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
-                    <p class="font-medium">
-                        <strong>Inversão com Flexbox:</strong> Na classe <code class="font-mono text-sm bg-slate-50 px-1 rounded">.formulario-trafego</code>, modifique o comando de direção para <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">flex-direction: column-reverse;</code>. Explique o que aconteceu com a ordem de exibição visual das caixas de input e do botão.
-                    </p>
+                    <p class="font-medium"><strong>Fator de Inversão:</strong> Na classe <code>.formulario-trafego</code>, modifique a direção do fluxo para <code>flex-direction: column-reverse;</code>. Explique o que aconteceu com a ordem das caixas e do botão.</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
                     <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
-                    <p class="font-medium">
-                        <strong>Efeito Cascata da Ligação:</strong> No seu <code class="font-mono text-sm bg-slate-50 px-1 rounded">index.html</code>, altere o nome do arquivo chamado na tag de ligação para <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">href="estilo-errado.css"</code>. O que acontece com a aparência visual do formulário? Justifique relacionando o papel da tag de importação externa.
-                    </p>
+                    <p class="font-medium"><strong>Quebra de Link:</strong> Altere o nome do arquivo importado no seu HTML para <code>href="estilo-errado.css"</code>. O que aconteceu com o design do formulário e por quê?</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
                     <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
-                    <p class="font-medium">
-                        <strong>O Rompimento do Float:</strong> Note que o parágrafo <code class="font-mono text-sm bg-slate-50 px-1 rounded">.texto-alerta</code> acabou subindo para o lado esquerdo do botão. Por que isso acontece quando ativamos o <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">float: right;</code> no botão? Qual é o impacto desse comportamento no fluxo linear de leitura?
-                    </p>
+                    <p class="font-medium"><strong>Impacto do Float:</strong> Perceba que o parágrafo <code>.texto-alerta</code> subiu para o lado livre esquerdo do botão. Por que isso ocorre quando usamos <code>float: right;</code>?</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
                     <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
-                    <p class="font-medium">
-                        <strong>Alinhamento Horizontal:</strong> Altere a propriedade de organização do formulário para <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">flex-direction: row;</code> e remova a linha de float do botão. Descreva como os elementos se reajustaram para disputar o espaço lateral.
-                    </p>
+                    <p class="font-medium"><strong>Layout Horizontal:</strong> Modifique a direção do contêiner para <code>flex-direction: row;</code> e apague a regra de float do botão. Descreva a nova disposição espacial assumida.</p>
                 </div>
-
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
                     <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
-                    <p class="font-medium">
-                        <strong>Centralização Quebrada:</strong> Remova a propriedade <code class="font-mono text-sm bg-slate-50 px-1 rounded">max-width: 400px;</code> da classe do card principal. O comando <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">margin: 0 auto;</code> continuou executando a centralização perfeitamente na tela? Explique o porquê.
-                    </p>
+                    <p class="font-medium"><strong>Centralização Quebrada:</strong> Remova a linha <code>max-width: 400px;</code> do card de cadastro. Explique por que o comando <code>margin: 0 auto;</code> deixou de funcionar visualmente.</p>
                 </div>
             </div>
         </section>
@@ -238,9 +235,9 @@
     </main>
 
     <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
-        <p class="max-w-md mx-auto text-sm leading-relaxed">
-            Curso Técnico em Informática para Internet<br>
-            <span class="text-slate-600 text-xs font-mono">Interfaces Web I — Módulo Técnico</span>
+        <p class="max-w-4xl mx-auto">
+            Aula 11 concluída. O gerenciamento de fluxo externo já não tem segredos para si!<br>
+            A seguir: <strong>Módulo 3 - Planos de Fundo, Gradientes e Opacidade</strong>.
         </p>
     </footer>
 
