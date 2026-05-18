@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 11: A Ponte de Dados e os Organizadores de Tráfego</title>
+    <style>
+        /* ==========================================================================
+           RESET E ESTRUTURA BASE (Para dividir a tela em Teoria e Prática)
+           ========================================================================== */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+        }
+
+        body {
+            display: flex;
+            min-height: 100vh;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        /* Painel Esquerdo: Teoria e Instruções (Estilo Apostila) */
+        .painel-didatico {
+            width: 45%;
+            background-color: #ffffff;
+            padding: 40px;
+            overflow-y: auto;
+            height: 100vh;
+            border-right: 2px solid #e4e7eb;
+            box-shadow: 5px 0 15px rgba(0,0,0,0.05);
+        }
+
+        /* Painel Direito: Onde a mágica do CSS acontece (Área de Teste) */
+        .painel-pratico {
+            width: 55%;
+            padding: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center; /* Centralização vertical e horizontal padrão */
+            height: 100vh;
+            overflow-y: auto;
+        }
+
+        /* ==========================================================================
+           ESTILIZAÇÃO DOS ELEMENTOS DIDÁTICOS (Apostila)
+           ========================================================================== */
+        h1 { color: #2c3e50; font-size: 24px; margin-bottom: 5px; }
+        h2 { color: #34495e; font-size: 18px; margin-bottom: 25px; font-weight: 400; border-bottom: 2px solid #3498db; padding-bottom: 10px; }
+        h3 { color: #2c3e50; font-size: 18px; margin: 25px 0 10px 0; }
+        h4 { color: #e67e22; font-size: 15px; margin: 15px 0 5px 0; }
+        
+        p { line-height: 1.6; margin-bottom: 15px; font-size: 15px; color: #555; }
+        ul { margin-left: 20px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; font-size: 14px; line-height: 1.5; }
+        strong { color: #2c3e50; }
+        
+        .nota-importante {
+            background-color: #e8f4fd;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+
+        .box-atividade {
+            background-color: #fdf2e9;
+            border-left: 4px solid #e67e22;
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 4px;
+        }
+        .box-atividade ol { margin-left: 20px; }
+        .box-atividade li { margin-bottom: 12px; font-weight: bold; color: #444; }
+        .box-atividade span { font-weight: normal; display: block; color: #666; margin-top: 4px; }
+
+        /* ==========================================================================
+           CSS DA ATIVIDADE PRÁTICA (O que os alunos vão manipular)
+           ========================================================================== */
+        
+        /* 1. O CONTAINER PRINCIPAL - Centralizado com AUTO */
+        .card-cadastro {
+            background-color: white;
+            width: 100%;
+            max-width: 400px; /* Obriga o elemento a ter um teto de largura */
+            margin: 0 auto;   /* Piloto Automático: Centraliza horizontalmente nas sobras de espaço */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+
+        .card-cadastro h3 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            color: #1a252f;
+            font-size: 22px;
+        }
+
+        /* 2. O FORMULÁRIO - Organizado com FLEXBOX */
+        .formulario-firebase {
+            display: flex;
+            flex-direction: column; /* Empilha os campos em formato de coluna */
+            gap: 15px;              /* Espaçamento perfeito e automático entre os filhos */
+        }
+
+        /* Estilização das caixas de entrada (Inputs) */
+        .campo-input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #cbd5e1;
+            border-radius: 6px;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+
+        /* Pseudo-classe Focus: Feedback visual de clique */
+        .campo-input:focus {
+            border-color: #3498db; /* Azul Firebase */
+            box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+        }
+
+        /* O Botão de Envio */
+        .btn-enviar {
+            background-color: #e67e22; /* Laranja Firebase */
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            
+            /* 3. O FLOAT - Empurra o botão para a direita individualmente */
+            float: right; 
+            width: 50%; /* Ocupará metade do formulário */
+        }
+
+        .btn-enviar:hover {
+            background-color: #d35400; /* Tom mais escuro no hover */
+        }
+
+        .texto-alerta {
+            font-size: 12px;
+            color: #7f8c8d;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="painel-didatico">
+        <h1>Aula 11: A Ponte de Dados e os Organizadores de Tráfego</h1>
+        <h2>Construindo Formulários e Alinhando Elementos com Auto, Flex, e Float</h2>
+
+        <h3>1. A Caixa de Entrada: O Formulário</h3>
+        <p>Se o HTML antes era apenas uma vitrine para o usuário olhar, o formulário (<code>&lt;form&gt;</code>) é a nossa caixa de correio. É através dele que capturamos o que o usuário digita para despacharmos via JavaScript diretamente para o banco de dados do <strong>Firebase</strong>.</p>
+        <ul>
+            <li><strong>&lt;input&gt;:</strong> O espaço onde o usuário digita (texto, e-mail, senhas).</li>
+            <li><strong>&lt;button&gt;:</strong> O gatilho que dispara os dados coletados.</li>
+        </ul>
+
+        <h3>2. Os Organizadores de Tráfego</h3>
+        <p>Para alinhar inputs e botões, o CSS evoluiu por eras. Vamos entender a diferença conceitual das três ferramentas usadas neste código:</p>
+        
+        <h4>🚗 Auto: O Piloto Automático (Centralização Estática)</h4>
+        <p>Distribui o espaço restante nas laterais de forma matemática e igualitária. Só funciona se o bloco tiver uma largura máxima definida (<code>width</code> ou <code>max-width</code>). Centraliza o bloco na tela, mas não sabe organizar coisas complexas dentro dele.</p>
+
+        <h4>🚀 Flexbox: O Teletransporte Dinâmico (Layout Moderno)</h4>
+        <p>Transforma um container pai em um espaço inteligente onde os elementos filhos se alinham, mudam de ordem e se distribuem sozinhos. É o par perfeito para exibir listas ou alinhar formulários dinâmicos que se comunicam com o banco de dados.</p>
+
+        <h4>⛵ Float: O Barco a Vela (Alinhamento Lateral Antigo)</h4>
+        <p>Empurra um elemento totalmente para um lado, fazendo textos e outros blocos contornarem ele. Era usado para layouts inteiros antigamente, mas hoje é desencorajado, exceto para efeitos específicos (como o nosso botão ali ao lado).</p>
+
+        <div class="box-atividade">
+            <h3>Atividade: O Maestro do Layout</h3>
+            <p>Abra as ferramentas do desenvolvedor no navegador (F12), localize o CSS e faça os testes:</p>
+            <ol>
+                <li>Inversão de Fluxo (Flexbox)
+                    <span>Na classe <code>.formulario-firebase</code>, mude <code>flex-direction: column;</code> para <code>column-reverse</code>. O que mudou na ordem visual? O HTML original foi alterado?</span>
+                </li>
+                <li>O Perigo do Float
+                    <span>Repare no pequeno texto abaixo do botão "Salvar Dados". O botão tem <code>float: right;</code>. O texto ficou abaixo ou tentou subir preenchendo o espaço do botão? Como o float quebra o fluxo natural?</span>
+                </li>
+                <li>Alinhamento em Linha (Row)
+                    <span>Mude a <code>.formulario-firebase</code> para <code>flex-direction: row;</code> e remova temporariamente o <code>float: right</code> e o <code>width: 50%</code> do botão. Como os inputs se reorganizaram?</span>
+                </li>
+                <li>Quebrando o Piloto Automático (Auto)
+                    <span>Vá no <code>.card-cadastro</code> e remova a propriedade <code>max-width: 400px;</code>. O <code>margin: 0 auto;</code> ainda consegue centralizar o bloco? Por quê?</span>
+                </li>
+            </ol>
+        </div>
+    </div>
+
+    <div class="painel-pratico">
+        
+        <div class="card-cadastro">
+            <h3>Salvar no Firebase</h3>
+            
+            <form class="formulario-firebase" onsubmit="event.preventDefault(); alert('Pronto! Dados capturados pelo JS e preparados para envio ao Firebase.');">
+                <input type="text" placeholder="Nome completo" class="campo-input" required>
+                <input type="email" placeholder="E-mail de cadastro" class="campo-input" required>
+                
+                <div>
+                    <button type="submit" class="btn-enviar">Salvar Dados</button>
+                    <p class="texto-alerta">Ambiente de testes local.</p>
+                </div>
+            </form>
+        </div>
+
+    </div>
+
+</body>
+</html>
