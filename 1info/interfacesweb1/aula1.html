@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Aula 11: Organizadores de Tráfego</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
-    
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
         body { font-family: 'Inter', sans-serif; }
         code, pre { font-family: 'Fira Code', monospace; }
         
@@ -25,23 +24,27 @@
         .tag { color: #569cd6; }
         .attr { color: #9cdcfe; }
         .val { color: #ce9178; }
+        .selector { color: #dcdcaa; }
+        .prop { color: #9cdcfe; }
+        .prop-val { color: #ce9178; }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-800 antialiased">
 
-    <header class="bg-slate-900 text-white sticky top-0 z-50 px-6 py-4 shadow-md flex justify-between items-center">
+    <header class="bg-indigo-950 text-white sticky top-0 z-50 px-6 py-4 shadow-md flex justify-between items-center">
         <div class="flex items-center space-x-3">
-            <span class="bg-amber-500 text-slate-900 font-bold px-3 py-1 rounded text-sm font-mono">AULA 11</span>
-            <span class="text-slate-400 font-medium">|</span>
-            <h1 class="text-lg font-semibold tracking-tight">Organizadores de Tráfego</h1>
+            <span class="bg-indigo-500 text-white font-bold px-3 py-1 rounded text-sm font-mono">1º INFO</span>
+            <span class="text-indigo-300 font-medium">|</span>
+            <h1 class="text-lg font-semibold tracking-tight">Interfaces Web I</h1>
         </div>
-        <nav class="text-sm font-medium text-slate-400">
-            Interfaces Web I
+        <nav class="text-sm font-medium text-indigo-200 font-mono">
+            Aula 11
         </nav>
     </header>
 
-    <div class="bg-gradient-to-r from-slate-800 to-indigo-950 text-white py-16 px-6 text-center shadow-inner">
-        <h2 class="text-4xl font-extrabold mb-4 tracking-tight">A Caixa de Entrada e as Ruas do Layout</h2>
+    <div class="bg-gradient-to-r from-slate-900 to-indigo-950 text-white py-20 px-6 text-center shadow-inner">
+        <span class="bg-indigo-500/20 text-indigo-300 border border-indigo-500/30 text-xs font-bold uppercase tracking-widest px-3 py-1 rounded-full">Módulo Técnico</span>
+        <h2 class="text-4xl font-extrabold mt-4 mb-4 tracking-tight">Organizadores de Tráfego (Fluxo de Layout)</h2>
         <p class="text-slate-300 text-lg max-w-2xl mx-auto font-light">
             Dominando a estrutura de formulários e desmistificando o posicionamento com os três grandes gerenciadores de fluxo: Auto, Flexbox e Float.
         </p>
@@ -54,19 +57,19 @@
                 <h3 class="text-2xl font-bold text-slate-900">1. A Caixa de Entrada: O Formulário</h3>
             </div>
             <p class="text-slate-600 leading-relaxed text-lg">
-                Se as tags que vimos até aqui transformavam o HTML em uma vitrine estática para o usuário apenas ler, o formulário (<code class="bg-slate-100 text-amber-600 px-1.5 py-0.5 rounded font-medium text-sm">&lt;form&gt;</code>) funciona como a nossa caixa de correio. Ele é a ferramenta padrão para coletar e agrupar dados enviados por quem navega na página.
+                Se as tags que vimos até aqui transformavam o HTML em uma vitrine estática para o usuário apenas ler, o formulário (<code class="bg-slate-100 text-indigo-600 px-1.5 py-0.5 rounded font-medium text-sm">&lt;form&gt;</code>) funciona como a nossa caixa de correio. Ele é a ferramenta padrão para coletar e agrupar dados enviados por quem navega na página.
             </p>
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-blue-100 text-blue-600 flex items-center justify-center font-bold text-lg font-mono">&lt;input&gt;</div>
+                    <div class="w-10 h-10 rounded-xl bg-indigo-100 text-indigo-600 flex items-center justify-center font-bold text-lg font-mono">&lt;input&gt;</div>
                     <h4 class="text-lg font-bold text-slate-800">Espaço de Digitação</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">
                         É a vaga reservada para a entrada de texto. Pode se adaptar para receber e-mails, senhas ou dados numéricos dependendo do seu tipo de configuração estrutural.
                     </p>
                 </div>
                 <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 space-y-3">
-                    <div class="w-10 h-10 rounded-xl bg-orange-100 text-orange-600 flex items-center justify-center font-bold text-lg font-mono">&lt;button&gt;</div>
+                    <div class="w-10 h-10 rounded-xl bg-purple-100 text-purple-600 flex items-center justify-center font-bold text-lg font-mono">&lt;button&gt;</div>
                     <h4 class="text-lg font-bold text-slate-800">O Gatilho de Disparo</h4>
                     <p class="text-slate-600 text-sm leading-relaxed">
                         Representa a ação final. Quando acionado de dentro de um formulário, empacota todos os dados digitados e despacha o lote para processamento do sistema.
@@ -83,41 +86,26 @@
                 Para alinhar esses elementos de entrada na interface, o CSS disponibiliza métodos criados em épocas diferentes da história do desenvolvimento web:
             </p>
 
-            <div class="space-y-4">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4 flex flex-col justify-center items-start">
-                        <span class="bg-sky-100 text-sky-800 font-bold px-3 py-1 rounded-full text-xs tracking-wider uppercase mb-2">🚗 Método Auto</span>
-                        <h4 class="text-xl font-bold text-slate-800">O Piloto Automático</h4>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Calcula matematicamente o tamanho total da janela do navegador, subtrai a largura fixa do seu bloco e divide o espaço restante igualmente entre as laterais esquerda e direita. É a forma clássica de centralizar caixas estáticas na horizontal, mas com uma limitação: só funciona se o elemento tiver uma largura máxima definida.
-                        </p>
-                    </div>
+            <div class="grid grid-cols-1 gap-4">
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-8 border-sky-500">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">🚗 Método Auto</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Calcula matematicamente o tamanho total da janela do navegador, subtrai a largura fixa do seu bloco e divide o espaço restante igualmente entre as laterais esquerda e direita. É a forma clássica de centralizar caixas estáticas na horizontal, mas com uma limitação: só funciona se o elemento tiver uma largura máxima definida.
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4 flex flex-col justify-center items-start">
-                        <span class="bg-emerald-100 text-emerald-800 font-bold px-3 py-1 rounded-full text-xs tracking-wider uppercase mb-2">🚀 Método Flex</span>
-                        <h4 class="text-xl font-bold text-slate-800">O Teletransporte</h4>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Converte um contêiner "pai" em uma cabine inteligente de distribuição. Os elementos internos (filhos) ganham superpoderes: conseguem se alinhar sozinhos em linhas ou colunas, criar espaçamentos automáticos e mudar de ordem dinamicamente sem quebrar a estrutura.
-                        </p>
-                    </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-8 border-emerald-500">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">🚀 Método Flex</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Converte um contêiner "pai" em uma cabine inteligente de distribuição. Os elementos internos (filhos) ganham superpoderes: conseguem se alinhar sozinhos em linhas ou colunas, criar espaçamentos automáticos e mudar de ordem dinamicamente sem quebrar a estrutura.
+                    </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100 flex flex-col md:flex-row gap-6">
-                    <div class="md:w-1/4 flex flex-col justify-center items-start">
-                        <span class="bg-rose-100 text-rose-800 font-bold px-3 py-1 rounded-full text-xs tracking-wider uppercase mb-2">⛵ Método Float</span>
-                        <h4 class="text-xl font-bold text-slate-800">O Barco a Vela</h4>
-                    </div>
-                    <div class="md:w-3/4">
-                        <p class="text-slate-600 text-sm leading-relaxed">
-                            Força um bloco individual a flutuar completamente direcionado para a margem esquerda ou direita, obrigando todos os textos e elementos vizinhos a contornarem seu corpo físico. Hoje serve quase que de forma exclusiva para emular formatações de blocos de imagem em colunas de texto.
-                        </p>
-                    </div>
+                <div class="bg-white p-6 rounded-xl shadow-md border-l-8 border-rose-500">
+                    <h4 class="text-lg font-bold text-slate-800 mb-2">⛵ Método Float</h4>
+                    <p class="text-slate-600 text-sm leading-relaxed">
+                        Força um bloco individual a flutuar completamente direcionado para a margem esquerda ou direita, obrigando todos os textos e elementos vizinhos a contornarem seu corpo físico. Hoje serve quase que de forma exclusiva para emular formatações de blocos de imagem em colunas de texto.
+                    </p>
                 </div>
             </div>
         </section>
@@ -127,27 +115,28 @@
                 <h3 class="text-2xl font-bold text-slate-900">3. Código de Exemplo da Aula</h3>
             </div>
             <p class="text-slate-600">
-                Veja abaixo a estrutura profissional do exemplo da aula separada em duas abas técnicas (HTML semântico e o arquivo CSS externo):
+                Abaixo estão as estruturas completas do nosso exemplo técnico. Observe a tag de importação externa conectando ambos na mesma pasta:
             </p>
 
-            <div class="space-y-4">
-                <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider">📄 Arquivo: index.html</h4>
-                <div class="code-container">
+            <div class="space-y-6">
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">📄 Código HTML: index.html</span>
+                    <div class="code-container">
 <pre><span class="comment">&lt;!DOCTYPE html&gt;</span>
 <span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="val">"pt-br"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;head&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="val">"UTF-8"</span><span class="tag">&gt;</span>
     <span class="tag">&lt;title&gt;</span>Exemplo de Layout de Formulário<span class="tag">&lt;/title&gt;</span>
-    <span class="comment">&lt;!-- Vinculando o arquivo CSS separado que contém as regras de layout --&gt;</span>
+    <span class="comment">&lt;!-- Referenciando o arquivo CSS na mesma pasta --&gt;</span>
     <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="val">"stylesheet"</span> <span class="attr">href</span>=<span class="val">"estilo.css"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
 <span class="tag">&lt;body&gt;</span>
 
     <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="val">"card-cadastro"</span><span class="tag">&gt;</span>
         <span class="tag">&lt;h3&gt;</span>Painel de Cadastro<span class="tag">&lt;/h3&gt;</span>
-        <span class="tag">&lt;form</span> <span class="attr">class</span>=<span class="val">"formulario-trafego"</span> <span class="attr">onsubmit</span>=<span class="val">"event.preventDefault();"</span><span class="tag">&gt;</span>
-            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">placeholder</span>=<span class="val">"Nome completo"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span> <span class="attr">required</span><span class="tag">&gt;</span>
-            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"E-mail de acesso"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;form</span> <span class="attr">class</span>=<span class="val">"formulario-trafego"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"text"</span> <span class="attr">placeholder</span>=<span class="val">"Nome completo"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="val">"email"</span> <span class="attr">placeholder</span>=<span class="val">"E-mail de acesso"</span> <span class="attr">class</span>=<span class="val">"campo-input"</span><span class="tag">&gt;</span>
             
             <span class="tag">&lt;div&gt;</span>
                 <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="val">"submit"</span> <span class="attr">class</span>=<span class="val">"btn-enviar"</span><span class="tag">&gt;</span>Cadastrar<span class="tag">&lt;/button&gt;</span>
@@ -158,62 +147,61 @@
 
 <span class="tag">&lt;/body&gt;</span>
 <span class="tag">&lt;/html&gt;</span></pre>
+                    </div>
                 </div>
 
-                <h4 class="text-sm font-bold text-slate-500 uppercase tracking-wider pt-4">🎨 Arquivo: estilo.css</h4>
-                <div class="code-container">
-<pre><span class="comment">/* ==========================================================
-   ESTILO EXTERNO - ORGANIZADORES DE FLUXO
-   ========================================================== */</span>
-
-<span class="comment">/* 1. O CARD PRINCIPAL - Centralizado horizontalmente via AUTO */</span>
-<span class="attr">.card-cadastro</span> {
-    <span class="attr">background-color</span>: <span class="val">white</span>;
-    <span class="attr">max-width</span>: <span class="val">400px</span>;        <span class="comment">/* Teto limitador de largura */</span>
-    <span class="attr">margin</span>: <span class="val">0 auto</span>;          <span class="comment">/* Centralização horizontal automática */</span>
-    <span class="attr">padding</span>: <span class="val">30px</span>;
-    <span class="attr">border-radius</span>: <span class="val">12px</span>;
-    <span class="attr">border</span>: <span class="val">1px solid #e2e8f0</span>;
+                <div class="space-y-2">
+                    <span class="text-xs font-bold uppercase tracking-wider text-slate-400 font-mono">🎨 Código CSS: estilo.css</span>
+                    <div class="code-container">
+<pre><span class="comment">/* 1. O CARD PRINCIPAL - Centralizado horizontalmente via AUTO */</span>
+<span class="selector">.card-cadastro</span> {
+    <span class="prop">background-color</span>: <span class="prop-val">white</span>;
+    <span class="prop">max-width</span>: <span class="prop-val">400px</span>;        <span class="comment">/* Teto limitador de largura */</span>
+    <span class="prop">margin</span>: <span class="prop-val">0 auto</span>;          <span class="comment">/* Centralização horizontal automática */</span>
+    <span class="prop">padding</span>: <span class="prop-val">30px</span>;
+    <span class="prop">border-radius</span>: <span class="prop-val">12px</span>;
+    <span class="prop">border</span>: <span class="prop-val">1px solid #e2e8f0</span>;
 }
 
 <span class="comment">/* 2. O FORMULÁRIO INTERNO - Controlado via FLEXBOX */</span>
-<span class="attr">.formulario-trafego</span> {
-    <span class="attr">display</span>: <span class="val">flex</span>;
-    <span class="attr">flex-direction</span>: <span class="val">column</span>;   <span class="comment">/* Empilhamento vertical dos elementos filhos */</span>
-    <span class="attr">gap</span>: <span class="val">15px</span>;                <span class="comment">/* Espaçamento automático perfeito */</span>
+<span class="selector">.formulario-trafego</span> {
+    <span class="prop">display</span>: <span class="prop-val">flex</span>;
+    <span class="prop">flex-direction</span>: <span class="prop-val">column</span>;   <span class="comment">/* Empilhamento vertical dos elementos filhos */</span>
+    <span class="prop">gap</span>: <span class="prop-val">15px</span>;                <span class="comment">/* Espaçamento automático perfeito */</span>
 }
 
-<span class="attr">.campo-input</span> {
-    <span class="attr">width</span>: <span class="val">100%</span>;
-    <span class="attr">padding</span>: <span class="val">12px 15px</span>;
-    <span class="attr">border</span>: <span class="val">2px solid #cbd5e1</span>;
-    <span class="attr">border-radius</span>: <span class="val">6px</span>;
+<span class="selector">.campo-input</span> {
+    <span class="prop">width</span>: <span class="prop-val">100%</span>;
+    <span class="prop">padding</span>: <span class="prop-val">12px 15px</span>;
+    <span class="prop">border</span>: <span class="prop-val">2px solid #cbd5e1</span>;
+    <span class="prop">border-radius</span>: <span class="prop-val">6px</span>;
 }
 
 <span class="comment">/* 3. O BOTÃO - Desviado individualmente usando FLOAT */</span>
-<span class="attr">.btn-enviar</span> {
-    <span class="attr">float</span>: <span class="val">right</span>;            <span class="comment">/* Atraca na extremidade direita do bloco */</span>
-    <span class="attr">width</span>: <span class="val">50%</span>;              <span class="comment">/* Ocupa metade da largura interna do card */</span>
-    <span class="attr">background-color</span>: <span class="val">#e67e22</span>;
-    <span class="attr">color</span>: <span class="val">white</span>;
-    <span class="attr">padding</span>: <span class="val">14px</span>;
-    <span class="attr">border-radius</span>: <span class="val">6px</span>;
-    <span class="attr">font-weight</span>: <span class="val">bold</span>;
+<span class="selector">.btn-enviar</span> {
+    <span class="prop">float</span>: <span class="prop-val">right</span>;            <span class="comment">/* Atraca na extremidade direita do bloco */</span>
+    <span class="prop">width</span>: <span class="prop-val">50%</span>;              <span class="comment">/* Ocupa metade da largura interna do card */</span>
+    <span class="prop">background-color</span>: <span class="prop-val">#e67e22</span>;
+    <span class="prop">color</span>: <span class="prop-val">white</span>;
+    <span class="prop">padding</span>: <span class="prop-val">14px</span>;
+    <span class="prop">border-radius</span>: <span class="prop-val">6px</span>;
+    <span class="prop">font-weight</span>: <span class="prop-val">bold</span>;
 }
 
-<span class="attr">.texto-alerta</span> {
-    <span class="attr">font-size</span>: <span class="val">12px</span>;
-    <span class="attr">color</span>: <span class="val">#7f8c8d</span>;
-    <span class="attr">margin-top</span>: <span class="val">5px</span>;
+<span class="selector">.texto-alerta</span> {
+    <span class="prop">font-size</span>: <span class="prop-val">12px</span>;
+    <span class="prop">color</span>: <span class="prop-val">#7f8c8d</span>;
+    <span class="prop">margin-top</span>: <span class="prop-val">5px</span>;
 }</pre>
+                    </div>
                 </div>
             </div>
         </section>
 
         <section class="space-y-6 bg-slate-100 p-8 rounded-2xl border border-slate-200">
             <div class="text-center max-w-sm mx-auto mb-4">
-                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Ambiente Prático Executado</span>
-                <h4 class="text-lg font-bold text-slate-800">Resultado Real do Código</h4>
+                <span class="text-xs font-bold uppercase tracking-widest text-slate-400">Resultado em Tempo Real</span>
+                <h4 class="text-lg font-bold text-slate-800">Visualização do Elemento</h4>
             </div>
             
             <div class="p-4 bg-slate-200 rounded-xl border border-dashed border-slate-400 min-h-[340px] flex items-center justify-center">
@@ -230,29 +218,29 @@
             </p>
 
             <div class="grid grid-cols-1 gap-4">
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
                     <p class="font-medium">
                         <strong>Inversão de Fluxo:</strong> Na classe do contêiner flexível do formulário (<code class="font-mono text-sm bg-slate-50 px-1 rounded">.formulario-trafego</code>), altere o comando <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">flex-direction: column;</code> para <code class="font-mono text-sm bg-slate-100 text-emerald-600 px-1 rounded">column-reverse</code>. Qual foi o impacto visual gerado sobre a caixa de texto e o botão? Houve alteração no código HTML?
                     </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
                     <p class="font-medium">
                         <strong>O Desalinhamento do Float:</strong> Note o parágrafo <code class="font-mono text-xs">.texto-alerta</code> posicionado abaixo do botão. Como o botão utiliza <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">float: right;</code>, explique por que o texto subiu lateralmente tentando preencher o espaço flutuante livre ao invés de descer. Como isso prova que o Float rompe o fluxo natural da página?
                     </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
                     <p class="font-medium">
                         <strong>Alinhamento em Linha (Row):</strong> Modifique o formulário flexível para <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">flex-direction: row;</code> e apague as propriedades de <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">float</code> e <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">width: 50%;</code> da classe do botão. Descreva a nova organização horizontal assumida pelos componentes de entrada.
                     </p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
                     <p class="font-medium">
                         <strong>Falha no Posicionamento Automático:</strong> Vá até a classe <code class="font-mono text-sm bg-slate-50 px-1 rounded">.card-cadastro</code> e delete a linha <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">max-width: 400px;</code>. O comando de centralização <code class="font-mono text-sm bg-slate-100 text-rose-600 px-1 rounded">margin: 0 auto;</code> continuou surtindo algum efeito na interface? Justifique a resposta com base na expansão nativa dos elementos em bloco.
                     </p>
@@ -278,12 +266,14 @@
                 <meta charset="UTF-8">
                 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
                 <link rel="stylesheet" href="estilo.css">
-                <style>body { font-family: 'Inter', sans-serif; background: transparent; padding: 10px; margin: 0; }</style>
+                <style>
+                    body { font-family: 'Inter', sans-serif; background: transparent; padding: 20px; margin: 0; }
+                </style>
             </head>
             <body>
                 <div class="card-cadastro">
                     <h3>Painel de Cadastro</h3>
-                    <form class="formulario-trafego" onsubmit="event.preventDefault(); alert('Dados interceptados para simulação técnico-visual!');">
+                    <form class="formulario-trafego" onsubmit="event.preventDefault();">
                         <input type="text" placeholder="Nome completo" class="campo-input" required>
                         <input type="email" placeholder="E-mail de acesso" class="campo-input" required>
                         <div>
@@ -295,7 +285,6 @@
             </body>
             </html>
         `;
-        
         iframe.srcdoc = iframeContent;
     </script>
 
