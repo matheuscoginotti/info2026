@@ -38,13 +38,6 @@
     font-size: 15px;
     outline: none;
     box-sizing: border-box;
-    transition: all 0.3s ease;
-}
-
-/* Pseudo-classe Focus para Acessibilidade Visual */
-.campo-input:focus {
-    border-color: #3498db;
-    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
 }
 
 /* 3. O BOTÃO - Desviado individualmente usando FLOAT */
@@ -59,11 +52,6 @@
     font-size: 16px;
     font-weight: bold;
     cursor: pointer;
-    transition: background-color 0.2s ease;
-}
-
-.btn-enviar:hover {
-    background-color: #d35400;     /* Efeito escurecido no hover */
 }
 
 /* Parágrafo de texto afetado pelo comportamento do Float */
