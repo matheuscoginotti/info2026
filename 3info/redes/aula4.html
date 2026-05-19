@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 01: Introdução às Redes (Fundamentos e Meio Físico)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; font-weight: bold; }
+        .css-selector { color: #d7ba7d; }
+        .css-val { color: #4fc1ff; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 3: Infraestrutura Conectada e Segura</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 01: Introdução às Redes</h1>
+            <p class="text-2xl text-indigo-100 opacity-90">Dos Fundamentos da ARPANET aos Limites do Meio Físico</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Como funciona uma Rede?</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Uma rede de computadores é simplesmente um conjunto de dispositivos conectados para trocar dados. Para que essa comunicação aconteça, imagine que estamos a usar um sistema de **Walkie-Talkies**:
+            </p>
+
+            
+
+            <div class="grid md:grid-cols-3 gap-8 mt-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border-t-4 border-indigo-500 shadow-sm text-center">
+                    <div class="text-3xl mb-2">🗣️</div>
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">O Emissor</h3>
+                    <p class="text-xs text-slate-600">É quem inicia a conversa e envia o pacote de dados. Na prática, pode ser o seu smartphone pedindo para abrir um site.</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-t-4 border-slate-600 shadow-sm text-center">
+                    <div class="text-3xl mb-2">🔌</div>
+                    <h3 class="text-lg font-bold text-slate-800 mb-2">O Meio / Canal</h3>
+                    <p class="text-xs text-slate-600">É a estrada física por onde a informação viaja. Pode ser o ar (ondas de Wi-Fi) ou a autoestrada de cobre (Cabos de Rede).</p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-t-4 border-indigo-500 shadow-sm text-center">
+                    <div class="text-3xl mb-2">👤</div>
+                    <h3 class="text-lg font-bold text-indigo-700 mb-2">O Receptor</h3>
+                    <p class="text-xs text-slate-600">É o destino final que recebe e decodifica a mensagem. Geralmente é um grande servidor, como o do Google ou Instagram.</p>
+                </div>
+            </div>
+            
+            <p class="mt-8 text-center text-slate-500 italic text-sm">
+                "O Emissor cria o dado. O Meio transporta o sinal. O Receptor entende a informação."
+            </p>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Definições Fundamentais de Redes</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Para que serve uma rede?</h3>
+                    <p class="text-slate-600">O seu único propósito de existência no mercado é a partilha de recursos: seja para transferir ficheiros, aceder a servidores centrais ou permitir a comunicação instantânea entre pessoas.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">A Origem: ARPANET</h3>
+                    <p class="text-slate-600">Criada nos EUA na década de 1960 (Guerra Fria). Era um projeto militar focado em construir uma rede de comunicação descentralizada e altamente resistente a falhas físicas ou bombardeamentos.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Crosstalk (Interferência)</h3>
+                    <p class="text-slate-600">Fenómeno onde o sinal elétrico de um fio gera um campo magnético que vaza e corrompe o dado do fio vizinho. É combatido trançando cirurgicamente os pares de cobre dentro do cabo.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">O Limite dos 100 Metros</h3>
+                    <p class="text-slate-600">A eletricidade perde força (atenuação) ao longo do cobre. Por norma técnica, os cabos de par trançado só conseguem garantir a entrega dos bits perfeitos a uma distância máxima de 100 metros.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4 text-indigo-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V6.265M15.347 12H19.23" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">2. Nomenclatura e Escopo de Alcance</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">
+                Classificamos o tamanho das redes com base na distância geográfica que elas cobrem. Veja a escala de crescimento:
+            </p>
+
+            
+
+            <p class="my-6 text-sm text-slate-600 font-light">
+                Para o meio de transmissão cabeado, o padrão de mercado é o cabo de **Par Trançado**, dividido entre ambientes comuns ou ruidosos:
+            </p>
+
+            
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">3. A Métrica Digital: Bits vs. Bytes</h2>
+            </div>
+
+            <div class="code-container">
+<pre><code><span class="comment"># =========================================================
+# ENTENDENDO A VELOCIDADE DA SUA REDE
+# =========================================================</span>
+
+ A OPERADORA VENDE EM:   <span class="tag">Megabits (Mbps)</span>  --> Mede os pulsos elétricos que correm no cabo.
+ O NAVEGADOR FAZ DOWNLOAD EM: <span class="tag">MegaBytes (MB/s)</span> --> Mede o tamanho do ficheiro guardado em disco.
+
+<span class="comment"># REGRA MATEMÁTICA DA REDE (1 Byte = 8 bits)</span>
+ Se contratou um link de [<span class="css-val">100 Mbps</span>] ───(Divide por 8)───> Baixa ficheiros a no máximo [<span class="css-selector">12.5 MB/s</span>]
+ Se contratou um link de [<span class="css-val">400 Mbps</span>] ───(Divide por 8)───> Baixa ficheiros a no máximo [<span class="css-selector">50.0 MB/s</span>]
+
+<span class="comment"># AS TRÊS VELOCIDADES PADRÃO DO CABO ETHERNET</span>
+ ── <span class="attr">Fast Ethernet</span> ────> Até <span class="css-val">100 Mbps</span>     (Padrão antigo de redes locais)
+ ── <span class="attr">Gigabit Ethernet</span> ──> Até <span class="css-val">1000 Mbps</span>    (Padrão comum atual de alta velocidade)
+ ── <span class="attr">10-Gigabit</span> ───────> Até <span class="css-val">10000 Mbps</span>   (Usado para interligar servidores corporativos)</code></pre>
+            </div>
+        </section>
+
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">4. Curiosidades do Escopo Físico</h2>
+            </div>
+
+            <div class="space-y-6 text-indigo-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">A</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">A Escala PAN na sua Mesa</h4>
+                        <p class="text-sm text-slate-600 font-medium">A **PAN (Personal Area Network)** é a menor rede que existe. Ela é criada ao redor do seu próprio corpo. Quando liga o seu Smartwatch ao telemóvel via Bluetooth ou usa um fone sem fios, criou uma infraestrutura de rede pessoal com alcance limitado a poucos metros.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">B</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">A Escolha do Cabo Industrial: STP</h4>
+                        <p class="text-sm text-slate-600 font-medium">Em escritórios comuns, usamos o cabo **UTP** (sem blindagem), pois não há grandes interferências. Porém, em indústrias, com cabos passando colados a motores gigantes, o ruído elétrico destruiria os dados. Nesses cenários, é obrigatório usar o cabo **STP**, que traz uma armadura de metal protetora interna.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">C</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">A Internet é a maior WAN do Mundo</h4>
+                        <p class="text-sm text-slate-600 font-medium">Enquanto a rede da sua escola é uma **LAN** (Local), a internet é classificada como uma **WAN (Wide Area Network)**. Ela quebra barreiras geográficas unindo continentes inteiros através de gigantescos cabos de fibra óptica que cruzam o fundo dos oceanos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 01 concluída. Os fundamentos e a estrutura física da rede estão assimilados!<br>
+            A seguir: <strong>Aula 02 — O Mapa Postal da Rede (Modelo OSI e Endereçamento Lógico/Físico)</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
