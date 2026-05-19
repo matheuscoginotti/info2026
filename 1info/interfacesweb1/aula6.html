@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 06: Coleta de Dados e Formulários II</title>
+    <!-- Tailwind CSS para um design de alta fidelidade e intuitivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Cabeçalho -->
+    <header class="bg-cyan-800 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-cyan-600 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-cyan-50">Módulo 1: Fundamentos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4 text-white">Aula 06: O Poder da Escolha</h1>
+            <p class="text-2xl text-cyan-100 opacity-90 font-light">Opções, Seleções e Organização Semântica</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyan-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">O Restaurante Digital</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Imagine que está a fazer um pedido num <strong>Restaurante</strong>. O formulário precisa de saber lidar com diferentes tipos de pedidos.
+            </p>
+
+            
+
+            <div class="grid md:grid-cols-2 gap-10 mt-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-cyan-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-cyan-800 mb-3">Rádio vs Checkbox</h3>
+                    <p class="text-sm text-slate-600">
+                        Os <strong>Botões de Rádio</strong> são como a escolha do prato principal: só pode escolher um (ex: Carne OU Peixe). As <strong>Checkboxes</strong> são como os extras: pode marcar vários (ex: Batatas, Salada e Arroz).
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Fieldset: As Secções do Menu</h3>
+                    <p class="text-sm text-slate-600">
+                        Um menu organizado separa "Entradas", "Pratos" e "Bebidas". No HTML, o <code>fieldset</code> agrupa campos relacionados, e o <code>legend</code> serve como o título dessa categoria.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-cyan-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyan-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h7" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">1. Elementos de Seleção e Texto</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-cyan-200 transition-colors">
+                    <h3 class="font-bold text-cyan-600 mb-3 text-lg">Select e Option</h3>
+                    <p class="text-slate-600">Cria um menu suspenso (dropdown). Economiza espaço na tela e é ideal para listas longas, como nomes de países ou estados.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-cyan-200 transition-colors">
+                    <h3 class="font-bold text-cyan-600 mb-3 text-lg">Textarea</h3>
+                    <p class="text-slate-600">Diferente do input de texto comum, o <code>textarea</code> permite múltiplas linhas. Usado para comentários, mensagens ou descrições longas.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-cyan-200 transition-colors">
+                    <h3 class="font-bold text-cyan-600 mb-3 text-lg">Atributo 'name' no Rádio</h3>
+                    <p class="text-slate-600">Para que o navegador saiba que apenas uma opção pode ser marcada, todos os botões de rádio do mesmo grupo devem ter o <strong>mesmo name</strong>.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-cyan-200 transition-colors">
+                    <h3 class="font-bold text-cyan-600 mb-3 text-lg">Checked e Selected</h3>
+                    <p class="text-slate-600">Estes atributos booleanos permitem que uma opção já venha marcada ou selecionada por padrão quando a página carrega.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Formulário de Pedido</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600">Este código demonstra como agrupar opções complexas num formulário profissional. Cada linha está comentada para a sua aprendizagem:</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- Formulário de Personalização de Serviço --&gt;</span>
+<span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="string">"#"</span> <span class="attr">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span>
+
+    <span class="comment">&lt;!-- FIELDSET: Agrupa campos de preferência visualmente e logicamente --&gt;</span>
+    <span class="tag">&lt;fieldset&gt;</span>
+        <span class="comment">&lt;!-- LEGEND: O título que fica na borda do agrupamento --&gt;</span>
+        <span class="tag">&lt;legend&gt;</span>Escolha o seu Plano de Subscrição<span class="tag">&lt;/legend&gt;</span>
+
+        <span class="comment">&lt;!-- RÁDIO: Apenas um pode ser escolhido. Note o 'name' idêntico --&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"plano-basico"</span> <span class="attr">name</span>=<span class="string">"plano"</span> <span class="attr">value</span>=<span class="string">"basico"</span> <span class="attr">checked</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"plano-basico"</span><span class="tag">&gt;</span>Básico (Gratuito)<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"plano-premium"</span> <span class="attr">name</span>=<span class="string">"plano"</span> <span class="attr">value</span>=<span class="string">"premium"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"plano-premium"</span><span class="tag">&gt;</span>Premium (9.99€/mês)<span class="tag">&lt;/label&gt;</span>
+    <span class="tag">&lt;/fieldset&gt;</span>
+
+    <span class="tag">&lt;br&gt;</span>
+
+    <span class="tag">&lt;fieldset&gt;</span>
+        <span class="tag">&lt;legend&gt;</span>Interesses Técnicos (Marque todos os que desejar)<span class="tag">&lt;/legend&gt;</span>
+
+        <span class="comment">&lt;!-- CHECKBOX: Permite múltiplas seleções independentes --&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"html"</span> <span class="attr">name</span>=<span class="string">"interesse"</span> <span class="attr">value</span>=<span class="string">"html"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"html"</span><span class="tag">&gt;</span>HTML5 Semântico<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"css"</span> <span class="attr">name</span>=<span class="string">"interesse"</span> <span class="attr">value</span>=<span class="string">"css"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"css"</span><span class="tag">&gt;</span>CSS3 Avançado<span class="tag">&lt;/label&gt;</span>
+    <span class="tag">&lt;/fieldset&gt;</span>
+
+    <span class="tag">&lt;br&gt;</span>
+
+    <span class="comment">&lt;!-- SELECT: Menu suspenso para escolha de uma opção numa lista --&gt;</span>
+    <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"pais"</span><span class="tag">&gt;</span>País de Residência:<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+    <span class="tag">&lt;select</span> <span class="attr">id</span>=<span class="string">"pais"</span> <span class="attr">name</span>=<span class="string">"nacionalidade"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="string">"pt"</span> <span class="attr">selected</span><span class="tag">&gt;</span>Portugal<span class="tag">&lt;/option&gt;</span>
+        <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="string">"br"</span><span class="tag">&gt;</span>Brasil<span class="tag">&lt;/option&gt;</span>
+        <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="string">"ao"</span><span class="tag">&gt;</span>Angola<span class="tag">&lt;/option&gt;</span>
+    <span class="tag">&lt;/select&gt;</span>
+
+    <span class="tag">&lt;br&gt;&lt;br&gt;</span>
+
+    <span class="comment">&lt;!-- TEXTAREA: Área para textos longos (rows define a altura inicial) --&gt;</span>
+    <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"bio"</span><span class="tag">&gt;</span>Conte-nos um pouco sobre a sua experiência:<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+    <span class="tag">&lt;textarea</span> <span class="attr">id</span>=<span class="string">"bio"</span> <span class="attr">name</span>=<span class="string">"mensagem"</span> <span class="attr">rows</span>=<span class="string">"5"</span> <span class="attr">cols</span>=<span class="string">"40"</span><span class="tag">&gt;</span><span class="tag">&lt;/textarea&gt;</span>
+
+    <span class="tag">&lt;br&gt;&lt;br&gt;</span>
+
+    <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span>Submeter Pedido<span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;/form&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-cyan-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-500 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Mestre das Escolhas</h2>
+            </div>
+
+            <p class="mb-10 text-cyan-100 text-lg font-light">Para finalizar o Módulo 1, modifique o código exemplo com estes desafios:</p>
+
+            <div class="space-y-6 text-cyan-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Expansão de Rádios:</strong> No primeiro <code>fieldset</code>, adicione uma terceira opção de plano chamada "Empresarial" (49.99€/mês).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Novos Interesses:</strong> Adicione mais duas checkboxes no segundo <code>fieldset</code> para as opções "JavaScript" e "Design UI/UX".</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Lista de Cidades:</strong> Crie um novo <code>select</code> abaixo do campo de País para que o utilizador escolha a sua cidade favorita.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Limitação de Texto:</strong> No <code>textarea</code>, adicione o atributo <code>maxlength="200"</code> para garantir que a bio não exceda 200 caracteres.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Desafio de Agrupamento:</strong> Envolva o campo <code>select</code> e o <code>textarea</code> num terceiro <code>fieldset</code> com a legenda "Informações de Perfil".</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 06 concluída. Parabéns! Finalizámos a base do HTML5.<br>
+            A seguir: <strong>Módulo 2 - CSS Intro: Dando Cor e Vida ao Esqueleto</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

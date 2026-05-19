@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 09: O Modelo de Caixa (Box Model I)</title>
+    <!-- Tailwind CSS para o design da página de suporte -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-blue-800 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-blue-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-blue-50">Módulo 2: Estética</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 09: A Anatomia da Caixa</h1>
+            <p class="text-2xl text-blue-100 opacity-90">Dominando o Conteúdo, o Enchimento e a Borda</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-blue-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">A Encomenda Postal</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                No CSS, tudo é uma caixa. Imagine que está a enviar um <strong>Objeto Frágil</strong> pelo correio:
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-blue-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-700 mb-3">O Produto (Content)</h3>
+                    <p class="text-sm text-slate-600">
+                        É o objeto em si (o texto ou a imagem). A sua largura (<code>width</code>) e altura (<code>height</code>) definem o espaço básico que ele ocupa.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Plástico Bolha (Padding)</h3>
+                    <p class="text-sm text-slate-600">
+                        É o espaço <strong>interno</strong>. Serve para proteger o produto, impedindo que ele encoste nas paredes da caixa. Dá "respiro" ao conteúdo.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-blue-900 shadow-sm">
+                    <h3 class="text-xl font-bold text-blue-900 mb-3">A Caixa (Border)</h3>
+                    <p class="text-sm text-slate-600">
+                        É a barreira física que delimita o objeto. Pode ser fina, grossa, colorida ou invisível, mas ela está sempre lá definindo o limite.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-400 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-500 mb-3">Distância (Margin)</h3>
+                    <p class="text-sm text-slate-600">
+                        É o espaço <strong>externo</strong> entre a sua caixa e as outras caixas no camião de entregas. (Exploraremos mais na Aula 10).
+                    </p>
+                </div>
+            </div>
+
+            
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v14a1 1 0 01-1 1H5a1 1 0 01-1-1V5z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">1. Propriedades de Estrutura</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-all">
+                    <h3 class="font-bold text-blue-600 mb-3 text-lg italic">Padding (Espaço Interno)</h3>
+                    <p class="text-slate-600">Empurra o conteúdo para dentro. Pode ser definido para todos os lados ou individualmente: <code>padding-top</code>, <code>padding-right</code>, etc.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-all">
+                    <h3 class="font-bold text-blue-600 mb-3 text-lg italic">Border (A Moldura)</h3>
+                    <p class="text-slate-600">Precisa de três valores: Largura (2px), Estilo (solid) e Cor (black). Ex: <code>border: 2px solid #000;</code>.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-all">
+                    <h3 class="font-bold text-blue-600 mb-3 text-lg italic">Width e Height</h3>
+                    <p class="text-slate-600">Definem o tamanho da área de conteúdo. Por padrão, o padding e a borda são somados a estes valores, aumentando o tamanho total da caixa.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-blue-200 transition-all">
+                    <h3 class="font-bold text-blue-600 mb-3 text-lg italic">Box-sizing: border-box</h3>
+                    <p class="text-slate-600">O "salvador" dos layouts modernos. Faz com que o padding e a borda sejam incluídos dentro da largura definida, não somados por fora.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: Construindo a Caixa Perfeita</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">Este exemplo demonstra como o Padding e a Border alteram visualmente o elemento. Leia os comentários atentamente:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="comment">/* Aplicamos o border-box em tudo para facilitar o cálculo do tamanho */</span>
+        <span class="css-selector">*</span> {
+            <span class="css-prop">box-sizing</span>: <span class="css-val">border-box</span>;
+        }
+
+        <span class="css-selector">.caixa-exemplo</span> {
+            <span class="comment">/* O 'PRODUTO': Largura fixa de 400 pixels */</span>
+            <span class="css-prop">width</span>: <span class="css-val">400px</span>;
+            <span class="css-prop">background-color</span>: <span class="css-val">#3498db</span>; <span class="comment">/* Azul vibrante */</span>
+            <span class="css-prop">color</span>: <span class="css-val">white</span>;
+            
+            <span class="comment">/* O 'PLÁSTICO BOLHA': 40px de respiro interno em todos os lados */</span>
+            <span class="css-prop">padding</span>: <span class="css-val">40px</span>;
+            
+            <span class="comment">/* A 'CAIXA': Uma borda sólida, escura e de 10 pixels de espessura */</span>
+            <span class="css-prop">border</span>: <span class="css-val">10px solid #2c3e50</span>;
+
+            <span class="comment">/* Alinhamento de texto dentro da caixa */</span>
+            <span class="css-prop">text-align</span>: <span class="css-val">center</span>;
+            <span class="css-prop">font-size</span>: <span class="css-val">20px</span>;
+        }
+
+        <span class="css-selector">.caixa-variada</span> {
+            <span class="css-prop">width</span>: <span class="css-val">400px</span>;
+            <span class="css-prop">margin-top</span>: <span class="css-val">20px</span>;
+            <span class="css-prop">background-color</span>: <span class="css-val">#ecf0f1</span>;
+            <span class="css-prop">color</span>: <span class="css-val">#333</span>;
+            <span class="css-prop">border</span>: <span class="css-val">2px dashed #7f8c8d</span>; <span class="comment">/* Borda tracejada */</span>
+
+            <span class="comment">/* PADDINGS INDIVIDUAIS: Topo, Direita, Baixo, Esquerda */</span>
+            <span class="css-prop">padding-top</span>: <span class="css-val">10px</span>;
+            <span class="css-prop">padding-bottom</span>: <span class="css-val">50px</span>;
+            <span class="css-prop">padding-left</span>: <span class="css-val">20px</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"caixa-exemplo"</span><span class="tag">&gt;</span>
+        Eu sou uma caixa azul com muito preenchimento interno!
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"caixa-variada"</span><span class="tag">&gt;</span>
+        Esta caixa tem espaços internos diferentes em cada lado.
+    <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-blue-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-blue-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono text-blue-100">3. Atividade: O Arquiteto de Caixas</h2>
+            </div>
+
+            <p class="mb-10 text-blue-100 text-lg font-light italic">Realize as seguintes modificações no seu ficheiro para dominar o Box Model:</p>
+
+            <div class="space-y-6 text-blue-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Respiro Extra:</strong> Na <code>.caixa-exemplo</code>, aumente o <code>padding</code> para <code>80px</code>. Observe como o texto se afasta da borda.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Estilo de Borda:</strong> Mude o <code>solid</code> da primeira caixa para <code>double</code> ou <code>dotted</code>. Qual é o efeito visual?</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Cálculo de Tamanho:</strong> Desative a linha <code>box-sizing: border-box;</code> comentando-a com <code>/* ... */</code>. Note como a caixa azul parece "esticar" para fora.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Desafio de Lados:</strong> Na <code>.caixa-variada</code>, adicione um <code>padding-right: 100px;</code> e veja o que acontece com o texto quando ele chega perto do lado direito.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Arredondamento:</strong> Adicione <code>border-radius: 20px;</code> à caixa azul. Lembre-se: a borda é a "parede" da caixa!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 09 concluída. Agora já sabe como embalar o seu conteúdo profissionalmente!<br>
+            A seguir: <strong>O Box Model II: Margens e Colapso de Espaços</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

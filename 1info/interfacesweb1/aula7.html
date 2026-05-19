@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 07: Introdução ao CSS e Seletores</title>
+    <!-- Tailwind CSS para o design da nossa página de aula -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Cabeçalho -->
+    <header class="bg-pink-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-pink-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-pink-50">Módulo 2: Estética</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4 text-white font-mono">Aula 07: O Poder do Estilo</h1>
+            <p class="text-2xl text-pink-100 opacity-90 font-light italic">Introdução ao CSS, Formas de Inclusão e Seletores</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-pink-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono text-pink-700">A Maquilhagem da Web</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Se o HTML é o esqueleto, o <strong>CSS é a pele, a roupa e a maquilhagem</strong>. É o que transforma dados brutos numa experiência visual agradável.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-pink-500">
+                    <h3 class="text-xl font-bold text-pink-700 mb-3">Cascata: A Ordem de Comando</h3>
+                    <p class="text-sm text-slate-600">
+                        CSS significa <em>Cascading Style Sheets</em> (Folhas de Estilo em Cascata). Isso significa que as regras "escorrem" de cima para baixo. Se houver dois comandos diferentes para a mesma coisa, o que está mais abaixo ou é mais específico costuma ganhar.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Seletores: O Alvo</h3>
+                    <p class="text-sm text-slate-600">
+                        Construir CSS é como dar ordens a um pintor: "Pinte as paredes (Tipo), mas apenas as paredes da sala (Classe) e, especificamente, aquela parede de destaque (ID)".
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-pink-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-pink-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">1. Formas de Inclusão e Seletores</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-pink-200 transition-all">
+                    <h3 class="font-bold text-pink-600 mb-3 text-lg italic">Inline, Interno e Externo</h3>
+                    <p class="text-slate-600">Podemos colocar CSS diretamente na tag (Inline), numa tag <code>&lt;style&gt;</code> (Interno) ou num ficheiro <code>.css</code> separado (Externo - O método profissional).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-pink-200 transition-all">
+                    <h3 class="font-bold text-pink-600 mb-3 text-lg italic">Seletor de Tipo</h3>
+                    <p class="text-slate-600">Alvo: Todas as tags de um tipo. Ex: <code>h1 { color: blue; }</code> afeta todos os H1 do site.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-pink-200 transition-all">
+                    <h3 class="font-bold text-pink-600 mb-3 text-lg italic">Seletor de Classe (.)</h3>
+                    <p class="text-slate-600">Alvo: Qualquer elemento com a classe. Usa-se um ponto antes do nome. Ex: <code>.botao-verde { background: green; }</code>.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-pink-200 transition-all">
+                    <h3 class="font-bold text-pink-600 mb-3 text-lg italic">Seletor de ID (#)</h3>
+                    <p class="text-slate-600">Alvo: Um elemento único. Usa-se um cardinal (hashtag). Ex: <code>#logotipo { width: 100px; }</code>. Tem prioridade máxima sobre classes.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: Estilizando a Primeira Página</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg">Observe como o código abaixo utiliza os três tipos de seletores básicos e o método de CSS Interno:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Aula 07 - Meu Primeiro CSS<span class="tag">&lt;/title&gt;</span>
+
+    <span class="comment">&lt;!-- CSS INTERNO: Estilos definidos dentro da tag style no head --&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="comment">/* SELETOR DE TIPO: Afeta todas as tags 'body' */</span>
+        <span class="css-selector">body</span> {
+            <span class="css-prop">background-color</span>: <span class="css-val">#f0f0f0</span>; <span class="comment">/* Define a cor de fundo cinza claro */</span>
+            <span class="css-prop">font-family</span>: <span class="css-val">Arial, sans-serif</span>; <span class="comment">/* Define a fonte padrão */</span>
+        }
+
+        <span class="comment">/* SELETOR DE TIPO: Afeta todos os títulos 'h1' */</span>
+        <span class="css-selector">h1</span> {
+            <span class="css-prop">color</span>: <span class="css-val">navy</span>; <span class="comment">/* Cor azul marinho */</span>
+            <span class="css-prop">text-align</span>: <span class="css-val">center</span>; <span class="comment">/* Centraliza o texto */</span>
+        }
+
+        <span class="comment">/* SELETOR DE CLASSE: Afeta qualquer tag com class="card" */</span>
+        <span class="css-selector">.card</span> {
+            <span class="css-prop">background-color</span>: <span class="css-val">white</span>;
+            <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+            <span class="css-prop">border-radius</span>: <span class="css-val">10px</span>;
+            <span class="css-prop">margin</span>: <span class="css-val">20px auto</span>;
+            <span class="css-prop">width</span>: <span class="css-val">300px</span>;
+            <span class="css-prop">box-shadow</span>: <span class="css-val">0 4px 8px rgba(0,0,0,0.1)</span>;
+        }
+
+        <span class="comment">/* SELETOR DE ID: Afeta apenas o elemento único com id="destaque" */</span>
+        <span class="css-selector">#destaque</span> {
+            <span class="css-prop">color</span>: <span class="css-val">crimson</span>;
+            <span class="css-prop">font-weight</span>: <span class="css-val">bold</span>;
+            <span class="css-prop">text-decoration</span>: <span class="css-val">underline</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;h1&gt;</span>Iniciando no Mundo Visual<span class="tag">&lt;/h1&gt;</span>
+
+    <span class="comment">&lt;!-- Elemento que recebe a classe 'card' --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"card"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Este é um cartão estilizado com classe.<span class="tag">&lt;/p&gt;</span>
+        <span class="comment">&lt;!-- Elemento com ID único --&gt;</span>
+        <span class="tag">&lt;p</span> <span class="attr">id</span>=<span class="string">"destaque"</span><span class="tag">&gt;</span>Eu sou um texto de destaque único!<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- CSS INLINE: Estilo direto na tag (usar com moderação!) --&gt;</span>
+    <span class="tag">&lt;p</span> <span class="attr">style</span>=<span class="string">"text-align: center; color: gray;"</span><span class="tag">&gt;</span>
+        Texto centralizado via CSS Inline.
+    <span class="tag">&lt;/p&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-pink-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-pink-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Estilista de Código</h2>
+            </div>
+
+            <p class="mb-10 text-pink-100 text-lg font-light">Desafie-se a modificar o estilo da página anterior:</p>
+
+            <div class="space-y-6 text-pink-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-pink-500">
+                    <span class="bg-pink-100 text-pink-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Mudança de Fundo:</strong> No seletor <code>body</code>, altere a cor de fundo para <code>#e0f7fa</code> (um azul piscina claro).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-pink-500">
+                    <span class="bg-pink-100 text-pink-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Estilo de Título:</strong> No seletor <code>h1</code>, adicione a propriedade <code>text-transform: uppercase;</code> para deixar o título em maiúsculas.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-pink-500">
+                    <span class="bg-pink-100 text-pink-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Personalização do Card:</strong> No seletor <code>.card</code>, mude o <code>border-radius</code> para <code>0px</code> e adicione uma borda: <code>border: 2px solid navy;</code>.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-pink-500">
+                    <span class="bg-pink-100 text-pink-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Prioridade de ID:</strong> Crie uma classe chamada <code>.texto-azul</code> que define <code>color: blue;</code>. Aplique esta classe ao parágrafo que já tem o <code>id="destaque"</code>. Qual cor venceu? (Isso prova a prioridade do ID).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-pink-500">
+                    <span class="bg-pink-100 text-pink-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Novo Seletor:</strong> Adicione um seletor para a tag <code>p</code> (tipo) definindo <code>line-height: 1.6;</code> (espaçamento entre linhas) e veja como a leitura melhora.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 07 concluída. Agora já sabe como dar as primeiras pinceladas no seu site!<br>
+            A seguir: <strong>Teoria das Cores, Fontes e Tipografia Profissional</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

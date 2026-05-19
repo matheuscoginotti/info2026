@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 05: Coleta de Dados e Formulários I</title>
+    <!-- Tailwind CSS para uma interface de utilizador moderna e intuitiva -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Cabeçalho -->
+    <header class="bg-emerald-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-emerald-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-emerald-50">Módulo 1: Fundamentos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4 text-white">Aula 05: A Ponte de Dados</h1>
+            <p class="text-2xl text-emerald-100 opacity-90 font-light">Estrutura de Formulários e Entradas Básicas</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">O Questionário de Papel</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Criar um formulário web é exatamente como desenhar um <strong>Questionário de Inscrição em papel</strong>.
+            </p>
+
+            
+
+            <div class="grid md:grid-cols-2 gap-10 mt-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-emerald-600">
+                    <h3 class="text-xl font-bold text-emerald-800 mb-3">O Envelope (&lt;form&gt;)</h3>
+                    <p class="text-sm text-slate-600">
+                        O formulário é o envelope que guarda as respostas. Sem ele, os dados ficam soltos e o servidor não sabe para onde devem ser enviados ou como devem ser processados.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Etiqueta e Campo</h3>
+                    <p class="text-sm text-slate-600">
+                        A <code>label</code> é a pergunta escrita no papel ("Qual o seu nome?"). O <code>input</code> é o espaço em branco onde o utilizador escreve a resposta. Estão ligados por um fio invisível (o ID).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">1. Componentes da Interatividade</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-emerald-600 mb-3 text-lg">Action e Method</h3>
+                    <p class="text-slate-600">O <code>action</code> define o destino (URL) dos dados. O <code>method</code> define como viajam: <strong>GET</strong> (visível na URL) ou <strong>POST</strong> (invisível e seguro).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-emerald-600 mb-3 text-lg">O Atributo 'for'</h3>
+                    <p class="text-slate-600">Sempre use <code>&lt;label for="id-do-campo"&gt;</code>. Isso permite que, ao clicar no texto da etiqueta, o cursor foque automaticamente no campo de texto.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-emerald-600 mb-3 text-lg">Tipos de Input</h3>
+                    <p class="text-slate-600"><code>text</code> (geral), <code>email</code> (valida o @), <code>password</code> (esconde caracteres) e <code>number</code> (aceita apenas algarismos).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-emerald-600 mb-3 text-lg">Placeholders e Required</h3>
+                    <p class="text-slate-600"><code>placeholder</code> é a dica cinzenta dentro do campo. <code>required</code> impede o envio se o utilizador deixar o campo vazio.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-green-100 p-3 rounded-full mr-4 text-green-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Formulário de Registo</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600">Analise o código abaixo de um formulário de subscrição moderno. Cada linha possui um comentário didático:</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- A tag 'form' envolve todos os campos. O '#' no action significa 'mesma página' --&gt;</span>
+<span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="string">"#"</span> <span class="attr">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span>
+
+    <span class="comment">&lt;!-- Divisão para organizar o grupo do Nome --&gt;</span>
+    <span class="tag">&lt;div&gt;</span>
+        <span class="comment">&lt;!-- O 'for' liga esta etiqueta ao input com id='user-name' --&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"user-name"</span><span class="tag">&gt;</span>Nome Completo:<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+        <span class="comment">&lt;!-- 'name' é o nome da variável que o servidor vai receber --&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"user-name"</span> <span class="attr">name</span>=<span class="string">"nome"</span> <span class="attr">placeholder</span>=<span class="string">"Ex: João Silva"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;br&gt;</span>
+
+    <span class="comment">&lt;!-- Divisão para organizar o grupo do Email --&gt;</span>
+    <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"user-email"</span><span class="tag">&gt;</span>Endereço de Correio Eletrónico:<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+        <span class="comment">&lt;!-- 'type=email' garante que o utilizador digite um formato válido --&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"user-email"</span> <span class="attr">name</span>=<span class="string">"email"</span> <span class="attr">placeholder</span>=<span class="string">"exemplo@dominio.com"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;br&gt;</span>
+
+    <span class="comment">&lt;!-- Divisão para organizar o grupo da Palavra-passe --&gt;</span>
+    <span class="tag">&lt;div&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"user-pass"</span><span class="tag">&gt;</span>Palavra-passe:<span class="tag">&lt;/label&gt;</span><span class="tag">&lt;br&gt;</span>
+        <span class="comment">&lt;!-- 'type=password' mascara os caracteres com pontos por segurança --&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"user-pass"</span> <span class="attr">name</span>=<span class="string">"senha"</span> <span class="attr">minlength</span>=<span class="string">"8"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="tag">&lt;br&gt;</span>
+
+    <span class="comment">&lt;!-- Botão que dispara o envio do formulário --&gt;</span>
+    <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span>Criar Conta Agora<span class="tag">&lt;/button&gt;</span>
+
+    <span class="comment">&lt;!-- Botão que limpa todos os campos para o estado original --&gt;</span>
+    <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"reset"</span><span class="tag">&gt;</span>Limpar Dados<span class="tag">&lt;/button&gt;</span>
+
+<span class="tag">&lt;/form&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-emerald-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-500 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Arquiteto de Interações</h2>
+            </div>
+
+            <p class="mb-10 text-emerald-100 text-lg font-light">Modifique o código base para tornar o formulário mais robusto:</p>
+
+            <div class="space-y-6 text-emerald-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Novo Campo:</strong> Adicione um campo para "Telemóvel" usando o <code>type="tel"</code>. Não se esqueça de criar a etiqueta correspondente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Validação Extra:</strong> No campo de Palavra-passe, adicione o atributo <code>maxlength="20"</code> para limitar o tamanho da senha.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Campo Numérico:</strong> Insira uma pergunta "Quantos anos tem?" usando o <code>type="number"</code> com os atributos <code>min="13"</code> e <code>max="100"</code>.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Dicas Visuais:</strong> Altere os <code>placeholder</code> para que sejam exemplos reais de dados que o utilizador deve inserir.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Envio Seguro:</strong> No cabeçalho da tag <code>&lt;form&gt;</code>, altere o <code>method</code> para <strong>GET</strong> e tente submeter o formulário. O que aparece na barra de endereços do seu navegador? (Depois volte para POST).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 05 concluída. Agora já sabe como ouvir o que o utilizador tem a dizer!<br>
+            A seguir: <strong>Formulários II (Caixas de Seleção, Rádios e Menus)</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

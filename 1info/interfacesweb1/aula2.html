@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 02: Navegação e Listas</title>
+    <!-- Tailwind CSS para um design profissional e moderno -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Cabeçalho -->
+    <header class="bg-indigo-800 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 1: Fundamentos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4 text-white">Aula 02: Navegação e Listas</h1>
+            <p class="text-2xl text-indigo-100 opacity-90 font-light">Conectando Páginas e Organizando Informações</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-amber-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">Portas e Inventários</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Na Aula 01, construímos as paredes. Agora, precisamos de <strong>portas</strong> para circular e <strong>armários</strong> para organizar.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">Links: As Portas</h3>
+                    <p class="text-sm text-slate-600">
+                        Um site não é uma ilha. Os links (âncoras) são as portas que ligam uma sala à outra ou a sua casa ao resto do mundo (a Internet). O atributo <code>href</code> é o endereço para onde a porta leva.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-emerald-500">
+                    <h3 class="text-xl font-bold text-emerald-700 mb-3">Listas: Os Armários</h3>
+                    <p class="text-sm text-slate-600">
+                        Informação sem ordem é ruído. As listas permitem-nos criar inventários, menus e manuais de instrução. Elas agrupam itens relacionados, facilitando a "leitura rápida" do utilizador.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- INTRODUÇÃO E DEFINIÇÕES -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">1. Conceitos Fundamentais</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-xl">Âncoras (&lt;a&gt;)</h3>
+                    <p class="text-slate-600 text-sm">O motor da Web. Usa o atributo <code>href</code> (referência) para navegar. Pode abrir na mesma aba ou numa nova com <code>target="_blank"</code>.</p>
+                </div>
+                <div class="group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-xl">Caminhos (Paths)</h3>
+                    <p class="text-slate-600 text-sm">Podem ser <strong>Absolutos</strong> (URL completa de outro site) ou <strong>Relativos</strong> (diretórios dentro do seu próprio projeto).</p>
+                </div>
+                <div class="group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-xl">Listas não Ordenadas</h3>
+                    <p class="text-slate-600 text-sm">A tag <code>&lt;ul&gt;</code> (Unordered List) cria listas com marcadores (bolinhas). Ideal para menus ou itens sem hierarquia cronológica.</p>
+                </div>
+                <div class="group bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:shadow-md transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-xl">Listas Ordenadas</h3>
+                    <p class="text-slate-600 text-sm">A tag <code>&lt;ol&gt;</code> (Ordered List) gera números ou letras automaticamente. Perfeita para passos de uma receita ou rankings.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">2. Prática Explicada</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600">Este código simula uma página de recursos. Analise cada linha para entender a conexão entre as tags:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Aula 02 - Navegação Interativa<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="comment">&lt;!-- O NAV é a área semântica ideal para menus de navegação --&gt;</span>
+    <span class="tag">&lt;nav&gt;</span>
+        <span class="tag">&lt;h2&gt;</span>Menu de Acesso Rápido<span class="tag">&lt;/h2&gt;</span>
+        <span class="comment">&lt;!-- Criamos um menu usando uma lista para melhor organização --&gt;</span>
+        <span class="tag">&lt;ul&gt;</span>
+            <span class="comment">&lt;!-- O href="#" cria um link que aponta para o topo da própria página --&gt;</span>
+            <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"#"</span><span class="tag">&gt;</span>Início<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+            
+            <span class="comment">&lt;!-- Link relativo: aponta para um ficheiro na mesma pasta --&gt;</span>
+            <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"contato.html"</span><span class="tag">&gt;</span>Contacto Local<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+            
+            <span class="comment">&lt;!-- Link absoluto: aponta para um endereço externo completo --&gt;</span>
+            <span class="tag">&lt;li&gt;</span><span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"https://google.com"</span> <span class="attr">target</span>=<span class="string">"_blank"</span><span class="tag">&gt;</span>Google (Nova Aba)<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/li&gt;</span>
+        <span class="tag">&lt;/ul&gt;</span>
+    <span class="tag">&lt;/nav&gt;</span>
+
+    <span class="tag">&lt;hr&gt;</span>
+
+    <span class="tag">&lt;main&gt;</span>
+        <span class="tag">&lt;section&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>Como Aprender Desenvolvimento Web em 3 Passos:<span class="tag">&lt;/h3&gt;</span>
+            <span class="comment">&lt;!-- Listas ordenadas (ol) geram a numeração 1, 2, 3 automaticamente --&gt;</span>
+            <span class="tag">&lt;ol&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Entenda a estrutura básica (HTML)<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Aplique estilos visuais (CSS)<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Crie interatividade dinâmica (JavaScript)<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ol&gt;</span>
+        <span class="tag">&lt;/section&gt;</span>
+
+        <span class="tag">&lt;section&gt;</span>
+            <span class="tag">&lt;h3&gt;</span>Ferramentas Recomendadas:<span class="tag">&lt;/h3&gt;</span>
+            <span class="comment">&lt;!-- Listas não ordenadas (ul) usam marcadores circulares --&gt;</span>
+            <span class="tag">&lt;ul&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Editor de Código (VS Code)<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Navegador Moderno (Chrome/Firefox)<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Documentação da MDN Web Docs<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+        <span class="tag">&lt;/section&gt;</span>
+    <span class="tag">&lt;/main&gt;</span>
+
+    <span class="tag">&lt;footer&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Deseja falar connosco? <span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"mailto:ajuda@exemplo.com"</span><span class="tag">&gt;</span>Envie um E-mail<span class="tag">&lt;/a&gt;</span><span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/footer&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold">3. Atividade: Prática de Navegação</h2>
+            </div>
+
+            <p class="mb-10 text-indigo-100 text-lg">Aplique as seguintes modificações no código de exemplo para fixar o conteúdo:</p>
+
+            <div class="space-y-6">
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700 flex items-start">
+                    <span class="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="text-indigo-100 font-medium">No menu de navegação, adicione um novo item de lista que leve para o seu perfil do GitHub ou LinkedIn.</p>
+                </div>
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700 flex items-start">
+                    <span class="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="text-indigo-100 font-medium">Mude a lista de "Como Aprender" de Ordenada (<code>&lt;ol&gt;</code>) para Não Ordenada (<code>&lt;ul&gt;</code>) e veja a diferença visual.</p>
+                </div>
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700 flex items-start">
+                    <span class="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="text-indigo-100 font-medium">Crie um link no rodapé que permita ao utilizador ligar diretamente para um número fictício usando o prefixo <code>tel:</code> no href.</p>
+                </div>
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700 flex items-start">
+                    <span class="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="text-indigo-100 font-medium">Dentro da secção de "Ferramentas", adicione uma <strong>sub-lista</strong> (uma lista dentro de outra) com versões específicas dos softwares citados.</p>
+                </div>
+                <div class="bg-indigo-800/50 p-6 rounded-xl border border-indigo-700 flex items-start">
+                    <span class="bg-indigo-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="text-indigo-100 font-medium">Adicione o atributo <code>title="Clique para ir ao topo"</code> no primeiro link do menu e teste o resultado ao passar o rato (mouse) sobre ele.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 02 finalizada. Agora já sabemos conectar os esqueletos que construímos!<br>
+            A seguir: <strong>Multimédia e Estrutura HTML5 Semântica</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

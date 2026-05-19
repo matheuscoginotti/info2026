@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 03: Multimídia e Semântica HTML5</title>
+    <!-- Tailwind CSS para design moderno e responsivo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed">
+
+    <!-- Cabeçalho -->
+    <header class="bg-violet-800 text-white py-20 px-6 shadow-xl">
+        <div class="max-w-4xl mx-auto text-center md:text-left">
+            <span class="bg-violet-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 1: Fundamentos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4 text-white font-mono">Aula 03: Média e Semântica</h1>
+            <p class="text-2xl text-violet-100 opacity-90 font-light italic">Dando Vida e Sentido ao Conteúdo Web</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-violet-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-violet-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">O Espetáculo e o Guião</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Construir um site é como produzir um <strong>Espetáculo de Teatro</strong>. Precisamos de ordem para que o público (e os motores de busca) entendam a história.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-violet-500">
+                    <h3 class="text-xl font-bold text-violet-700 mb-3">Média: Os Artistas</h3>
+                    <p class="text-sm text-slate-600">
+                        Áudios e Vídeos são os artistas que dão dinamismo ao palco. Eles captam a atenção imediata, mas precisam de "comandos" (controlos) para não atrapalhar a experiência do público.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">Semântica: O Guião</h3>
+                    <p class="text-sm text-slate-600">
+                        Sem um guião, os atores ficam perdidos. A semântica HTML5 diz ao navegador: "Isto é o Início", "Isto é o Conteúdo Principal", "Isto são os Créditos". Ajuda a IA e os cegos a "lerem" o palco.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-violet-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-violet-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">1. Blocos Semânticos e Média</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-violet-600 mb-3 text-xl">&lt;main&gt; e &lt;article&gt;</h3>
+                    <p class="text-slate-600 text-sm">O <code>&lt;main&gt;</code> define a área única da página. Já o <code>&lt;article&gt;</code> é um conteúdo independente que faz sentido sozinho (como um post ou notícia).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-violet-600 mb-3 text-xl">&lt;section&gt; e &lt;aside&gt;</h3>
+                    <p class="text-slate-600 text-sm">Use <code>&lt;section&gt;</code> para dividir partes lógicas de um tema. O <code>&lt;aside&gt;</code> é para barras laterais ou curiosidades relacionadas.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-violet-600 mb-3 text-xl">Atributos de Áudio</h3>
+                    <p class="text-slate-600 text-sm"><code>controls</code> (mostra botões), <code>autoplay</code> (inicia só), <code>loop</code> (repete) e <code>muted</code> (carrega sem som).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
+                    <h3 class="font-bold text-violet-600 mb-3 text-xl">Formatos de Vídeo</h3>
+                    <p class="text-slate-600 text-sm">O HTML5 suporta nativamente MP4, WebM e Ogg. O atributo <code>poster</code> define a imagem de capa antes do play.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Código Vivo</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600">Este exemplo cria um artigo de revista digital com suporte a vídeo e áudio. Veja os comentários para entender a função de cada tag:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Aula 03 - Revista Digital<span class="tag">&lt;/title&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="comment">&lt;!-- Cabeçalho Principal (Topo do site) --&gt;</span>
+    <span class="tag">&lt;header&gt;</span>
+        <span class="tag">&lt;h1&gt;</span>Portal Tech 2026<span class="tag">&lt;/h1&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Informação com sentido e som.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/header&gt;</span>
+
+    <span class="comment">&lt;!-- Área Principal de Conteúdo --&gt;</span>
+    <span class="tag">&lt;main&gt;</span>
+
+        <span class="comment">&lt;!-- Article: Conteúdo que faz sentido independentemente do site --&gt;</span>
+        <span class="tag">&lt;article&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>A Revolução do HTML5<span class="tag">&lt;/h2&gt;</span>
+            
+            <span class="comment">&lt;!-- Secção de Introdução --&gt;</span>
+            <span class="tag">&lt;section&gt;</span>
+                <span class="tag">&lt;p&gt;</span>O HTML5 mudou a forma como consumimos média na web.<span class="tag">&lt;/p&gt;</span>
+                
+                <span class="comment">&lt;!-- Inserindo Áudio: 'controls' é essencial para o utilizador interagir --&gt;</span>
+                <span class="tag">&lt;audio</span> <span class="attr">controls</span> <span class="attr">loop</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="string">"podcast.mp3"</span> <span class="attr">type</span>=<span class="string">"audio/mpeg"</span><span class="tag">&gt;</span>
+                    Seu browser não suporta áudio.
+                <span class="tag">&lt;/audio&gt;</span>
+            <span class="tag">&lt;/section&gt;</span>
+
+            <span class="comment">&lt;!-- Secção de Demonstração Visual --&gt;</span>
+            <span class="tag">&lt;section&gt;</span>
+                <span class="tag">&lt;h3&gt;</span>Veja o vídeo explicativo:<span class="tag">&lt;/h3&gt;</span>
+                
+                <span class="comment">&lt;!-- Vídeo: 'poster' é a imagem exibida antes do play --&gt;</span>
+                <span class="tag">&lt;video</span> <span class="attr">width</span>=<span class="string">"640"</span> <span class="attr">controls</span> <span class="attr">poster</span>=<span class="string">"capa.jpg"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;source</span> <span class="attr">src</span>=<span class="string">"video.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span><span class="tag">&gt;</span>
+                    Vídeo não suportado.
+                <span class="tag">&lt;/video&gt;</span>
+            <span class="tag">&lt;/section&gt;</span>
+        <span class="tag">&lt;/article&gt;</span>
+
+        <span class="comment">&lt;!-- Aside: Conteúdo lateral relacionado ao artigo principal --&gt;</span>
+        <span class="tag">&lt;aside&gt;</span>
+            <span class="tag">&lt;h4&gt;</span>Glossário Rápido<span class="tag">&lt;/h4&gt;</span>
+            <span class="tag">&lt;p&gt;</span>MP4: O formato de vídeo mais popular da web.<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/aside&gt;</span>
+
+    <span class="tag">&lt;/main&gt;</span>
+
+    <span class="comment">&lt;!-- Rodapé: Créditos e avisos --&gt;</span>
+    <span class="tag">&lt;footer&gt;</span>
+        <span class="tag">&lt;p&gt;</span><span class="tag">&lt;small&gt;</span>Documento criado para fins educativos.<span class="tag">&lt;/small&gt;</span><span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/footer&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-violet-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-violet-500 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Teu Próprio Post</h2>
+            </div>
+
+            <p class="mb-10 text-violet-100 text-lg">Desafia-te a modificar o código anterior e torna o site mais completo:</p>
+
+            <div class="space-y-6">
+                <div class="bg-violet-800/50 p-6 rounded-xl border border-violet-700 flex items-start">
+                    <span class="bg-violet-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="text-violet-100 font-medium"><strong>Múltiplos Artigos:</strong> Cria um segundo <code>&lt;article&gt;</code> dentro do <code>&lt;main&gt;</code> sobre o teu artista favorito.</p>
+                </div>
+                <div class="bg-violet-800/50 p-6 rounded-xl border border-violet-700 flex items-start">
+                    <span class="bg-violet-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="text-violet-100 font-medium"><strong>Som Silencioso:</strong> Adiciona o atributo <code>muted</code> ao vídeo e observa como ele se comporta ao carregar a página.</p>
+                </div>
+                <div class="bg-violet-800/50 p-6 rounded-xl border border-violet-700 flex items-start">
+                    <span class="bg-violet-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="text-violet-100 font-medium"><strong>Rodapé Completo:</strong> Adiciona uma lista não ordenada (<code>&lt;ul&gt;</code>) dentro do <code>&lt;footer&gt;</code> com links para "Termos de Uso" e "Privacidade".</p>
+                </div>
+                <div class="bg-violet-800/50 p-6 rounded-xl border border-violet-700 flex items-start">
+                    <span class="bg-violet-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="text-violet-100 font-medium"><strong>Autoplay e Loop:</strong> Tenta aplicar o <code>autoplay</code> (pode não funcionar em alguns browsers sem o <code>muted</code>) e o <code>loop</code> no áudio.</p>
+                </div>
+                <div class="bg-violet-800/50 p-6 rounded-xl border border-violet-700 flex items-start">
+                    <span class="bg-violet-500 text-white w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="text-violet-100 font-medium"><strong>Acessibilidade:</strong> Adiciona um parágrafo dentro da tag de áudio/vídeo descrevendo o conteúdo para utilizadores com browsers muito antigos.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 03 concluída. Agora o teu site já tem voz, movimento e inteligência!<br>
+            Próximo desafio: <strong>Tabelas e Atributos Globais</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

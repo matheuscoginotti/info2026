@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 10: O Modelo de Caixa (Box Model II)</title>
+    <!-- Tailwind CSS para o design da página de suporte -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 2: Estética</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 10: O Espaço Entre Nós</h1>
+            <p class="text-2xl text-indigo-100 opacity-90">Dominando Margens, Colapso e Centralização</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Distanciamento Social</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Se o <em>Padding</em> é o conforto dentro da roupa, a <strong>Margin</strong> é a distância que mantemos das outras pessoas na rua.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">Margin: O Espaço Externo</h3>
+                    <p class="text-sm text-slate-600">
+                        A margem cria um "campo de força" invisível ao redor da caixa. Ela empurra os vizinhos para longe, garantindo que os blocos de informação não se misturem.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Colapso: O Encaixe</h3>
+                    <p class="text-sm text-slate-600">
+                        Estranhamente, quando duas margens verticais se tocam, elas não se somam. Elas "colapsam": a maior margem vence e o espaço total é apenas o valor da maior, não a soma das duas.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-amber-50 rounded-xl border border-amber-100">
+                <p class="text-amber-900 text-sm">
+                    <strong></strong><br>
+                    <em>Nota: Perceba que 20px de margem inferior + 20px de margem superior resultam em apenas 20px de separação, e não 40px.</em>
+                </p>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Propriedades de Distância</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Sintaxe Shorthand</h3>
+                    <p class="text-slate-600">Pode definir os 4 lados numa só linha: <code>margin: 10px 20px 30px 40px;</code> (Topo, Direita, Baixo, Esquerda - sentido horário).</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Margem Automática</h3>
+                    <p class="text-slate-600">Usar <code>margin: 0 auto;</code> num elemento com largura fixa é a forma clássica de centralizá-lo horizontalmente na tela.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Margens Negativas</h3>
+                    <p class="text-slate-600">Ao contrário do padding, as margens podem ser negativas (ex: <code>margin-top: -20px;</code>). Isso faz o elemento "puxar" os vizinhos para cima de si.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Colapso de Margem</h3>
+                    <p class="text-slate-600">Ocorre apenas em margens <strong>verticais</strong> de elementos em bloco. Margens horizontais nunca colapsam; elas somam-se normalmente.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Prática: O Jogo das Margens</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">O código abaixo demonstra o efeito de afastamento e a técnica de centralização automática:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;style&gt;</span>
+        <span class="comment">/* Reset básico para visualização clara */</span>
+        <span class="css-selector">*</span> { <span class="css-prop">box-sizing</span>: <span class="css-val">border-box</span>; <span class="css-prop">margin</span>: <span class="css-val">0</span>; <span class="css-prop">padding</span>: <span class="css-val">0</span>; }
+
+        <span class="css-selector">.container</span> {
+            <span class="css-prop">background-color</span>: <span class="css-val">#f0f0f0</span>;
+            <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+            <span class="css-prop">border</span>: <span class="css-val">2px solid #ccc</span>;
+        }
+
+        <span class="css-selector">.caixa-central</span> {
+            <span class="css-prop">width</span>: <span class="css-val">300px</span>; <span class="comment">/* Obrigatório ter largura para centralizar */</span>
+            <span class="css-prop">background-color</span>: <span class="css-val">#8e44ad</span>; <span class="comment">/* Roxo */</span>
+            <span class="css-prop">color</span>: <span class="css-val">white</span>;
+            <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+            <span class="css-prop">text-align</span>: <span class="css-val">center</span>;
+
+            <span class="comment">/* CENTRALIZAÇÃO: 50px em cima/baixo e AUTO nas laterais */</span>
+            <span class="css-prop">margin</span>: <span class="css-val">50px auto</span>;
+        }
+
+        <span class="css-selector">.bloco-vizinho</span> {
+            <span class="css-prop">background-color</span>: <span class="css-val">#e67e22</span>; <span class="comment">/* Laranja */</span>
+            <span class="css-prop">padding</span>: <span class="css-val">15px</span>;
+            
+            <span class="comment">/* MARGENS INDIVIDUAIS para testar o colapso */</span>
+            <span class="css-prop">margin-bottom</span>: <span class="css-val">30px</span>;
+            <span class="css-prop">margin-top</span>: <span class="css-val">30px</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"container"</span><span class="tag">&gt;</span>
+        <span class="comment">&lt;!-- Este bloco vai testar o colapso de margem com o próximo --&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bloco-vizinho"</span><span class="tag">&gt;</span>
+            Bloco Vizinho 1 (Margem Inferior: 30px)
+        <span class="tag">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- Entre estes dois, o espaço será apenas 30px, não 60px --&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"bloco-vizinho"</span><span class="tag">&gt;</span>
+            Bloco Vizinho 2 (Margem Superior: 30px)
+        <span class="tag">&lt;/div&gt;</span>
+
+        <span class="comment">&lt;!-- Esta caixa ficará perfeitamente no meio do container --&gt;</span>
+        <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"caixa-central"</span><span class="tag">&gt;</span>
+            Eu estou centralizado com 'margin: auto'!
+        <span class="tag">&lt;/div&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Atividade: O Mestre dos Espaços</h2>
+            </div>
+
+            <p class="mb-10 text-indigo-100 text-lg font-light">Para concluir o estudo do Box Model, aplique estas alterações:</p>
+
+            <div class="space-y-6 text-indigo-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Fator de Colapso:</strong> Mude a <code>margin-bottom</code> do Vizinho 1 para <code>100px</code>. Repare que o Vizinho 2 não se moveu mais 30px, mas sim os 100px totais.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Largura Relativa:</strong> Na <code>.caixa-central</code>, mude a largura de <code>300px</code> para <code>50%</code>. Ela continua centralizada? Porquê?</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Efeito de Puxar:</strong> Aplique uma <code>margin-left: -50px;</code> na caixa central. Para que lado ela fugiu do centro?</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Shorthand Prático:</strong> Substitua as margens individuais dos vizinhos por uma única linha: <code>margin: 20px 0 40px 10px;</code>. Identifique qual valor afeta cada lado.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Centralização Quebrada:</strong> Remova a propriedade <code>width</code> da caixa central. O <code>margin: auto</code> ainda funciona? (Dica: Elementos de bloco sem largura ocupam 100%).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 10 concluída. O Box Model já não tem segredos para si!<br>
+            A seguir: <strong>Módulo 3 - Planos de Fundo, Gradientes e Opacidade</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>

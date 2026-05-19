@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 08: Cores e Tipografia Profissional</title>
+    <!-- Tailwind CSS para o design da página de suporte -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Importação de fontes profissionais do Google Fonts para o exemplo -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-teal-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-teal-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-teal-50">Módulo 2: Estética</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 08: Cores e Voz Visual</h1>
+            <p class="text-2xl text-teal-100 opacity-90">Dominando a Psicologia Cromática e a Tipografia Profissional</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- SECÇÃO DE ANALOGIAS -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-teal-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.172-1.172a4 4 0 115.656 5.656L10 17.657l-6.828-6.829a4 4 0 010-5.656z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">O Clima e a Voz</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Imagine que o seu site é uma <strong>Sala de Estar</strong>.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-teal-500">
+                    <h3 class="text-xl font-bold text-teal-700 mb-3">A Cor é o Clima</h3>
+                    <p class="text-sm text-slate-600">
+                        As cores definem a temperatura da sala. Um azul suave traz calma e confiança (ideal para bancos); um laranja vibrante traz fome e urgência (ideal para comida rápida). A cor dita como o utilizador se deve <em>sentir</em>.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">A Fonte é a Voz</h3>
+                    <p class="text-sm text-slate-600">
+                        A tipografia é o tom de voz de quem está na sala. Fontes com serifa (pequenos traços nas pontas) falam com autoridade e tradição. Fontes sem serifa falam com modernidade e clareza.
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DEFINIÇÕES OBJETIVAS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-teal-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">1. Sistemas de Cores e Tipos</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition-all">
+                    <h3 class="font-bold text-teal-600 mb-3 text-lg italic">HEX e RGB</h3>
+                    <p class="text-slate-600"><strong>HEX:</strong> Código de 6 dígitos (#FFFFFF). <strong>RGB:</strong> Mistura de Vermelho, Verde e Azul (rgb(255,255,255)). São os "DNAS" das cores no monitor.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition-all">
+                    <h3 class="font-bold text-teal-600 mb-3 text-lg italic">Serif vs Sans-Serif</h3>
+                    <p class="text-slate-600"><strong>Serif:</strong> Fontes com "pés" (ex: Times). Transmitem seriedade. <strong>Sans-Serif:</strong> Fontes retas (ex: Arial). Transmitem limpeza e tecnologia.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition-all">
+                    <h3 class="font-bold text-teal-600 mb-3 text-lg italic">Line-height e Spacing</h3>
+                    <p class="text-slate-600">O segredo do design profissional está no respiro. O <code>line-height</code> controla a distância entre linhas, e o <code>letter-spacing</code> a distância entre letras.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-teal-200 transition-all">
+                    <h3 class="font-bold text-teal-600 mb-3 text-lg italic">Web Fonts</h3>
+                    <p class="text-slate-600">Não estamos limitados às fontes do sistema. Usamos o Google Fonts para carregar tipografias externas que tornam o site único.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">2. Prática: Estilo Tipográfico Avançado</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg">Observe como este código aplica cores em diferentes formatos e utiliza uma tipografia externa para criar contraste:</p>
+
+            <div class="code-container">
+<pre><code><span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-pt"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- Importando fontes do Google para usar no CSS --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">href</span>=<span class="string">"https://fonts.googleapis.com/css2?family=Playfair+Display&amp;family=Roboto&amp;display=swap"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span><span class="tag">&gt;</span>
+    
+    <span class="tag">&lt;style&gt;</span>
+        <span class="css-selector">body</span> {
+            <span class="comment">/* Cor de fundo usando sistema HEX (Cinza muito claro) */</span>
+            <span class="css-prop">background-color</span>: <span class="css-val">#fdfdfd</span>;
+            <span class="comment">/* Cor do texto principal usando RGB (Preto suave) */</span>
+            <span class="css-prop">color</span>: <span class="css-val">rgb(40, 40, 40)</span>;
+            <span class="comment">/* Definindo a fonte Roboto (Sans-Serif) como padrão */</span>
+            <span class="css-prop">font-family</span>: <span class="css-val">'Roboto', sans-serif</span>;
+            <span class="css-prop">font-size</span>: <span class="css-val">18px</span>;
+            <span class="comment">/* Espaçamento entre linhas para melhorar a leitura */</span>
+            <span class="css-prop">line-height</span>: <span class="css-val">1.8</span>;
+        }
+
+        <span class="css-selector">h1</span> {
+            <span class="comment">/* Cor usando nome da cor (Sienna) */</span>
+            <span class="css-prop">color</span>: <span class="css-val">sienna</span>;
+            <span class="comment">/* Fonte Playfair (Serifada) para títulos elegantes */</span>
+            <span class="css-prop">font-family</span>: <span class="css-val">'Playfair Display', serif</span>;
+            <span class="css-prop">font-size</span>: <span class="css-val">48px</span>;
+            <span class="css-prop">margin-bottom</span>: <span class="css-val">10px</span>;
+            <span class="comment">/* Espaçamento entre letras para um aspeto de revista */</span>
+            <span class="css-prop">letter-spacing</span>: <span class="css-val">-1px</span>;
+        }
+
+        <span class="css-selector">.destaque-cor</span> {
+            <span class="comment">/* Cor de fundo usando HEX com opacidade (transparência) */</span>
+            <span class="css-prop">background-color</span>: <span class="css-val">#ffd70055</span>; <span class="comment">/* Amarelo Ouro com 55 de transparência */</span>
+            <span class="css-prop">padding</span>: <span class="css-val">5px 10px</span>;
+            <span class="css-prop">font-weight</span>: <span class="css-val">700</span>; <span class="comment">/* Peso da fonte: Negrito */</span>
+        }
+
+        <span class="css-selector">footer</span> {
+            <span class="css-prop">text-align</span>: <span class="css-val">center</span>;
+            <span class="css-prop">font-size</span>: <span class="css-val">14px</span>;
+            <span class="css-prop">color</span>: <span class="css-val">#888</span>;
+            <span class="comment">/* Transformação: deixa tudo em maiúsculas */</span>
+            <span class="css-prop">text-transform</span>: <span class="css-val">uppercase</span>;
+            <span class="css-prop">margin-top</span>: <span class="css-val">50px</span>;
+        }
+    <span class="tag">&lt;/style&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;header&gt;</span>
+        <span class="tag">&lt;h1&gt;</span>A Arte da Leitura<span class="tag">&lt;/h1&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Design não é apenas o que se vê, é como se <span class="tag">&lt;span</span> <span class="attr">class</span>=<span class="string">"destaque-cor"</span><span class="tag">&gt;</span>percebe<span class="tag">&lt;/span&gt;</span>.<span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/header&gt;</span>
+
+    <span class="tag">&lt;main&gt;</span>
+        <span class="tag">&lt;p&gt;</span>
+            Quando escolhemos as cores certas, guiamos o olhar do utilizador. 
+            A tipografia correta garante que a mensagem chegue sem esforço.
+        <span class="tag">&lt;/p&gt;</span>
+    <span class="tag">&lt;/main&gt;</span>
+
+    <span class="tag">&lt;footer&gt;</span>
+        Direitos de Design Reservados &amp;copy; 2026
+    <span class="tag">&lt;/footer&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-teal-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-teal-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold">3. Atividade: O Designer de Cores</h2>
+            </div>
+
+            <p class="mb-10 text-teal-100 text-lg font-light italic">Aplique estas melhorias visuais para testar os seus conhecimentos:</p>
+
+            <div class="space-y-6 text-teal-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-teal-500">
+                    <span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Cores HEX:</strong> Mude a cor do <code>h1</code> para <code>#2c3e50</code> (um azul petróleo profundo).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-teal-500">
+                    <span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Legibilidade:</strong> Altere o <code>line-height</code> do body para <code>2.0</code>. Note como o texto ganha ainda mais "respiro".</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-teal-500">
+                    <span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Contraste:</strong> Mude a cor da classe <code>.destaque-cor</code> para um fundo preto (<code>#000</code>) e a cor do texto para branco (<code>#fff</code>).</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-teal-500">
+                    <span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Peso Visual:</strong> Adicione a propriedade <code>font-weight: 300;</code> ao rodapé para deixá-lo com uma aparência mais fina e discreta.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-teal-500">
+                    <span class="bg-teal-100 text-teal-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>Personalização:</strong> Visite o Google Fonts, escolha uma fonte diferente e tente substituir o 'Roboto' no seu código (apenas no atributo <code>font-family</code>).</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 08 finalizada. Agora os seus sites já têm alma e voz!<br>
+            Próxima aula: <strong>O Box Model I: Margens e Espaçamentos Internos</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
