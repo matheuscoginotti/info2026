@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 01: As Veias da Internet (Infraestrutura Física e Escopo)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Classes de Realce de Sintaxe Adaptadas para Terminal/Dados de Rede */
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; font-weight: bold; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+        .css-prop { color: #b5cea8; }
+        .css-val { color: #4fc1ff; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 3: Infraestrutura Conectada e Segura</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 01: As Veias da Internet</h1>
+            <p class="text-2xl text-indigo-100 opacity-90">Explorando o Alcance das Redes, Unidades de Banda e Meios Físicos</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11a7 7 0 01-7 7m0 0a7 7 0 01-7-7m7 7v4m0 0H8m4 0h4m-4-8a3 3 0 100-6 3 3 0 000 6z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">O Sistema de Rodovias dos Dados</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Para entender redes, pense na infraestrutura como um sistema de estradas e cidades. Antes de enviarmos qualquer pacote de dados, precisamos construir o asfalto, definir o tamanho das vilas e garantir que os veículos não sofram acidentes por causa de ruídos externos.
+            </p>
+
+            <div class="grid md:grid-cols-2 gap-10">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">Tamanho das Cidades (Escopo)</h3>
+                    <p class="text-sm text-slate-600">
+                        As redes são classificadas pela sua área de cobertura. Uma **PAN** é a sua mesa de trabalho (fone Bluetooth), uma **LAN** é o prédio da escola, e uma **MAN** cobre uma cidade inteira. O tamanho dita como o tráfego é gerenciado.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Os Canos de Transmissão (Cabos)</h3>
+                    <p class="text-sm text-slate-600">
+                        O cabo de par trançado **UTP** é a nossa estrada comum. Os fios são trancados para evitar que as ondas eletromagnéticas de fora misturem e estraguem os bits. Em fábricas com muito ruído elétrico, usamos o **STP**, que traz uma blindagem extra protetora.
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-amber-50 rounded-xl border border-amber-100">
+                <p class="text-amber-900 text-sm">
+                    <strong>A Armadilha dos Bits vs Bytes:</strong><br>
+                    <em>As operadoras vendem internet em <strong>Megabits (Mbps)</strong>, mas o seu navegador mede downloads em <strong>MegaBytes (MB/s)</strong>. Como 1 Byte equivale a 8 bits, para saber a velocidade real de download, você precisa dividir a velocidade contratada por 8!</em>
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Glossário Técnico Base</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Padrão Ethernet (IEEE 802.3)</h3>
+                    <p class="text-slate-600">É a regra mundial que dita como a informação deve ser fatiada e empurrada através de cabos de rede locais para que todos os computadores se entendam.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Categoria 6 (Cat6)</h3>
+                    <p class="text-slate-600">Evolução dos cabos de rede capaz de trafegar dados a velocidades de até 10 Gbps em distâncias curtas, possuindo um separador interno de plástico para isolar os pares.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Crosstalk (Interferência)</h3>
+                    <p class="text-slate-600">Fenómeno destrutivo onde o sinal elétrico de um fio salta para o fio vizinho, corrompendo os 0s e 1s. É combatido diretamente pelo trançamento cirúrgico dos pares.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Largura de Banda</h3>
+                    <p class="text-slate-600">A capacidade máxima teórica de tráfego que um cabo ou conexão consegue carregar por segundo. Não confunda com velocidade de propagação do sinal.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 009 11V7a4 4 0 00-8 0v4c0 2.417.881 4.634 2.344 6.344m5.44 2.04A13.942 13.942 0 0012 15c2.417 0 4.634.881 6.344 2.344m-23.44 0l.054-.09A13.916 13.916 0 0017 11V7a4 4 0 00-8 0v4c0 2.417-.881 4.634-2.344 6.344M8 11h8m-4-4v8" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Prática: Análise de Tráfego e Pinagem</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">
+                Abaixo está a representação técnica do cálculo de vazão de dados e a pinagem padrão **T568B** (utilizada para cravar conectores RJ-45). Analise a distribuição estrutural:
+            </p>
+
+            <div class="code-container">
+
+<pre><code><span class="comment"># =========================================================
+# ANÁLISE MATEMÁTICA: Conversão de Link de Internet
+# =========================================================</span>
+<span class="tag">Link_Contratado:</span> <span class="css-val">240 Mbps</span> (Megabits por segundo)
+<span class="tag">Fator_Divisor:</span>   <span class="css-prop">8 bits</span> = 1 Byte
+
+<span class="tag">Cálculo:</span>         240 / 8 = <span class="css-selector">30 MB/s</span> (Taxa máxima de download real)
+<span class="tag">Cenário:</span>         Arquivo de 300 MegaBytes será baixado em exatamente <span class="css-val">10 segundos</span>.
+
+<span class="comment"># =========================================================
+# MAPEAMENTO DE PINOS: Padrão de Crimpagem T568B (RJ-45)
+# =========================================================</span>
+
+<span class="tag">Pino 1:</span> <span class="string">Branco do Laranja</span>  --> <span class="css-selector">[Transmissão +]</span>
+<span class="tag">Pino 2:</span> <span class="string">Laranja</span>            --> <span class="css-selector">[Transmissão -]</span>
+<span class="tag">Pino 3:</span> <span class="string">Branco do Verde</span>    --> <span class="css-selector">[Receção +]</span>
+<span class="tag">Pino 4:</span> <span class="string">Azul</span>                --> <span class="comment">[Uso reservado / PoE]</span>
+<span class="tag">Pino 5:</span> <span class="string">Branco do Azul</span>     --> <span class="comment">[Uso reservado / PoE]</span>
+<span class="tag">Pino 6:</span> <span class="string">Verde</span>               --> <span class="css-selector">[Receção -]</span>
+<span class="tag">Pino 7:</span> <span class="string">Marrom Branco</span> --> <span class="comment">[Uso reservado / Linha]</span>
+<span class="tag">Pino 8:</span> <span class="string">Marrom</span>           --> <span class="comment">[Uso reservado / Linha]</span>
+
+<span class="comment"># Nota: Cabos Fast Ethernet (100 Mbps) usam apenas os pinos 1, 2, 3 e 6.
+# Redes Gigabit (1000 Mbps) exigem obrigatoriamente a ação de todos os 8 pinos ativos!</span></code></pre>
+            </div>
+        </section>
+
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 4a2 2 0 114 0v8a2 2 0 01-2 2H5a2 2 0 01-2-2V4a2 2 0 114 0v4a2 2 0 012 2h2a2 2 0 002-2V4z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Diagnóstico de Infraestrutura</h2>
+            </div>
+
+            <p class="mb-10 text-indigo-100 text-lg font-light">Atue como administrador de redes de uma empresa e resolva os seguintes problemas com base no material de estudo:</p>
+
+            <div class="space-y-6 text-indigo-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Gargalo de Banda:</strong> Um cliente contratou um plano de internet de 400 Mbps. Ao realizar um download de um ISO de sistema de 400 Megabytes, o indicador marcou travado em 50 MB/s. O cliente abriu uma reclamação alegando roubo na velocidade. Justifique matematicamente se a operadora está certa ou errada.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Cabo Partido:</strong> Um computador parou de navegar na internet, mas o analista percebeu que a placa de rede ainda acende uma luz estática. Ao testar a integridade física do cabo, descobriu-se que o filamento de cobre do <strong>Pino 6 (Verde)</strong> se rompeu internamente. Explique por que a máquina perdeu a capacidade de navegar.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Ambiente Industrial:</strong> Você recebeu a missão de passar um cabo de rede saindo do escritório administrativo e atravessando todo o chão de fábrica, passando colado a grandes motores elétricos de alta indução. Qual cabo deve ser comprado para esta tarefa: **Cat5e UTP** ou **Cat6 STP**? Justifique sua defesa técnica.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Classificação de Escopo:</strong> Ao sincronizar o seu Smartwatch com o Smartphone via Bluetooth enquanto caminha pela escola, você está utilizando qual tipo de rede em relação ao alcance geográfico (PAN, LAN ou MAN)? Explique o motivo.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">5</span>
+                    <p class="font-medium"><strong>O Mistério do Gigabit:</strong> Um switch antigo da escola foi trocado por um moderno Switch Gigabit (1000 Mbps). No entanto, as máquinas conectadas a ele continuam operando à velocidade de 100 Mbps. Sabendo que as placas-mãe suportam Gigabit, qual elemento da camada física provavelmente está sabotando a rede?</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 01 concluída. A estrutura e os limites físicos da informação já não têm segredos para si!<br>
+            A seguir: <strong>Aula 02 — O Mapa Postal da Rede (Modelo OSI e Endereçamento Lógico/Físico)</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
