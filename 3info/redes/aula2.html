@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 02: O Mapa Postal da Rede (Modelo OSI e Endereçamento)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* Cores de Realce para a Estrutura de Dados e Comandos */
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; font-weight: bold; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+        .css-prop { color: #b5cea8; }
+        .css-val { color: #4fc1ff; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 3: Infraestrutura Conectada e Segura</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 02: O Mapa Postal da Rede</h1>
+            <p class="text-2xl text-indigo-100 opacity-90">Desvendando as Camadas do Modelo OSI e o Confronto IP vs. Endereço MAC</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">A Jornada de Uma Carta Internacional</h2>
+            </div>
+
+            <p class="text-lg text-slate-600 mb-8">
+                Para que um dado saia do seu WhatsApp e chegue ao telemóvel de outra pessoa, ele precisa passar por um sistema rigoroso de empacotamento. É exatamente igual ao envio de uma encomenda postal pelos correios.
+            </p>
+
+            
+
+            <div class="grid md:grid-cols-2 gap-10 mt-8">
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
+                    <h3 class="text-xl font-bold text-indigo-700 mb-3">O Modelo OSI (As 7 Camadas)</h3>
+                    <p class="text-sm text-slate-600">
+                        O **Modelo OSI** divide a rede em 7 etapas. Quem envia o dado começa no topo (A Aplicação/Navegador), onde a mensagem é escrita, e desce até virar eletricidade no cabo (Física). Quem recebe faz o caminho inverso, subindo do cabo até o ecrã.
+                    </p>
+                </div>
+                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
+                    <h3 class="text-xl font-bold text-slate-800 mb-3">Endereço de Casa vs. CPF</h3>
+                    <p class="text-sm text-slate-600">
+                        Sua máquina possui duas identidades fundamentais. O **IP** é o endereço lógico (muda se você mudar de rede ou de casa). O **MAC Address** é o endereço físico (gravado de fábrica na placa de rede, funciona como o CPF do componente).
+                    </p>
+                </div>
+            </div>
+
+            <div class="mt-10 p-6 bg-amber-50 rounded-xl border border-amber-100">
+                <p class="text-amber-900 text-sm">
+                    <strong>A Lógica do Tráfego Local:</strong><br>
+                    <em>Roteadores usam o **IP** para descobrir em qual rua do mundo o dado deve entrar. Mas os Switches (dentro da escola) ignoram o IP e usam apenas o **MAC Address** para entregar o pacote diretamente na máquina certa.</em>
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-10">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Resumo Técnico das Camadas Críticas</h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-8 text-sm">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 7: Aplicação</h3>
+                    <p class="text-slate-600">Onde o utilizador interage diretamente. Exemplos práticos: o navegador Chrome, o cliente de Email ou a interface de mensagens do WhatsApp.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 4: Transporte</h3>
+                    <p class="text-slate-600">Controla a segurança da entrega dos pedaços de dados. O protocolo **TCP** garante de forma obstinada que nenhum bit se perca pelo caminho.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 3: Rede (O IP)</h3>
+                    <p class="text-slate-600">Responsável pelo roteamento. É nesta etapa que o cabeçalho ganha o **IP de Destino**, permitindo mapear a rota de tráfego entre cidades diferentes.</p>
+                </div>
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
+                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 2: Enlace (O MAC)</h3>
+                    <p class="text-slate-600">Trabalha estritamente dentro do perímetro da rede local (LAN). É o reino dos Switches e do controle de hardware via **MAC Address**.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H3m14 2v2a4 4 0 004 4h2uM12 3v18M3 12h18" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Mapeamento de Inspeção de Rede</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">
+                O bloco de diagnóstico a seguir demonstra como o protocolo **ARP** mapeia automaticamente os IPs dinâmicos vinculando-os aos seus respectivos nós de hardware (MAC) imutáveis:
+            </p>
+
+            
+
+            <div class="code-container">
+<pre><code><span class="comment"># =========================================================
+# ANATOMIA DE UM PACOTE DE DADOS EM TRÂNSITO
+# =========================================================</span>
+<span class="tag">[ CABEÇALHO DE ENLACE ]</span> --> MAC Origem: <span class="string">00:1A:2B:3C:4D:5E</span> | MAC Destino: <span class="string">00:1A:2B:99:AA:BB</span>
+<span class="tag">[ CABEÇALHO DE REDE   ]</span> --> IP Origem:  <span class="css-val">192.168.1.15</span>      | IP Destino:  <span class="css-val">192.168.1.254</span>
+<span class="tag">[ DADOS DA MENSAGEM   ]</span> --> Conteúdo encapsulado: <span class="css-selector">"Pedido de acesso ao servidor"</span>
+
+<span class="comment"># =========================================================
+# REGISTO DE TERMINAL: Saída Real do Comando 'arp -a'
+# =========================================================</span>
+Interface: 192.168.1.15 --- 0x3
+
+  <span class="attr">Endereço Internet (IP)</span>   <span class="attr">Endereço Físico (MAC)</span>     <span class="attr">Tipo</span>
+  <span class="css-prop">192.168.1.1</span>              <span class="string">cc-40-d0-88-99-aa</span>         dinâmico   <span class="comment">&lt;-- Gateway/Roteador</span>
+  <span class="css-prop">192.168.1.50</span>             <span class="string">00-11-22-33-44-55</span>         dinâmico   <span class="comment">&lt;-- Impressora de Rede</span>
+  <span class="css-prop">192.168.1.254</span>            <span class="string">00-1a-2b-99-aa-bb</span>         dinâmico   <span class="comment">&lt;-- Servidor Local</span>
+  <span class="css-prop">255.255.255.255</span>          <span class="string">ff-ff-ff-ff-ff-ff</span>         estático   <span class="comment">&lt;-- Endereço de Broadcast</span>
+
+<span class="comment"># Nota Técnica: O endereço MAC "ff-ff-ff-ff-ff-ff" é a marca do Broadcast. 
+# Quando uma máquina manda dados para esse destino, todas as placas locais leem o pacote.</span></code></pre>
+            </div>
+        </section>
+
+        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono">3. Casos de Resolução de Conflitos</h2>
+            </div>
+
+            <p class="mb-10 text-indigo-100 text-lg font-light">Veja abaixo situações reais enfrentadas pelo suporte técnico de TI e a explicação imediata de como as identidades da rede agem:</p>
+
+            <div class="space-y-6 text-indigo-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">A</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">O Mistério do IP Duplicado</h4>
+                        <p class="text-sm text-slate-600 font-medium">Se dois computadores forem configurados manualmente com o mesmíssimo IP (`192.168.1.10`), a rede local entra em colapso momentâneo. O Switch consegue identificar o erro de imediato porque, embora os IPs sejam iguais, as placas de rede possuem **MAC Addresses diferentes**, disparando um alerta de segurança no sistema.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">B</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">A Troca do Roteador Doméstico</h4>
+                        <p class="text-sm text-slate-600 font-medium">Quando você troca o roteador da sua casa por um novo, todos os seus dispositivos continuam recebendo IPs semelhantes (como `192.168.1.X`), mas a tabela **ARP** interna dos computadores precisa ser limpa. Isso ocorre porque o novo roteador traz uma nova placa física e, consequentemente, um **MAC Address totalmente novo** para o Gateway.</p>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
+                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">C</span>
+                    <div>
+                        <h4 class="font-bold text-indigo-900 mb-1">Segurança por Filtro Física</h4>
+                        <p class="text-sm text-slate-600 font-medium">Muitas empresas bloqueiam o acesso ao Wi-Fi corporativo usando filtragem por hardware. Mesmo que um invasor descubra a senha do Wi-Fi e tente clonar um IP válido da rede, ele será barrado na Camada 2 (Enlace) caso o seu **MAC Address** não esteja explicitamente cadastrado na lista de permissões do ponto de acesso.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 02 concluída. O endereçamento lógico e físico já não têm segredos para si!<br>
+            A seguir: <strong>Aula 03 — Os Mensageiros Invisíveis (Protocolos de Automação: DHCP e Pilha TCP/IP)</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
