@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Turmas - Informática para Internet</title>
-    <!-- Fonte estilo código e ícones -->
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;700&family=Poppins:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -66,6 +65,17 @@
             color: var(--text-secondary);
             font-family: 'Poppins', sans-serif;
             font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+
+        /* Estilo personalizado para o seu nome */
+        p.subtitle-name {
+            color: var(--accent-2); /* Tom azul suave para destacar com elegância */
+            font-family: 'Fira Code', monospace;
+            font-size: 1.1rem;
+            font-weight: bold;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
         }
 
         /* --- Container dos Cards --- */
@@ -171,12 +181,12 @@
 
     <header>
         <h1><span id="typewriter"></span><span class="cursor">&nbsp;</span></h1>
+        <p class="subtitle-name">Matheus M. Coginotti</p>
         <p class="subtitle">&lt; Selecione sua turma para continuar /&gt;</p>
     </header>
 
     <div class="cards-container">
         
-        <!-- 1º INFO -->
         <div class="card" style="--hover-color: var(--accent-1);">
             <div class="code-bg">
                 &lt;div&gt;<br>&nbsp;&nbsp;class="iniciante"<br>&lt;/div&gt;
@@ -188,7 +198,6 @@
             <a href="1info/1infomenu.html" class="btn-access" onclick="alert('Acessando painel do 1º Ano...')">Acessar</a>
         </div>
 
-        <!-- 3º INFO -->
         <div class="card" style="--hover-color: var(--accent-3);">
             <div class="code-bg">
                 SELECT * FROM<br>&nbsp;&nbsp;future_devs;<br>
