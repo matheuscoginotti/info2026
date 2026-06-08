@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 13 - Sombras, Bordas e Profundidade</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        /* Simulação do CSS Puro que o aluno vai aprender */
+        .preview-card {
+            max-width: 320px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,.20);
+            transition: .3s;
+        }
+        .preview-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,.30);
+        }
+        .preview-button {
+            width: 100%;
+            padding: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen">
+
+    <header class="border-b border-slate-800 bg-slate-950/50 backdrop-blur py-12 px-8 sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+            <div>
+                <span class="bg-indigo-500/10 text-indigo-400 border border-indigo-500/20 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider">Módulo 3: Front-End Moderno</span>
+                <h1 class="text-4xl font-extrabold text-white mt-3 tracking-tight">Aula 13: Sombras, Bordas e Profundidade</h1>
+                <p class="text-slate-400 mt-2 text-lg">Dominando a estética e o comportamento visual de componentes profissionais.</p>
+            </div>
+            <div class="flex items-center gap-2 text-sm text-slate-400 bg-slate-900 p-3 rounded-xl border border-slate-800 self-start md:self-center">
+                <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                Ambiente de Aula Ativo
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto p-6 lg:p-8 grid lg:grid-cols-12 gap-8">
+        
+        <div class="lg:col-span-7 space-y-8">
+            
+            <section class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h2 class="text-xl font-bold text-white mb-3 flex items-center gap-2">
+                    <span class="text-indigo-400">#</span> Visão Geral
+                </h2>
+                <p class="text-slate-300 leading-relaxed">
+                    Nesta aula prática, vamos elevar o nível visual das nossas interfaces. Entenderemos como as propriedades <code class="text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded text-sm">box-shadow</code>, <code class="text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded text-sm">border-radius</code>, <code class="text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded text-sm">overflow</code> e <code class="text-indigo-400 bg-indigo-950/50 px-1.5 py-0.5 rounded text-sm">transition</code> trabalham juntas para simular profundidade e interações orgânicas no ecossistema web.
+                </p>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight">1. Conceitos Chave</h2>
+                <div class="grid sm:grid-cols-2 gap-4">
+                    <div class="bg-slate-950 border border-slate-800 p-5 rounded-xl hover:border-slate-700 transition">
+                        <div class="text-emerald-400 font-semibold mb-1 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> box-shadow
+                        </div>
+                        <p class="text-sm text-slate-400">Gera sombras projetadas. Cria a ilusão de que o elemento está flutuando sobre a página (eixo Z).</p>
+                    </div>
+                    
+                    <div class="bg-slate-950 border border-slate-800 p-5 rounded-xl hover:border-slate-700 transition">
+                        <div class="text-sky-400 font-semibold mb-1 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-sky-400"></span> border-radius
+                        </div>
+                        <p class="text-sm text-slate-400">Suaviza as quinas do Box Model. Essencial para o design moderno e interfaces amigáveis.</p>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-800 p-5 rounded-xl hover:border-slate-700 transition">
+                        <div class="text-amber-400 font-semibold mb-1 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-amber-400"></span> overflow: hidden
+                        </div>
+                        <p class="text-sm text-slate-400">Funciona como uma guilhotina. Impede que filhos (como imagens) vazem pelos cantos arredondados do pai.</p>
+                    </div>
+
+                    <div class="bg-slate-950 border border-slate-800 p-5 rounded-xl hover:border-slate-700 transition">
+                        <div class="text-pink-400 font-semibold mb-1 flex items-center gap-2">
+                            <span class="w-1.5 h-1.5 rounded-full bg-pink-400"></span> transition
+                        </div>
+                        <p class="text-sm text-slate-400">Interpola estados. Transforma mudanças abruptas de CSS (como o hover) em animações fluidas.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="space-y-4">
+                <h2 class="text-2xl font-bold text-white tracking-tight">2. Código do Projeto Base</h2>
+                <p class="text-slate-400 text-sm">Copie os blocos abaixo para reproduzir o projeto no seu editor local.</p>
+                
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-950 shadow-2xl">
+                    <div class="bg-slate-900 px-4 py-2 border-b border-slate-800 flex justify-between items-center text-xs text-slate-400">
+                        <span class="font-mono text-emerald-400">index.html</span>
+                        <span>HTML5</span>
+                    </div>
+                    <pre class="p-4 text-sm overflow-x-auto text-slate-300"><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="pt-br"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;title&gt;Card Moderno&lt;/title&gt;
+    &lt;link rel="stylesheet" href="estilo.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+
+    &lt;div class="card"&gt;
+        &lt;img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80" alt="Notebook Gamer"&gt;
+        &lt;h2&gt;Notebook Gamer&lt;/h2&gt;
+        &lt;p&gt;Intel Core i7 • 16GB RAM&lt;/p&gt;
+        &lt;button&gt;Comprar&lt;/button&gt;
+    &lt;/div&gt;
+
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+                </div>
+
+                <div class="border border-slate-800 rounded-xl overflow-hidden bg-slate-950 shadow-2xl">
+                    <div class="bg-slate-900 px-4 py-2 border-b border-slate-800 flex justify-between items-center text-xs text-slate-400">
+                        <span class="font-mono text-sky-400">estilo.css</span>
+                        <span>CSS3</span>
+                    </div>
+                    <pre class="p-4 text-sm overflow-x-auto text-slate-300"><code>body {
+    background: #f1f5f9;
+    font-family: sans-serif;
+    padding: 40px;
+}
+
+.card {
+    max-width: 350px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 18px;
+    overflow: hidden; /* Corta a imagem na borda */
+    box-shadow: 0 10px 25px rgba(0,0,0,.20);
+    transition: .3s;
+}
+
+.card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(0,0,0,.30);
+}
+
+img {
+    width: 100%;
+    display: block;
+}
+
+h2, p {
+    padding: 0 20px;
+}
+
+button {
+    width: 100%;
+    padding: 15px;
+    background: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+}</code></pre>
+                </div>
+            </section>
+        </div>
+
+        <div class="lg:col-span-5 space-y-8 lg:sticky lg:top-32 lg:self-start">
+            
+            <section class="bg-slate-950 border border-slate-800 rounded-2xl p-6 shadow-xl">
+                <h2 class="text-xs font-semibold text-slate-400 uppercase tracking-widest mb-4 flex items-center gap-2">
+                    <span class="w-2 h-2 rounded-full bg-indigo-500"></span> Resultado Visual (Live Preview)
+                </h2>
+                
+                <div class="bg-slate-100 rounded-xl p-8 border border-slate-200 min-h-[400px] flex items-center justify-center">
+                    
+                    <div class="preview-card text-slate-800">
+                        <img src="https://images.unsplash.com/photo-1603302576837-37561b2e2302?auto=format&fit=crop&w=600&q=80" alt="Notebook" class="w-full block">
+                        <h2 class="text-xl font-bold mt-4 mb-1">Notebook Gamer</h2>
+                        <p class="text-sm text-slate-500 mb-5">Intel Core i7 • 16GB RAM</p>
+                        <button class="preview-button font-medium">Comprar</button>
+                    </div>
+
+                </div>
+                <p class="text-xs text-slate-500 mt-3 text-center">Passe o mouse por cima do card para testar o efeito <code class="bg-slate-900 px-1 py-0.5 rounded">:hover</code> e a <code class="bg-slate-900 px-1 py-0.5 rounded">transition</code>.</p>
+            </section>
+
+            <section class="bg-gradient-to-br from-indigo-950 to-slate-950 border border-indigo-900/50 rounded-2xl p-6 shadow-2xl">
+                <h2 class="text-xl font-bold text-white mb-4 flex items-center gap-2">
+                    ⚡ Desafios Práticos
+                </h2>
+                <form class="space-y-4">
+                    <label class="flex items-start gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="checkbox" class="mt-1 accent-indigo-500 rounded">
+                        <span class="text-sm text-slate-300"><b>1.</b> Modifique a opacidade e o espalhamento do <code class="text-indigo-400">box-shadow</code> para deixar a sombra mais intensa.</span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="checkbox" class="mt-1 accent-indigo-500 rounded">
+                        <span class="text-sm text-slate-300"><b>2.</b> Altere o <code class="text-indigo-400">border-radius</code> para arredondar <b>apenas</b> as quinas superiores do container do card.</span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="checkbox" class="mt-1 accent-indigo-500 rounded">
+                        <span class="text-sm text-slate-300"><b>3.</b> Aplique a pseudo-classe <code class="text-indigo-400">button:hover</code> no CSS para alterar o <code class="text-indigo-400">background</code> do botão ao passar o mouse.</span>
+                    </label>
+
+                    <label class="flex items-start gap-3 p-3 bg-slate-900/50 border border-slate-800 rounded-xl cursor-pointer hover:bg-slate-900 transition">
+                        <input type="checkbox" class="mt-1 accent-indigo-500 rounded">
+                        <span class="text-sm text-slate-300"><b>4.</b> Crie um segundo card idêntico no HTML e alinhe ambos lado a lado utilizando propriedades de <b>Flexbox</b> no elemento pai.</span>
+                    </label>
+
+                    <div class="p-3 bg-indigo-950/30 border border-indigo-500/20 rounded-xl text-xs text-indigo-300 leading-relaxed">
+                        <strong>💡 Pergunta Teórica:</strong> O que acontece se removermos o <code>overflow: hidden;</code> do card? Faça o teste prático e observe o topo da imagem!
+                    </div>
+                </form>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="border-t border-slate-800 bg-slate-950 text-slate-500 text-center py-8 mt-12 text-sm font-medium">
+        Fim da Aula 13 • Próxima etapa: <span class="text-slate-300">Pseudo-classes e Efeitos Avançados</span>
+    </footer>
+
+</body>
+</html>
