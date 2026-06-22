@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação: Portal de Suporte Técnico</title>
+    <!-- Tailwind CSS para um design moderno e limpo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .tag { color: #569cd6; font-family: 'Fira Code', monospace; }
+        .attr { color: #9cdcfe; font-family: 'Fira Code', monospace;}
+        .string { color: #ce9178; font-family: 'Fira Code', monospace;}
+        .css-prop { color: #9cdcfe; font-family: 'Fira Code', monospace;}
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-rose-800 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-rose-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-rose-50">Atividade Avaliativa</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Portal de Suporte Técnico</h1>
+            <p class="text-2xl text-rose-100 opacity-90 font-light">Desenvolvimento de Interface Visual</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- OBJETIVO E INSTRUÇÕES -->
+        <section class="mb-16 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-rose-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-rose-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">Objetivo e Instruções</h2>
+            </div>
+            
+            <div class="mb-8 p-6 bg-slate-50 rounded-2xl border-l-4 border-rose-600">
+                <p class="text-lg text-slate-700">
+                    <strong>Objetivo:</strong> Construir a interface visual de um sistema de abertura de chamados, aplicando boas práticas de HTML semântico e estruturação CSS (Box Model, Flexbox e Efeitos Visuais).
+                </p>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Instruções Gerais:</h3>
+            <ul class="space-y-3 text-slate-600">
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-rose-500 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    Você deve criar dois arquivos: <strong>index.html</strong> (estrutura) e <strong>style.css</strong> (estilos visuais).
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-rose-500 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+                    </svg>
+                    A consulta ao "Guia de Sintaxe CSS" e aos materiais das aulas é permitida e incentivada.
+                </li>
+            </ul>
+        </section>
+
+        <!-- REQUISITOS DO PROJETO -->
+        <section class="mb-16">
+            <div class="flex items-center mb-8">
+                <div class="bg-slate-200 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">Requisitos do Projeto</h2>
+            </div>
+
+            <!-- 1. Estrutura Global -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-2xl font-bold text-rose-700 mb-6 flex items-center">
+                    <span class="bg-rose-100 text-rose-800 w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">1</span>
+                    Estrutura Global (HTML Semântico)
+                </h3>
+                <ul class="space-y-4 text-slate-700">
+                    <li class="flex items-start bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div class="w-2 h-2 rounded-full bg-rose-500 mt-2 mr-3 shrink-0"></div>
+                        <p>A página deve conter um cabeçalho (<span class="tag">&lt;header&gt;</span>), uma área de conteúdo principal (<span class="tag">&lt;main&gt;</span>) e um rodapé (<span class="tag">&lt;footer&gt;</span>).</p>
+                    </li>
+                    <li class="flex items-start bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <div class="w-2 h-2 rounded-full bg-rose-500 mt-2 mr-3 shrink-0"></div>
+                        <p>O título da página (dentro do header) deve ser <strong>"Abertura de Chamado de TI"</strong>.</p>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- 2. Formulário -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-2xl font-bold text-rose-700 mb-6 flex items-center">
+                    <span class="bg-rose-100 text-rose-800 w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">2</span>
+                    O Formulário de Chamado (HTML)
+                </h3>
+                <p class="text-slate-600 mb-6">Dentro do <span class="tag">&lt;main&gt;</span>, crie um formulário estruturado utilizando <span class="tag">&lt;fieldset&gt;</span> e <span class="tag">&lt;legend&gt;</span> (ex: "Detalhes do Incidente"). O formulário deve conter os seguintes campos, acompanhados de suas respectivas etiquetas (<span class="tag">&lt;label&gt;</span>):</p>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">Nome Completo</p>
+                        <p class="text-sm text-slate-500 font-mono mt-1">type="text"</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">E-mail Corporativo</p>
+                        <p class="text-sm text-slate-500 font-mono mt-1">type="email"</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">Setor</p>
+                        <p class="text-sm text-slate-600 mt-1">Crie um <span class="tag">&lt;select&gt;</span> com 3 opções de departamentos (ex: RH, Financeiro, Diretoria).</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">Nível de Urgência</p>
+                        <p class="text-sm text-slate-600 mt-1">Crie botões de rádio para Baixa, Média e Alta.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">Descrição do Problema</p>
+                        <p class="text-sm text-slate-600 mt-1">Utilize uma <span class="tag">&lt;textarea&gt;</span>.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border-l-4 border-rose-400">
+                        <p class="font-bold text-slate-800">Botão de Envio</p>
+                        <p class="text-sm text-slate-500 font-mono mt-1">&lt;button type="submit"&gt;</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. CSS Avançado -->
+            <div class="bg-rose-900 p-8 rounded-2xl shadow-xl text-white">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <span class="bg-rose-500 text-white w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">3</span>
+                    Estilização e Tráfego (CSS Avançado)
+                </h3>
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-rose-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-rose-100 text-lg">Fundo Global:</p>
+                            <p class="text-rose-200 mt-1">O <code>body</code> da página deve ter um plano de fundo utilizando <span class="css-prop">linear-gradient</span> (escolha duas cores profissionais).</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-rose-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-rose-100 text-lg">O Card do Formulário (Box Model):</p>
+                            <p class="text-rose-200 mt-1">O formulário não deve ficar encostado nas bordas da tela. Ele deve estar dentro de uma caixa branca centralizada (<span class="css-prop">margin: 0 auto;</span>), com largura máxima (<span class="css-prop">max-width</span>) definida e <span class="css-prop">padding</span> adequado para dar "respiro" interno.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-rose-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-rose-100 text-lg">Flexbox:</p>
+                            <p class="text-rose-200 mt-1">Utilize <span class="css-prop">display: flex</span> e aplique <span class="css-prop">flex-direction: column</span> no formulário para empilhar os campos perfeitamente na vertical. Use a propriedade <span class="css-prop">gap</span> para criar o espaçamento automático entre eles.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-rose-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-rose-100 text-lg">Profundidade:</p>
+                            <p class="text-rose-200 mt-1">Aplique <span class="css-prop">border-radius</span> para arredondar os cantos do cartão do formulário e adicione um <span class="css-prop">box-shadow</span> suave para dar a impressão de que a caixa está "flutuando" sobre o fundo degradê.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-rose-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-rose-100 text-lg">Interação (Hover):</p>
+                            <p class="text-rose-200 mt-1">O botão de envio deve reagir ao mouse. Crie uma regra <span class="css-selector">:hover</span> mudando levemente a cor de fundo ou adicionando uma transição suave.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6 mt-12">
+        <p class="max-w-4xl mx-auto text-sm">
+            Avaliação Prática - Interfaces Web 1<br>
+            Leia os requisitos com atenção e utilize os materiais de consulta se necessário. Bom trabalho!
+        </p>
+    </footer>
+
+</body>
+</html>
