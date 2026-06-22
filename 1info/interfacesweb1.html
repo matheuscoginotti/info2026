@@ -310,14 +310,15 @@
         const STORAGE_KEY_PREFIX = 'iw1_lesson_';
         const mapContainer = document.getElementById('lessonMap');
 
-        // Criação dinâmica da lista de aulas (Adicionando 13.a e 13.b)
+        // Criação dinâmica da lista de aulas
         const lessonList = [];
         for (let i = 1; i <= 30; i++) {
             lessonList.push(i.toString());
-            // Injeta as aulas auxiliares logo após a aula 13
+            // Injeta as aulas auxiliares e a avaliação logo após a aula 13
             if (i === 13) {
                 lessonList.push('13.A');
                 lessonList.push('13.B');
+                lessonList.push('AVALIAÇÃO');
             }
         }
 
@@ -342,8 +343,14 @@
             
             console.log(`Inicializando Módulo ${lessonId}...`);
             
-            // Redirecionamento: O sistema procurará por aula1.html, aula13.a.html, etc.
-            window.location.href = `interfacesweb1/aula${lessonId}.html`;
+            // Tratamento especial para o nome do arquivo, evitando acentos em "AVALIAÇÃO"
+            let fileName = `aula${lessonId}.html`;
+            if (lessonId === 'AVALIAÇÃO') {
+                fileName = 'avaliacao.html';
+            }
+            
+            // Redirecionamento
+            window.location.href = `interfacesweb1/${fileName}`;
         }
 
         function renderLessons() {
@@ -357,12 +364,17 @@
                 const lessonItem = document.createElement('div');
                 lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
 
-                // Se tiver um ponto (como 13.a), diminui a fonte para caber no polígono
-                const fontSize = lessonId.includes('.') ? '1.4rem' : '2rem';
+                // Ajuste dinâmico de fonte para comportar "13.A", "13.B" e a palavra "AVALIAÇÃO"
+                let fontSize = '2rem';
+                if (lessonId === 'AVALIAÇÃO') {
+                    fontSize = '0.80rem'; // Letra menor para caber no polígono
+                } else if (lessonId.includes('.')) {
+                    fontSize = '1.4rem';
+                }
 
                 lessonItem.innerHTML = `
                     <a href="#" class="lesson-btn" onclick="accessLesson('${lessonId}')">
-                        <span class="lesson-number" style="font-size: ${fontSize}">${lessonId}</span>
+                        <span class="lesson-number" style="font-size: ${fontSize}; text-align: center;">${lessonId}</span>
                         <div class="status-badge">
                             <i class="fas ${hasAccess ? 'fa-check' : 'fa-lock'}"></i>
                         </div>
