@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interfaces Web 1 - Aulas</title>
-    <!-- Adicionando Cinzel Decorative para o toque mágico -->
     <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -107,7 +105,7 @@
             font-weight: 700;
             letter-spacing: 2px;
             
-            /* Gradiente Adaptado para Fundo Claro (Ouro -> Cinza Escuro -> Azul) */
+            /* Gradiente Adaptado para Fundo Claro */
             background: linear-gradient(90deg, #b45309 0%, #1e293b 50%, #0284c7 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -176,13 +174,12 @@
             text-decoration: none;
             color: var(--text-primary);
             backdrop-filter: blur(8px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra sutil para profundidade */
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
         }
 
         /* Número */
         .lesson-number {
             font-family: 'Chakra Petch', sans-serif;
-            font-size: 2rem;
             font-weight: 700;
             z-index: 2;
         }
@@ -206,8 +203,6 @@
         }
 
         /* --- Estados --- */
-
-        /* Hover */
         .lesson-btn:hover {
             transform: translateY(-5px);
             background: #fff;
@@ -216,7 +211,6 @@
             color: var(--accent-cyan);
         }
 
-        /* Acessado (Completado) */
         .lesson-item.accessed .lesson-btn {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
@@ -237,7 +231,7 @@
         /* --- Texto Informativo --- */
         .access-info {
             margin-top: 12px;
-            font-size: 0.75rem; /* Levemente maior para ler no claro */
+            font-size: 0.75rem;
             color: var(--text-secondary);
             font-family: 'Chakra Petch', sans-serif;
             text-transform: uppercase;
@@ -251,7 +245,7 @@
         }
 
         .lesson-item.accessed .access-info {
-            opacity: 1; /* Totalmente visível no tema claro */
+            opacity: 1;
             transform: translateY(0);
             color: var(--accent-gold);
         }
@@ -274,7 +268,6 @@
             opacity: 0.8;
         }
 
-        /* Responsividade Mobile */
         @media (max-width: 800px) {
             .lesson-map {
                 grid-template-columns: repeat(2, 1fr);
@@ -314,10 +307,19 @@
 
     <script>
         // Configurações
-        const TOTAL_LESSONS = 30;
         const STORAGE_KEY_PREFIX = 'iw1_lesson_';
-
         const mapContainer = document.getElementById('lessonMap');
+
+        // Criação dinâmica da lista de aulas (Adicionando 13.a e 13.b)
+        const lessonList = [];
+        for (let i = 1; i <= 30; i++) {
+            lessonList.push(i.toString());
+            // Injeta as aulas auxiliares logo após a aula 13
+            if (i === 13) {
+                lessonList.push('13.a');
+                lessonList.push('13.b');
+            }
+        }
 
         function getTimeAgo(timestamp) {
             if (!timestamp) return '';
@@ -340,24 +342,27 @@
             
             console.log(`Inicializando Módulo ${lessonId}...`);
             
-            // Redirecionamento para a página específica da aula na pasta interfacesweb1
+            // Redirecionamento: O sistema procurará por aula1.html, aula13.a.html, etc.
             window.location.href = `interfacesweb1/aula${lessonId}.html`;
         }
 
         function renderLessons() {
             mapContainer.innerHTML = ''; 
 
-            for (let i = 1; i <= TOTAL_LESSONS; i++) {
-                const lastAccess = localStorage.getItem(STORAGE_KEY_PREFIX + i);
+            lessonList.forEach(lessonId => {
+                const lastAccess = localStorage.getItem(STORAGE_KEY_PREFIX + lessonId);
                 const timeString = getTimeAgo(lastAccess);
                 const hasAccess = lastAccess !== null;
 
                 const lessonItem = document.createElement('div');
                 lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
 
+                // Se tiver um ponto (como 13.a), diminui a fonte para caber no polígono
+                const fontSize = lessonId.includes('.') ? '1.4rem' : '2rem';
+
                 lessonItem.innerHTML = `
-                    <a href="#" class="lesson-btn" onclick="accessLesson(${i})">
-                        <span class="lesson-number">${i}</span>
+                    <a href="#" class="lesson-btn" onclick="accessLesson('${lessonId}')">
+                        <span class="lesson-number" style="font-size: ${fontSize}">${lessonId}</span>
                         <div class="status-badge">
                             <i class="fas ${hasAccess ? 'fa-check' : 'fa-lock'}"></i>
                         </div>
@@ -366,7 +371,7 @@
                 `;
 
                 mapContainer.appendChild(lessonItem);
-            }
+            });
         }
 
         // Foguetes Tecnológicos
@@ -374,7 +379,6 @@
             const container = document.getElementById('rocketContainer');
             const rocket = document.createElement('i');
             
-            // Ícones variados
             const icons = ['fa-rocket', 'fa-shuttle-space', 'fa-jet-fighter'];
             const randomIcon = icons[Math.floor(Math.random() * icons.length)];
             
