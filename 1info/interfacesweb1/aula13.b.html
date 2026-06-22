@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Extra: Guia Prático de Sintaxe CSS</title>
+    <!-- Tailwind CSS para um design moderno e limpo -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-teal-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-teal-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-teal-50">Material de Apoio</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula Extra: Dicionário de Sintaxe CSS</h1>
+            <p class="text-2xl text-teal-100 opacity-90 font-light">Guia Rápido de Propriedades, Atributos e Estruturas Visuais</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- INTRODUÇÃO -->
+        <section class="mb-16 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-teal-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-teal-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">O Manual do Construtor Visual</h2>
+            </div>
+            <p class="text-lg text-slate-600 mb-4">
+                Este material serve como uma <strong>folha de consulta rápida (Cheat Sheet)</strong> para a sua atividade prática. Aqui você encontrará a sintaxe exata e as propriedades mais importantes mapeadas durante o nosso curso. 
+            </p>
+            <p class="text-sm text-amber-700 bg-amber-50 p-4 rounded-xl border border-amber-200 italic">
+                Lembre-se: No desenvolvimento profissional, você não precisa decorar cada linha de código, mas sim entender a lógica de aplicação e saber onde consultar a sintaxe correta quando necessário.
+            </p>
+        </section>
+
+        <!-- 1. SELETORES -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">1. Seletores e Estrutura Básica</h2>
+            <p class="mb-4 text-slate-600">Regras básicas de como apontar para um elemento HTML e aplicar modificações:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="comment">/* SELETOR DE TIPO: Afeta todas as tags desse tipo na página */</span>
+<span class="css-selector">body</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#fafafa</span>;
+}
+
+<span class="comment">/* SELETOR DE CLASSE: Aplica-se a qualquer elemento que utilize o atributo class="..." */</span>
+<span class="css-selector">.card-azul</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">lightblue</span>;
+}
+
+<span class="comment">/* SELETOR DE ID: Afeta apenas o elemento único com o atributo id="..." correspondente */</span>
+<span class="css-selector">#botao-enviar</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">green</span>;
+}
+
+<span class="comment">/* PSEUDO-CLASSE :HOVER: Aplica regras visuais apenas quando o mouse passa sobre o elemento */</span>
+<span class="css-selector">.card-azul:hover</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">deepskyblue</span>;
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 2. TIPOGRAFIA -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">2. Tipografia e Formatação de Texto</h2>
+            <p class="mb-4 text-slate-600">Controle total sobre fontes, tamanhos, pesos e o espaçamento de leitura:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="css-selector">.texto-customizado</span> {
+    <span class="css-prop">font-family</span>: <span class="css-val">'Inter', Arial, sans-serif</span>; <span class="comment">/* Define a família da fonte e alternativas */</span>
+    <span class="css-prop">font-size</span>: <span class="css-val">16px</span>;                        <span class="comment">/* Tamanho da fonte (px, em, rem) */</span>
+    <span class="css-prop">font-weight</span>: <span class="css-val">700</span>;                       <span class="comment">/* Peso/Espessura: 300 (fina), 400 (normal), 700 (negrito) */</span>
+    <span class="css-prop">color</span>: <span class="css-val">#2c3e50</span>;                         <span class="comment">/* Cor do texto em formato hexadecimal */</span>
+    <span class="css-prop">text-align</span>: <span class="css-val">center</span>;                     <span class="comment">/* Alinhamento: left, right, center, justify */</span>
+    <span class="css-prop">text-transform</span>: <span class="css-val">uppercase</span>;              <span class="comment">/* Força caixa alta: uppercase, lowercase, none */</span>
+    <span class="css-prop">line-height</span>: <span class="css-val">1.6</span>;                       <span class="comment">/* Espaçamento entre linhas (melhora a leitura) */</span>
+    <span class="css-prop">letter-spacing</span>: <span class="css-val">1px</span>;                    <span class="comment">/* Espaçamento horizontal entre as letras */</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 3. BOX MODEL -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">3. O Modelo de Caixa (Box Model)</h2>
+            <p class="mb-4 text-slate-600">Configuração de dimensões, preenchimentos internos, margens e bordas físicas:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="css-selector">.caixa-estruturada</span> {
+    <span class="comment">/* ATENÇÃO: Inclui padding e border dentro da largura total, evitando quebras */</span>
+    <span class="css-prop">box-sizing</span>: <span class="css-val">border-box</span>; 
+
+    <span class="css-prop">width</span>: <span class="css-val">100%</span>;                            <span class="comment">/* Ocupa toda a largura disponível */</span>
+    <span class="css-prop">max-width</span>: <span class="css-val">450px</span>;                       <span class="comment">/* Define um limite máximo fixo para a largura */</span>
+    <span class="css-prop">height</span>: <span class="css-val">auto</span>;                           <span class="comment">/* Altura adapta-se ao conteúdo interno automaticamente */</span>
+
+    <span class="comment">/* PADDING: Espaço interno (entre o texto e a borda) */</span>
+    <span class="css-prop">padding</span>: <span class="css-val">25px</span>;                          <span class="comment">/* Aplica 25px em todos os 4 lados */</span>
+    <span class="css-prop">padding</span>: <span class="css-val">15px 30px</span>;                     <span class="comment">/* Atalho: 15px (topo/baixo) e 30px (lados) */</span>
+
+    <span class="comment">/* MARGIN: Espaço externo (afastamento entre caixas vizinhas) */</span>
+    <span class="css-prop">margin</span>: <span class="css-val">0 auto</span>;                         <span class="comment">/* Perfeito para centralizar blocos horizontais na tela */</span>
+    <span class="css-prop">margin-bottom</span>: <span class="css-val">20px</span>;                    <span class="comment">/* Empurra elementos de baixo para longe */</span>
+
+    <span class="comment">/* BORDER: Moldura física da caixa */</span>
+    <span class="css-prop">border</span>: <span class="css-val">1px solid #cbd5e1</span>;              <span class="comment">/* Sintaxe: Espessura | Estilo (solid, dashed) | Cor */</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 4. FUNDOS E CORES -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">4. Planos de Fundo e Transparências</h2>
+            <p class="mb-4 text-slate-600">Trabalhando com cores sólidas, gradientes dinâmicos e opacidade controlada:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="css-selector">.fundo-estilizado</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#ffffff</span>;              <span class="comment">/* Fundo branco sólido tradicional */</span>
+
+    <span class="comment">/* Fundo transparente via RGBA (Vermelho, Verde, Azul, Alfa de transparência) 
+       Apenas o fundo fica transparente; os textos internos continuam 100% nítidos. */</span>
+    <span class="css-prop">background-color</span>: <span class="css-val">rgba(255, 255, 255, 0.85)</span>; 
+
+    <span class="comment">/* GRADIENTE LINEAR: Fusão de cores direcionada */</span>
+    <span class="css-prop">background-image</span>: <span class="css-val">linear-gradient(to right, #1e3a8a, #3b82f6)</span>; <span class="comment">/* Roxo/Azul para a direita */</span>
+    <span class="css-prop">background-image</span>: <span class="css-val">linear-gradient(45deg, #0f172a, #1e293b)</span>;   <span class="comment">/* Gradiente inclinado em 45 graus */</span>
+
+    <span class="comment">/* OPACIDADE GLOBAL: Torna o bloco INTEIRO semi-transparente (fundo E texto juntos) */</span>
+    <span class="css-prop">opacity</span>: <span class="css-val">0.6</span>;                           <span class="comment">/* Escala de 0.0 (invisível) a 1.0 (sólido) */</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 5. FLEXBOX -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">5. Flexbox (Alinhamento de Tráfego)</h2>
+            <p class="mb-4 text-slate-600">Gerenciamento inteligente de posicionamento e distribuição de elementos filhos:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="css-selector">.container-flexivel</span> {
+    <span class="css-prop">display</span>: <span class="css-val">flex</span>;                          <span class="comment">/* Habilita o modelo Flexbox no elemento pai */</span>
+    
+    <span class="css-prop">flex-direction</span>: <span class="css-val">column</span>;                 <span class="comment">/* Empilha os itens verticalmente (ótimo para formulários) */</span>
+    <span class="css-prop">flex-direction</span>: <span class="css-val">row</span>;                    <span class="comment">/* Alinha os itens lado a lado em linha (padrão) */</span>
+    
+    <span class="css-prop">justify-content</span>: <span class="css-val">center</span>;                <span class="comment">/* Alinhamento no eixo principal: flex-start, center, space-between */</span>
+    <span class="css-prop">align-items</span>: <span class="css-val">center</span>;                    <span class="comment">/* Alinhamento no eixo cruzado: flex-start, center, stretch */</span>
+    
+    <span class="css-prop">gap</span>: <span class="css-val">15px</span>;                              <span class="comment">/* Cria um espaçamento automático e idêntico entre os itens */</span>
+}</code></pre>
+            </div>
+        </section>
+
+        <!-- 6. PROFUNDIDADE -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-teal-700 mb-6">6. Bordas Suaves e Elevação Tridimensional</h2>
+            <p class="mb-4 text-slate-600">Tratamento de cantos arredondados, estouros de conteúdo e sombras projetadas:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="css-selector">.card-tridimensional</span> {
+    <span class="css-prop">border-radius</span>: <span class="css-val">12px</span>;                    <span class="comment">/* Suaviza as 4 quinas retas da caixa */</span>
+    <span class="css-prop">overflow</span>: <span class="css-val">hidden</span>;                       <span class="comment">/* Corta cirurgicamente qualquer conteúdo filho que tente vazar */</span>
+    
+    <span class="comment">/* BOX-SHADOW (Sombra projetada): 
+       Sintaxe: Deslocamento-X | Deslocamento-Y | Nível-de-Desfoque (Blur) | Cor-com-Opacidade */</span>
+    <span class="css-prop">box-shadow</span>: <span class="css-val">0 10px 20px rgba(0, 0, 0, 0.15)</span>; 
+    
+    <span class="comment">/* TRANSIÇÃO SUAVE: Amortece qualquer alteração de estilo (como no :hover) */</span>
+    <span class="css-prop">transition</span>: <span class="css-val">all 0.3s ease</span>;              <span class="comment">/* Altera o estado de forma suave durante 0.3 segundos */</span>
+}
+
+<span class="comment">/* Efeito combinado de elevação ao passar o mouse */</span>
+<span class="css-selector">.card-tridimensional:hover</span> {
+    <span class="css-prop">transform</span>: <span class="css-val">translateY(-5px)</span>;            <span class="comment">/* Desloca o elemento levemente para cima */</span>
+    <span class="css-prop">box-shadow</span>: <span class="css-val">0 15px 30px rgba(0, 0, 0, 0.25)</span>; <span class="comment">/* Deixa a sombra mais ampla e suave */</span>
+}</code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6 mt-12">
+        <p class="max-w-4xl mx-auto text-sm">
+            Guia de Consulta Rápida desenvolvido para atividades práticas de Front-end.<br>
+            Aproveite este material para estruturar folhas de estilo limpas e organizadas.
+        </p>
+    </footer>
+
+</body>
+</html>

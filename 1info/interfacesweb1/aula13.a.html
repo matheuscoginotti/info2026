@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula Extra: Guia Prático de Sintaxe HTML</title>
+    <!-- Tailwind CSS para manter o padrão visual -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho Principal -->
+    <header class="bg-blue-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-blue-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-blue-50">Material de Apoio</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula Extra: Dicionário de Sintaxe HTML</h1>
+            <p class="text-2xl text-blue-100 opacity-90 font-light">Guia Rápido de Tags, Atributos e Estrutura Semântica</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- INTRODUÇÃO -->
+        <section class="mb-16 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">O Esqueleto Digital</h2>
+            </div>
+            <p class="text-lg text-slate-600 mb-4">
+                Este guia rápido reúne as principais marcações (tags) estruturais do HTML5. Utilize-o para lembrar como abrir e fechar elementos corretamente durante a montagem das suas páginas e formulários.
+            </p>
+        </section>
+
+        <!-- 1. ESTRUTURA BÁSICA -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-blue-700 mb-6">1. A Estrutura Obrigatória</h2>
+            <p class="mb-4 text-slate-600">Todo documento HTML precisa desta base invisível para funcionar corretamente nos navegadores:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="comment">&lt;!-- Declaração do HTML5 --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+
+<span class="comment">&lt;!-- Tag principal definindo o idioma --&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
+
+<span class="tag">&lt;head&gt;</span>
+    <span class="comment">&lt;!-- Suporte a acentuação e caracteres especiais --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- Configuração essencial para telas de celular (Responsividade) --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="comment">&lt;!-- Título da aba do navegador --&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Título da Minha Página<span class="tag">&lt;/title&gt;</span>
+    <span class="comment">&lt;!-- Vinculando o arquivo CSS externo --&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+    <span class="comment">&lt;!-- Todo o conteúdo visível vai aqui dentro --&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+
+<span class="tag">&lt;/html&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- 2. SEMÂNTICA -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-blue-700 mb-6">2. Tags Semânticas (Organização)</h2>
+            <p class="mb-4 text-slate-600">Substitua o excesso de <code>&lt;div&gt;</code> por tags que dão significado real ao seu layout:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="tag">&lt;header&gt;</span>
+    <span class="comment">&lt;!-- Cabeçalho da página ou de uma seção --&gt;</span>
+<span class="tag">&lt;/header&gt;</span>
+
+<span class="tag">&lt;main&gt;</span>
+    <span class="comment">&lt;!-- Conteúdo principal e exclusivo da página (use apenas um por página) --&gt;</span>
+<span class="tag">&lt;/main&gt;</span>
+
+<span class="tag">&lt;section&gt;</span>
+    <span class="comment">&lt;!-- Uma seção genérica agrupando um tema específico --&gt;</span>
+<span class="tag">&lt;/section&gt;</span>
+
+<span class="tag">&lt;footer&gt;</span>
+    <span class="comment">&lt;!-- Rodapé contendo assinaturas, avisos legais ou links finais --&gt;</span>
+<span class="tag">&lt;/footer&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- 3. CONTEÚDO BÁSICO -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-blue-700 mb-6">3. Textos, Links e Imagens</h2>
+            <p class="mb-4 text-slate-600">As marcações mais comuns para preencher o corpo do site com informações:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="comment">&lt;!-- Títulos: h1 é o mais importante, h6 é o menor --&gt;</span>
+<span class="tag">&lt;h1&gt;</span>Título Principal<span class="tag">&lt;/h1&gt;</span>
+<span class="tag">&lt;h2&gt;</span>Subtítulo Secundário<span class="tag">&lt;/h2&gt;</span>
+
+<span class="comment">&lt;!-- Parágrafo padrão --&gt;</span>
+<span class="tag">&lt;p&gt;</span>Este é um bloco de texto normal com <span class="tag">&lt;strong&gt;</span>negrito<span class="tag">&lt;/strong&gt;</span>.<span class="tag">&lt;/p&gt;</span>
+
+<span class="comment">&lt;!-- Imagem (Não precisa de tag de fechamento) --&gt;</span>
+<span class="tag">&lt;img</span> <span class="attr">src</span>=<span class="string">"foto.jpg"</span> <span class="attr">alt</span>=<span class="string">"Descrição para acessibilidade"</span><span class="tag">&gt;</span>
+
+<span class="comment">&lt;!-- Link (Âncora) --&gt;</span>
+<span class="tag">&lt;a</span> <span class="attr">href</span>=<span class="string">"https://google.com"</span> <span class="attr">target</span>=<span class="string">"_blank"</span><span class="tag">&gt;</span>Abrir Google em nova aba<span class="tag">&lt;/a&gt;</span></code></pre>
+            </div>
+        </section>
+
+        <!-- 4. FORMULÁRIOS -->
+        <section class="mb-16">
+            <h2 class="text-2xl font-bold text-slate-900 font-mono text-blue-700 mb-6">4. Formulários (A Ponte de Interação)</h2>
+            <p class="mb-4 text-slate-600">A estrutura essencial para coletar dados do usuário de forma organizada:</p>
+            <div class="code-container mb-6">
+<pre><code><span class="comment">&lt;!-- A caixa do formulário --&gt;</span>
+<span class="tag">&lt;form</span> <span class="attr">action</span>=<span class="string">"#"</span> <span class="attr">method</span>=<span class="string">"POST"</span><span class="tag">&gt;</span>
+
+    <span class="comment">&lt;!-- Agrupamento visual e semântico (A borda com título) --&gt;</span>
+    <span class="tag">&lt;fieldset&gt;</span>
+        <span class="tag">&lt;legend&gt;</span>Dados de Contato<span class="tag">&lt;/legend&gt;</span>
+
+        <span class="comment">&lt;!-- Campo de Texto simples --&gt;</span>
+        <span class="comment">&lt;!-- O 'for' do label DEVE ser igual ao 'id' do input --&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"nome"</span><span class="tag">&gt;</span>Nome Completo:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">id</span>=<span class="string">"nome"</span> <span class="attr">name</span>=<span class="string">"nome_usuario"</span> <span class="attr">placeholder</span>=<span class="string">"João Silva"</span> <span class="attr">required</span><span class="tag">&gt;</span>
+
+        <span class="comment">&lt;!-- Menu Suspenso (Dropdown) --&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"setor"</span><span class="tag">&gt;</span>Departamento:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;select</span> <span class="attr">id</span>=<span class="string">"setor"</span> <span class="attr">name</span>=<span class="string">"setor"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="string">"ti"</span><span class="tag">&gt;</span>Tecnologia<span class="tag">&lt;/option&gt;</span>
+            <span class="tag">&lt;option</span> <span class="attr">value</span>=<span class="string">"rh"</span><span class="tag">&gt;</span>Recursos Humanos<span class="tag">&lt;/option&gt;</span>
+        <span class="tag">&lt;/select&gt;</span>
+
+        <span class="comment">&lt;!-- Botões de Rádio (Apenas uma opção pode ser escolhida) --&gt;</span>
+        <span class="comment">&lt;!-- O 'name' deve ser IGUAL em todas as opções do mesmo grupo --&gt;</span>
+        <span class="tag">&lt;p&gt;</span>Nível de Urgência:<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"urg-baixa"</span> <span class="attr">name</span>=<span class="string">"urgencia"</span> <span class="attr">value</span>=<span class="string">"baixa"</span> <span class="attr">checked</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"urg-baixa"</span><span class="tag">&gt;</span>Baixa<span class="tag">&lt;/label&gt;</span>
+
+        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"radio"</span> <span class="attr">id</span>=<span class="string">"urg-alta"</span> <span class="attr">name</span>=<span class="string">"urgencia"</span> <span class="attr">value</span>=<span class="string">"alta"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"urg-alta"</span><span class="tag">&gt;</span>Alta<span class="tag">&lt;/label&gt;</span>
+
+        <span class="comment">&lt;!-- Área de Texto Múltiplas Linhas --&gt;</span>
+        <span class="tag">&lt;label</span> <span class="attr">for</span>=<span class="string">"desc"</span><span class="tag">&gt;</span>Descrição:<span class="tag">&lt;/label&gt;</span>
+        <span class="tag">&lt;textarea</span> <span class="attr">id</span>=<span class="string">"desc"</span> <span class="attr">name</span>=<span class="string">"descricao"</span> <span class="attr">rows</span>=<span class="string">"4"</span><span class="tag">&gt;&lt;/textarea&gt;</span>
+
+        <span class="comment">&lt;!-- Botão de Submissão --&gt;</span>
+        <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"submit"</span><span class="tag">&gt;</span>Enviar Chamado<span class="tag">&lt;/button&gt;</span>
+
+    <span class="tag">&lt;/fieldset&gt;</span>
+<span class="tag">&lt;/form&gt;</span></code></pre>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6 mt-12">
+        <p class="max-w-4xl mx-auto text-sm">
+            Guia de Consulta Rápida desenvolvido para atividades práticas de Front-end.<br>
+            Aproveite este material para estruturar um HTML limpo, semântico e acessível.
+        </p>
+    </footer>
+
+</body>
+</html>
