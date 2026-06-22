@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Avaliação: Portal de Suporte Técnico</title>
-    <!-- Tailwind CSS para um design moderno e limpo -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
@@ -26,11 +25,127 @@
         .attr { color: #9cdcfe; font-family: 'Fira Code', monospace;}
         .string { color: #ce9178; font-family: 'Fira Code', monospace;}
         .css-prop { color: #9cdcfe; font-family: 'Fira Code', monospace;}
+
+        /* ========================================================
+           ESTILOS DO RESULTADO AO VIVO (Injetados para não vazar)
+        ======================================================== */
+        .live-preview-section {
+            background-image: linear-gradient(135deg, #0f172a, #2563eb);
+            color: #334155;
+            padding: 60px 20px;
+            border-radius: 24px;
+            margin-top: 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .live-preview-section header {
+            text-align: center;
+            color: white;
+            padding: 0 20px 30px;
+        }
+
+        .live-preview-section header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .live-preview-section form {
+            background-color: #ffffff;
+            max-width: 550px;
+            margin: 0 auto; 
+            padding: 35px; 
+            border-radius: 12px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        }
+
+        .live-preview-section fieldset {
+            border: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column; 
+            gap: 15px; 
+        }
+
+        .live-preview-section legend {
+            font-size: 1.4rem;
+            font-weight: bold;
+            color: #1e293b;
+            margin-bottom: 15px;
+            border-bottom: 2px solid #e2e8f0;
+            width: 100%;
+            padding-bottom: 10px;
+        }
+
+        .live-preview-section label {
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: #334155;
+        }
+
+        .live-preview-section input[type="text"],
+        .live-preview-section input[type="email"],
+        .live-preview-section select,
+        .live-preview-section textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box; 
+            font-family: inherit;
+            font-size: 1rem;
+            color: #1e293b;
+            transition: border-color 0.3s;
+        }
+
+        .live-preview-section input:focus, 
+        .live-preview-section select:focus, 
+        .live-preview-section textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .live-preview-section .grupo-radios {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            background-color: #f8fafc;
+            padding: 12px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .live-preview-section .grupo-radios label {
+            font-weight: 400;
+            cursor: pointer;
+            color: #475569;
+        }
+
+        .live-preview-section button[type="submit"] {
+            background-color: #2563eb;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease; 
+        }
+
+        .live-preview-section button[type="submit"]:hover {
+            background-color: #1d4ed8; 
+            transform: translateY(-3px); 
+            box-shadow: 0 5px 15px rgba(37, 99, 235, 0.4); 
+        }
     </style>
 </head>
 <body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
 
-    <!-- Cabeçalho Principal -->
     <header class="bg-rose-800 text-white py-20 px-6 shadow-xl text-center md:text-left">
         <div class="max-w-4xl mx-auto">
             <span class="bg-rose-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-rose-50">Atividade Avaliativa</span>
@@ -41,7 +156,6 @@
 
     <main class="max-w-4xl mx-auto py-16 px-6">
         
-        <!-- OBJETIVO E INSTRUÇÕES -->
         <section class="mb-16 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
             <div class="flex items-center mb-6">
                 <div class="bg-rose-100 p-4 rounded-2xl mr-5">
@@ -75,7 +189,6 @@
             </ul>
         </section>
 
-        <!-- REQUISITOS DO PROJETO -->
         <section class="mb-16">
             <div class="flex items-center mb-8">
                 <div class="bg-slate-200 p-3 rounded-full mr-4">
@@ -86,7 +199,6 @@
                 <h2 class="text-3xl font-bold text-slate-900">Requisitos do Projeto</h2>
             </div>
 
-            <!-- 1. Estrutura Global -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8">
                 <h3 class="text-2xl font-bold text-rose-700 mb-6 flex items-center">
                     <span class="bg-rose-100 text-rose-800 w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">1</span>
@@ -104,7 +216,6 @@
                 </ul>
             </div>
 
-            <!-- 2. Formulário -->
             <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8">
                 <h3 class="text-2xl font-bold text-rose-700 mb-6 flex items-center">
                     <span class="bg-rose-100 text-rose-800 w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">2</span>
@@ -140,8 +251,7 @@
                 </div>
             </div>
 
-            <!-- 3. CSS Avançado -->
-            <div class="bg-rose-900 p-8 rounded-2xl shadow-xl text-white">
+            <div class="bg-rose-900 p-8 rounded-2xl shadow-xl text-white mb-16">
                 <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
                     <span class="bg-rose-500 text-white w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">3</span>
                     Estilização e Tráfego (CSS Avançado)
@@ -185,11 +295,67 @@
                 </div>
             </div>
 
+            <div class="flex items-center mb-6">
+                <div class="bg-blue-100 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-blue-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">Resultado "Ao Vivo" Esperado</h2>
+            </div>
+
+            <div class="live-preview-section">
+                <header>
+                    <h1>Abertura de Chamado de TI</h1>
+                </header>
+
+                <main>
+                    <form action="#" method="POST" onsubmit="event.preventDefault(); alert('Chamado simulado com sucesso!');">
+                        <fieldset>
+                            <legend>Detalhes do Incidente</legend>
+
+                            <label for="nome">Nome Completo:</label>
+                            <input type="text" id="nome" name="nome_usuario" placeholder="Digite seu nome" required>
+
+                            <label for="email">E-mail Corporativo:</label>
+                            <input type="email" id="email" name="email_usuario" placeholder="seu.nome@empresa.com" required>
+
+                            <label for="setor">Setor / Departamento:</label>
+                            <select id="setor" name="setor" required>
+                                <option value="" disabled selected>Selecione uma opção...</option>
+                                <option value="rh">Recursos Humanos (RH)</option>
+                                <option value="financeiro">Financeiro</option>
+                                <option value="diretoria">Diretoria</option>
+                                <option value="ti">Tecnologia da Informação</option>
+                            </select>
+
+                            <label>Nível de Urgência:</label>
+                            <div class="grupo-radios">
+                                <input type="radio" id="urg-baixa" name="urgencia" value="baixa" checked>
+                                <label for="urg-baixa">Baixa</label>
+
+                                <input type="radio" id="urg-media" name="urgencia" value="media">
+                                <label for="urg-media">Média</label>
+
+                                <input type="radio" id="urg-alta" name="urgencia" value="alta">
+                                <label for="urg-alta">Alta</label>
+                            </div>
+
+                            <label for="descricao">Descrição do Problema:</label>
+                            <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva o erro ou solicitação com detalhes..." required></textarea>
+
+                            <button type="submit">Abrir Chamado</button>
+                        </fieldset>
+                    </form>
+                </main>
+            </div>
+
         </section>
 
     </main>
 
-    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6 mt-12">
+    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6">
         <p class="max-w-4xl mx-auto text-sm">
             Avaliação Prática - Interfaces Web 1<br>
             Leia os requisitos com atenção e utilize os materiais de consulta se necessário. Bom trabalho!
