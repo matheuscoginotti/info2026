@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 18 - CSS Grid Layout: O Arquiteto do Dashboard</title>
+    <!-- Tailwind CSS para manter a consistência visual do material didático -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+        .syntax-box {
+            background-color: #f0fdf4; /* green-50 */
+            border-left: 4px solid #22c55e; /* green-500 */
+            padding: 16px;
+            margin-top: 12px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-emerald-600 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-emerald-400 text-emerald-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 5: Layouts Modernos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 18: O Arquiteto Grid</h1>
+            <p class="text-2xl text-emerald-100 opacity-90">Construindo o Painel Principal (Dashboard) Pós-Login</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- INTRODUÇÃO TEÓRICA DETALHADA -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-emerald-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Para Além do Flexbox</h2>
+            </div>
+
+            <p class="text-lg text-slate-700 mb-6 font-medium">
+                O Flexbox é incrível para alinhar coisas num único sentido (linha <strong>ou</strong> coluna), como o nosso formulário de login. Mas e quando o utilizador entrar no sistema?
+            </p>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-emerald-500 shadow-sm mt-8">
+                <h3 class="text-xl font-bold text-emerald-700 mb-2">A Analogia da Planta Baixa 🗺️</h3>
+                <p class="text-sm text-slate-600 mb-3">
+                    Um painel de sistema (Dashboard) precisa de um menu lateral, um cabeçalho no topo, uma área de gráficos e um rodapé. 
+                </p>
+                <p class="text-sm text-slate-600">
+                    O <strong>CSS Grid</strong> é como o arquiteto que desenha a planta baixa da casa inteira de uma só vez. Diferente do Flexbox (que é 1D), o Grid trabalha em <strong>2D</strong>: ele controla linhas e colunas simultaneamente, permitindo que você diga exatamente em que "quadrado" cada parte do site deve ficar.
+                </p>
+            </div>
+        </section>
+
+        <!-- O DICIONÁRIO DO CÓDIGO -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">1. O Dicionário Grid (Sintaxe)</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-6">Assim como o Flexbox, a magia do Grid acontece no elemento <strong>PAI</strong> (o container):</p>
+
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-emerald-700 mb-2"><code>display: grid;</code></h3>
+                    <p class="text-slate-600 mb-2">Avisa ao navegador que este elemento será regido pelas regras do Grid, preparando o terreno em branco.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-emerald-700 mb-2"><code>grid-template-columns</code></h3>
+                    <p class="text-slate-600 mb-2">Define quantas colunas o layout terá e as suas larguras. Exemplo: <code>200px 1fr 1fr;</code> cria 3 colunas (uma fixa de 200px e duas que dividem o espaço restante).</p>
+                    <div class="syntax-box">grid-template-columns: 250px 1fr;</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-emerald-700 mb-2"><code>grid-template-rows</code></h3>
+                    <p class="text-slate-600 mb-2">Define as alturas das linhas. Exemplo: <code>80px 1fr 50px;</code> cria um topo fixo, um meio flexível e um rodapé fixo.</p>
+                    <div class="syntax-box">grid-template-rows: auto 1fr;</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-emerald-500">
+                    <h3 class="font-bold text-emerald-700 mb-2">A Unidade <code>fr</code> (Fração)</h3>
+                    <p class="text-slate-600 mb-2">É a unidade mágica do Grid. <code>1fr</code> significa "1 fração do espaço disponível". Resolve problemas de cálculos percentuais.</p>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA (O CÓDIGO FINAL) -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: Estruturando o Dashboard</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">Este é o esqueleto clássico do painel que o utilizador verá após o login: um Menu Lateral, um Cabeçalho Superior e uma Área Central de Conteúdo.</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- =========================================================
+    ARQUIVO 1: index.html
+========================================================= --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="comment">&lt;!-- O CONTAINER PAI (Onde vai a regra do GRID) --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"grid-container"</span><span class="tag">&gt;</span>
+        
+        <span class="comment">&lt;!-- FILHO 1: O Menu Lateral (Sidebar) --&gt;</span>
+        <span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="string">"menu-lateral"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>Sistema Etec<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;ul&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Dashboard<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Relatórios<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Configurações<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+        <span class="tag">&lt;/nav&gt;</span>
+
+        <span class="comment">&lt;!-- FILHO 2: O Cabeçalho (Header) --&gt;</span>
+        <span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="string">"cabecalho"</span><span class="tag">&gt;</span>
+            Bem-vindo, Matheus! <span class="tag">&lt;button&gt;</span>Sair<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;/header&gt;</span>
+
+        <span class="comment">&lt;!-- FILHO 3: A Área Principal (Main Content) --&gt;</span>
+        <span class="tag">&lt;main</span> <span class="attr">class</span>=<span class="string">"conteudo-principal"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h1&gt;</span>Resumo de Vendas<span class="tag">&lt;/h1&gt;</span>
+            <span class="tag">&lt;p&gt;</span>Aqui entra o gráfico ou a tabela de dados...<span class="tag">&lt;/p&gt;</span>
+        <span class="tag">&lt;/main&gt;</span>
+
+    <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+
+<span class="comment">/* =========================================================
+    ARQUIVO 2: style.css
+========================================================= */</span>
+<span class="css-selector">body</span> {
+    <span class="css-prop">margin</span>: <span class="css-val">0</span>;
+    <span class="css-prop">font-family</span>: <span class="css-val">sans-serif</span>;
+}
+
+<span class="comment">/* A PLANTA BAIXA DO ARQUITETO (GRID) */</span>
+<span class="css-selector">.grid-container</span> {
+    <span class="css-prop">display</span>: <span class="css-val">grid</span>;
+    
+    <span class="comment">/* Definindo as Colunas: 
+       A primeira terá exatamente 250px (para o menu lateral).
+       A segunda usará todo o espaço restante (1fr). */</span>
+    <span class="css-prop">grid-template-columns</span>: <span class="css-val">250px 1fr</span>;
+
+    <span class="comment">/* Definindo as Linhas:
+       A primeira terá 70px de altura (para o cabeçalho).
+       A segunda usará todo o espaço restante (1fr). */</span>
+    <span class="css-prop">grid-template-rows</span>: <span class="css-val">70px 1fr</span>;
+    
+    <span class="comment">/* Altura total da tela para o Grid não encolher */</span>
+    <span class="css-prop">height</span>: <span class="css-val">100vh</span>;
+}
+
+<span class="comment">/* ----------------------------------------------------
+   ESTILIZANDO E POSICIONANDO OS FILHOS
+---------------------------------------------------- */</span>
+
+<span class="comment">/* Menu Lateral: Vai ocupar a coluna 1 e atravessar as linhas 1 e 2 */</span>
+<span class="css-selector">.menu-lateral</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#1e293b</span>; <span class="comment">/* Azul Escuro */</span>
+    <span class="css-prop">color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+    
+    <span class="comment">/* COMANDO MÁGICO: Estica a barra lateral desde o topo até o fim */</span>
+    <span class="css-prop">grid-row</span>: <span class="css-val">1 / 3</span>; 
+    <span class="css-prop">grid-column</span>: <span class="css-val">1 / 2</span>;
+}
+
+<span class="comment">/* Cabeçalho: Fica na coluna 2, linha 1 */</span>
+<span class="css-selector">.cabecalho</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#ffffff</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">0 30px</span>;
+    <span class="css-prop">display</span>: <span class="css-val">flex</span>; <span class="comment">/* Olha o Flexbox ajudando dentro do Grid! */</span>
+    <span class="css-prop">justify-content</span>: <span class="css-val">space-between</span>;
+    <span class="css-prop">align-items</span>: <span class="css-val">center</span>;
+    <span class="css-prop">box-shadow</span>: <span class="css-val">0 2px 5px rgba(0,0,0,0.1)</span>; <span class="comment">/* Sombra suave */</span>
+    
+    <span class="css-prop">grid-row</span>: <span class="css-val">1 / 2</span>;
+    <span class="css-prop">grid-column</span>: <span class="css-val">2 / 3</span>;
+}
+
+<span class="comment">/* Área Central: Fica na coluna 2, linha 2 */</span>
+<span class="css-selector">.conteudo-principal</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#f1f5f9</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">30px</span>;
+    
+    <span class="css-prop">grid-row</span>: <span class="css-val">2 / 3</span>;
+    <span class="css-prop">grid-column</span>: <span class="css-val">2 / 3</span>;
+}
+</code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-emerald-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono text-emerald-100">3. Atividade: O Construtor Digital</h2>
+            </div>
+
+            <p class="mb-10 text-emerald-100 text-lg font-light italic">Altere as medidas da sua "planta baixa" para testar o comportamento do CSS Grid:</p>
+
+            <div class="space-y-6 text-emerald-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Aumentando o Menu:</strong> No <code>.grid-container</code>, altere o valor de <code>250px</code> do <code>grid-template-columns</code> para <code>400px</code>. Veja como o menu lateral cresce e o conteúdo principal encolhe automaticamente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Apertando o Cabeçalho:</strong> Reduza o valor <code>70px</code> do <code>grid-template-rows</code> para <code>40px</code>. Observe como toda a linha do topo diminui uniformemente.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Quebrando a Regra Mágica:</strong> No CSS da <code>.menu-lateral</code>, altere a linha <code>grid-row: 1 / 3;</code> para <code>grid-row: 2 / 3;</code>. O que acontece com o topo do menu lateral? Ele ainda encosta no teto da tela?</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-emerald-500">
+                    <span class="bg-emerald-100 text-emerald-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Desafio Extra (Gap):</strong> Adicione a propriedade <code>gap: 10px;</code> no seu <code>.grid-container</code>. Note que as "linhas da planta" se separam umas das outras revelando o fundo da página.</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 18 concluída. O layout do nosso painel de controle já está de pé!<br>
+            A Caminho do <strong>Projeto Final: Responsividade (Media Queries) e Mobile-First</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
