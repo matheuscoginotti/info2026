@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 14 - Introdução ao JavaScript e Interatividade</title>
+    <!-- Tailwind CSS para manter a consistência visual do material didático -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .keyword { color: #c586c0; font-weight: bold; }
+        .js-function { color: #dcdcaa; }
+        .js-variable { color: #9cdcfe; }
+        .syntax-box {
+            background-color: #f8fafc;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            margin-top: 12px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-amber-500 text-slate-900 py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-amber-300 text-slate-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 4: Ação e Dinamismo</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 14: O Motor JavaScript (O que é e como funciona)</h1>
+            <p class="text-2xl text-amber-900 opacity-90">Deixando de ser estático: Sintaxes e Exemplos Práticos</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- INTRODUÇÃO TEÓRICA DETALHADA -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-amber-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">O que é o JavaScript (JS)?</h2>
+            </div>
+
+            <p class="text-lg text-slate-700 mb-6 font-medium">
+                Se o HTML é o esqueleto (a estrutura) e o CSS é a pele/roupa (o design), o <strong>JavaScript é o músculo e o cérebro</strong>.
+            </p>
+
+            <p class="text-slate-600 mb-6">
+                Até a Aula 13, construímos páginas estáticas. Elas são bonitas (com sombras, bordas arredondadas e cores), mas não "pensam". Se o utilizador clica num botão, nada acontece. O JavaScript é uma linguagem de programação real (diferente de HTML/CSS) que permite:
+            </p>
+            
+            <ul class="list-disc pl-6 mb-8 text-slate-600 space-y-2">
+                <li>Alterar o HTML ou o CSS em tempo real (ex: Mudar para Modo Escuro).</li>
+                <li>Reagir a ações do utilizador (cliques, digitação num formulário, mover o rato).</li>
+                <li>Fazer contas, guardar informações e validar dados antes de enviá-los.</li>
+            </ul>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-amber-500 shadow-sm mt-8">
+                <h3 class="text-xl font-bold text-amber-700 mb-2">Analogia da Casa 🏠⚡</h3>
+                <p class="text-sm text-slate-600">
+                    O <strong>HTML</strong> levantou as paredes e instalou o interruptor na parede. O <strong>CSS</strong> pintou o interruptor de branco e deixou-o redondo. Mas sem os fios elétricos e a corrente (<strong>JavaScript</strong>), apertar o interruptor não acende a lâmpada. O JS é a lógica: "SE o interruptor for apertado, ENTÃO ligue a luz".
+                </p>
+            </div>
+        </section>
+
+        <!-- SINTAXES: VARIÁVEIS -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-indigo-100 p-3 rounded-full mr-4 text-indigo-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">1. Guardando Dados (Variáveis)</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-4">Para o JS funcionar, ele precisa de guardar informações na memória (como o nome de quem entrou no site ou qual botão foi clicado). Usamos "caixas" para isso, chamadas Variáveis.</p>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-indigo-700 mb-2">let (A caixa que muda)</h3>
+                    <p class="text-sm text-slate-600 mb-3">Usamos <code>let</code> quando o valor que está lá dentro vai ser alterado no futuro (ex: a pontuação de um jogo).</p>
+                    <div class="syntax-box">
+                        <span class="keyword">let</span> pontuacao = 0;<br>
+                        pontuacao = 10; <span class="comment">// Mudou para 10!</span>
+                    </div>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200">
+                    <h3 class="font-bold text-indigo-700 mb-2">const (A caixa trancada)</h3>
+                    <p class="text-sm text-slate-600 mb-3">Usamos <code>const</code> quando o valor <strong>nunca</strong> vai mudar (ex: um botão HTML que selecionámos para usar). É o mais seguro e recomendado.</p>
+                    <div class="syntax-box">
+                        <span class="keyword">const</span> nomeAluno = "João";<br>
+                        <span class="comment">// nomeAluno = "Maria"; -> DARIA ERRO!</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SINTAXES: O DOM E A PONTE -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">2. A Ponte entre JS e HTML (O DOM)</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-4">O JS é cego. Ele não sabe que você criou um <code>&lt;button class="btn"&gt;</code> no HTML. Temos de usar uma luneta chamada <code>querySelector</code> para encontrar esse elemento no HTML e guardá-lo numa variável JS.</p>
+            
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <p class="text-sm text-slate-600 font-semibold mb-2">Sintaxe Padrão para "pescar" um elemento do HTML:</p>
+                <div class="syntax-box">
+                    <span class="keyword">const</span> nomeVariavel = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'seletor-css'</span>);
+                </div>
+                <p class="text-sm text-slate-500 mt-3"><em>Dica: Onde diz 'seletor-css', usa-se a mesma regra da Aula 07 (. para classe, # para ID).</em></p>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-slate-700 text-sm mb-2">Exemplo 1: Pescando por Classe</h4>
+                    <code class="text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded">const btn = document.querySelector('.meu-botao');</code>
+                </div>
+                <div class="bg-slate-50 p-4 rounded-lg border border-slate-200">
+                    <h4 class="font-bold text-slate-700 text-sm mb-2">Exemplo 2: Pescando por Tag HTML</h4>
+                    <code class="text-xs text-blue-700 bg-blue-50 px-2 py-1 rounded">const fundo = document.querySelector('body');</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- SINTAXES: EVENTOS E AÇÕES -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-red-100 p-3 rounded-full mr-4 text-red-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 15l-2 5L9 9l11 4-5 2zm0 0l5 5M7.188 2.239l.777 2.897M5.136 7.965l-2.898-.777M13.95 4.05l-2.122 2.122m-5.657 5.656l-2.12 2.122" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">3. Eventos: Dando Ação ao Elemento</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-4">Agora que o JS tem o botão "pescado", ele precisa ficar "à escuta" de quando o utilizador vai clicar. Usamos o "Ouvidor de Eventos": <code>addEventListener</code>.</p>
+
+            <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 mb-6">
+                <p class="text-sm text-slate-600 font-semibold mb-2">Sintaxe Padrão para ouvir um clique e fazer algo:</p>
+                <div class="syntax-box">
+                    elemento_pescado.<span class="js-function">addEventListener</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {<br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// Tudo o que escrever aqui dentro (entre as chaves)</span><br>
+                    &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">// só vai acontecer quando ocorrer o 'click'</span><br>
+                    });
+                </div>
+            </div>
+            
+            <h3 class="font-bold text-slate-800 text-lg mb-3">A Ação mais útil para o Projeto: classList.toggle</h3>
+            <p class="text-slate-600 mb-4">Uma das coisas mais legais que o JS pode fazer dentro de um evento é ligar ou desligar uma classe CSS de um elemento. <strong>Toggle</strong> significa alternar (como o interruptor da luz). Se a classe CSS existir no HTML, ele tira. Se não existir, ele coloca.</p>
+            <div class="syntax-box">
+                <span class="comment">// Vai no CSS procurar a classe '.modo-escuro' e aplica/remove do elemento fundoSite</span><br>
+                fundoSite.classList.<span class="js-function">toggle</span>(<span class="string">'modo-escuro'</span>);
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA (O CÓDIGO FINAL) -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-amber-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">4. Prática: O "Dark Mode" Completo</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">Vamos juntar a trindade! Veja como o HTML, CSS e JS trabalham juntos no mesmo projeto para criar um botão de alteração de tema:</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- =========================================================
+    ARQUIVO 1: index.html (O Esqueleto e o Botão)
+========================================================= --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+    
+    <span class="tag">&lt;h1&gt;</span>Meu Projeto Final<span class="tag">&lt;/h1&gt;</span>
+    
+    <span class="comment">&lt;!-- O botão que o utilizador vai clicar. Tem a classe 'btn-tema' --&gt;</span>
+    <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"btn-tema"</span><span class="tag">&gt;</span>Alterar Fundo<span class="tag">&lt;/button&gt;</span>
+
+    <span class="comment">&lt;!-- A tag SCRIPT conecta o motor JS. Fica ANTES de fechar o body --&gt;</span>
+    <span class="tag">&lt;script</span> <span class="attr">src</span>=<span class="string">"script.js"</span><span class="tag">&gt;&lt;/script&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+
+<span class="comment">/* =========================================================
+    ARQUIVO 2: style.css (A Pintura e a classe 'secreta')
+========================================================= */</span>
+<span class="comment">/* Estilo Padrão (O site nasce claro) */</span>
+<span class="css-selector">body</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">color</span>: <span class="css-val">black</span>;
+    <span class="css-prop">transition</span>: <span class="css-val">0.5s</span>; <span class="comment">/* Transição suave (Aula 13) para não piscar seco */</span>
+}
+
+<span class="comment">/* Estilo Escuro - Inicialmente o HTML NÃO TEM essa classe.
+   Quem vai adicionar essa classe no body é o JavaScript! */</span>
+<span class="css-selector">.tema-escuro</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#1a1a1a</span>;
+    <span class="css-prop">color</span>: <span class="css-val">white</span>;
+}
+
+
+<span class="comment">// =========================================================
+//  ARQUIVO 3: script.js (O Motor e a Lógica)
+// =========================================================</span>
+
+<span class="comment">// PASSO 1: PESCAR OS ELEMENTOS DO HTML (querySelector)</span>
+<span class="comment">// Variável 'meuBotao' guarda o botão. Variável 'corpoSite' guarda o body.</span>
+<span class="keyword">const</span> <span class="js-variable">meuBotao</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'.btn-tema'</span>);
+<span class="keyword">const</span> <span class="js-variable">corpoSite</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'body'</span>);
+
+<span class="comment">// PASSO 2: OUVIR O CLIQUE (addEventListener)</span>
+<span class="js-variable">meuBotao</span>.<span class="js-function">addEventListener</span>(<span class="string">'click'</span>, <span class="keyword">function</span>() {
+    
+    <span class="comment">// PASSO 3: A AÇÃO! (classList.toggle)</span>
+    <span class="comment">// Adiciona a classe '.tema-escuro' ao body. Se clicar de novo, ele tira!</span>
+    <span class="js-variable">corpoSite</span>.<span class="js-variable">classList</span>.<span class="js-function">toggle</span>(<span class="string">'tema-escuro'</span>);
+    
+});
+</code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-amber-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-amber-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono text-amber-100">5. Atividade: Dominando a Interatividade</h2>
+            </div>
+
+            <p class="mb-10 text-amber-100 text-lg font-light italic">Hora de testar as novas ferramentas do JS. Modifique o código base acima:</p>
+
+            <div class="space-y-6 text-amber-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
+                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Caixa de Alerta:</strong> Dentro da função do <code>addEventListener</code> (no JS), adicione o comando <code>alert("O Tema foi trocado com sucesso!");</code>. Veja o que acontece no navegador ao clicar no botão.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
+                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>CSS do Botão:</strong> Volte à <strong>Aula 13</strong> e aplique um belo <code>box-shadow</code> e <code>border-radius</code> na classe <code>.btn-tema</code> do CSS, para o botão não parecer antiquado.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
+                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Pescar outro elemento:</strong> Adicione <code>id="titulo-principal"</code> na tag <code>&lt;h1&gt;</code> do HTML. Crie uma nova variável no topo do JS chamada <code>const meuTitulo</code> para "pescar" esse ID usando o <code>querySelector('#titulo-principal')</code>.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
+                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Alteração de Conteúdo:</strong> Ainda dentro do evento de clique, use a nova variável para alterar o texto dinamicamente com o comando: <code>meuTitulo.textContent = "Modo Noturno Ativado!";</code></p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 14 concluída. A trindade Web (HTML, CSS e JS) está conectada e viva!<br>
+            A seguir: <strong>Foco total no Desenvolvimento Prático do Projeto Final</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
