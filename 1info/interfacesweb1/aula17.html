@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 17 - Flexbox II e Formulários Profissionais</title>
+    <!-- Tailwind CSS para manter a consistência visual do material didático -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .comment { color: #6a9955; font-style: italic; }
+        .tag { color: #569cd6; }
+        .attr { color: #9cdcfe; }
+        .string { color: #ce9178; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
+        .syntax-box {
+            background-color: #ecfeff; /* cyan-50 */
+            border-left: 4px solid #06b6d4; /* cyan-500 */
+            padding: 16px;
+            margin-top: 12px;
+            border-radius: 0 8px 8px 0;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.9em;
+            color: #334155;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <!-- Cabeçalho -->
+    <header class="bg-cyan-600 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-4xl mx-auto">
+            <span class="bg-cyan-400 text-cyan-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 5: Layouts Modernos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 17: O Design Interior</h1>
+            <p class="text-2xl text-cyan-100 opacity-90">Flexbox II e a Arte de Estilizar Formulários</p>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto py-16 px-6">
+        
+        <!-- INTRODUÇÃO TEÓRICA DETALHADA -->
+        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-cyan-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Organizando as Gavetas</h2>
+            </div>
+
+            <p class="text-lg text-slate-700 mb-6 font-medium">
+                Na Aula 16, usamos o Flexbox no <code>&lt;body&gt;</code> para colocar a nossa Caixa de Login bem no meio da tela. Mas e dentro da caixa?
+            </p>
+
+            <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-cyan-500 shadow-sm mt-8">
+                <h3 class="text-xl font-bold text-cyan-700 mb-2">A Analogia da Estante Vertical 📚</h3>
+                <p class="text-sm text-slate-600 mb-3">
+                    Um formulário de login padrão tem os elementos empilhados de cima para baixo: o título, o campo de e-mail, o campo de senha e o botão.
+                </p>
+                <p class="text-sm text-slate-600">
+                    O Flexbox também pode ser usado <strong>dentro</strong> da caixa de login para agir como uma estante. Em vez de usar várias tags <code>&lt;br&gt;</code> para dar espaços feios ou margens confusas, nós transformamos a caixa de login num container Flex com direção de <strong>coluna</strong>.
+                </p>
+            </div>
+        </section>
+
+        <!-- O DICIONÁRIO DO CÓDIGO -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-100 p-3 rounded-full mr-4 text-cyan-700">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                    </svg>
+                </div>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">1. O Dicionário Flex II e Formulários</h2>
+            </div>
+            
+            <p class="text-slate-600 mb-6">Novas propriedades para dominar o espaço interno e o visual profissional dos inputs:</p>
+
+            <div class="grid md:grid-cols-2 gap-6 text-sm">
+                
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-cyan-500">
+                    <h3 class="font-bold text-cyan-700 mb-2"><code>flex-direction: column;</code></h3>
+                    <p class="text-slate-600 mb-2">Transforma o trilho horizontal (padrão do flex) num elevador. Todos os inputs e botões ficam empilhados verticalmente.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-cyan-500">
+                    <h3 class="font-bold text-cyan-700 mb-2"><code>gap: 15px;</code> (A Mágica do Espaço)</h3>
+                    <p class="text-slate-600 mb-2">Esqueça a dor de cabeça de colocar margens em cada elemento. O <code>gap</code> cria um espaço perfeito, automático e idêntico entre todos os itens do seu Flexbox!</p>
+                    <div class="syntax-box">gap: 20px;</div>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-cyan-500">
+                    <h3 class="font-bold text-cyan-700 mb-2"><code>outline: none;</code></h3>
+                    <p class="text-slate-600 mb-2">Sabe aquela borda preta ou azul feia que aparece quando você clica num input no navegador? O <code>outline</code> remove isso para você criar a sua própria borda bonita.</p>
+                </div>
+
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-cyan-500">
+                    <h3 class="font-bold text-cyan-700 mb-2">A Pseudo-classe <code>:focus</code></h3>
+                    <p class="text-slate-600 mb-2">Funciona como o <code>:hover</code> (passar o mouse), mas o <code>:focus</code> é ativado quando o utilizador <strong>clica dentro do input</strong> para começar a digitar.</p>
+                    <div class="syntax-box">input:focus { border-color: blue; }</div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- PRÁTICA EXPLICADA (O CÓDIGO FINAL) -->
+        <section class="mb-20">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Formulário Profissional</h2>
+            </div>
+
+            <p class="mb-8 text-slate-600 text-lg font-light">Veja como o CSS transforma um form feio numa tela de login digna de empresas gigantes usando Flexbox em Coluna e estilos de Input.</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- =========================================================
+    ARQUIVO 1: index.html
+========================================================= --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="comment">&lt;!-- Nossa caixa de login da Aula 16 --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"caixa-login"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;h2&gt;</span>Acesse sua Conta<span class="tag">&lt;/h2&gt;</span>
+        
+        <span class="comment">&lt;!-- Usamos a tag &lt;form&gt; para envolver os inputs --&gt;</span>
+        <span class="tag">&lt;form</span> <span class="attr">class</span>=<span class="string">"form-flex"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">class</span>=<span class="string">"meu-input"</span> <span class="attr">placeholder</span>=<span class="string">"exemplo@etec.sp.gov.br"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">class</span>=<span class="string">"meu-input"</span> <span class="attr">placeholder</span>=<span class="string">"Sua senha"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"button"</span> <span class="attr">class</span>=<span class="string">"meu-botao"</span><span class="tag">&gt;</span>Entrar no Sistema<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;/form&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+
+<span class="comment">/* =========================================================
+    ARQUIVO 2: style.css
+========================================================= */</span>
+<span class="comment">/* Reset básico e alinhamento do Body (Aula 16) */</span>
+<span class="css-selector">body</span> {
+    <span class="css-prop">margin</span>: <span class="css-val">0</span>;
+    <span class="css-prop">background-color</span>: <span class="css-val">#f1f5f9</span>;
+    <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+    <span class="css-prop">justify-content</span>: <span class="css-val">center</span>;
+    <span class="css-prop">align-items</span>: <span class="css-val">center</span>;
+    <span class="css-prop">height</span>: <span class="css-val">100vh</span>;
+    <span class="css-prop">font-family</span>: <span class="css-val">sans-serif</span>;
+}
+
+<span class="css-selector">.caixa-login</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">40px</span>;
+    <span class="css-prop">border-radius</span>: <span class="css-val">12px</span>;
+    <span class="css-prop">box-shadow</span>: <span class="css-val">0 10px 25px rgba(0,0,0,0.1)</span>;
+    <span class="css-prop">width</span>: <span class="css-val">360px</span>;
+    <span class="css-prop">text-align</span>: <span class="css-val">center</span>;
+}
+
+<span class="comment">/* ----------------------------------------------------
+   A MAGIA DO FLEXBOX INTERNO NO FORMULÁRIO 
+---------------------------------------------------- */</span>
+<span class="css-selector">.form-flex</span> {
+    <span class="css-prop">display</span>: <span class="css-val">flex</span>;
+    <span class="css-prop">flex-direction</span>: <span class="css-val">column</span>; <span class="comment">/* Empilha de cima para baixo */</span>
+    <span class="css-prop">gap</span>: <span class="css-val">20px</span>; <span class="comment">/* Cria 20px de espaço entre cada input/botão automaticamente! */</span>
+    <span class="css-prop">margin-top</span>: <span class="css-val">25px</span>;
+}
+
+<span class="comment">/* ----------------------------------------------------
+   ESTILIZANDO OS INPUTS COMO PROFISSIONAL
+---------------------------------------------------- */</span>
+<span class="css-selector">.meu-input</span> {
+    <span class="css-prop">padding</span>: <span class="css-val">14px</span>;
+    <span class="css-prop">border</span>: <span class="css-val">2px solid #e2e8f0</span>; <span class="comment">/* Borda cinza claro */</span>
+    <span class="css-prop">border-radius</span>: <span class="css-val">8px</span>;
+    <span class="css-prop">font-size</span>: <span class="css-val">16px</span>;
+    <span class="css-prop">outline</span>: <span class="css-val">none</span>; <span class="comment">/* Remove a borda azul nativa do navegador */</span>
+    <span class="css-prop">transition</span>: <span class="css-val">0.3s</span>;
+}
+
+<span class="comment">/* Quando o utilizador clica dentro do input */</span>
+<span class="css-selector">.meu-input:focus</span> {
+    <span class="css-prop">border-color</span>: <span class="css-val">#0ea5e9</span>; <span class="comment">/* A borda fica azul cyan ao digitar */</span>
+}
+
+<span class="comment">/* ----------------------------------------------------
+   ESTILIZANDO O BOTÃO
+---------------------------------------------------- */</span>
+<span class="css-selector">.meu-botao</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#0ea5e9</span>; <span class="comment">/* Azul Cyan */</span>
+    <span class="css-prop">color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">14px</span>;
+    <span class="css-prop">border</span>: <span class="css-val">none</span>;
+    <span class="css-prop">border-radius</span>: <span class="css-val">8px</span>;
+    <span class="css-prop">font-weight</span>: <span class="css-val">bold</span>;
+    <span class="css-prop">cursor</span>: <span class="css-val">pointer</span>;
+    <span class="css-prop">transition</span>: <span class="css-val">0.3s</span>;
+}
+
+<span class="css-selector">.meu-botao:hover</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#0284c7</span>; <span class="comment">/* Fica mais escuro ao passar o mouse */</span>
+}
+</code></pre>
+            </div>
+        </section>
+
+        <!-- ATIVIDADE DE MODIFICAÇÃO -->
+        <section class="bg-cyan-900 p-12 rounded-3xl text-white shadow-2xl">
+            <div class="flex items-center mb-8">
+                <div class="bg-cyan-500 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold font-mono text-cyan-100">3. Atividade: Lapidando o Layout</h2>
+            </div>
+
+            <p class="mb-10 text-cyan-100 text-lg font-light italic">Aplique estas modificações no código para entender a magia do Flexbox em colunas:</p>
+
+            <div class="space-y-6 text-cyan-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>O Poder do Gap:</strong> No CSS <code>.form-flex</code>, mude o <code>gap</code> para <code>40px</code>. Veja como tudo se distancia de forma perfeita sem usar uma única tag &lt;br&gt;.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Invertendo Eixos:</strong> No <code>.form-flex</code>, apague a linha <code>flex-direction: column;</code> (ele voltará para row). O que aconteceu com os inputs e o botão?</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Cores de Foco:</strong> Altere a cor do <code>border-color</code> no <code>.meu-input:focus</code> para <code>#22c55e</code> (Verde). Clique dentro do input para testar o efeito.</p>
+                </div>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-cyan-500">
+                    <span class="bg-cyan-100 text-cyan-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">4</span>
+                    <p class="font-medium"><strong>Botão Secundário:</strong> Adicione um link <code>&lt;a href="#" class="link-senha"&gt;Esqueci minha senha&lt;/a&gt;</code> logo abaixo do botão no HTML. Graças ao Flexbox e ao `gap`, ele vai alinhar-se perfeitamente embaixo do botão!</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
+        <p class="max-w-4xl mx-auto">
+            Aula 17 concluída. A sua tela de login já tem um aspeto profissional e moderno!<br>
+            A Caminho do <strong>Projeto Final: CSS Grid e a Construção do Dashboard</strong>.
+        </p>
+    </footer>
+
+</body>
+</html>
