@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Aulas - Hardware e Manutenção</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8; /* Azul Tech para Hardware */
+            --border-tech: rgba(148, 163, 184, 0.3);
+            --grid-color: rgba(56, 189, 248, 0.05);
+            --node-bg: rgba(15, 23, 42, 0.7);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+            padding-bottom: 80px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            width: 200vw;
+            height: 200vh;
+            background-image: 
+                linear-gradient(var(--grid-color) 1px, transparent 1px),
+                linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 80%);
+            opacity: 0.8;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .top-bar {
+            width: 100%;
+            padding: 1.5rem 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header {
+            text-align: center;
+            margin: 6rem 0 4rem;
+            z-index: 2;
+            position: relative;
+            padding: 0 20px;
+        }
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            text-transform: uppercase;
+            position: relative;
+        }
+
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
+            opacity: 0.8;
+        }
+
+        .subtitle {
+            color: var(--accent-gold);
+            font-family: 'Rajdhani', sans-serif;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            margin-top: 20px;
+            font-weight: 600;
+        }
+
+        .lesson-map {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4rem 2rem;
+            max-width: 1000px;
+            width: 95%;
+            z-index: 2;
+            padding: 20px;
+        }
+
+        .lesson-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        .lesson-btn {
+            width: 85px;
+            height: 85px;
+            background: var(--node-bg);
+            border: 1px solid var(--border-tech);
+            clip-path: polygon(15% 0, 85% 0, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0 85%, 0 15%);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+            position: relative;
+            text-decoration: none;
+            color: var(--text-primary);
+            backdrop-filter: blur(8px);
+        }
+
+        .lesson-icon {
+            font-size: 2.2rem;
+            z-index: 2;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
+        }
+
+        .status-badge {
+            position: absolute;
+            bottom: -8px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-tech);
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            z-index: 3;
+            transition: all 0.3s ease;
+        }
+
+        .lesson-title-label {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            max-width: 150px;
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        .access-info {
+            margin-top: 5px;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            font-family: 'Chakra Petch', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+            min-height: 1rem;
+            opacity: 0;
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .lesson-btn:hover {
+            transform: translateY(-5px);
+            background: var(--card-bg);
+            border-color: var(--accent-blue);
+            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .lesson-btn:hover .lesson-icon {
+            color: var(--accent-blue);
+        }
+
+        .lesson-item.accessed .lesson-btn {
+            border-color: var(--accent-gold);
+            background: rgba(245, 158, 11, 0.1);
+        }
+        
+        .lesson-item.accessed .lesson-icon {
+            color: var(--accent-gold);
+        }
+
+        .lesson-item.accessed .status-badge {
+            color: var(--bg-color);
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        .lesson-item.accessed .lesson-title-label {
+            color: var(--accent-gold);
+        }
+
+        .lesson-item.accessed .access-info {
+            opacity: 1;
+            transform: translateY(0);
+            color: var(--text-secondary);
+        }
+
+        .lesson-item:not(:nth-child(4n))::after {
+            content: '';
+            position: absolute;
+            right: -2rem;
+            top: 42px;
+            width: 2rem;
+            height: 2px;
+            background: linear-gradient(90deg, var(--border-tech) 0%, var(--border-tech) 50%, transparent 100%);
+            z-index: -1;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+        }
+
+        .lesson-item.accessed:not(:nth-child(4n))::after {
+            background: var(--accent-gold);
+            opacity: 0.6;
+        }
+
+        @media (max-width: 800px) {
+            h1 { font-size: 2.2rem; }
+            .lesson-map {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 3rem 2rem;
+            }
+            .lesson-item:not(:nth-child(4n))::after { display: none; }
+            .lesson-item:not(:nth-child(2n))::after {
+                content: '';
+                position: absolute;
+                right: -2rem;
+                top: 42px;
+                width: 2rem;
+                height: 2px;
+                background: var(--border-tech);
+                display: block;
+            }
+            .lesson-item.accessed:not(:nth-child(2n))::after {
+                 background: var(--accent-gold);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="top-bar">
+        <a href="3infomenu.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+
+    <header>
+        <h1>Hardware e Manutenção</h1>
+        <div class="subtitle">Trilha de Aprendizagem</div>
+    </header>
+
+    <div class="lesson-map" id="lessonMap"></div>
+
+    <script>
+        const STORAGE_KEY_PREFIX = '3info_hardware_lesson_';
+        const mapContainer = document.getElementById('lessonMap');
+
+        // Cronograma completo de Hardware
+        const lessonsData = [
+            { id: 1, title: "Placa-Mãe, Fan e Cooler", icon: "fa-motherboard" },
+            { id: 2, title: "Processadores e Desempenho", icon: "fa-microchip" },
+            { id: 3, title: "Memória RAM e Métricas", icon: "fa-memory" },
+            { id: 4, title: "Armazenamento Moderno", icon: "fa-hard-drive" },
+            { id: 5, title: "Fontes e Eficiência Energética", icon: "fa-bolt" },
+            { id: 6, title: "Placas de Vídeo e GPU", icon: "fa-display" },
+            { id: 7, title: "Refrigeração e Fluxo de Ar", icon: "fa-wind" },
+            { id: 8, title: "Montagem Prática de PCs", icon: "fa-screwdriver-wrench" },
+            { id: 9, title: "Diagnóstico e Códigos de Erro", icon: "fa-stethoscope" },
+            { id: 10, title: "Manutenção Preventiva", icon: "fa-broom" }
+        ];
+
+        function getTimeAgo(timestamp) {
+            if (!timestamp) return '';
+            const now = Date.now();
+            const diffMs = now - parseInt(timestamp);
+            const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+            const diffHours = Math.floor(diffMs / (1000 * 60 * 60));
+            const diffMinutes = Math.floor(diffMs / (1000 * 60));
+
+            if (diffMinutes < 1) return 'ONLINE AGORA';
+            if (diffHours < 24) return 'ACESSADO HOJE';
+            if (diffDays === 1) return 'ACESSADO ONTEM';
+            return `${diffDays} DIAS ATRÁS`;
+        }
+
+        function accessLesson(lessonId) {
+            localStorage.setItem(STORAGE_KEY_PREFIX + lessonId, Date.now());
+            renderLessons();
+            window.location.href = `hardware/aula${lessonId}.html`;
+        }
+
+        function renderLessons() {
+            mapContainer.innerHTML = ''; 
+
+            lessonsData.forEach((lesson) => {
+                const lastAccess = localStorage.getItem(STORAGE_KEY_PREFIX + lesson.id);
+                const timeString = getTimeAgo(lastAccess);
+                const hasAccess = lastAccess !== null;
+                const formattedId = String(lesson.id).padStart(2, '0');
+
+                const lessonItem = document.createElement('div');
+                lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
+
+                lessonItem.innerHTML = `
+                    <a href="#" class="lesson-btn" onclick="accessLesson(${lesson.id}); return false;">
+                        <i class="fas ${lesson.icon} lesson-icon"></i>
+                        <div class="status-badge">
+                            <i class="fas ${hasAccess ? 'fa-check' : 'fa-lock'}"></i>
+                        </div>
+                    </a>
+                    <div class="lesson-title-label">Aula ${formattedId}<br>${lesson.title}</div>
+                    <div class="access-info">${timeString}</div>
+                `;
+
+                mapContainer.appendChild(lessonItem);
+            });
+        }
+
+        renderLessons();
+    </script>
+</body>
+</html>
