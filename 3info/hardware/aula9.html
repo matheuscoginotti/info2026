@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 09 - Diagnóstico de Defeitos e Códigos de Erro</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* Estilo para Tabela */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+            line-height: 1.5;
+        }
+
+        .tech-table th {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../hardware.html#" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Hardware e Manutenção</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 09: Diagnóstico de Defeitos e Códigos de Erro</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo Adicional • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Quando um computador se recusa a ligar, trava na tela preta ou exibe uma tela azul misteriosa, o técnico de TI não age na base do "chute". O diagnóstico profissional exige uma metodologia lógica, investigativa e sistemática de eliminação de hipóteses (*troubleshooting*).</p>
+
+            <h2><i class="fas fa-stethoscope"></i> 1. A Metodologia do Diagnóstico por Eliminação</h2>
+            <p>Sempre que um equipamento apresenta falha, o técnico deve seguir uma linha de raciocínio investigativa dividida em etapas:</p>
+            <ol style="margin-left: 20px; margin-bottom: 1.5rem; line-height: 1.8;">
+                <li><strong>Identificar o Sintoma:</strong> O PC liga os coolers mas não dá vídeo? Ele reinicia sozinho em loops? Ou trava durante o uso pesado?</li>
+                <li><strong>Isolar o Problema:</strong> Separar falhas de software (sistema corrompido, driver defeituoso) de falhas físicas de hardware.</li>
+                <li><strong>Testar com Peças de Conferencia (Peças Boas):</strong> Substituir o componente suspeito por um que se sabe estar funcionando perfeitamente.</li>
+            </ol>
+
+            <h2><i class="fas fa-volume-up"></i> 2. Interpretando os Bips da Placa-Mãe (POST Beeps)</h2>
+            <p>Antes mesmo de exibir qualquer imagem no monitor, a placa-mãe realiza o <strong>POST (Power-On Self-Test)</strong>, um autoteste que verifica se os componentes vitais estão respondendo. Se a placa possui um pequeno alto-falante conectado (Speaker) e encontra uma falha crítica, ela emite uma sequência de bips sonoros codificados:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Sequência de Bips (AMI/Award BIOS)</th>
+                        <th>Significado Provável da Falha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h3>1 Bip Curto</h3></td>
+                        <td>Sistema inicializado com sucesso (tudo normal).</td>
+                    </tr>
+                    <tr>
+                        <td><h3>3 Bips Curtos</h3></td>
+                        <td>Erro nos primeiros 64KB da Memória RAM. Tente limpar os contatos ou trocar de slot.</td>
+                    </tr>
+                    <tr>
+                        <td><h3>1 Bip Longo e 2 Curtos</h3></td>
+                        <td>Falha na Placa de Vídeo (GPU ausente, mal encaixada ou com defeito).</td>
+                    </tr>
+                    <tr>
+                        <td><h3>Bips Contínuos (Infinitos)</h3></td>
+                        <td>Problema na Fonte de Alimentação ou superaquecimento crítico do processador.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><i class="fas fa-desktop"></i> 3. Telas Azuis (BSOD) e Códigos de Parada</h2>
+            <p>Quando o Windows sofre uma falha crítica no nível do kernel (sistema operacional), ele trava imediatamente para proteger o hardware, gerando a famosa **Tela Azul da Morte (Blue Screen of Death)**.</p>
+
+            <div class="code-container">
+<span class="comment"># COMO ANALISAR UMA TELA AZUL</span>
+Toda BSOD exibe um código em destaque (ex: <span class="tag">CRITICAL_PROCESS_DIED</span> ou <span class="val">MEMORY_MANAGEMENT</span>).
+O técnico deve anotar o código de parada ou usar ferramentas gratuitas como o 
+<span class="tag">BlueScreenView</span> para ler o arquivo de despejo de memória (.dmp) gerado pelo sistema.
+            </div>
+
+            <h2><i class="fas fa-tools"></i> 4. Ferramentas Essenciais do Técnico</h2>
+            <p>Para acelerar o diagnóstico físico em bancada, um bom laboratório de suporte conta com:</p>
+            <ul>
+                <td><strong>Multímetro Digital:</strong> Essencial para testar se a fonte de alimentação está entregando as voltagens corretas nas linhas de +12V e +5V.</td>
+                <td><strong>Placa de Diagnóstico PCI/USB (Debug Card):</strong> Exibe códigos hexadecimais em tempo real indicando exatamente em qual etapa do boot a placa-mãe travou.</td>
+                <td><strong>Borracha Branca Escolar / limpa-contatos:</strong> Para remover oxidação dos contatos dourados dos pentes de memória RAM e placas de expansão.</td>
+            </ul>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-lightbulb"></i> A Regra de Ouro da Bancada Limpa</strong>
+                <p>Em caso de falhas em que o PC não dá vídeo de jeito nenhum, monte a máquina "na unha" sobre a bancada usando apenas o essencial: Placa-mãe, 1 pente de RAM, Processador com cooler e a Fonte. Desconecte tudo o mais (HDs, placas extras, painel frontal) e ligue fechando curto levemente nos pinos do Power SW com uma chave de fenda. Isso isola qualquer curto-circuito gerado pelo gabinete!</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula8.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula10.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
