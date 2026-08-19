@@ -299,7 +299,7 @@
 
     <main class="lesson-container">
         
-        <h1 class="lesson-title">Aula 05: Fontes de Alimentação, Eficiência e Cybenetics</h1>
+        <h1 class="lesson-title">Aula 05: Fontes de Alimentação, Eficiência e Certificações</h1>
         <div class="lesson-meta">
             <i class="far fa-calendar-alt"></i> Módulo Adicional • Professor: Matheus M. Coginotti
         </div>
@@ -319,37 +319,64 @@
                 <p>O termo "watt real" não existe oficialmente na engenharia elétrica; é apenas um jargão comercial criado no passado para tentar diferenciar fontes decentes das famosas fontes xing-ling que explodiam. Toda fonte projeta uma potência. O que define se uma fonte é boa ou ruim <strong>não é um selo impresso de "Watts Reais" na carcaça, mas sim a presença de proteções elétricas reais (como OCP, SCP e OTP)</strong> e a capacidade de entregar energia estável na linha de +12V.</p>
             </div>
 
-            <h2><i class="fas fa-certificate"></i> 3. Certificação 80 Plus e o Padrão Moderno Cybenetics</h2>
-            <p>Historicamente, a certificação <strong>80 Plus</strong> media o nível de eficiência energética da fonte (garantindo conversão de pelo menos 80%). No entanto, o mercado evoluiu e hoje temos um padrão muito mais rigoroso e completo: a <strong>Cybenetics</strong>.</p>
+            <h2><i class="fas fa-certificate"></i> 3. Certificações Energéticas: O que cada selo garante no mínimo?</h2>
+            <p>Para garantir que a fonte não gaste energia excessiva transformando eletricidade em calor puro, o mercado utiliza selos de eficiência. Historicamente usamos o <strong>80 Plus</strong>, e atualmente o rigoroso padrão <strong>Cybenetics</strong>.</p>
+
+            <p>Abaixo estão as exigências mínimas de eficiência que cada selo garante quando a fonte está operando sob carga na rede elétrica:</p>
 
             <table class="tech-table">
                 <thead>
                     <tr>
-                        <th>Padrão de Avaliação</th>
-                        <th>O que o 80 Plus avaliava?</th>
-                        <th>O que o padrão moderno Cybenetics avalia?</th>
+                        <th>Nível do Selo (80 Plus)</th>
+                        <th>Eficiência Mínima a 20% de Carga</th>
+                        <th>Eficiência Mínima a 50% de Carga (Pico Ideal)</th>
+                        <th>Eficiência Mínima a 100% de Carga</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><h3>Escopo de Testes</h3></td>
-                        <td>Apenas a eficiência em poucos pontos de carga pré-determinados.</td>
-                        <td>Mais de 1.450 pontos de teste diferentes, cobrindo cenários extremos de uso real.</td>
+                        <td><h3>80 Plus (White)</h3></td>
+                        <td>80%</td>
+                        <td>85%</td>
+                        <td>80%</td>
                     </tr>
                     <tr>
-                        <td><h3>Ruído e Acústica</h3></td>
-                        <td>Não avaliava o barulho da ventoinha.</td>
-                        <td>Possui o selo <strong>LAMBDA</strong>, que mede o nível exato de ruído (em decibéis) gerado pela fan da fonte.</td>
+                        <td><h3>80 Plus Bronze</h3></td>
+                        <td>82%</td>
+                        <td>85%</td>
+                        <td>82%</td>
                     </tr>
                     <tr>
-                        <td><h3>Eficiência em Standby</h3></td>
-                        <td>Análise superficial.</td>
-                        <td>Testes rigorosos do circuito de 5VSB (consumo fantasma com o PC desligado).</td>
+                        <td><h3>80 Plus Silver</h3></td>
+                        <td>85%</td>
+                        <td>88%</td>
+                        <td>85%</td>
+                    </tr>
+                    <tr>
+                        <td><h3>80 Plus Gold</h3></td>
+                        <td>87%</td>
+                        <td>90%</td>
+                        <td>87%</td>
+                    </tr>
+                    <tr>
+                        <td><h3>80 Plus Platinum</h3></td>
+                        <td>90%</td>
+                        <td>92%</td>
+                        <td>89%</td>
+                    </tr>
+                    <tr>
+                        <td><h3>80 Plus Titanium</h3></td>
+                        <td>92%</td>
+                        <td>94%</td>
+                        <td>90%</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2><i class="fas fa-plug"></i> 4. PFC Ativo e Estabilizadores</h2>
+            <h3>O Padrão Moderno Cybenetics (ETA e LAMBDA)</h3>
+            <p>Enquanto o 80 Plus testa apenas a eficiência em condições limitadas, a <strong>Cybenetics</strong> realiza mais de 1.450 testes automatizados simulando cenários reais estressantes. Além disso, ela introduziu o selo <strong>LAMBDA</strong>, que classifica de forma oficial o <strong>nível de ruído (barulho da ventoinha em decibéis)</strong> gerado pela fonte, variando de super silenciosa (A++) até barulhenta (Standard).</p>
+
+            <h2><i class="fas fa-plug"></i> 4. PFC Ativo e o Perigo dos Estabilizadores</h2>
             <p>As fontes modernas possuem <strong>PFC Ativo</strong> com faixa universal (bivolt automático de 100V a 240V). Ela ajusta a tensão de entrada automaticamente e protege contra oscilações severas.</p>
 
             <div class="highlight-box success">
