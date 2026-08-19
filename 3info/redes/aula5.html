@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 05 - Métodos de Transmissão</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 05: Métodos de Transmissão</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Quando enviamos um pacote de dados pela rede, ele precisa ter um "estilo" de entrega. O roteador e o switch tratam o tráfego de formas diferentes dependendo de <strong>quantos dispositivos</strong> devem receber aquela informação. Chamamos isso de Métodos de Transmissão ou Formas de Envio.</p>
+
+            <div class="code-container">
+<span class="comment"># A ANALOGIA DA SALA DE AULA</span>
+<span class="tag">Unicast:</span> O professor chega perto de um aluno e fala baixinho só com ele.
+<span class="tag">Multicast:</span> O professor chama um grupo de 5 alunos específicos para dar um recado.
+<span class="tag">Broadcast:</span> O diretor pega o microfone e grita no pátio para a escola inteira ouvir.
+            </div>
+
+            <h2><i class="fas fa-arrow-right"></i> 1. Unicast (Um para Um)</h2>
+            <p>O <strong>Unicast</strong> é a comunicação direta entre <strong>um remetente e um único destinatário</strong>. É o método mais comum e utilizado em quase 90% de tudo o que fazemos na internet.</p>
+
+            <ul>
+                <li>Ocorre quando você abre uma página web (seu PC solicita a página diretamente ao Servidor Web).</li>
+                <li>Quando você baixa um arquivo, envia um e-mail ou manda uma mensagem direta no WhatsApp.</li>
+                <li>O Switch, por ser inteligente, adora o Unicast. Ele entrega o pacote exatamente na porta onde o MAC Address do destino está conectado.</li>
+            </ul>
+
+            <h2><i class="fas fa-share-alt"></i> 2. Multicast (Um para um Grupo)</h2>
+            <p>O <strong>Multicast</strong> é a transmissão de dados de um remetente para <strong>vários destinatários selecionados</strong>, mas não para todos da rede. É uma forma altamente inteligente de economizar banda (velocidade).</p>
+
+            <p>Imagine que 50 computadores em um laboratório precisem assistir a uma transmissão de vídeo ao vivo (Streaming):</p>
+            <ul>
+                <li>Se fosse Unicast, o servidor teria que enviar 50 cópias do mesmo vídeo (uma para cada PC), esgotando a rede.</li>
+                <li>Usando Multicast, o servidor envia <strong>apenas um pacote de vídeo</strong>. Os roteadores e switches se encarregam de duplicar esse pacote no meio do caminho apenas para as portas dos computadores que "assinaram" aquele canal.</li>
+                <li><strong>Onde é usado:</strong> Serviços de IPTV, videoconferências corporativas, e protocolos de roteamento dinâmico (onde os roteadores conversam apenas com outros roteadores).</li>
+            </ul>
+
+            <h2><i class="fas fa-broadcast-tower"></i> 3. Broadcast (Um para Todos)</h2>
+            <p>O <strong>Broadcast</strong> (Radiodifusão) é quando um dispositivo envia um pacote para <strong>absolutamente todas as máquinas daquela rede local</strong> ao mesmo tempo.</p>
+
+            <p>Você lembra da <em>Aula 03</em>? O Broadcast é vital para a rede local funcionar! Ele é usado para descobrir coisas que a máquina ainda não sabe:</p>
+            <ul>
+                <li><strong>Protocolo ARP:</strong> "Ei todo mundo, quem é o dono do IP 192.168.1.50? Me passe o seu MAC!".</li>
+                <li><strong>Protocolo DHCP:</strong> Quando você conecta no Wi-Fi, seu celular grita em Broadcast: "Ei, algum Servidor DHCP pode me emprestar um endereço IP para eu navegar?".</li>
+            </ul>
+
+            <div class="highlight-box danger">
+                <strong><i class="fas fa-skull-crossbones"></i> O Perigo: Broadcast Storm (Tempestade de Broadcast)</strong>
+                <p>O Broadcast não passa de roteadores (ele morre dentro da rede local / LAN). No entanto, se um administrador de rede não configurar equipamentos como os Switches gerenciáveis corretamente (ativando protocolos como o STP), um pacote de Broadcast pode ficar rodando em loop infinito entre os switches.</p>
+                <p>Isso gera uma <strong>Tempestade de Broadcast</strong>: os pacotes se multiplicam tão rápido que entopem os cabos e travam 100% o processamento dos switches, derrubando a rede da empresa inteira em questão de segundos!</p>
+            </div>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-microchip"></i> E o IPv6? O Fim do Broadcast!</strong>
+                <p>Como o Broadcast é barulhento, inseguro e gera tráfego inútil (todos os PCs precisam parar o que estão fazendo para analisar a mensagem do grito e ver se é para eles), o novo padrão da internet, o <strong>IPv6</strong>, aboliu totalmente o Broadcast. No IPv6, os equipamentos usam apenas configurações otimizadas de <strong>Multicast</strong> para descobrir a rede.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula4.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula6.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
