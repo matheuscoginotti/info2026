@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trilha de Aulas - Sistemas Operacionais</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Estilos omitidos para brevidade, use os mesmos do redes.html, mas altere as variáveis de cor se quiser um tom de azul/petróleo diferente -->
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --accent-blue: #3b82f6; /* Azul um pouco mais vibrante para SO */
+            --accent-gold: #f59e0b;
+        }
+        /* ... use o mesmo CSS do redes.html mantendo a estrutura do .lesson-map ... */
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <a href="3infomenu.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+
+    <header>
+        <h1>Sistemas Operacionais</h1>
+        <div class="subtitle">Trilha de Aprendizagem</div>
+    </header>
+
+    <div class="lesson-map" id="lessonMap"></div>
+
+    <script>
+        const STORAGE_KEY_PREFIX = '3info_so_lesson_';
+        const mapContainer = document.getElementById('lessonMap');
+
+        const lessonsData = [
+            { id: 1, title: "Introdução e Diferenças entre SOs", icon: "fa-microchip" },
+            { id: 2, title: "Sistemas de Arquivos", icon: "fa-folder-tree" },
+            { id: 3, title: "Unidades de Medida e Binário", icon: "fa-database" }
+        ];
+
+        // ... (use o mesmo script renderLessons e accessLesson do redes.html, ajustando a URL para 'so/aulaX.html')
+        function accessLesson(lessonId) {
+            localStorage.setItem(STORAGE_KEY_PREFIX + lessonId, Date.now());
+            window.location.href = `so/aula${lessonId}.html`;
+        }
+        // ... (renderLessons e lógica de foguetes igual à trilha de redes)
+    </script>
+</body>
+</html>
