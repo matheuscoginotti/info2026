@@ -374,16 +374,23 @@ Byte: É um conjunto de <span class="tag">8 Bits</span> unidos.
                 </tbody>
             </table>
 
-            <h2><i class="fas fa-question-circle"></i> 3. Por que meu HD de 1TB mostra menos espaço no Windows?</h2>
-            <p>Uma dúvida clássica de suporte técnico: <em>"Comprei um HD externo de 1 Terabyte, conectei no computador e o Windows diz que ele tem apenas 931 GB. A fabricante me roubou?"</em></p>
+            <h2><i class="fas fa-question-circle"></i> 3. Por que meu HD de 1 TB mostra apenas 931 GB no Windows?</h2>
+            <p>Uma dúvida clássica de suporte: <em>"Comprei um HD de 1 TB, espetei no PC e o Windows diz que só tem 931 GB. Fui enganado?"</em></p>
+
+            <p>A resposta é <strong>não</strong>. Isso acontece por uma diferença de cálculo entre a fabricante e o Sistema Operacional:</p>
+
+            <ul>
+                <li><strong>A Fabricante (Base 10 / Decimal):</strong> Arredonda de 1.000 em 1.000. Para ela, 1 TB equivale a exatamente <strong>1.000.000.000.000 de bytes</strong>.</li>
+                <li><strong>O Windows (Base 2 / Binária):</strong> Mede de 1.024 em 1.024.</li>
+            </ul>
 
             <div class="highlight-box warning">
-                <strong><i class="fas fa-calculator"></i> A Disputa entre o Mercado e a Matemática</strong>
-                <ul>
-                    <li><strong>As Fabricantes de Hardware (Base 10):</strong> Calculam o Terabyte usando o padrão decimal que conhecemos. Para elas, 1 TB = 1.000.000.000.000 de bytes.</li>
-                    <li><strong>O Sistema Operacional / Windows (Base 2):</strong> Calcula o espaço usando potências de 2. Para o Windows, 1 Terabyte (na verdade chamado de Tebibyte) vale 1.024 x 1.024 x 1.024 x 1.024 bytes = 1.099.511.627.776 bytes.</li>
-                </ul>
-                <p>Essa diferença de interpretação faz com que o espaço anunciado pareça "sumir" na tela do computador, mas os bytes físicos entregues pela fabricante continuam lá exatamente como o combinado!</p>
+                <strong><i class="fas fa-calculator"></i> A Conta na Prática</strong>
+                <p>Quando o Windows lê o 1 trilhão de bytes do HD, ele divide por 1.024 três vezes consecutivas para converter em Gigabytes:</p>
+                <p style="font-family: monospace; font-size: 1.05rem; margin-top: 8px;">
+                    1.000.000.000.000 ÷ 1024 ÷ 1024 ÷ 1024 = <strong>931,32 GB</strong>
+                </p>
+                <p style="margin-top: 8px;">O espaço físico está todo lá; a diferença é apenas a "régua" de medida usada para exibir na tela.</p>
             </div>
 
             <div class="highlight-box success">
