@@ -1,181 +1,337 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 02: As Veias da Internet (Infraestrutura Física e Escopo)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Aula 02 - Abrangência, Meio Físico e Velocidade</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        code, pre { font-family: 'Fira Code', monospace; }
-        
-        .code-container {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            border-radius: 12px;
-            padding: 24px;
-            overflow-x: auto;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
         }
 
-        .comment { color: #6a9955; font-style: italic; }
-        .tag { color: #569cd6; font-weight: bold; }
-        .css-selector { color: #d7ba7d; }
-        .css-val { color: #4fc1ff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.5rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+<body>
 
-    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
-        <div class="max-w-4xl mx-auto">
-            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 1: Infraestrutura Conectada e Segura</span>
-            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 02: As Veias da Internet</h1>
-            <p class="text-2xl text-indigo-100 opacity-90">Entendendo o Alcance Geográfico, Unidades de Banda e os Cabos de Rede</p>
-        </div>
+    <header>
+        <!-- Link de voltar apontando para o mapa da trilha -->
+        <a href="trilha_redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
     </header>
 
-    <main class="max-w-4xl mx-auto py-16 px-6">
+    <main class="lesson-container">
         
-        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h2a2.5 2.5 0 002.5-2.5V6.265M15.347 12H19.23" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-800 font-mono">O Tamanho do Território</h2>
-            </div>
+        <h1 class="lesson-title">Aula 02: Abrangência, Meio Físico e Velocidades</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
+        </div>
 
-            <p class="text-lg text-slate-600 mb-8">
-                As redes de computadores são como divisões geopolíticas (uma casa, um bairro, um país). Usamos siglas técnicas para definir o tamanho do território que os dados conseguem alcançar.
-            </p>
-
+        <div class="content">
             
-
-            <div class="grid md:grid-cols-2 gap-10 mt-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
-                    <h3 class="text-xl font-bold text-indigo-700 mb-3">PAN e LAN (Redes Próximas)</h3>
-                    <p class="text-sm text-slate-600">
-                        A <strong>PAN</strong> é a sua bolha pessoal (o seu telemóvel conversando com o fone Bluetooth). A <b>LAN</b> é a rede local, restrita a um único espaço físico, como os computadores conectados dentro da sala de aula ou na sua casa.
-                    </p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">MAN e WAN (Grandes Distâncias)</h3>
-                    <p class="text-sm text-slate-600">
-                        A <b>MAN</b> cobre uma região metropolitana (a rede que interliga os bairros de uma cidade). Já a <b>WAN</b> quebra todas as barreiras geográficas: ela interliga países e continentes. A própria Internet é a maior WAN do planeta.
-                    </p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-20">
-            <div class="flex items-center mb-10">
-                <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. O Meio Físico: Cabos de Par Trançado</h2>
+            <div class="highlight-box success">
+                <strong><i class="fas fa-globe"></i> A Origem de Tudo: ARPANET</strong>
+                <p>Na década de 1960, em plena Guerra Fria, as forças militares dos EUA precisavam de uma rede que não parasse de funcionar caso um dos nós fosse bombardeado. Assim nasceu a ARPANET, o projeto ancestral que fragmentou os dados e deu origem à arquitetura da internet que usamos hoje.</p>
             </div>
 
-            <p class="text-lg text-slate-600 mb-8">
-                Nas redes cabeadas (padrão Ethernet), a informação viaja como pulsos elétricos por cabos de cobre. O grande desafio aqui é proteger o sinal contra ruídos e interferências externas.
-            </p>
-
+            <h2><i class="fas fa-expand-arrows-alt"></i> 1. Abrangência Geográfica (Nomenclaturas)</h2>
+            <p>As redes de computadores são classificadas pelo seu tamanho e pela distância geográfica que conseguem cobrir. A nomenclatura oficial segue esta escala de crescimento:</p>
             
-            
-            <div class="grid md:grid-cols-2 gap-8 text-sm mt-8">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Por que os fios são trançados?</h3>
-                    <p class="text-slate-600">Quando a eletricidade passa por um fio, ela gera um pequeno campo magnético que pode corromper o fio vizinho (efeito Crosstalk). Trançar os fios em pares faz com que os seus campos magnéticos se cancelem mutuamente, protegendo os bits.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">A Proteção: UTP vs. STP</h3>
-                    <p class="text-slate-600">O cabo <b>UTP</b> é o mais comum (não tem blindagem), ideal para casas e escritórios. O cabo <b>STP</b> possui uma malha protetora de metal ao redor dos fios, usada em indústrias para blindar o sinal contra o ruído de grandes motores.</p>
-                </div>
-            </div>
-        </section>
+            <ul>
+                <li><strong>PAN (Personal Area Network):</strong> Rede de uso pessoal. Curto alcance (alguns metros). Exemplo: Conexão via Bluetooth entre seu fone de ouvido sem fio e seu celular, ou um Smartwatch.</li>
+                <li><strong>LAN (Local Area Network):</strong> Rede local. Cobre uma área física pequena. Exemplo: A rede Wi-Fi da sua casa, ou a rede cabeada do laboratório de informática da ETEC.</li>
+                <li><strong>MAN (Metropolitan Area Network):</strong> Rede metropolitana. Conecta várias LANs dentro de uma mesma cidade ou região metropolitana. Exemplo: A rede que interliga o campus central de uma universidade aos seus polos em outros bairros.</li>
+                <li><strong>WAN (Wide Area Network):</strong> Rede de longa distância. Quebra barreiras geográficas unindo continentes inteiros. Exemplo: A própria Internet.</li>
+            </ul>
 
-        <section class="mb-20">
-            <div class="flex items-center mb-8">
-                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 002 2h2a2 2 0 002-2z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Entendendo a Vazão: Bits vs. Bytes</h2>
-            </div>
-
-            <p class="mb-8 text-slate-600 text-lg font-light">
-                O painel abaixo mostra de forma visual a diferença entre a velocidade que a operadora te vende e a velocidade real que você enxerga no navegador:
-            </p>
+            <h2><i class="fas fa-tachometer-alt"></i> 2. Bits vs. Bytes (Velocidade do Link)</h2>
+            <p>Na área de TI, confundir Bits com Bytes gera grandes problemas de dimensionamento de rede. Entenda a matemática por trás da velocidade que você contrata no seu provedor de internet:</p>
 
             <div class="code-container">
-<pre><code><span class="comment"># =========================================================
-# COMPREENSÃO VISUAL DA LARGURA DE BANDA
+<span class="comment"># =========================================================
+# O CÁLCULO REAL DA SUA INTERNET
 # =========================================================</span>
 
- A OPERADORA VENDE EM:   <span class="tag">Megabits (Mbps)</span>  --> Mede a quantidade de "pequenos impulsos" por segundo.
- O NAVEGADOR MOSTRA EM:  <span class="tag">MegaBytes (MB/s)</span> --> Mede o tamanho real do arquivo salvo no disco.
+A OPERADORA VENDE EM:   <span class="tag">Megabits (Mbps)</span>  --> Representa o pulso elétrico no cabo (bit = b minúsculo).
+O SEU HD GRAVA EM:      <span class="tag">MegaBytes (MB/s)</span> --> Representa o dado físico (Byte = B maiúsculo).
 
-<span class="comment"># REGRA DE CONVERSÃO DIRETAL (1 Byte = 8 bits)</span>
- Se o seu plano é de  [<span class="css-val">100 Mbps</span>] ──(Dividido por 8)──> O download máximo será de [<span class="css-selector">12.5 MB/s</span>]
- Se o seu plano é de  [<span class="css-val">400 Mbps</span>] ──(Dividido por 8)──> O download máximo será de [<span class="css-selector">50.0 MB/s</span>]
+<span class="comment"># REGRA MATEMÁTICA: 1 Byte equivale a 8 bits.</span>
+Para saber a velocidade real de download, divida o valor do seu plano por 8:
 
-<span class="comment"># EVOLUÇÃO DAS CATEGORIAS DE CABOS (Ethernet)</span>
- ── <span class="attr">Cat5</span>  ──────> Suporta até <span class="css-val">100 Mbps</span>    (Velocidade Fast Ethernet antiga)
- ── <span class="attr">Cat5e</span> ─────> Suporta até <span class="css-val">1000 Mbps</span>   (Padrão Gigabit comum atual)
- ── <span class="attr">Cat6</span>  ──────> Suporta até <span class="css-val">10000 Mbps</span>  (Padrão 10-Gigabit com separador interno)</code></pre>
-            </div>
-        </section>
-
-        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold font-mono">3. Curiosidades da Infraestrutura</h2>
+Plano de <span class="val">100 Mbps</span> ──(÷ 8)──> Download máximo teórico de <span class="val">12.5 MB/s</span>
+Plano de <span class="val">400 Mbps</span> ──(÷ 8)──> Download máximo teórico de <span class="val">50.0 MB/s</span>
+Plano de <span class="val">1 Gbps</span>   ──(÷ 8)──> Download máximo teórico de <span class="val">125.0 MB/s</span>
             </div>
 
-            <p class="mb-10 text-indigo-100 text-lg font-light">Fatos marcantes sobre como a base física da rede moldou o mundo digital:</p>
+            <h2><i class="fas fa-plug"></i> 3. O Meio Físico: Cabos de Par Trançado</h2>
+            <p>Apesar do Wi-Fi dominar os dispositivos móveis, a espinha dorsal de qualquer infraestrutura robusta ainda é o cabo de cobre. O padrão mundial de mercado é o <strong>Cabo de Par Trançado</strong> (Twisted Pair), que enrola os fios internamente para cancelar interferências magnéticas.</p>
 
-            <div class="space-y-6 text-indigo-950">
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">A</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">A Origem de Tudo: ARPANET</h4>
-                        <p class="text-sm text-slate-600 font-medium">Na década de 1960, em plena Guerra Fria, as forças militares dos EUA precisavam de uma rede que não parasse de funcionar caso um dos nós fosse bombardeado. Assim nasceu a ARPANET, o projeto ancestral que fragmentou os dados e deu origem à arquitetura da internet que usamos hoje.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">B</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">O Separador Interno do Cat6</h4>
-                        <p class="text-sm text-slate-600 font-medium">Se você cortar um cabo de rede Cat6 original, vai encontrar uma cruz de plástico rígido no meio dele. Esse componente serve unicamente para separar fisicamente os 4 pares de fios lá dentro. Evitando que eles se encostem, o cabo consegue atingir frequências muito mais altas e transmitir dados sem erros.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">C</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">O Limite dos 100 Metros</h4>
-                        <p class="text-sm text-slate-600 font-medium">A eletricidade perde força à medida que viaja pelo cobre. Por isso, as normas internacionais determinam que um cabo de rede par trançado só consegue carregar dados com perfeita integridade por no máximo **100 metros**. Passou disso, o sinal enfraquece tanto que os computadores deixam de se entender.</p>
-                    </div>
-                </div>
+            <h3>Tipos de Blindagem</h3>
+            <ul>
+                <li><strong>UTP (Unshielded Twisted Pair):</strong> Cabo sem blindagem. Mais barato, flexível e usado em 90% das redes domésticas e escritórios comuns.</li>
+                <li><strong>STP (Shielded Twisted Pair):</strong> Cabo com blindagem metálica interna. Obrigatório em indústrias e fábricas, onde motores elétricos pesados geram um ruído magnético que destruiria os dados de um cabo UTP comum.</li>
+            </ul>
+
+            <h3>Categorias de Cabeamento (Cat)</h3>
+            <p>A categoria define a frequência de operação e a velocidade suportada pelo cabo de rede. As mais relevantes atualmente são a <strong>Cat5e</strong> (suporta até 1 Gbps) e a <strong>Cat6 / Cat6a</strong> (suportam de 1 a 10 Gbps).</p>
+
+            <div class="highlight-box">
+                <strong><i class="fas fa-plus-circle"></i> O Separador Interno do Cat6</strong>
+                <p>Se você cortar um cabo de rede Cat6 original, vai encontrar uma cruz de plástico rígido no meio dele. Esse componente serve unicamente para separar fisicamente os 4 pares de fios lá dentro. Evitando que eles se encostem, o cabo consegue atingir frequências muito mais altas e transmitir dados sem erros.</p>
             </div>
-        </section>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-exclamation-triangle"></i> O Limite dos 100 Metros</strong>
+                <p>A eletricidade perde força à medida que viaja pelo cobre. Por isso, as normas internacionais determinam que um cabo de rede par trançado só consegue carregar dados com perfeita integridade por no máximo <strong>100 metros</strong>. Passou disso, o sinal enfraquece tanto que os computadores deixam de se entender (fenômeno conhecido como atenuação).</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula1_redes.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula3_redes.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
 
     </main>
-
-    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
-        <p class="max-w-4xl mx-auto">
-            Aula 01 concluída. A estrutura e os limites físicos da informação já não têm segredos para si!<br>
-            A seguir: <strong>Aula 02 — O Mapa Postal da Rede (Modelo OSI e Endereçamento Lógico/Físico)</strong>.
-        </p>
-    </footer>
 
 </body>
 </html>
