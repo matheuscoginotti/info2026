@@ -142,10 +142,10 @@
 
         .content h3 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             color: var(--text-primary);
             margin-top: 2rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
             display: flex;
             align-items: center;
             gap: 8px;
@@ -195,24 +195,6 @@
             align-items: center;
             gap: 8px;
         }
-
-        /* Bloco de Código Customizado */
-        .code-container {
-            background-color: rgba(15, 23, 42, 0.8);
-            border: 1px solid var(--border-tech);
-            border-left: 4px solid var(--accent-green);
-            padding: 1.5rem;
-            border-radius: 8px;
-            font-family: 'Consolas', monospace;
-            font-size: 0.95rem;
-            overflow-x: auto;
-            margin: 2rem 0;
-            color: #d4d4d4;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-        .code-container .comment { color: #6a9955; font-style: italic; }
-        .code-container .tag { color: #569cd6; font-weight: bold; }
-        .code-container .val { color: #4fc1ff; }
 
         /* Estilo para Tabela */
         .tech-table {
@@ -345,7 +327,28 @@
                 </tbody>
             </table>
 
-            <h2><i class="fas fa-balance-scale"></i> 3. Proprietário vs. Open Source (Código Aberto)</h2>
+            <h2><i class="fas fa-balance-scale"></i> 3. Vantagens, Desvantagens e o Perfil de Cada SO</h2>
+            <p>Cada sistema operacional atende a um objetivo diferente. Conhecer os pontos fortes e fracos de cada um é essencial para qualquer profissional de TI:</p>
+
+            <h3><i class="fab fa-windows" style="color: #38bdf8;"></i> Windows</h3>
+            <ul>
+                <li><strong>Vantagens:</strong> Compatibilidade universal com praticamente qualquer software ou jogo do mercado, facilidade de uso para o usuário comum e vasta gama de drivers para qualquer tipo de hardware.</li>
+                <li><strong>Desvantagens:</strong> Tradicionalmente mais visado por malwares (vírus e ransomware), consome mais recursos do computador (memória RAM e processador) em comparação com sistemas mais leves.</li>
+            </ul>
+
+            <h3><i class="fab fa-linux" style="color: #facc15;"></i> Linux</h3>
+            <ul>
+                <li><strong>Vantagens:</strong> É um sistema extremamente leve, gratuito, de código aberto e com uma segurança nativa muito forte (sendo muito mais complicado de ser afetado por vírus tradicionais). Além disso, oferece a possibilidade de personalizar absolutamente tudo no sistema e é a base da maioria dos servidores mundiais.</li>
+                <li><strong>Desvantagens:</strong> Exige um conhecimento técnico maior (muitas vezes exigindo o uso do terminal/linha de comando) e possui menor compatibilidade com softwares comerciais populares (como o pacote Adobe completo) e jogos de última geração.</li>
+            </ul>
+
+            <h3><i class="fab fa-apple" style="color: #e2e8f0;"></i> macOS</h3>
+            <ul>
+                <li><strong>Vantagens:</strong> Excelente otimização entre hardware e software (fluidez impressionante), ecossistema integrado com celulares e tablets, alta estabilidade e forte segurança contra vírus (por ser baseado em Unix).</li>
+                <li><strong>Desvantagens:</strong> É um sistema "fechado" (você só pode instalá-lo oficialmente em computadores da Apple) e o custo de aquisição do hardware é extremamente alto.</li>
+            </ul>
+
+            <h2><i class="fas fa-code-branch"></i> 4. Proprietário vs. Open Source (Código Aberto)</h2>
             <p>Uma das maiores diferenças conceituais entre os sistemas está na licença de uso:</p>
             
             <ul>
@@ -362,7 +365,7 @@
 
         <!-- Navegação -->
         <div class="lesson-nav">
-            <div></div> <!-- Espaço vazio para alinhar o botão à direita -->
+            <div></div>
             <a href="aula2.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
         </div>
 
