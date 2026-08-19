@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 09 - Serviços e Logs</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #3b82f6;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: #accent-green;
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* Estilo para Tabela */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+            line-height: 1.5;
+        }
+
+        .tech-table th {
+            background: rgba(59, 130, 246, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../so.html#" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Sistemas Operacionais</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 09: Gerenciamento de Serviços e Logs</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 3 • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Quando olhamos para a tela de um computador, vemos os aplicativos que abrimos (como o navegador ou editor de texto). No entanto, dezenas de tarefas invisíveis rodam em segundo plano o tempo todo para manter a máquina viva: gerenciamento de áudio, atualizações de segurança, conexões de rede e antivírus. Esses programas invisíveis são chamados de <strong>Serviços</strong>.</p>
+
+            <h2><i class="fas fa-cogs"></i> 1. O que são Serviços (Daemons)?</h2>
+            <p>Um serviço é um tipo especial de processo que roda em segundo plano sem precisar de interação humana ou de uma interface gráfica (janela na tela).</p>
+            <ul>
+                <li><strong>No Windows:</strong> São chamados oficialmente de <em>Windows Services</em>. Você pode gerenciá-los digitando <code>services.msc</code> no executar.</li>
+                <li><strong>No Linux e macOS:</strong> São chamados de <strong>Daemons</strong> (ou gerenciados pelo sistema <code>systemd</code>).</li>
+            </ul>
+
+            <div class="code-container">
+<span class="comment"># EXEMPLOS COMUNS DE SERVIÇOS EM SEGUNDO PLANO</span>
+- Windows Update: Serviço que busca e baixa atualizações do sistema em silêncio.
+- Spooler de Impressão: Gerencia a fila de documentos enviados para a impressora.
+- SSH Server: Serviço de acesso remoto seguro em servidores Linux.
+            </div>
+
+            <h2><i class="fas fa-play-circle"></i> 2. Modos de Inicialização de um Serviço</h2>
+            <p>No suporte técnico, configurar corretamente como um serviço inicia com o sistema é essencial para poupar memória RAM e acelerar o boot da máquina:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Modo de Inicialização</th>
+                        <th>O que significa?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Automático</strong></td>
+                        <td>O serviço liga sozinho no exato momento em que o sistema operacional faz o boot. (Ex: Antivírus, Driver de Áudio).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Automático (Atrasado)</strong></td>
+                        <td>Inicia logo após o boot, mas espera o computador desafogar das tarefas principais para não travar a inicialização.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Manual</strong></td>
+                        <td>O serviço fica dormindo e só é ativado se algum programa específico solicitar a sua ajuda.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Desativado</strong></td>
+                        <td>O sistema tem proibição absoluta de ligar esse serviço (muito usado para cortar recursos inúteis ou bloquear funções indesejadas).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><i class="fas fa-clipboard-list"></i> 3. O Poder dos Logs (A Caixa Preta do Sistema)</h2>
+            <p>Quando um computador trava do nada, reinicia sozinho ou exibe um erro misterioso, como o técnico descobre o que aconteceu? Através dos <strong>Logs</strong>.</p>
+
+            <p>Os logs são arquivos de texto gerados automaticamente pelo Sistema Operacional e pelos aplicativos, registrando em ordem cronológica tudo o que acontece na máquina (erros, avisos, tentativas de login e falhas de hardware).</p>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-search"></i> Onde encontrar os Logs?</strong>
+                <ul>
+                    <li><strong>No Windows:</strong> O <em>Visualizador de Eventos</em> (Event Viewer) registra cada detalhe técnico da máquina, dividido em categorias como <em>Application</em>, <em>Security</em> e <em>System</em>.</li>
+                    <li><strong>No Linux:</strong> Os logs ficam centralizados dentro da pasta <code>/var/log/</code> (como o <code>syslog</code> ou <code>auth.log</code>), onde é possível rastrear falhas linha por linha usando o terminal.</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-lightbulb"></i> A Ferramenta Número 1 do Detetive de TI</strong>
+                <p>Jamais chute a solução de um problema complexo de infraestrutura. Um bom profissional de TI sempre abre o arquivo de Log primeiro para ler o código de erro exato gerado pelo Kernel antes de tomar qualquer atitude.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula8.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula10.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
