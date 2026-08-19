@@ -29,13 +29,14 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: 'Roboto', sans-serif;
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            overflow: hidden;
+            overflow-x: hidden;
             position: relative;
+            padding: 40px 0;
         }
 
         /* --- Fundo de Grade Tecnológica --- */
@@ -164,16 +165,16 @@
         /* Título da Disciplina */
         h2 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.5rem;
+            font-size: 1.35rem;
             font-weight: 600;
             margin-bottom: 2rem;
             color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            min-height: 3rem; /* Alinha os botões mesmo com títulos de tamanhos diferentes */
+            min-height: 3.5rem; /* Alinha os botões mesmo com títulos de tamanhos diferentes */
             display: flex;
             align-items: center;
-            justify-content: center; /* Centraliza o texto vertical e horizontalmente */
+            justify-content: center;
         }
 
         /* Botão Acessar */
@@ -236,7 +237,7 @@
         }
 
         /* Responsividade */
-        @media (max-width: 900px) {
+        @media (max-width: 1000px) {
             .cards-wrapper { flex-direction: column; align-items: center; }
             .tech-card { width: 100%; max-width: 320px; }
             h1 { font-size: 2rem; }
@@ -255,7 +256,7 @@
 
     <div class="cards-wrapper">
         
-        <!-- Disciplina 1: Redes, Segurança da Informação e Internet das Coisas -->
+        <!-- Disciplina 1: Redes, Segurança da Informação e IoT -->
         <div class="tech-card">
             <div class="corner-deco"></div>
             <div class="icon-box">
@@ -273,6 +274,16 @@
             </div>
             <h2>Sistemas Operacionais</h2>
             <a href="so.html" class="btn-tech">Acessar</a>
+        </div>
+
+        <!-- Disciplina 3: Hardware e Manutenção -->
+        <div class="tech-card">
+            <div class="corner-deco"></div>
+            <div class="icon-box">
+                <i class="fa-solid fa-screwdriver-wrench"></i>
+            </div>
+            <h2>Hardware e Manutenção</h2>
+            <a href="hardware.html" class="btn-tech">Acessar</a>
         </div>
 
     </div>
