@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 05 - Fontes de Alimentação e Eficiência Energética</title>
+    <title>Aula 05 - Fontes de Alimentação, Eficiência e Cybenetics</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -170,7 +170,7 @@
             border-left: 4px solid var(--accent-blue);
             padding: 1.5rem;
             border-radius: 0 8px 8px 0;
-            margin: da2rem 0;
+            margin: 2rem 0;
         }
 
         .highlight-box.warning {
@@ -230,7 +230,6 @@
         }
         
         .tech-table th, .tech-table td {
-            path: 1rem;
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-tech);
@@ -300,7 +299,7 @@
 
     <main class="lesson-container">
         
-        <h1 class="lesson-title">Aula 05: Fontes de Alimentação e Eficiência Energética</h1>
+        <h1 class="lesson-title">Aula 05: Fontes de Alimentação, Eficiência e Cybenetics</h1>
         <div class="lesson-meta">
             <i class="far fa-calendar-alt"></i> Módulo Adicional • Professor: Matheus M. Coginotti
         </div>
@@ -312,55 +311,50 @@
             <h2><i class="fas fa-bolt"></i> 1. A Função Crítica da Fonte</h2>
             <p>A energia que sai da tomada da sua casa é em **Corrente Alternada (AC)**, oscilando em alta frequência (110V ou 220V). No entanto, os componentes sensíveis do computador (como o processador, a placa de vídeo e a placa-mãe) exigem **Corrente Contínua (DC)** limpa, estável e dividida em voltagens específicas (principalmente +12V, +5V e +3.3V). A fonte é o equipamento responsável por fazer essa conversão com precisão cirúrgica.</p>
 
-            <h2><i class="fas fa-shield-alt"></i> 2. O Perigo das Fontes Genéricas</h2>
-            <p>No mercado de informática, existem as chamadas "fontes genéricas" baratas e as fontes de qualidade com proteções reais. As fontes ruins não possuem circuitos de filtragem adequados e frequentemente entregam tensões oscilantes.</p>
+            <h2><i class="fas fa-bullhorn"></i> 2. Cuidado com a Pegadinha dos "Watts Reais"</h2>
+            <p>Se você entrar em fóruns antigos ou conversar com vendedores despreparados de lojas de informática, é muito comum ouvir a pergunta: <em>"Essa fonte é de watts reais?"</em>.</p>
 
-            <div class="highlight-box danger">
-                <strong><i class="fas fa-exclamation-triangle"></i> O Risco de Queima Total</strong>
-                <p>Uma fonte de baixa qualidade sem proteções contra curto-circuito (SCP), sobretensão (OVP) ou sobrecorrente (OCP) pode queimar em um único pico de energia da rede elétrica, levando junto com ela a placa-mãe, o processador e a placa de vídeo do usuário. Economizar na fonte é o caminho mais rápido para o prejuízo total.</p>
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-exclamation-triangle"></i> O Mito dos "Watts Reais"</strong>
+                <p>O termo "watt real" não existe oficialmente na engenharia elétrica; é apenas um jargão comercial criado no passado para tentar diferenciar fontes decentes das famosas fontes xing-ling que explodiam. Toda fonte projeta uma potência. O que define se uma fonte é boa ou ruim <strong>não é um selo impresso de "Watts Reais" na carcaça, mas sim a presença de proteções elétricas reais (como OCP, SCP e OTP)</strong> e a capacidade de entregar energia estável na linha de +12V.</p>
             </div>
 
-            <h2><i class="fas fa-certificate"></i> 3. Certificação 80 Plus e Eficiência Energética</h2>
-            <p>A certificação <strong>80 Plus</strong> mede o nível de eficiência energética da fonte. Ela garante que o equipamento converta a energia da tomada com pelo menos 80% de aproveitamento, transformando o restante em calor de forma controlada.</p>
+            <h2><i class="fas fa-certificate"></i> 3. Certificação 80 Plus e o Padrão Moderno Cybenetics</h2>
+            <p>Historicamente, a certificação <strong>80 Plus</strong> media o nível de eficiência energética da fonte (garantindo conversão de pelo menos 80%). No entanto, o mercado evoluiu e hoje temos um padrão muito mais rigoroso e completo: a <strong>Cybenetics</strong>.</p>
 
             <table class="tech-table">
                 <thead>
                     <tr>
-                        <th>Selo 80 Plus</th>
-                        <th>Eficiência Média (sob carga)</th>
-                        <th>Nível de Qualidade e Aplicação</th>
+                        <th>Padrão de Avaliação</th>
+                        <th>O que o 80 Plus avaliava?</th>
+                        <th>O que o padrão moderno Cybenetics avalia?</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><h3>White / Standard</h3></td>
-                        <td>Aprox. 80% a 85%</td>
-                        <td>O nível básico aceitável para computadores de entrada e escritórios simples.</td>
+                        <td><h3>Escopo de Testes</h3></td>
+                        <td>Apenas a eficiência em poucos pontos de carga pré-determinados.</td>
+                        <td>Mais de 1.450 pontos de teste diferentes, cobrindo cenários extremos de uso real.</td>
                     </tr>
                     <tr>
-                        <td><h3>Bronze</h3></td>
-                        <td>Aprox. 82% a 88%</td>
-                        <td>Excelente custo-benefício para máquinas intermediárias e PCs gamers básicos.</td>
+                        <td><h3>Ruído e Acústica</h3></td>
+                        <td>Não avaliava o barulho da ventoinha.</td>
+                        <td>Possui o selo <strong>LAMBDA</strong>, que mede o nível exato de ruído (em decibéis) gerado pela fan da fonte.</td>
                     </tr>
                     <tr>
-                        <td><h3>Gold</h3></td>
-                        <td>Aprox. 87% a 92%</td>
-                        <td>Padrão de alta qualidade, recomendado para setups avançados e estações de trabalho de alto desempenho.</td>
-                    </tr>
-                    <tr>
-                        <td><h3>Platinum / Titanium</h3></td>
-                        <td>Aprox. 90% a 94%+</td>
-                        <td>O ápice da engenharia elétrica, voltado para servidores de grande porte e entusiastas extremos.</td>
+                        <td><h3>Eficiência em Standby</h3></td>
+                        <td>Análise superficial.</td>
+                        <td>Testes rigorosos do circuito de 5VSB (consumo fantasma com o PC desligado).</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2><i class="fas fa-plug"></i> 4. Tecnologias Importantes: PFC Ativo</h2>
-            <p>Antigamente, as fontes baratas possuíam uma chavinha seletora manual atrás (110V / 220V). Se o usuário esquecesse a chave em 110V e ligasse na tomada de 220V, a fonte explodia instantaneamente.</p>
+            <h2><i class="fas fa-plug"></i> 4. PFC Ativo e Estabilizadores</h2>
+            <p>As fontes modernas possuem <strong>PFC Ativo</strong> com faixa universal (bivolt automático de 100V a 240V). Ela ajusta a tensão de entrada automaticamente e protege contra oscilações severas.</p>
 
             <div class="highlight-box success">
-                <strong><i class="fas fa-check-circle"></i> O Padrão Moderno: PFC Ativo (Power Factor Correction)</strong>
-                <p>As fontes modernas possuem <strong>PFC Ativo</strong> com faixa universal (bivolt automático de 100V a 240V). Ela ajusta a tensão de entrada automaticamente, protege contra oscilações severas da rede elétrica e garante um fator de potência próximo de 1, otimizando o consumo de energia da casa e dispensando o uso de estabilizadores (que hoje em dia prejudicam mais do que ajudam as fontes modernas).</p>
+                <strong><i class="fas fa-check-circle"></i> O Fim dos Estabilizadores</strong>
+                <p>Com o PFC Ativo nas fontes modernas, o uso de estabilizadores de 110V/220V tornou-se prejudicial. O estabilizador interrompe a energia bruscamente em cliques mecânicos para "corrigir" a voltagem, estressando e desgastando o capacitor da fonte do PC. O ideal para proteger a máquina é ligar a fonte diretamente em um bom <strong>Filtro de Linha de qualidade (clamper)</strong>.</p>
             </div>
 
         </div>
