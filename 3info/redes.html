@@ -9,7 +9,7 @@
 
     <style>
         :root {
-            /* Paleta Dark Tech (Padrão 3info/Enfermagem) */
+            /* Paleta Dark Tech (Padrão 3info) */
             --bg-color: #0f172a; 
             --card-bg: rgba(30, 41, 59, 0.85);
             --text-primary: #f1f5f9;
@@ -66,27 +66,7 @@
             100% { opacity: 0.8; }
         }
 
-        /* --- Foguetes (Background) --- */
-        .rocket-bg {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        .rocket {
-            position: absolute;
-            bottom: -50px;
-            color: var(--accent-blue);
-            font-size: 1.5rem;
-            opacity: 0.15;
-            filter: drop-shadow(0 0 5px var(--accent-blue));
-            animation: flyUp linear forwards;
-        }
-
-        @keyframes flyUp { to { transform: translateY(-120vh); opacity: 0; } }
-
-        /* --- Barra Superior Fixo --- */
+        /* --- Barra Superior Fixa --- */
         .top-bar {
             width: 100%;
             padding: 1.5rem 20px;
@@ -134,6 +114,7 @@
             text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
             text-transform: uppercase;
             position: relative;
+            max-width: 900px;
         }
 
         h1::after {
@@ -162,8 +143,8 @@
         .lesson-map {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
-            gap: 3rem 2rem;
-            max-width: 900px;
+            gap: 4rem 2rem;
+            max-width: 1000px;
             width: 95%;
             z-index: 2;
             padding: 20px;
@@ -195,12 +176,12 @@
             backdrop-filter: blur(8px);
         }
 
-        /* Número da Aula */
-        .lesson-number {
-            font-family: 'Chakra Petch', sans-serif;
-            font-size: 2rem;
-            font-weight: 700;
+        /* Ícone Centralizado */
+        .lesson-icon {
+            font-size: 2.2rem;
             z-index: 2;
+            color: var(--text-secondary);
+            transition: color 0.3s ease;
         }
 
         /* Ícone de Status (Cadeado/Check) */
@@ -221,38 +202,24 @@
             transition: all 0.3s ease;
         }
 
-        /* --- Estados --- */
-
-        /* Hover */
-        .lesson-btn:hover {
-            transform: translateY(-5px);
-            background: var(--card-bg);
-            border-color: var(--accent-blue);
-            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.2);
-            color: var(--accent-blue);
-        }
-
-        /* Acessado (Completado) */
-        .lesson-item.accessed .lesson-btn {
-            border-color: var(--accent-gold);
-            color: var(--accent-gold);
-            background: rgba(212, 175, 55, 0.1);
-        }
-        
-        .lesson-item.accessed .status-badge {
-            color: var(--bg-color);
-            background: var(--accent-gold);
-            border-color: var(--accent-gold);
-        }
-
-        .lesson-item.accessed .lesson-btn:hover {
-            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
-        }
-
-        /* --- Texto Informativo (Online Agora / Há 2 dias) --- */
-        .access-info {
+        /* --- Título da Aula (Abaixo do Botão) --- */
+        .lesson-title-label {
             margin-top: 15px;
-            font-size: 0.8rem;
+            font-size: 0.95rem;
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            text-align: center;
+            font-weight: 700;
+            text-transform: uppercase;
+            max-width: 150px;
+            line-height: 1.2;
+            transition: color 0.3s ease;
+        }
+
+        /* --- Texto Informativo (Tempo) --- */
+        .access-info {
+            margin-top: 5px;
+            font-size: 0.75rem;
             color: var(--text-secondary);
             font-family: 'Chakra Petch', sans-serif;
             text-transform: uppercase;
@@ -265,10 +232,41 @@
             font-weight: 600;
         }
 
+        /* --- Estados (Hover e Acessado) --- */
+        .lesson-btn:hover {
+            transform: translateY(-5px);
+            background: var(--card-bg);
+            border-color: var(--accent-blue);
+            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.2);
+        }
+
+        .lesson-btn:hover .lesson-icon {
+            color: var(--accent-blue);
+        }
+
+        .lesson-item.accessed .lesson-btn {
+            border-color: var(--accent-gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .lesson-item.accessed .lesson-icon {
+            color: var(--accent-gold);
+        }
+
+        .lesson-item.accessed .status-badge {
+            color: var(--bg-color);
+            background: var(--accent-gold);
+            border-color: var(--accent-gold);
+        }
+
+        .lesson-item.accessed .lesson-title-label {
+            color: var(--accent-gold);
+        }
+
         .lesson-item.accessed .access-info {
             opacity: 1;
             transform: translateY(0);
-            color: var(--accent-gold);
+            color: var(--text-secondary);
         }
 
         /* --- Conectores entre os Nós --- */
@@ -276,7 +274,7 @@
             content: '';
             position: absolute;
             right: -2rem;
-            top: 42px;
+            top: 42px; /* Meio do botão */
             width: 2rem;
             height: 2px;
             background: linear-gradient(90deg, var(--border-tech) 0%, var(--border-tech) 50%, transparent 100%);
@@ -292,14 +290,12 @@
 
         /* Responsividade Mobile */
         @media (max-width: 800px) {
+            h1 { font-size: 2.2rem; }
             .lesson-map {
                 grid-template-columns: repeat(2, 1fr);
-                gap: 2rem;
+                gap: 3rem 2rem;
             }
-            h1 { font-size: 2.2rem; }
-            
             .lesson-item:not(:nth-child(4n))::after { display: none; }
-            
             .lesson-item:not(:nth-child(2n))::after {
                 content: '';
                 position: absolute;
@@ -310,7 +306,6 @@
                 background: var(--border-tech);
                 display: block;
             }
-            
             .lesson-item.accessed:not(:nth-child(2n))::after {
                  background: var(--accent-gold);
             }
@@ -318,8 +313,6 @@
     </style>
 </head>
 <body>
-
-    <div class="rocket-bg" id="rocketContainer"></div>
 
     <div class="top-bar">
         <a href="3infomenu.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
@@ -333,16 +326,25 @@
     <div class="lesson-map" id="lessonMap"></div>
 
     <script>
-        // Configurações
-        const TOTAL_LESSONS = 30;
-        // Chave exclusiva para não dar conflito com o projeto de Enfermagem
         const STORAGE_KEY_PREFIX = '3info_redes_lesson_';
-
         const mapContainer = document.getElementById('lessonMap');
+
+        // Estrutura das Aulas (ID, Título e Ícone do FontAwesome)
+        const lessonsData = [
+            { id: 1, title: "Introdução às Redes", icon: "fa-network-wired" },
+            { id: 2, title: "Modelo OSI e TCP/IP", icon: "fa-layer-group" },
+            { id: 3, title: "Meios de Transmissão", icon: "fa-ethernet" },
+            { id: 4, title: "Endereçamento IP", icon: "fa-laptop-code" },
+            { id: 5, title: "Roteadores e Switches", icon: "fa-server" },
+            { id: 6, title: "Redes Sem Fio", icon: "fa-wifi" },
+            { id: 7, title: "Princípios de Segurança", icon: "fa-shield-halved" },
+            { id: 8, title: "Criptografia e Ameaças", icon: "fa-user-secret" },
+            { id: 9, title: "O que é IoT", icon: "fa-microchip" },
+            { id: 10, title: "Projetos em IoT", icon: "fa-lightbulb" }
+        ];
 
         function getTimeAgo(timestamp) {
             if (!timestamp) return '';
-
             const now = Date.now();
             const diffMs = now - parseInt(timestamp);
             const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
@@ -356,64 +358,41 @@
         }
 
         function accessLesson(lessonId) {
-            // Salva o progresso no navegador
             localStorage.setItem(STORAGE_KEY_PREFIX + lessonId, Date.now());
             renderLessons();
-            
-            console.log(`Inicializando Módulo ${lessonId}...`);
-            
-            // Redirecionamento para a página específica da aula na pasta redes
             window.location.href = `redes/aula${lessonId}.html`;
         }
 
         function renderLessons() {
             mapContainer.innerHTML = ''; 
 
-            for (let i = 1; i <= TOTAL_LESSONS; i++) {
-                const lastAccess = localStorage.getItem(STORAGE_KEY_PREFIX + i);
+            lessonsData.forEach((lesson) => {
+                const lastAccess = localStorage.getItem(STORAGE_KEY_PREFIX + lesson.id);
                 const timeString = getTimeAgo(lastAccess);
                 const hasAccess = lastAccess !== null;
+
+                // Formata o número da aula com zero à esquerda (ex: Aula 01)
+                const formattedId = String(lesson.id).padStart(2, '0');
 
                 const lessonItem = document.createElement('div');
                 lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
 
                 lessonItem.innerHTML = `
-                    <a href="#" class="lesson-btn" onclick="accessLesson(${i}); return false;">
-                        <span class="lesson-number">${i}</span>
+                    <a href="#" class="lesson-btn" onclick="accessLesson(${lesson.id}); return false;">
+                        <i class="fas ${lesson.icon} lesson-icon"></i>
                         <div class="status-badge">
                             <i class="fas ${hasAccess ? 'fa-check' : 'fa-lock'}"></i>
                         </div>
                     </a>
+                    <div class="lesson-title-label">Aula ${formattedId}<br>${lesson.title}</div>
                     <div class="access-info">${timeString}</div>
                 `;
 
                 mapContainer.appendChild(lessonItem);
-            }
-        }
-
-        // Foguetes Tecnológicos (Sutis no Background)
-        function createRocket() {
-            const container = document.getElementById('rocketContainer');
-            const rocket = document.createElement('i');
-            
-            // Ícones variados
-            const icons = ['fa-rocket', 'fa-shuttle-space', 'fa-jet-fighter'];
-            const randomIcon = icons[Math.floor(Math.random() * icons.length)];
-            
-            rocket.classList.add('fas', randomIcon, 'rocket');
-            rocket.style.left = Math.random() * 95 + 'vw';
-            
-            const size = (Math.random() * 1.2 + 0.8) + 'rem';
-            rocket.style.fontSize = size;
-            
-            rocket.style.animationDuration = (Math.random() * 8 + 6) + 's';
-            container.appendChild(rocket);
-            setTimeout(() => { rocket.remove(); }, 14000);
+            });
         }
 
         renderLessons();
-        setInterval(createRocket, 2000);
-
     </script>
 </body>
 </html>
