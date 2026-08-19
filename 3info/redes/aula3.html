@@ -1,194 +1,447 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 03: O Mapa Postal da Rede (Modelo OSI e Endereçamento)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Aula 03 - Modelo OSI, Endereçamentos, Máscara e ARP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        code, pre { font-family: 'Fira Code', monospace; }
-        
-        .code-container {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            border-radius: 12px;
-            padding: 24px;
-            overflow-x: auto;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
         }
 
-        /* Cores de Realce para a Estrutura de Dados e Comandos */
-        .comment { color: #6a9955; font-style: italic; }
-        .tag { color: #569cd6; font-weight: bold; }
-        .attr { color: #9cdcfe; }
-        .string { color: #ce9178; }
-        .css-selector { color: #d7ba7d; }
-        .css-prop { color: #b5cea8; }
-        .css-val { color: #4fc1ff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Tabela/Pilha Modelo OSI --- */
+        .osi-stack {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid var(--border-tech);
+        }
+
+        .osi-layer {
+            display: flex;
+            align-items: center;
+            background: rgba(30, 41, 59, 0.9);
+            padding: 10px 15px;
+            border-radius: 6px;
+            border-left: 5px solid var(--accent-blue);
+            transition: all 0.3s ease;
+        }
+
+        .osi-layer:hover {
+            transform: translateX(10px);
+            background: rgba(56, 189, 248, 0.15);
+            border-left-color: var(--accent-gold);
+        }
+
+        .osi-num {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--accent-gold);
+            min-width: 40px;
+        }
+
+        .osi-name {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 150px;
+        }
+
+        .osi-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+            .osi-layer { flex-direction: column; align-items: flex-start; gap: 5px; }
+            .osi-name { min-width: auto; }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+<body>
 
-    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
-        <div class="max-w-4xl mx-auto">
-            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 1: Infraestrutura Conectada e Segura</span>
-            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 03: O Mapa Postal da Rede</h1>
-            <p class="text-2xl text-indigo-100 opacity-90">Desvendando as Camadas do Modelo OSI e o Confronto IP vs. Endereço MAC</p>
-        </div>
+    <header>
+        <a href="trilha_redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
     </header>
 
-    <main class="max-w-4xl mx-auto py-16 px-6">
+    <main class="lesson-container">
         
-        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-800 font-mono">A Jornada de Uma Carta Internacional</h2>
-            </div>
+        <h1 class="lesson-title">Aula 03: Modelo OSI, Endereçamentos, Máscara e ARP</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
+        </div>
 
-            <p class="text-lg text-slate-600 mb-8">
-                Para que um dado saia do seu WhatsApp e chegue ao telemóvel de outra pessoa, ele precisa passar por um sistema rigoroso de empacotamento. É exatamente igual ao envio de uma encomenda postal pelos correios.
-            </p>
-
+        <div class="content">
             
+            <p>Para que um computador no Brasil consiga abrir um site hospedado no Japão, independente da marca da placa de rede ou do sistema operacional, ambos precisam falar exatamente o mesmo "idioma". Para padronizar essa comunicação mundial, foi criado o <strong>Modelo OSI</strong>.</p>
 
-            <div class="grid md:grid-cols-2 gap-10 mt-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
-                    <h3 class="text-xl font-bold text-indigo-700 mb-3">O Modelo OSI (As 7 Camadas)</h3>
-                    <p class="text-sm text-slate-600">
-                        O <b>Modelo OSI</b> divide a rede em 7 etapas. Quem envia o dado começa no topo (A Aplicação/Navegador), onde a mensagem é escrita, e desce até virar eletricidade no cabo (Física). Quem recebe faz o caminho inverso, subindo do cabo até o ecrã.
-                    </p>
+            <h2><i class="fas fa-layer-group"></i> 1. O Modelo OSI (As 7 Camadas)</h2>
+            <p>O Modelo OSI (Open Systems Interconnection) divide o processo complexo de enviar dados pela rede em 7 camadas lógicas. A informação "desce" essas camadas no computador que envia, viaja pelo cabo, e "sobe" as camadas no computador que recebe.</p>
+
+            <div class="osi-stack">
+                <div class="osi-layer">
+                    <span class="osi-num">7</span>
+                    <span class="osi-name">Aplicação</span>
+                    <span class="osi-desc">Interface com o usuário (Navegador, HTTP, DNS, SMTP).</span>
                 </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">Endereço de Casa vs. CPF</h3>
-                    <p class="text-sm text-slate-600">
-                        Sua máquina possui duas identidades fundamentais. O <b>IP</b> é o endereço lógico (muda se você mudar de rede ou de casa). O <b>MAC Address</b> é o endereço físico (gravado de fábrica na placa de rede, funciona como o CPF do componente).
-                    </p>
+                <div class="osi-layer">
+                    <span class="osi-num">6</span>
+                    <span class="osi-name">Apresentação</span>
+                    <span class="osi-desc">Formatação do dado e Criptografia (SSL/TLS, JPEG, MP4).</span>
+                </div>
+                <div class="osi-layer">
+                    <span class="osi-num">5</span>
+                    <span class="osi-name">Sessão</span>
+                    <span class="osi-desc">Abre, mantém e encerra a comunicação entre os dispositivos.</span>
+                </div>
+                <div class="osi-layer" style="border-left-color: var(--accent-green);">
+                    <span class="osi-num">4</span>
+                    <span class="osi-name">Transporte</span>
+                    <span class="osi-desc">Controle de portas e integridade (Protocolos TCP e UDP).</span>
+                </div>
+                <div class="osi-layer" style="border-left-color: var(--accent-gold);">
+                    <span class="osi-num">3</span>
+                    <span class="osi-name">Rede</span>
+                    <span class="osi-desc">Roteamento e Endereçamento Lógico (Endereço IP, Roteadores).</span>
+                </div>
+                <div class="osi-layer" style="border-left-color: #f97316;">
+                    <span class="osi-num">2</span>
+                    <span class="osi-name">Enlace</span>
+                    <span class="osi-desc">Identificação Física na rede local (Endereço MAC, Switches).</span>
+                </div>
+                <div class="osi-layer" style="border-left-color: #ef4444;">
+                    <span class="osi-num">1</span>
+                    <span class="osi-name">Física</span>
+                    <span class="osi-desc">Transmissão bruta de bits (Cabos de Cobre, Fibra, Sinais Elétricos).</span>
                 </div>
             </div>
 
-            <div class="mt-10 p-6 bg-amber-50 rounded-xl border border-amber-100">
-                <p class="text-amber-900 text-sm">
-                    <strong>A Lógica do Tráfego Local:</strong><br>
-                    <em>Roteadores usam o <b>IP</b> para descobrir em qual rua do mundo o dado deve entrar. Mas os Switches (dentro da escola) ignoram o IP e usam apenas o <b>MAC Address</b> para entregar o pacote diretamente na máquina certa.</em>
-                </p>
-            </div>
-        </section>
-
-        <section class="mb-20">
-            <div class="flex items-center mb-10">
-                <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 5a1 1 0 011-1h14a1 1 0 011 1v2a1 1 0 01-1 1H5a1 1 0 01-1-1V5zM4 13a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H5a1 1 0 01-1-1v-6zM16 13a1 1 0 011-1h2a1 1 0 011 1v6a1 1 0 01-1 1h-2a1 1 0 01-1-1v-6z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Resumo Técnico das Camadas Críticas</h2>
-            </div>
-            
-            <div class="grid md:grid-cols-2 gap-8 text-sm">
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 7: Aplicação</h3>
-                    <p class="text-slate-600">Onde o utilizador interage diretamente. Exemplos práticos: o navegador Chrome, o cliente de Email ou a interface de mensagens do WhatsApp.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 4: Transporte</h3>
-                    <p class="text-slate-600">Controla a segurança da entrega dos pedaços de dados. O protocolo <b>TCP</b> garante de forma obstinada que nenhum bit se perca pelo caminho.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 3: Rede (O IP)</h3>
-                    <p class="text-slate-600">Responsável pelo roteamento. É nesta etapa que o cabeçalho ganha o <b>IP de Destino</b>, permitindo mapear a rota de tráfego entre cidades diferentes.</p>
-                </div>
-                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 hover:border-indigo-200 transition-all">
-                    <h3 class="font-bold text-indigo-600 mb-3 text-lg italic">Camada 2: Enlace (O MAC)</h3>
-                    <p class="text-slate-600">Trabalha estritamente dentro do perímetro da rede local (LAN). É o reino dos Switches e do controle de hardware via <b>MAC Address</b>.</p>
-                </div>
-            </div>
-        </section>
-
-        <section class="mb-20">
-            <div class="flex items-center mb-8">
-                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17v-2a4 4 0 00-4-4H3m14 2v2a4 4 0 004 4h2uM12 3v18M3 12h18" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. Mapeamento de Inspeção de Rede</h2>
-            </div>
-
-            <p class="mb-8 text-slate-600 text-lg font-light">
-                O bloco de diagnóstico a seguir demonstra como o protocolo **ARP** mapeia automaticamente os IPs dinâmicos vinculando-os aos seus respectivos nós de hardware (MAC) imutáveis:
-            </p>
-
-            
+            <h2><i class="fas fa-id-card"></i> 2. Endereçamentos: IP vs MAC</h2>
+            <p>Para a rede funcionar (Camadas 2 e 3 do Modelo OSI), todo dispositivo possui dois tipos de endereços fundamentais. Para não confundir, use a regra do CPF e do CEP:</p>
 
             <div class="code-container">
-<pre><code><span class="comment"># =========================================================
-# ANATOMIA DE UM PACOTE DE DADOS EM TRÂNSITO
-# =========================================================</span>
-<span class="tag">[ CABEÇALHO DE ENLACE ]</span> --> MAC Origem: <span class="string">00:1A:2B:3C:4D:5E</span> | MAC Destino: <span class="string">00:1A:2B:99:AA:BB</span>
-<span class="tag">[ CABEÇALHO DE REDE   ]</span> --> IP Origem:  <span class="css-val">192.168.1.15</span>      | IP Destino:  <span class="css-val">192.168.1.254</span>
-<span class="tag">[ DADOS DA MENSAGEM   ]</span> --> Conteúdo encapsulado: <span class="css-selector">"Pedido de acesso ao servidor"</span>
-
 <span class="comment"># =========================================================
-# REGISTO DE TERMINAL: Saída Real do Comando 'arp -a'
+# AS DUAS IDENTIDADES DO COMPUTADOR
 # =========================================================</span>
-Interface: 192.168.1.15 --- 0x3
 
-  <span class="attr">Endereço Internet (IP)</span>   <span class="attr">Endereço Físico (MAC)</span>     <span class="attr">Tipo</span>
-  <span class="css-prop">192.168.1.1</span>              <span class="string">cc-40-d0-88-99-aa</span>         dinâmico   <span class="comment">&lt;-- Gateway/Roteador</span>
-  <span class="css-prop">192.168.1.50</span>             <span class="string">00-11-22-33-44-55</span>         dinâmico   <span class="comment">&lt;-- Impressora de Rede</span>
-  <span class="css-prop">192.168.1.254</span>            <span class="string">00-1a-2b-99-aa-bb</span>         dinâmico   <span class="comment">&lt;-- Servidor Local</span>
-  <span class="css-prop">255.255.255.255</span>          <span class="string">ff-ff-ff-ff-ff-ff</span>         estático   <span class="comment">&lt;-- Endereço de Broadcast</span>
+<span class="tag">Endereço MAC (Media Access Control) - Camada 2:</span>
+> É o <span class="val">"CPF"</span> da máquina. 
+> É físico, gravado de fábrica na placa de rede e <strong>NUNCA</strong> muda.
+> Formato Hexadecimal: 00:1A:2B:3C:4D:5E
 
-<span class="comment"># Nota Técnica: O endereço MAC "ff-ff-ff-ff-ff-ff" é a marca do Broadcast. 
-# Quando uma máquina manda dados para esse destino, todas as placas locais leem o pacote.</span></code></pre>
-            </div>
-        </section>
-
-        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold font-mono">3. Casos de Resolução de Conflitos</h2>
+<span class="tag">Endereço IP (Internet Protocol) - Camada 3:</span>
+> É o <span class="val">"CEP residencial"</span> da máquina.
+> É lógico, configurado pelo roteador. Se você mudar de casa (de rede), seu IP muda.
+> Formato IPv4 Decimal: 192.168.1.15
             </div>
 
-            <p class="mb-10 text-indigo-100 text-lg font-light">Veja abaixo situações reais enfrentadas pelo suporte técnico de TI e a explicação imediata de como as identidades da rede agem:</p>
+            <h2><i class="fas fa-sitemap"></i> 3. A Máscara de Rede, Classes de IP e o CIDR</h2>
+            <p>O Endereço IP sozinho não é capaz de dizer o tamanho da rede ou quem pertence a ela. Para resolver isso, usamos a <strong>Máscara de Sub-rede</strong>.</p>
 
-            <div class="space-y-6 text-indigo-950">
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">A</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">O Mistério do IP Duplicado</h4>
-                        <p class="text-sm text-slate-600 font-medium">Se dois computadores forem configurados manualmente com o mesmíssimo IP (`192.168.1.10`), a rede local entra em colapso momentâneo. O Switch consegue identificar o erro de imediato porque, embora os IPs sejam iguais, as placas de rede possuem **MAC Addresses diferentes**, disparando um alerta de segurança no sistema.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">B</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">Segurança por Filtro Física</h4>
-                        <p class="text-sm text-slate-600 font-medium">Muitas empresas bloqueiam o acesso ao Wi-Fi corporativo usando filtragem por hardware. Mesmo que um invasor descubra a senha do Wi-Fi e tente clonar um IP válido da rede, ele será barrado na Camada 2 (Enlace) caso o seu **MAC Address** não esteja explicitamente cadastrado na lista de permissões do ponto de acesso.</p>
-                    </div>
-                </div>
+            <h3>Para que serve a Máscara de Rede?</h3>
+            <p>Imagine o IP como um endereço completo. A Máscara de Rede atua como um filtro (uma régua) que divide esse endereço IP em duas partes exatas: a parte que identifica a <strong>REDE</strong> (o "bairro") e a parte que identifica o <strong>HOST</strong> (a "casa" ou dispositivo).</p>
+
+            <div class="code-container">
+<span class="comment"># Exemplo Clássico de Rede Doméstica (Classe C)</span>
+IP do PC: <span class="val">192.168.1.50</span>
+Máscara:  <span class="val">255.255.255.0</span>
+
+<span class="comment"># Como o computador lê isso?</span>
+<span class="tag">Onde tem 255:</span> Ele trava a numeração. A rede inteira se chama "192.168.1".
+<span class="tag">Onde tem 0:</span> Ele entende que é livre. Sua máquina específica é a número "50".
             </div>
-        </section>
+
+            <h3>As Classes de IP (O Modelo Antigo)</h3>
+            <p>No início da internet, os IPs foram divididos em "Classes" rígidas para facilitar o trabalho dos roteadores:</p>
+            <ul>
+                <li><strong>Classe A (Máscara 255.0.0.0):</strong> Voltada para redes gigantes, trava apenas o 1º bloco do IP. Permite mais de 16 milhões de computadores numa mesma rede.</li>
+                <li><strong>Classe B (Máscara 255.255.0.0):</strong> Para médias e grandes corporações, trava os 2 primeiros blocos. Permite cerca de 65 mil computadores.</li>
+                <li><strong>Classe C (Máscara 255.255.255.0):</strong> Para residências e pequenas empresas. Trava os 3 primeiros blocos. Permite até 254 computadores conectados.</li>
+            </ul>
+
+            <h3>A Revolução do CIDR (Classless Inter-Domain Routing)</h3>
+            <p>Com o tempo, o modelo de Classes gerava muito desperdício de IPs no mundo. O mercado adotou então o <strong>CIDR</strong> (Roteamento Sem Classes), que permitiu criar máscaras flexíveis. Além disso, o CIDR introduziu uma notação muito mais moderna usando uma barra (<code>/</code>).</p>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-compress-arrows-alt"></i> A Notação CIDR na Prática</strong>
+                <p>Em vez de configurar um equipamento digitando o IP <code>192.168.1.10</code> e depois a máscara <code>255.255.255.0</code>, os técnicos passaram a informar tudo de forma resumida: <strong><code>192.168.1.10/24</code></strong>.</p>
+                <p>O <code>/24</code> significa simplesmente que os primeiros 24 bits da máscara estão ativados (três blocos de 8 bits = 255.255.255). É muito mais ágil!</p>
+            </div>
+
+            <h2><i class="fas fa-exchange-alt"></i> 4. O Protocolo ARP</h2>
+            <p>A comunicação precisa juntar o "CEP" com o "CPF". O <strong>ARP (Address Resolution Protocol)</strong> é o tradutor da rede. Quando o computador sabe o IP de destino, mas não sabe quem é a máquina fisicamente, ele grita (Broadcast) na rede local: <em>"Quem é o dono do IP 192.168.1.50? Me passe o seu endereço MAC!"</em>. Assim que o destino responde, o pacote é enviado diretamente a ele pelo Switch.</p>
+
+            <h2><i class="fas fa-shield-alt"></i> 5. Casos Reais: Resolução de Conflitos</h2>
+            <p>Veja abaixo situações reais enfrentadas pelo suporte técnico de TI e a explicação imediata de como as identidades da rede agem nas soluções de problemas:</p>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-search-location"></i> O Mistério do IP Duplicado</strong>
+                <p>Se dois computadores forem configurados manualmente com o mesmíssimo IP (`192.168.1.10`), a rede local entra em colapso momentâneo. O Switch consegue identificar o erro de imediato porque, embora os IPs sejam iguais, as placas de rede possuem <strong>MAC Addresses diferentes</strong>, disparando um alerta de segurança e de conflito no sistema.</p>
+            </div>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-lock"></i> Segurança por Filtro Físico (MAC Filter)</strong>
+                <p>Muitas empresas bloqueiam o acesso ao Wi-Fi corporativo usando filtragem por hardware. Mesmo que um invasor descubra a senha do Wi-Fi e tente clonar um IP válido da rede, ele será barrado de imediato na Camada 2 (Enlace) caso o seu <strong>MAC Address</strong> não esteja explicitamente cadastrado na "Lista Branca" (Whitelist) de permissões do ponto de acesso.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula2_redes.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula4_redes.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
 
     </main>
-
-    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
-        <p class="max-w-4xl mx-auto">
-            Aula 02 concluída. O endereçamento lógico e físico já não têm segredos para si!<br>
-            A seguir: <strong>Aula 03 — Os Mensageiros Invisíveis (Protocolos de Automação: DHCP e Pilha TCP/IP)</strong>.
-        </p>
-    </footer>
 
 </body>
 </html>
