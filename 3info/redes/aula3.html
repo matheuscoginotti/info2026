@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 03 - Modelo OSI, Endereçamentos, Máscara e ARP</title>
+    <title>Aula 03 - Modelo OSI, Endereçamentos, Portas e Protocolos</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -210,6 +210,32 @@
             color: var(--text-secondary);
         }
 
+        /* Estilo para Tabela de Portas */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+            line-height: 1.5;
+        }
+
+        .tech-table th {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         /* --- Caixas de Destaque --- */
         .highlight-box {
             background: rgba(56, 189, 248, 0.1);
@@ -302,6 +328,7 @@
             .header-spacer { display: none; }
             .osi-layer { flex-direction: column; align-items: flex-start; gap: 5px; }
             .osi-name { min-width: auto; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     </style>
 </head>
@@ -315,7 +342,7 @@
 
     <main class="lesson-container">
         
-        <h1 class="lesson-title">Aula 03: Modelo OSI, Endereçamentos, Máscara e ARP</h1>
+        <h1 class="lesson-title">Aula 03: Modelo OSI, Endereçamentos, Portas e Protocolos</h1>
         <div class="lesson-meta">
             <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
         </div>
@@ -346,7 +373,7 @@
                 <div class="osi-layer" style="border-left-color: var(--accent-green);">
                     <span class="osi-num">4</span>
                     <span class="osi-name">Transporte</span>
-                    <span class="osi-desc">Controle de portas e integridade (Protocolos TCP e UDP).</span>
+                    <span class="osi-desc">Controle de portas lógicas e integridade (Protocolos TCP e UDP).</span>
                 </div>
                 <div class="osi-layer" style="border-left-color: var(--accent-gold);">
                     <span class="osi-num">3</span>
@@ -384,7 +411,61 @@
 > Formato IPv4 Decimal: 192.168.1.15
             </div>
 
-            <h2><i class="fas fa-sitemap"></i> 3. A Máscara de Rede, Classes de IP e o CIDR</h2>
+            <h2><i class="fas fa-door-open"></i> 3. A União Perfeita: Protocolos e Portas Lógicas</h2>
+            <p>Saber o endereço IP de um servidor (o "CEP") e o endereço MAC (o "CPF") não basta se você não souber <strong>qual serviço</strong> deseja acessar dentro daquela máquina. É aqui que entram os <strong>Protocolos</strong> e as <strong>Portas Lógicas</strong> (trabalhando principalmente na Camada 4 - Transporte).</p>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-lightbulb"></i> A Analogia do Prédio Comercial</strong>
+                <p>Imagine que o <strong>Endereço IP</strong> é o endereço de um grande prédio de escritórios na cidade. O pacote de dados chega até a portaria do prédio. Mas como o entregador sabe em qual sala exata ele deve deixar a encomenda? A <strong>Porta Lógica</strong> funciona exatamente como o número da sala ou o ramal dentro daquele prédio!</p>
+            </div>
+
+            <p>O <strong>Protocolo</strong>, por sua vez, é a regra ou o "idioma" que os softwares usam para conversar, e cada protocolo possui uma porta padrão associada:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Protocolo</th>
+                        <th>Função Principal</th>
+                        <th>Porta Padrão</th>
+                        <th>Como funciona em conjunto?</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>HTTP</strong></td>
+                        <td>Navegação web sem criptografia.</td>
+                        <td><code>80</code></td>
+                        <td>Quando você digita um site sem segurança, o navegador bate na porta 80 do servidor IP.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>HTTPS</strong></td>
+                        <td>Navegação web segura e criptografada.</td>
+                        <td><code>443</code></td>
+                        <td>Sites modernos usam criptografia TLS e exigem acesso direto à porta 443.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>DNS</strong></td>
+                        <td>Tradução de nomes de domínios em IPs.</td>
+                        <td><code>53</code></td>
+                        <td>Resolve endereços como <em>google.com</em> para o IP numérico correspondente.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>SSH</strong></td>
+                        <td>Acesso remoto seguro a servidores via terminal.</td>
+                        <td><code>22</code></td>
+                        <td>Permite que administradores gerenciem servidores à distância com criptografia.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-container">
+<span class="comment"># SOBRE PORTAS ALTERNATIVAS (EX: 8080)</span>
+Embora o HTTP utilize nativamente a porta 80, ambientes de desenvolvimento ou servidores locais 
+(como o XAMPP ou Tomcat) frequentemente utilizam a porta <span class="val">8080</span> como alternativa 
+para evitar conflitos de permissão ou de portas no sistema operacional!
+            </div>
+
+            <h2><i class="fas fa-sitemap"></i> 4. A Máscara de Rede, Classes de IP e o CIDR</h2>
             <p>O Endereço IP sozinho não é capaz de dizer o tamanho da rede ou quem pertence a ela. Para resolver isso, usamos a <strong>Máscara de Sub-rede</strong>.</p>
 
             <h3>Para que serve a Máscara de Rede?</h3>
@@ -417,10 +498,10 @@ Máscara:  <span class="val">255.255.255.0</span>
                 <p>O <code>/24</code> significa simplesmente que os primeiros 24 bits da máscara estão ativados (três blocos de 8 bits = 255.255.255). É muito mais ágil!</p>
             </div>
 
-            <h2><i class="fas fa-exchange-alt"></i> 4. O Protocolo ARP</h2>
+            <h2><i class="fas fa-exchange-alt"></i> 5. O Protocolo ARP</h2>
             <p>A comunicação precisa juntar o "CEP" com o "CPF". O <strong>ARP (Address Resolution Protocol)</strong> é o tradutor da rede. Quando o computador sabe o IP de destino, mas não sabe quem é a máquina fisicamente, ele grita (Broadcast) na rede local: <em>"Quem é o dono do IP 192.168.1.50? Me passe o seu endereço MAC!"</em>. Assim que o destino responde, o pacote é enviado diretamente a ele pelo Switch.</p>
 
-            <h2><i class="fas fa-shield-alt"></i> 5. Casos Reais: Resolução de Conflitos</h2>
+            <h2><i class="fas fa-shield-alt"></i> 6. Casos Reais: Resolução de Conflitos</h2>
             <p>Veja abaixo situações reais enfrentadas pelo suporte técnico de TI e a explicação imediata de como as identidades da rede agem nas soluções de problemas:</p>
 
             <div class="highlight-box warning">
