@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 05 - Fontes de Alimentação e Eficiência Energética</title>
+    <title>Aula 06 - Placas de Vídeo e Processamento Gráfico</title>
     <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -170,7 +170,7 @@
             border-left: 4px solid var(--accent-blue);
             padding: 1.5rem;
             border-radius: 0 8px 8px 0;
-            margin: da2rem 0;
+            margin: 2rem 0;
         }
 
         .highlight-box.warning {
@@ -230,7 +230,6 @@
         }
         
         .tech-table th, .tech-table td {
-            path: 1rem;
             padding: 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-tech);
@@ -300,75 +299,76 @@
 
     <main class="lesson-container">
         
-        <h1 class="lesson-title">Aula 05: Fontes de Alimentação e Eficiência Energética</h1>
+        <h1 class="lesson-title">Aula 06: Placas de Vídeo (GPU) e Processamento Gráfico</h1>
         <div class="lesson-meta">
             <i class="far fa-calendar-alt"></i> Módulo Adicional • Professor: Matheus M. Coginotti
         </div>
 
         <div class="content">
             
-            <p>Enquanto os componentes internos processam dados e armazenam arquivos, a <strong>Fonte de Alimentação (PSU - Power Supply Unit)</strong> é o coração que bombeia energia para todo o sistema. Tratar a fonte como um mero "fio de tomada avançado" é um dos erros mais graves que um técnico pode cometer.</p>
+            <p>Se o processador (CPU) foi feito para resolver problemas complexos um de cada vez com altíssima velocidade, a <strong>Placa de Vídeo (GPU - Graphics Processing Unit)</strong> foi projetada com uma mentalidade totalmente oposta: possui milhares de núcleos menores focados em realizar <strong>milhares de cálculos matemáticos idênticos em paralelo</strong> ao mesmo tempo.</p>
 
-            <h2><i class="fas fa-bolt"></i> 1. A Função Crítica da Fonte</h2>
-            <p>A energia que sai da tomada da sua casa é em **Corrente Alternada (AC)**, oscilando em alta frequência (110V ou 220V). No entanto, os componentes sensíveis do computador (como o processador, a placa de vídeo e a placa-mãe) exigem **Corrente Contínua (DC)** limpa, estável e dividida em voltagens específicas (principalmente +12V, +5V e +3.3V). A fonte é o equipamento responsável por fazer essa conversão com precisão cirúrgica.</p>
+            <h2><i class="fas fa-display"></i> 1. CPU vs. GPU: A Divisão de Trabalho</h2>
+            <p>Enquanto a CPU gerencia o sistema operacional, abre aplicativos e dita a lógica principal dos programas, a GPU é especialista em transformar dados brutos em imagens tridimensionais na tela. Desenhar polígonos, aplicar texturas, calcular iluminação realista e sombras exige um poder massivo de processamento matemático paralelo, tarefa onde a GPU reina absoluta.</p>
 
-            <h2><i class="fas fa-shield-alt"></i> 2. O Perigo das Fontes Genéricas</h2>
-            <p>No mercado de informática, existem as chamadas "fontes genéricas" baratas e as fontes de qualidade com proteções reais. As fontes ruins não possuem circuitos de filtragem adequados e frequentemente entregam tensões oscilantes.</p>
-
-            <div class="highlight-box danger">
-                <strong><i class="fas fa-exclamation-triangle"></i> O Risco de Queima Total</strong>
-                <p>Uma fonte de baixa qualidade sem proteções contra curto-circuito (SCP), sobretensão (OVP) ou sobrecorrente (OCP) pode queimar em um único pico de energia da rede elétrica, levando junto com ela a placa-mãe, o processador e a placa de vídeo do usuário. Economizar na fonte é o caminho mais rápido para o prejuízo total.</p>
-            </div>
-
-            <h2><i class="fas fa-certificate"></i> 3. Certificação 80 Plus e Eficiência Energética</h2>
-            <p>A certificação <strong>80 Plus</strong> mede o nível de eficiência energética da fonte. Ela garante que o equipamento converta a energia da tomada com pelo menos 80% de aproveitamento, transformando o restante em calor de forma controlada.</p>
+            <h2><i class="fas fa-microchip"></i> 2. Os Pilares Técnicos de uma Placa de Vídeo</h2>
+            <p>Ao avaliar uma placa de vídeo dedicada (seja para jogos, edição de vídeo ou IA), os técnicos e entusiastas olham atentamente para as seguintes especificações:</p>
 
             <table class="tech-table">
                 <thead>
                     <tr>
-                        <th>Selo 80 Plus</th>
-                        <th>Eficiência Média (sob carga)</th>
-                        <th>Nível de Qualidade e Aplicação</th>
+                        <th>Especificação</th>
+                        <th>Termo / Unidade</th>
+                        <th>O que isso define no desempenho?</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td><h3>White / Standard</h3></td>
-                        <td>Aprox. 80% a 85%</td>
-                        <td>O nível básico aceitável para computadores de entrada e escritórios simples.</td>
+                        <td><h3>VRAM (Memória de Vídeo)</h3></td>
+                        <td>GB (Gigabytes, ex: 8GB, 12GB, 16GB)</td>
+                        <td>A memória RAM dedicada exclusivamente à placa de vídeo. Guarda texturas de jogos, modelos 3D e quadros de vídeo em alta resolução. Se faltar VRAM, o jogo sofre travamentos severos de "stuttering".</td>
                     </tr>
                     <tr>
-                        <td><h3>Bronze</h3></td>
-                        <td>Aprox. 82% a 88%</td>
-                        <td>Excelente custo-benefício para máquinas intermediárias e PCs gamers básicos.</td>
+                        <td><h3>CUDA Cores / Stream Processors</h3></td>
+                        <td>Quantidade de núcleos</td>
+                        <td>Os microprocessadores paralelos internos da GPU. Quanto mais núcleos ela possuir, maior será sua capacidade de renderização simultânea.</td>
                     </tr>
                     <tr>
-                        <td><h3>Gold</h3></td>
-                        <td>Aprox. 87% a 92%</td>
-                        <td>Padrão de alta qualidade, recomendado para setups avançados e estações de trabalho de alto desempenho.</td>
+                        <td><h3>Clock de Boost</h3></td>
+                        <td>MHz ou GHz</td>
+                        <td>A frequência máxima que os núcleos da placa conseguem atingir quando exigidos sob carga pesada e com boa refrigeração.</td>
                     </tr>
                     <tr>
-                        <td><h3>Platinum / Titanium</h3></td>
-                        <td>Aprox. 90% a 94%+</td>
-                        <td>O ápice da engenharia elétrica, voltado para servidores de grande porte e entusiastas extremos.</td>
+                        <td><h3>Interface de Memória (Bus Width)</h3></td>
+                        <td>Bits (ex: 128-bit, 192-bit, 256-bit)</td>
+                        <td>A "largura da estrada" que liga a GPU à sua VRAM. Uma interface maior permite transportar muito mais dados por ciclo.</td>
                     </tr>
                 </tbody>
             </table>
 
-            <h2><i class="fas fa-plug"></i> 4. Tecnologias Importantes: PFC Ativo</h2>
-            <p>Antigamente, as fontes baratas possuíam uma chavinha seletora manual atrás (110V / 220V). Se o usuário esquecesse a chave em 110V e ligasse na tomada de 220V, a fonte explodia instantaneamente.</p>
+            <h2><i class="fas fa-bolt"></i> 3. O Consumo Energético e Conexões</h2>
+            <p>As placas de vídeo modernas de alto desempenho puxam tanta energia que frequentemente consomem mais eletricidade do que o resto do computador inteiro somado. Por isso, exigem cabos de alimentação dedicados vindos diretamente da fonte (conectores PCIe de 8 pinos ou o novo padrão 12VHPWR).</p>
+
+            <div class="code-container">
+<span class="comment"># GRÁFICOS INTEGRADOS vs. PLACA DE VÍDEO DEDICADA</span>
+- Integrada (On-board): Fica embutida no próprio processador (ex: Intel Iris Xe ou AMD Radeon Vega). Usa um pedaço da RAM do sistema. Perfeita para escritório, estudos e tarefas leves.
+- Dedicada (Off-board): Uma placa física separada espetada no slot PCI-Express da placa-mãe, com seu próprio circuito elétrico, refrigeração e VRAM independente. Indispensável para jogos pesados, modelagem 3D e Inteligência Artificial.
+            </div>
+
+            <h2><i class="fas fa-lightbulb"></i> 4. O Papel Atual da GPU na Inteligência Artificial</h2>
+            <p>Nos últimos anos, a arquitetura paralela das GPUs deixou de ser importante apenas para jogos e passou a sustentar a revolução tecnológica mundial. O treinamento de grandes modelos de linguagem (como os sistemas de Inteligência Artificial) depende inteiramente da capacidade das GPUs de processar matrizes matemáticas em escala massiva.</p>
 
             <div class="highlight-box success">
-                <strong><i class="fas fa-check-circle"></i> O Padrão Moderno: PFC Ativo (Power Factor Correction)</strong>
-                <p>As fontes modernas possuem <strong>PFC Ativo</strong> com faixa universal (bivolt automático de 100V a 240V). Ela ajusta a tensão de entrada automaticamente, protege contra oscilações severas da rede elétrica e garante um fator de potência próximo de 1, otimizando o consumo de energia da casa e dispensando o uso de estabilizadores (que hoje em dia prejudicam mais do que ajudam as fontes modernas).</p>
+                <strong><i class="fas fa-shield-alt"></i> Dica de Manutenção Preventiva em GPUs</strong>
+                <p>As placas de vídeo são os componentes que mais geram calor em um PC. Fique atento à troca periódica de pasta térmica e aos pads térmicos das memórias da placa caso o usuário perceba temperaturas subindo acima de 85°C sob carga contínua.</p>
             </div>
 
         </div>
 
         <!-- Navegação -->
         <div class="lesson-nav">
-            <a href="aula4.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
-            <a href="aula6.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+            <a href="aula5.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula7.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
         </div>
 
     </main>
