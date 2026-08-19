@@ -1,33 +1,26 @@
-
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redes, Segurança da Informação e Internet das Coisas - Aulas</title>
-    <!-- Adicionando Cinzel Decorative para o toque mágico -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;700&display=swap" rel="stylesheet">
+    <title>Trilha de Aulas - Redes e IoT</title>
+    <link href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;600;700&family=Rajdhani:wght@500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* Paleta Magitech Light (Suave e Tecnológica) */
-            --bg-color: #f8fafc; /* Branco Gelo/Prata Suave */
-            --grid-color: rgba(14, 165, 233, 0.1); /* Azul sutil para o grid */
+            /* Paleta Dark Tech (Padrão 3info/Enfermagem) */
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --border-tech: rgba(148, 163, 184, 0.3);
             
-            /* Cores dos nós/aulas */
-            --node-bg: rgba(255, 255, 255, 0.85); /* Vidro branco */
-            --node-border: #cbd5e1; /* Cinza claro */
-            --node-hover: rgba(224, 242, 254, 0.8);
-            
-            /* Textos e Detalhes */
-            --text-primary: #334155; /* Cinza Escuro para leitura */
-            --text-secondary: #64748b;
-            
-            /* Acentos */
-            --accent-gold: #d97706; /* Dourado âmbar (mais escuro para contraste) */
-            --accent-cyan: #0284c7; /* Azul celeste sólido */
-            --accent-locked: #94a3b8;
+            /* Específicos do Mapa */
+            --grid-color: rgba(56, 189, 248, 0.05);
+            --node-bg: rgba(15, 23, 42, 0.7);
         }
 
         * {
@@ -49,7 +42,7 @@
             padding-bottom: 80px;
         }
 
-        /* --- Fundo Cibernético Suave --- */
+        /* --- Fundo Cibernético --- */
         body::before {
             content: '';
             position: fixed;
@@ -69,8 +62,8 @@
         }
 
         @keyframes grid-pulse {
-            0% { opacity: 0.5; }
-            100% { opacity: 0.9; }
+            0% { opacity: 0.4; }
+            100% { opacity: 0.8; }
         }
 
         /* --- Foguetes (Background) --- */
@@ -84,58 +77,83 @@
         .rocket {
             position: absolute;
             bottom: -50px;
-            color: var(--accent-cyan);
+            color: var(--accent-blue);
             font-size: 1.5rem;
-            opacity: 0.4; /* Mais sutil no fundo claro */
-            filter: drop-shadow(0 0 2px var(--accent-cyan));
+            opacity: 0.15;
+            filter: drop-shadow(0 0 5px var(--accent-blue));
             animation: flyUp linear forwards;
         }
 
         @keyframes flyUp { to { transform: translateY(-120vh); opacity: 0; } }
 
+        /* --- Barra Superior Fixo --- */
+        .top-bar {
+            width: 100%;
+            padding: 1.5rem 20px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
         /* --- Header --- */
         header {
             text-align: center;
-            margin: 5rem 0 4rem;
+            margin: 6rem 0 4rem;
             z-index: 2;
-            position: relative;
-        }
-
-        h1 {
-            font-family: 'Cinzel Decorative', cursive;
-            font-size: 4rem;
-            font-weight: 700;
-            letter-spacing: 2px;
-            
-            /* Gradiente Adaptado para Fundo Claro (Ouro -> Cinza Escuro -> Azul) */
-            background: linear-gradient(90deg, #b45309 0%, #1e293b 50%, #0284c7 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            
-            /* Sombra mais suave */
-            text-shadow: 0 4px 10px rgba(0,0,0,0.1);
             position: relative;
             padding: 0 20px;
         }
-        
+
+        h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-shadow: 0 0 15px rgba(56, 189, 248, 0.3);
+            text-transform: uppercase;
+            position: relative;
+        }
+
         h1::after {
             content: '';
             position: absolute;
-            bottom: -15px;
+            bottom: -10px;
             left: 50%;
             transform: translateX(-50%);
             width: 150px;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent-gold), transparent);
-            opacity: 0.6;
+            opacity: 0.8;
         }
 
         .subtitle {
-            color: var(--accent-cyan);
+            color: var(--accent-gold);
             font-family: 'Rajdhani', sans-serif;
-            letter-spacing: 6px;
+            letter-spacing: 4px;
             text-transform: uppercase;
-            font-size: 0.9rem;
+            font-size: 1.1rem;
             margin-top: 20px;
             font-weight: 600;
         }
@@ -159,14 +177,13 @@
             position: relative;
         }
 
-        /* Botão Principal */
+        /* Botão Octogonal */
         .lesson-btn {
             width: 85px;
             height: 85px;
             background: var(--node-bg);
-            border: 1px solid var(--node-border);
+            border: 1px solid var(--border-tech);
             clip-path: polygon(15% 0, 85% 0, 100% 15%, 100% 85%, 85% 100%, 15% 100%, 0 85%, 0 15%);
-            
             display: flex;
             justify-content: center;
             align-items: center;
@@ -176,10 +193,9 @@
             text-decoration: none;
             color: var(--text-primary);
             backdrop-filter: blur(8px);
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05); /* Sombra sutil para profundidade */
         }
 
-        /* Número */
+        /* Número da Aula */
         .lesson-number {
             font-family: 'Chakra Petch', sans-serif;
             font-size: 2rem;
@@ -187,22 +203,22 @@
             z-index: 2;
         }
 
-        /* Ícone de Status */
+        /* Ícone de Status (Cadeado/Check) */
         .status-badge {
             position: absolute;
             bottom: -8px;
-            background: #fff;
-            border: 1px solid var(--node-border);
-            width: 24px;
-            height: 24px;
+            background: var(--bg-color);
+            border: 1px solid var(--border-tech);
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
-            color: var(--accent-locked);
+            font-size: 0.75rem;
+            color: var(--text-secondary);
             z-index: 3;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
         }
 
         /* --- Estados --- */
@@ -210,34 +226,33 @@
         /* Hover */
         .lesson-btn:hover {
             transform: translateY(-5px);
-            background: #fff;
-            border-color: var(--accent-cyan);
-            box-shadow: 0 10px 25px rgba(14, 165, 233, 0.15);
-            color: var(--accent-cyan);
+            background: var(--card-bg);
+            border-color: var(--accent-blue);
+            box-shadow: inset 0 0 15px rgba(56, 189, 248, 0.2);
+            color: var(--accent-blue);
         }
 
         /* Acessado (Completado) */
         .lesson-item.accessed .lesson-btn {
             border-color: var(--accent-gold);
             color: var(--accent-gold);
-            background: #fff;
-            box-shadow: 0 4px 10px rgba(217, 119, 6, 0.1);
+            background: rgba(212, 175, 55, 0.1);
         }
         
         .lesson-item.accessed .status-badge {
-            color: #fff;
+            color: var(--bg-color);
             background: var(--accent-gold);
             border-color: var(--accent-gold);
         }
 
         .lesson-item.accessed .lesson-btn:hover {
-             box-shadow: 0 10px 25px rgba(217, 119, 6, 0.2);
+            box-shadow: inset 0 0 15px rgba(212, 175, 55, 0.3);
         }
 
-        /* --- Texto Informativo --- */
+        /* --- Texto Informativo (Online Agora / Há 2 dias) --- */
         .access-info {
-            margin-top: 12px;
-            font-size: 0.75rem; /* Levemente maior para ler no claro */
+            margin-top: 15px;
+            font-size: 0.8rem;
             color: var(--text-secondary);
             font-family: 'Chakra Petch', sans-serif;
             text-transform: uppercase;
@@ -251,12 +266,12 @@
         }
 
         .lesson-item.accessed .access-info {
-            opacity: 1; /* Totalmente visível no tema claro */
+            opacity: 1;
             transform: translateY(0);
             color: var(--accent-gold);
         }
 
-        /* --- Conectores --- */
+        /* --- Conectores entre os Nós --- */
         .lesson-item:not(:nth-child(4n))::after {
             content: '';
             position: absolute;
@@ -264,14 +279,15 @@
             top: 42px;
             width: 2rem;
             height: 2px;
-            background: linear-gradient(90deg, var(--node-border) 0%, var(--node-border) 50%, transparent 100%);
+            background: linear-gradient(90deg, var(--border-tech) 0%, var(--border-tech) 50%, transparent 100%);
             z-index: -1;
             opacity: 0.5;
+            transition: all 0.3s ease;
         }
 
         .lesson-item.accessed:not(:nth-child(4n))::after {
             background: var(--accent-gold);
-            opacity: 0.8;
+            opacity: 0.6;
         }
 
         /* Responsividade Mobile */
@@ -280,7 +296,7 @@
                 grid-template-columns: repeat(2, 1fr);
                 gap: 2rem;
             }
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.2rem; }
             
             .lesson-item:not(:nth-child(4n))::after { display: none; }
             
@@ -291,7 +307,7 @@
                 top: 42px;
                 width: 2rem;
                 height: 2px;
-                background: var(--node-border);
+                background: var(--border-tech);
                 display: block;
             }
             
@@ -305,9 +321,13 @@
 
     <div class="rocket-bg" id="rocketContainer"></div>
 
+    <div class="top-bar">
+        <a href="menu_3info.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+    </div>
+
     <header>
         <h1>Redes, Segurança da Informação e Internet das Coisas</h1>
-        <div class="subtitle">Protocolo de Aprendizagem</div>
+        <div class="subtitle">Trilha de Aprendizagem</div>
     </header>
 
     <div class="lesson-map" id="lessonMap"></div>
@@ -315,7 +335,8 @@
     <script>
         // Configurações
         const TOTAL_LESSONS = 30;
-        const STORAGE_KEY_PREFIX = 'iw1_lesson_';
+        // Chave exclusiva para não dar conflito com o projeto de Enfermagem
+        const STORAGE_KEY_PREFIX = '3info_redes_lesson_';
 
         const mapContainer = document.getElementById('lessonMap');
 
@@ -335,6 +356,7 @@
         }
 
         function accessLesson(lessonId) {
+            // Salva o progresso no navegador
             localStorage.setItem(STORAGE_KEY_PREFIX + lessonId, Date.now());
             renderLessons();
             
@@ -356,7 +378,7 @@
                 lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
 
                 lessonItem.innerHTML = `
-                    <a href="#" class="lesson-btn" onclick="accessLesson(${i})">
+                    <a href="#" class="lesson-btn" onclick="accessLesson(${i}); return false;">
                         <span class="lesson-number">${i}</span>
                         <div class="status-badge">
                             <i class="fas ${hasAccess ? 'fa-check' : 'fa-lock'}"></i>
@@ -369,7 +391,7 @@
             }
         }
 
-        // Foguetes Tecnológicos
+        // Foguetes Tecnológicos (Sutis no Background)
         function createRocket() {
             const container = document.getElementById('rocketContainer');
             const rocket = document.createElement('i');
@@ -384,13 +406,13 @@
             const size = (Math.random() * 1.2 + 0.8) + 'rem';
             rocket.style.fontSize = size;
             
-            rocket.style.animationDuration = (Math.random() * 8 + 4) + 's';
+            rocket.style.animationDuration = (Math.random() * 8 + 6) + 's';
             container.appendChild(rocket);
-            setTimeout(() => { rocket.remove(); }, 12000);
+            setTimeout(() => { rocket.remove(); }, 14000);
         }
 
         renderLessons();
-        setInterval(createRocket, 1500);
+        setInterval(createRocket, 2000);
 
     </script>
 </body>
