@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 01 - Placa-Mãe, Fatores de Forma, Fan e Cooler</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Estilo para Tabela */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+            line-height: 1.5;
+        }
+
+        .tech-table th {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../hardware.html#" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Hardware e Manutenção</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 01: Placa-Mãe, Fatores de Forma, Fan e Cooler</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo Adicional • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Para entender de computadores de verdade, precisamos começar pelo componente que une todas as peças físicas em uma única central de comunicação: a <strong>Placa-Mãe</strong> (Motherboard). É sobre ela que encaixamos o cérebro da máquina, as memórias, as placas de expansão e por onde viaja toda a energia e os dados.</p>
+
+            <h2><i class="fas fa-motherboard"></i> 1. A Placa-Mãe e os Fatores de Forma</h2>
+            <p>O <strong>Fator de Forma</strong> define o tamanho físico da placa-mãe, a disposição dos seus componentes e o tipo de gabinete compatível com ela. Os principais padrões do mercado são:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Padrão</th>
+                        <th>Tamanho Aproximado</th>
+                        <th>Principais Características</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><h3>ATX</h3></td>
+                        <td>305 x 244 mm</td>
+                        <td>O formato padrão mais popular. Possui bastante espaço, múltiplos slots PCI-Express e muitas portas de expansão.</td>
+                    </tr>
+                    <tr>
+                        <td><h3>Micro-ATX (mATX)</h3></td>
+                        <td>244 x 244 mm</td>
+                        <td>Um pouco menor que a ATX, excelente custo-benefício. Cabe na maioria dos gabinetes intermediários e atende a 90% dos usuários.</td>
+                    </tr>
+                    <tr>
+                        <td><h3>Mini-ITX</h3></td>
+                        <td>170 x 170 mm</td>
+                        <td>Super compacta, ideal para PCs de pequeno porte (SFF) e salas de estar, exigindo cuidado com o calor interno.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><i class="fas fa-wind"></i> 2. A Diferença Fundamental: Fan vs. Cooler</h2>
+            <p>No dia a dia do suporte técnico e nas lojas de informática, é muito comum as pessoas confundirem esses dois termos. No entanto, tecnicamente eles têm funções e estruturas diferentes:</p>
+
+            <ul>
+                <li><strong>Fan (Ventoinha):</strong> É apenas a hélice rotativa com motor elétrico. Sua função isolada é empurrar ou puxar o ar (ex: as ventoinhas que parafusamos na frente ou atrás do gabinete para renovar o ar interno).</li>
+                <li><strong>Cooler (Sistema de Arrefecimento Completo):</strong> É um conjunto térmico que engloba o bloco metálico de dissipação (geralmente feito de alumínio ou cobre com aletas) acoplado a uma ou mais ventoinhas (fans). O cooler do processador, por exemplo, absorve o calor do chip através da base metálica e a fan o dissipa para o ambiente.</li>
+            </ul>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-lightbulb"></i> Regra de Ouro do Técnico</strong>
+                <p>Lembre-se: todo cooler possui uma fan, mas nem toda fan é um cooler. A escolha correta e o dimensionamento do sistema de refrigeração evitam o superaquecimento e garantem que o computador não sofra perda de desempenho por travamento térmico (thermal throttling).</p>
+            </div>
+
+            <h2><i class="fas fa-microchip"></i> 3. Chipsets e Sockets</h2>
+            <p>A placa-mãe também define duas características vitais para a compatibilidade de hardware:</p>
+            <ul>
+                <li><strong>Socket (Soquete):</strong> É o encaixe físico na placa-mãe onde o processador (CPU) é inserido. Os pinos e o formato mudam conforme a geração e a marca (Intel vs. AMD). Um processador moderno simplesmente não encaixa em um socket antigo.</li>
+                <li><strong>Chipset:</strong> É o "diretor de trânsito" da placa-mãe (geralmente representado por um chip principal coberto por um dissipador). Ele controla a comunicação entre o processador, a memória RAM e os dispositivos de alta velocidade conectados aos slots.</li>
+            </ul>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <div></div>
+            <a href="aula2.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
