@@ -131,11 +131,13 @@
             font-family: 'Rajdhani', sans-serif;
             font-size: 2rem;
             color: var(--accent-blue);
-            margin-top: 3rem;
+            margin-top: 3.5rem;
             margin-bottom: 1rem;
             display: flex;
             align-items: center;
             gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
         }
 
         .content h3 {
@@ -156,7 +158,7 @@
         }
 
         .content li {
-            margin-bottom: 0.5rem;
+            margin-bottom: 0.8rem;
         }
 
         /* --- Caixas de Destaque --- */
@@ -206,6 +208,31 @@
         .code-container .tag { color: #569cd6; font-weight: bold; }
         .code-container .val { color: #4fc1ff; }
 
+        /* Estilo para Tabela de Comparação (Fibra) */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+        }
+
+        .tech-table th {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
         /* --- Botões de Navegação Inferior --- */
         .lesson-nav {
             display: flex;
@@ -246,13 +273,13 @@
             .lesson-nav { flex-direction: column; gap: 1rem; }
             .btn-nav { justify-content: center; }
             .header-spacer { display: none; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
         }
     </style>
 </head>
 <body>
 
     <header>
-        <!-- Link de voltar apontando para o mapa da trilha -->
         <a href="trilha_redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
         <h1>Informática para Internet</h1>
         <div class="header-spacer"></div>
@@ -260,7 +287,7 @@
 
     <main class="lesson-container">
         
-        <h1 class="lesson-title">Aula 02: Abrangência, Meio Físico e Velocidades</h1>
+        <h1 class="lesson-title">Aula 02: Abrangência, Meios Físicos e Velocidades</h1>
         <div class="lesson-meta">
             <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
         </div>
@@ -269,49 +296,45 @@
             
             <div class="highlight-box success">
                 <strong><i class="fas fa-globe"></i> A Origem de Tudo: ARPANET</strong>
-                <p>Na década de 1960, em plena Guerra Fria, as forças militares dos EUA precisavam de uma rede que não parasse de funcionar caso um dos nós fosse bombardeado. Assim nasceu a ARPANET, o projeto ancestral que fragmentou os dados e deu origem à arquitetura da internet que usamos hoje.</p>
+                <p>Na década de 1960, em plena Guerra Fria, as forças militares dos EUA precisavam de uma rede que não parasse de funcionar caso um dos nós fosse bombardeado. Assim nasceu a ARPANET, o projeto ancestral que fragmentou os dados e deu origem à arquitetura da internet descentralizada que usamos hoje.</p>
             </div>
 
             <h2><i class="fas fa-expand-arrows-alt"></i> 1. Abrangência Geográfica (Nomenclaturas)</h2>
-            <p>As redes de computadores são classificadas pelo seu tamanho e pela distância geográfica que conseguem cobrir. A nomenclatura oficial segue esta escala de crescimento:</p>
+            <p>As redes de computadores são classificadas pelo seu tamanho e pela distância geográfica que conseguem cobrir:</p>
             
             <ul>
-                <li><strong>PAN (Personal Area Network):</strong> Rede de uso pessoal. Curto alcance (alguns metros). Exemplo: Conexão via Bluetooth entre seu fone de ouvido sem fio e seu celular, ou um Smartwatch.</li>
-                <li><strong>LAN (Local Area Network):</strong> Rede local. Cobre uma área física pequena. Exemplo: A rede Wi-Fi da sua casa, ou a rede cabeada do laboratório de informática da ETEC.</li>
-                <li><strong>MAN (Metropolitan Area Network):</strong> Rede metropolitana. Conecta várias LANs dentro de uma mesma cidade ou região metropolitana. Exemplo: A rede que interliga o campus central de uma universidade aos seus polos em outros bairros.</li>
+                <li><strong>PAN (Personal Area Network):</strong> Rede de uso pessoal. Curto alcance (alguns metros). Exemplo: Conexão via Bluetooth entre seu fone de ouvido sem fio e seu celular.</li>
+                <li><strong>LAN (Local Area Network):</strong> Rede local. Cobre uma área física pequena, como uma residência ou prédio. Exemplo: A rede Wi-Fi da sua casa, ou a rede cabeada do laboratório da ETEC.</li>
+                <li><strong>MAN (Metropolitan Area Network):</strong> Rede metropolitana. Conecta várias LANs dentro de uma mesma cidade. Exemplo: A rede que interliga o campus central de uma universidade aos seus polos em outros bairros.</li>
                 <li><strong>WAN (Wide Area Network):</strong> Rede de longa distância. Quebra barreiras geográficas unindo continentes inteiros. Exemplo: A própria Internet.</li>
             </ul>
 
             <h2><i class="fas fa-tachometer-alt"></i> 2. Bits vs. Bytes (Velocidade do Link)</h2>
-            <p>Na área de TI, confundir Bits com Bytes gera grandes problemas de dimensionamento de rede. Entenda a matemática por trás da velocidade que você contrata no seu provedor de internet:</p>
+            <p>Na área de TI, confundir Bits com Bytes gera problemas graves no planejamento de redes. Entenda a matemática por trás da velocidade contratada no provedor:</p>
 
             <div class="code-container">
 <span class="comment"># =========================================================
 # O CÁLCULO REAL DA SUA INTERNET
 # =========================================================</span>
 
-A OPERADORA VENDE EM:   <span class="tag">Megabits (Mbps)</span>  --> Representa o pulso elétrico no cabo (bit = b minúsculo).
+A OPERADORA VENDE EM:   <span class="tag">Megabits (Mbps)</span>  --> Representa o pulso elétrico (bit = b minúsculo).
 O SEU HD GRAVA EM:      <span class="tag">MegaBytes (MB/s)</span> --> Representa o dado físico (Byte = B maiúsculo).
 
 <span class="comment"># REGRA MATEMÁTICA: 1 Byte equivale a 8 bits.</span>
 Para saber a velocidade real de download, divida o valor do seu plano por 8:
 
-Plano de <span class="val">100 Mbps</span> ──(÷ 8)──> Download máximo teórico de <span class="val">12.5 MB/s</span>
-Plano de <span class="val">400 Mbps</span> ──(÷ 8)──> Download máximo teórico de <span class="val">50.0 MB/s</span>
-Plano de <span class="val">1 Gbps</span>   ──(÷ 8)──> Download máximo teórico de <span class="val">125.0 MB/s</span>
+Plano de <span class="val">100 Mbps</span> ──(÷ 8)──> Download máximo de <span class="val">12.5 MB/s</span>
+Plano de <span class="val">400 Mbps</span> ──(÷ 8)──> Download máximo de <span class="val">50.0 MB/s</span>
             </div>
 
-            <h2><i class="fas fa-plug"></i> 3. O Meio Físico: Cabos de Par Trançado</h2>
-            <p>Apesar do Wi-Fi dominar os dispositivos móveis, a espinha dorsal de qualquer infraestrutura robusta ainda é o cabo de cobre. O padrão mundial de mercado é o <strong>Cabo de Par Trançado</strong> (Twisted Pair), que enrola os fios internamente para cancelar interferências magnéticas.</p>
-
-            <h3>Tipos de Blindagem</h3>
+            <h2><i class="fas fa-plug"></i> 3. Meio Físico em Cobre: Par Trançado e Coaxial</h2>
+            
+            <h3>Cabo de Par Trançado (Twisted Pair)</h3>
+            <p>A espinha dorsal das redes locais LAN. Os fios internos são enrolados em pares para cancelar interferências eletromagnéticas causadas pelos cabos vizinhos (crosstalk).</p>
             <ul>
-                <li><strong>UTP (Unshielded Twisted Pair):</strong> Cabo sem blindagem. Mais barato, flexível e usado em 90% das redes domésticas e escritórios comuns.</li>
-                <li><strong>STP (Shielded Twisted Pair):</strong> Cabo com blindagem metálica interna. Obrigatório em indústrias e fábricas, onde motores elétricos pesados geram um ruído magnético que destruiria os dados de um cabo UTP comum.</li>
+                <li><strong>UTP (Unshielded Twisted Pair):</strong> Cabo sem blindagem. Usado em 90% das redes domésticas e escritórios comuns.</li>
+                <li><strong>STP (Shielded Twisted Pair):</strong> Cabo com blindagem metálica interna. Obrigatório em indústrias, fábricas ou locais onde motores elétricos pesados geram muito ruído magnético.</li>
             </ul>
-
-            <h3>Categorias de Cabeamento (Cat)</h3>
-            <p>A categoria define a frequência de operação e a velocidade suportada pelo cabo de rede. As mais relevantes atualmente são a <strong>Cat5e</strong> (suporta até 1 Gbps) e a <strong>Cat6 / Cat6a</strong> (suportam de 1 a 10 Gbps).</p>
 
             <div class="highlight-box">
                 <strong><i class="fas fa-plus-circle"></i> O Separador Interno do Cat6</strong>
@@ -320,8 +343,49 @@ Plano de <span class="val">1 Gbps</span>   ──(÷ 8)──> Download máximo 
 
             <div class="highlight-box warning">
                 <strong><i class="fas fa-exclamation-triangle"></i> O Limite dos 100 Metros</strong>
-                <p>A eletricidade perde força à medida que viaja pelo cobre. Por isso, as normas internacionais determinam que um cabo de rede par trançado só consegue carregar dados com perfeita integridade por no máximo <strong>100 metros</strong>. Passou disso, o sinal enfraquece tanto que os computadores deixam de se entender (fenômeno conhecido como atenuação).</p>
+                <p>A eletricidade perde força à medida que viaja pelo cobre. As normas internacionais determinam que um cabo de rede par trançado só garante a entrega perfeita dos dados por no máximo <strong>100 metros</strong>. Passou disso, o sinal sofre atenuação severa.</p>
             </div>
+
+            <h3>Cabo Coaxial</h3>
+            <p>Foi o padrão principal no início das redes de computadores. Possui um núcleo de cobre espesso, uma camada isolante e uma malha metálica externa que oferece excelente blindagem. Hoje, perdeu espaço nas redes LAN, mas ainda é <strong>fortemente utilizado pelas operadoras de TV e provedores de internet via cabo (tecnologia HFC)</strong>. Os conectores mais comuns são o <strong>BNC</strong> (antigo) e o <strong>Conector F</strong> (rosqueado atrás do modem/TV).</p>
+
+            <h2><i class="fas fa-bolt"></i> 4. A Revolução: Fibra Óptica</h2>
+            <p>Ao contrário dos cabos de cobre, a Fibra Óptica <strong>não transmite eletricidade, transmite pulsos de LUZ</strong> (fótons). Por causa disso, ela é 100% imune a interferências eletromagnéticas e consegue transportar volumes gigantescos de dados por dezenas de quilômetros sem perder a qualidade do sinal.</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Característica</th>
+                        <th>Fibra Monomodo (Single-mode)</th>
+                        <th>Fibra Multimodo (Multi-mode)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Núcleo (Espessura)</strong></td>
+                        <td>Extremamente fino (8 a 10 micrômetros).</td>
+                        <td>Mais largo (50 a 62.5 micrômetros).</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Propagação da Luz</strong></td>
+                        <td>Um único feixe de luz (Laser) em linha reta.</td>
+                        <td>Vários feixes de luz (LED ou Laser) ricocheteando nas paredes.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alcance e Uso</strong></td>
+                        <td>Centenas de quilômetros. Usado em WANs, rodovias e cabos submarinos.</td>
+                        <td>Distâncias curtas (até 500m). Usado em LANs e Datacenters.</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tipos de Conectores de Fibra Óptica</h3>
+            <p>No mundo da fibra, o formato do "pino" que entra no equipamento varia. Os três mais cobrados no mercado são:</p>
+            <ul>
+                <li><strong>SC (Subscriber Connector):</strong> Tem um formato retangular, encaixa por pressão e click ("empurra-puxa"). Muito comum nos modems residenciais de internet (ONU/ONT).</li>
+                <li><strong>LC (Lucent Connector):</strong> É a metade do tamanho do SC e possui uma travinha de plástico parecida com a do cabo de rede RJ45. Muito usado em equipamentos empresariais de alta densidade (Switches).</li>
+                <li><strong>ST (Straight Tip):</strong> Tem um formato circular com engate tipo baioneta (gira e trava). É mais antigo e comum em sistemas de câmeras de segurança e redes industriais antigas.</li>
+            </ul>
 
         </div>
 
