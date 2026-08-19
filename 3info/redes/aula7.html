@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 07 - Internet das Coisas (IoT) e Alexa</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../redes.html#" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 07: Internet das Coisas (IoT)</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 2 • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Até a década passada, a internet era habitada exclusivamente por computadores e smartphones. Hoje, coisas "burras" e cotidianas ganharam sensores, placas de rede e Endereços IP. Essa é a essência da <strong>IoT (Internet of Things)</strong>: conectar objetos do mundo real à rede mundial de computadores.</p>
+
+            <h2><i class="fas fa-microchip"></i> 1. O que compõe um projeto IoT?</h2>
+            <p>Para um objeto deixar de ser comum e virar "Smart" (Inteligente), ele precisa de quatro pilares básicos:</p>
+            <ul>
+                <li><strong>Sensores/Atuadores:</strong> O objeto precisa sentir o ambiente (temperatura, movimento, voz) ou agir (ligar um motor, acender uma luz).</li>
+                <li><strong>Conectividade:</strong> Ele precisa de um canal de comunicação (Wi-Fi, Bluetooth ou protocolos específicos de casa inteligente, como Zigbee).</li>
+                <li><strong>Processamento de Dados:</strong> O que o aparelho capta precisa ser processado, geralmente em servidores gigantes na Nuvem (Cloud).</li>
+                <li><strong>Interface:</strong> Um aplicativo no seu celular onde você possa monitorar os dados e controlar a "Coisa".</li>
+            </ul>
+
+            <h2><i class="fas fa-robot"></i> 2. O Exemplo Perfeito: A Alexa</h2>
+            <p>Os Assistentes Virtuais (como a Amazon Echo/Alexa ou o Google Nest) são os grandes maestros das Casas Inteligentes. Muitas pessoas acham que a Alexa é um "supercomputador" cheio de inteligência artificial dentro daquela caixinha de som, mas não é bem assim que ela funciona.</p>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-cloud-slash"></i> O "Peso de Papel" sem Internet</strong>
+                <p>Se a internet da sua casa cair e você falar: <em>"Alexa, que horas são?"</em>, ela não vai saber responder. Por que? Porque o cérebro dela não está na sua sala! O aparelho físico serve apenas para duas coisas: <strong>ouvir sua voz (microfone) e falar com você (alto-falante)</strong>.</p>
+            </div>
+
+            <p>Veja o fluxo exato de rede quando você dá um comando para ligar a luz da sala:</p>
+
+            <div class="code-container">
+<span class="comment"># O CAMINHO DOS DADOS NA IOT</span>
+1. <span class="tag">Você fala:</span> "Alexa, acenda a lâmpada".
+2. <span class="tag">Upload:</span> A Alexa grava seu áudio e envia pela sua rede Wi-Fi/Roteador direto para os servidores da Amazon nos EUA.
+3. <span class="tag">A Nuvem (Cloud):</span> O supercomputador da Amazon traduz o áudio para texto, entende a intenção e envia um comando digital para os servidores da marca da sua Lâmpada (ex: Tuya/Positivo).
+4. <span class="tag">Download:</span> O servidor da Tuya envia um pacote "liga!" pela internet de volta para o roteador da sua casa.
+5. <span class="tag">Ação Final:</span> O roteador repassa o pacote (via IP local/MAC) para a Lâmpada Smart, e a luz finalmente acende.
+<span class="comment">Tudo isso ocorre em frações de segundo graças às altas velocidades da fibra óptica e dos switches!</span>
+            </div>
+
+            <h2><i class="fas fa-project-diagram"></i> 3. Protocolos de Comunicação em IoT</h2>
+            <p>Nem tudo na casa inteligente usa o Wi-Fi tradicional (802.11). O Wi-Fi gasta muita bateria e ocupa muito espaço no roteador. Por isso, a IoT usa protocolos paralelos:</p>
+            <ul>
+                <li><strong>Wi-Fi:</strong> Usado apenas para coisas que precisam de banda larga e estão sempre na tomada (Câmeras IP, Smart TVs e a própria Alexa).</li>
+                <li><strong>Bluetooth Low Energy (BLE):</strong> Usado para curtas distâncias e aparelhos portáteis (Smartwatches, fones, fechaduras).</li>
+                <li><strong>Zigbee / Z-Wave:</strong> São as "redes paralelas". Feitas para gastar quase zero de bateria. Usado em sensores de porta e lâmpadas, eles formam uma rede de teia (Mesh), onde uma lâmpada repassa o sinal para a outra, sem sobrecarregar o seu roteador principal.</li>
+            </ul>
+
+            <h2><i class="fas fa-shield-alt"></i> 4. O Lado Sombrio: Segurança em IoT</h2>
+            <p>Colocar um processador e internet numa geladeira, numa lâmpada ou numa câmera de babá traz um risco enorme de segurança. Dispositivos IoT costumam ser baratos, e os fabricantes raramente lançam atualizações de segurança ou antivírus para eles.</p>
+
+            <div class="highlight-box danger">
+                <strong><i class="fas fa-bug"></i> O Problema das Senhas de Fábrica (Botnets)</strong>
+                <p>O maior erro dos usuários é instalar uma câmera IP na rede e deixar o usuário e senha como <code>admin/admin</code>. Hackers vasculham a internet (WAN) o dia inteiro em busca de aparelhos IoT mal configurados.</p>
+                <p>Quando acham, invadem e instalam um vírus minúsculo, transformando o seu dispositivo em um "Zumbi". Juntando milhares de câmeras e roteadores zumbis, os hackers criam um exército (<strong>Botnet</strong>) e usam esses aparelhos domésticos para disparar ataques massivos (DDoS) que chegam a derrubar sites de bancos e governos inteiros.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula6.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula8.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
