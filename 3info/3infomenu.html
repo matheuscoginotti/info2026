@@ -3,16 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>3º Ano - Informática para Internet</title>
-    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <title>3º Ano - Disciplinas</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
     <style>
         :root {
-            /* Paleta Padrão (Estilo Enfermagem) */
-            --bg-color: #0f172a; 
-            --card-bg: rgba(30, 41, 59, 0.85);
-            --text-primary: #f1f5f9;
+            /* Paleta Tech/Frieren */
+            --bg-color: #1e293b; /* Slate Dark */
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --accent-gold: #d4af37;
             --accent-blue: #38bdf8;
@@ -29,145 +29,121 @@
             background-color: var(--bg-color);
             color: var(--text-primary);
             font-family: 'Roboto', sans-serif;
-            min-height: 100vh;
+            height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            overflow-x: hidden;
+            justify-content: center;
+            overflow: hidden;
             position: relative;
         }
 
-        /* --- Fundo de Grade Estático (Padrão Enfermagem) --- */
+        /* --- Fundo de Grade Tecnológica --- */
         body::before {
             content: '';
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
+            position: absolute;
+            width: 200%;
+            height: 200%;
             background-image: 
                 linear-gradient(var(--border-tech) 1px, transparent 1px),
                 linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
             background-size: 50px 50px;
-            opacity: 0.15;
-            z-index: -1;
+            transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            opacity: 0.3;
             pointer-events: none;
+            animation: grid-move 60s linear infinite;
         }
 
-        /* --- Cabeçalho Fixo --- */
-        header {
-            width: 100%;
-            background: rgba(15, 23, 42, 0.95);
-            border-bottom: 1px solid var(--accent-blue);
-            padding: 1.5rem 20px;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            backdrop-filter: blur(10px);
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        @keyframes grid-move {
+            0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); }
+            100% { transform: perspective(500px) rotateX(60deg) translateY(50px) translateZ(-200px); }
         }
 
-        .btn-back {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-family: 'Rajdhani', sans-serif;
-            font-weight: 600;
-            font-size: 1.1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: color 0.3s ease;
+        /* --- Container dos Foguetes (Fundo) --- */
+        .rocket-container {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .btn-back:hover {
-            color: var(--text-primary);
-        }
-
-        header h1 {
-            font-family: 'Rajdhani', sans-serif;
+        .rocket {
+            position: absolute;
+            bottom: -50px;
+            color: rgba(212, 175, 55, 0.15); /* Dourado bem sutil */
             font-size: 1.5rem;
-            color: var(--text-primary);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            text-align: center;
+            animation: flyUp linear forwards;
         }
 
-        .header-spacer { width: 80px; }
+        @keyframes flyUp {
+            to { transform: translateY(-110vh); opacity: 0; }
+        }
 
-        /* --- Container Principal --- */
-        .menu-container {
-            width: 100%;
-            max-width: 1200px;
-            padding: 4rem 20px;
+        /* --- Cabeçalho --- */
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
             z-index: 2;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
         }
 
-        .menu-header {
-            text-align: center;
-            margin-bottom: 4rem;
-        }
-
-        .menu-title {
+        h1 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 3.5rem;
+            font-size: 3rem;
             text-transform: uppercase;
             letter-spacing: 3px;
             font-weight: 700;
             color: var(--text-primary);
-            text-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-            margin-bottom: 0.5rem;
+            text-shadow: 0 0 10px rgba(56, 189, 248, 0.3);
         }
 
-        .menu-subtitle {
+        .subtitle {
             font-family: 'Rajdhani', sans-serif;
             color: var(--accent-gold);
             font-size: 1.2rem;
             letter-spacing: 2px;
             text-transform: uppercase;
+            margin-top: 0.5rem;
         }
 
         /* --- Grid de Cards --- */
         .cards-wrapper {
             display: flex;
-            gap: 2.5rem;
+            gap: 2rem;
+            z-index: 2;
             flex-wrap: wrap;
             justify-content: center;
-            width: 100%;
+            max-width: 1200px;
+            padding: 0 20px;
         }
 
-        /* --- Estilo do Card (Adaptado para Cores da Enfermagem) --- */
+        /* --- Estilo do Card --- */
         .tech-card {
             background: var(--card-bg);
             border: 1px solid var(--border-tech);
             border-radius: 12px;
-            width: 320px;
-            padding: 3rem 1.5rem 2.5rem 1.5rem;
+            width: 300px;
+            padding: 2.5rem 1.5rem;
             text-align: center;
             position: relative;
             backdrop-filter: blur(10px);
             transition: all 0.4s ease;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
 
         .tech-card:hover {
-            transform: translateY(-8px);
+            transform: translateY(-10px);
             border-color: var(--accent-blue);
             box-shadow: 0 10px 30px rgba(56, 189, 248, 0.15);
-            background: rgba(30, 41, 59, 0.95);
+            background: rgba(30, 41, 59, 0.9);
         }
 
         /* Ícone */
         .icon-box {
             font-size: 3rem;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             color: var(--accent-gold);
             height: 80px;
             width: 80px;
@@ -182,33 +158,30 @@
         .tech-card:hover .icon-box {
             color: var(--accent-blue);
             border-color: var(--accent-blue);
-            transform: scale(1.1) rotate(5deg);
+            transform: scale(1.1) rotate(360deg);
         }
 
         /* Título da Disciplina */
-        .tech-card h3 {
+        h2 {
             font-family: 'Rajdhani', sans-serif;
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             font-weight: 600;
-            margin-bottom: 2.5rem;
+            margin-bottom: 2rem;
             color: var(--text-primary);
             text-transform: uppercase;
             letter-spacing: 1px;
-            line-height: 1.3;
-            min-height: 3.5rem;
+            min-height: 3rem; /* Alinha os botões mesmo com títulos de tamanhos diferentes */
             display: flex;
             align-items: center;
-            justify-content: center;
         }
 
         /* Botão Acessar */
         .btn-tech {
-            margin-top: auto;
+            margin-top: auto; /* Empurra o botão para o fundo do card */
             padding: 0.8rem 2.5rem;
             background: transparent;
             color: var(--text-secondary);
             border: 1px solid var(--text-secondary);
-            border-radius: 6px;
             text-decoration: none;
             font-family: 'Rajdhani', sans-serif;
             font-weight: 600;
@@ -217,7 +190,7 @@
             transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
-            width: 85%;
+            width: 80%;
         }
 
         .btn-tech::before {
@@ -236,7 +209,7 @@
         }
 
         .btn-tech:hover {
-            color: #0f172a !important; /* Texto escuro no hover para destacar */
+            color: #1e293b !important; /* Texto escuro no hover */
             border-color: var(--accent-gold);
         }
 
@@ -250,10 +223,9 @@
             top: 0; right: 0;
             width: 0; height: 0;
             border-style: solid;
-            border-width: 0 45px 45px 0;
+            border-width: 0 40px 40px 0;
             border-color: transparent var(--border-tech) transparent transparent;
-            border-radius: 0 12px 0 0;
-            opacity: 0.6;
+            opacity: 0.5;
             transition: border-color 0.3s;
         }
 
@@ -263,64 +235,61 @@
 
         /* Responsividade */
         @media (max-width: 900px) {
-            .menu-title { font-size: 2.5rem; }
             .cards-wrapper { flex-direction: column; align-items: center; }
-            .tech-card { width: 100%; max-width: 350px; }
-            header h1 { font-size: 1.2rem; }
-            .header-spacer { display: none; }
+            .tech-card { width: 100%; max-width: 320px; }
+            h1 { font-size: 2rem; }
         }
     </style>
 </head>
 <body>
 
+    <!-- Fundo Animado -->
+    <div class="rocket-container" id="rocketContainer"></div>
+
     <header>
-        <a href="index.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
-        <h1>3º Ano - Informática</h1>
-        <div class="header-spacer"></div>
+        <h1>Informatica para Internet</h1>
+        <div class="subtitle">Grade Curricular - 3º Ano</div>
     </header>
 
-    <main class="menu-container">
+    <div class="cards-wrapper">
         
-        <div class="menu-header">
-            <h2 class="menu-title">Grade Curricular</h2>
-            <div class="menu-subtitle">Selecione a disciplina desejada</div>
+        <!-- Disciplina 1: Redes, Segurança da Informação e Internet das Coisas -->
+        <div class="tech-card">
+            <div class="corner-deco"></div>
+            <div class="icon-box">
+                <i class="fa-solid fa-ethernet"></i>
+            </div>
+            <h2>Redes, Segurança da Informação e Internet das Coisas</h2>
+            <a href="redes.html" class="btn-tech">Acessar</a>
         </div>
+    </div>
 
-        <div class="cards-wrapper">
+    <script>
+        // Animação de Fundo (Foguetes sutis)
+        function createRocket() {
+            const container = document.getElementById('rocketContainer');
+            const rocket = document.createElement('i');
+            rocket.classList.add('fas', 'fa-space-shuttle', 'rocket');
             
-            <!-- Disciplina 1: Redes e IoT -->
-            <div class="tech-card">
-                <div class="corner-deco"></div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-ethernet"></i>
-                </div>
-                <h3>Redes, Seg. da Informação e IoT</h3>
-                <a href="aula1_redes.html" class="btn-tech">Acessar</a>
-            </div>
+            // Posição aleatória
+            rocket.style.left = Math.random() * 95 + 'vw';
+            
+            // Tamanho aleatório (perspectiva)
+            const size = (Math.random() * 1 + 0.5) + 'rem';
+            rocket.style.fontSize = size;
+            
+            // Velocidade aleatória
+            const duration = (Math.random() * 5 + 5) + 's';
+            rocket.style.animationDuration = duration;
 
-            <!-- Disciplina 2: Desenvolvimento Web -->
-            <div class="tech-card">
-                <div class="corner-deco"></div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-code"></i>
-                </div>
-                <h3>Desenvolvimento Web (PHP / MySQL)</h3>
-                <a href="#" class="btn-tech">Acessar</a>
-            </div>
+            container.appendChild(rocket);
 
-            <!-- Disciplina 3: Suporte e Manutenção -->
-            <div class="tech-card">
-                <div class="corner-deco"></div>
-                <div class="icon-box">
-                    <i class="fa-solid fa-server"></i>
-                </div>
-                <h3>Infraestrutura e GLPI</h3>
-                <a href="#" class="btn-tech">Acessar</a>
-            </div>
+            // Limpeza
+            setTimeout(() => { rocket.remove(); }, parseFloat(duration) * 1000);
+        }
 
-        </div>
-
-    </main>
-
+        // Cria menos foguetes para não poluir o menu de disciplinas
+        setInterval(createRocket, 1500);
+    </script>
 </body>
 </html>
