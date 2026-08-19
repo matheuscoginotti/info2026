@@ -1,182 +1,340 @@
 <!DOCTYPE html>
-<html lang="pt-pt">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 04: Os Mensageiros Invisíveis (Protocolos e Automação)</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Aula 04 - Equipamentos de Rede</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
-        body { font-family: 'Inter', sans-serif; }
-        code, pre { font-family: 'Fira Code', monospace; }
-        
-        .code-container {
-            background-color: #1e1e1e;
-            color: #d4d4d4;
-            border-radius: 12px;
-            padding: 24px;
-            overflow-x: auto;
-            border: 1px solid #333;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
         }
 
-        .comment { color: #6a9955; font-style: italic; }
-        .tag { color: #569cd6; font-weight: bold; }
-        .css-selector { color: #d7ba7d; }
-        .css-val { color: #4fc1ff; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+        }
     </style>
 </head>
-<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+<body>
 
-    <header class="bg-indigo-700 text-white py-20 px-6 shadow-xl text-center md:text-left">
-        <div class="max-w-4xl mx-auto">
-            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Módulo 1: Infraestrutura Conectada e Segura</span>
-            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 04: Os Mensageiros Invisíveis</h1>
-            <p class="text-2xl text-indigo-100 opacity-90">Entendendo a Automação do DHCP, a Pilha TCP/IP e a Entrega de Pacotes</p>
-        </div>
+    <header>
+        <a href="trilha_redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
     </header>
 
-    <main class="max-w-4xl mx-auto py-16 px-6">
+    <main class="lesson-container">
         
-        <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-800 font-mono">O Recepcionista do Hotel (DHCP)</h2>
-            </div>
+        <h1 class="lesson-title">Aula 04: Equipamentos e Infraestrutura</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
+        </div>
 
-            <p class="text-lg text-slate-600 mb-8">
-                Quando você chega a um hotel, não escolhe o número do seu quarto sozinho. Você vai até a receção, entrega a sua identidade e o funcionário lhe dá uma chave com o número do quarto vago. Na rede, o **DHCP** faz exatamente esse papel.
-            </p>
-
+        <div class="content">
             
+            <p>Até agora aprendemos sobre cabos, endereços lógicos e as camadas teóricas. Mas, na prática, como os fios se conectam? Para que a rede exista fisicamente e os pacotes sejam encaminhados da forma correta, dependemos dos <strong>Equipamentos de Rede</strong>.</p>
 
-            <div class="grid md:grid-cols-2 gap-10 mt-8">
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-indigo-500 shadow-sm">
-                    <h3 class="text-xl font-bold text-indigo-700 mb-3">A Automação do DHCP</h3>
-                    <p class="text-sm text-slate-600">
-                        O protocolo **DHCP** evita o trabalho manual de configurar cada máquina. Assim que o computador se liga ao cabo, o DHCP entrega automaticamente quatro coisas vitais: o **Endereço IP** (seu número temporário), a **Máscara de Rede**, o **Gateway** (o roteador que dá saída para a rua) e o **DNS**.
-                    </p>
-                </div>
-                <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-slate-600 shadow-sm">
-                    <h3 class="text-xl font-bold text-slate-800 mb-3">O Modelo TCP/IP</h3>
-                    <p class="text-sm text-slate-600">
-                        É a engine da internet. Enquanto o **IP** se preocupa apenas em mapear e achar o caminho correto que o dado deve percorrer geograficamente, o **TCP** funciona como um fiscal obstinado: ele confere se todos os pedaços da mensagem chegaram inteiros e na ordem certa, refazendo o envio caso algo se perca.
-                    </p>
-                </div>
-            </div>
-        </section>
+            <h2><i class="fas fa-project-diagram"></i> 1. O Legado: HUB (O Concentrador)</h2>
+            <p>O <strong>Hub</strong> foi um dos primeiros equipamentos usados para conectar computadores em uma rede local (LAN). O seu funcionamento era extremamente simples: ele apenas recebia o pulso elétrico em uma porta e o copiava para <strong>todas</strong> as outras portas. Ele atua na <strong>Camada 1 (Física)</strong> do Modelo OSI.</p>
 
-        <section class="mb-20">
-            <div class="flex items-center mb-10">
-                <div class="bg-indigo-100 p-3 rounded-full mr-4">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8h2a2 2 0 012 2v6a2 2 0 01-2 2h-2v4l-4-4H9a1.994 1.994 0 01-1.414-.586m0 0L11 14h4a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2v4l.586-.586z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-indigo-700">1. Como a Voz se Propaga: Unicast, Broadcast e Multicast</h2>
+            <div class="highlight-box danger">
+                <strong><i class="fas fa-car-crash"></i> O Problema das Colisões (Broadcast)</strong>
+                <p>Imagine uma sala onde todo mundo fala ao mesmo tempo. Era assim que o Hub funcionava. Quando o PC1 queria falar apenas com o PC4, o Hub entregava a mensagem para todos. Se duas máquinas tentassem enviar dados no mesmo milissegundo, ocorria uma <strong>colisão de pacotes</strong>, e a rede inteira travava até que os dados fossem reenviados. Hoje, o Hub está completamente obsoleto.</p>
             </div>
 
-            <p class="text-lg text-slate-600 mb-8">
-                Dependendo do objetivo do dado, os computadores utilizam estratégias de comunicação diferentes para espalhar os pacotes pela infraestrutura física.
-            </p>
+            <h2><i class="fas fa-network-wired"></i> 2. Switch: O Maestro da Rede Local</h2>
+            <p>O <strong>Switch</strong> (Comutador) substituiu o Hub. Ele é muito mais inteligente porque trabalha na <strong>Camada 2 (Enlace)</strong>. Em vez de enviar o pacote para todo mundo, o Switch aprende e grava os <strong>Endereços MAC</strong> de cada placa de rede conectada a ele. Se o PC1 quer falar com o PC4, o Switch entrega o pacote <em>exclusivamente</em> na porta do PC4, eliminando as colisões.</p>
 
-            
-            
-            <div class="grid md:grid-cols-3 gap-6 text-sm mt-8">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-indigo-600 mb-2 text-base italic">Unicast (1 para 1)</h3>
-                    <p class="text-slate-600">É uma conversa direta e privada entre dois dispositivos. Quando você abre um site específico ou faz uma pesquisa no Google, o pacote tem um único destino certo na rede.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-indigo-600 mb-2 text-base italic">Broadcast (1 para TODOS)</h3>
-                    <p class="text-slate-600">Funciona como um grito no meio do pátio. O pacote vai para absolutamente todas as máquinas do mesmo segmento. O protocolo ARP e o DHCP usam isso para localizar serviços iniciais.</p>
-                </div>
-                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-100">
-                    <h3 class="font-bold text-indigo-600 mb-2 text-base italic">Multicast (1 para GRUPO)</h3>
-                    <p class="text-slate-600">A mensagem é enviada para um grupo selecionado. É o método favorito de dispositivos de transmissão de vídeo (Streaming) e caixas de som inteligentes para se anunciarem na casa.</p>
-                </div>
-            </div>
-        </section>
+            <h3>Switch Não Gerenciável (Plug and Play)</h3>
+            <p>É o equipamento "básico". Você tira da caixa, liga na tomada, espeta os cabos de rede e ele simplesmente funciona. É excelente para residências e pequenos escritórios, pois não exige configuração. Porém, você não consegue controlar o tráfego ou criar divisões na rede.</p>
 
-        <section class="mb-20">
-            <div class="flex items-center mb-8">
-                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono text-emerald-700">2. O Diálogo de Conexão dos Protocolos</h2>
-            </div>
+            <h3>Switch Gerenciável (A Escolha Corporativa)</h3>
+            <p>Usado em médias e grandes empresas. Ele possui um sistema operacional próprio e uma interface de configuração (acessível por IP) que permite ao técnico ou analista ter controle total da rede. Com ele é possível:</p>
+            <ul>
+                <li><strong>Criar VLANs (Redes Virtuais):</strong> Isolar a rede do setor Financeiro da rede do setor de Visitantes, mesmo usando o mesmo equipamento físico.</li>
+                <li><strong>Configurar QoS (Quality of Service):</strong> Dar prioridade de banda para chamadas de voz e vídeo (VoIP), evitando que o download de um usuário atrapalhe a reunião de outro.</li>
+                <li><strong>Spanning Tree Protocol (STP):</strong> Evitar loops na rede caso alguém conecte um cabo em duas portas do próprio Switch por engano.</li>
+            </ul>
 
-            <p class="mb-8 text-slate-600 text-lg font-light">
-                Veja abaixo, de forma esquemática, como as máquinas conversam nos bastidores para obter um IP (DHCP) e para firmar um pacto de entrega de dados confiável (TCP):
-            </p>
+            <h2><i class="fas fa-route"></i> 3. Roteador: O Caminho entre Mundos</h2>
+            <p>Se o Switch conecta os computadores do mesmo prédio (LAN), o <strong>Roteador</strong> é a ponte que conecta redes <strong>diferentes</strong> (Ex: a rede do seu escritório com a grande rede WAN da Internet). Ele opera na <strong>Camada 3 (Rede)</strong>, usando os Endereços IP para tomar decisões lógicas.</p>
 
             <div class="code-container">
-<pre><code><span class="comment"># =========================================================
-# O DIÁLOGO AUTOMÁTICO DO DHCP (PROCESSO D.O.R.A.)
-# =========================================================</span>
-
- COMPUTADOR ─── [Grito em Broadcast] ───> "Alguém aí é um Servidor DHCP? Preciso de um IP!" (DISCOVER)
- SERVIDOR   <─── [Resposta Direta] ──── "Olá! Eu sou o DHCP. Tenho o IP 192.168.1.50 livre, aceitas?" (OFFER)
- COMPUTADOR ─── [Grito de Aceitação] ──> "Sim! Eu quero reservar o IP 192.168.1.50 para mim!" (REQUEST)
- SERVIDOR   <─── [Confirmação Final] ── "Feito! O IP é teu pelas próximas 24 horas. Podes navegar." (ACK)
-
-<span class="comment"># =========================================================
-# O APERTO DE MÃO DO TCP (THREE-WAY HANDSHAKE)
-# =========================================================</span>
-
- CLIENTE  ─── [Sincronizar] ───────────> "Quero conectar ao servidor. Porta 80." (SYN)
- SERVIDOR <─── [Sincronizar + Confirmar] ─ "Recebido! Eu aceito a tua conexão. Estás pronto?" (SYN-ACK)
- CLIENTE  ─── [Confirmar] ─────────────> "Estou pronto! Vamos começar a trocar os dados." (ACK)
-
-<span class="comment"># Nota Visual: É por causa desse aperto de mão triplo que o TCP é ultra confiável. 
-# Se o servidor não responder com o SYN-ACK, o cliente sabe na hora que a conexão falhou.</span></code></pre>
-            </div>
-        </section>
-
-        <section class="bg-indigo-900 p-12 rounded-3xl text-white shadow-2xl">
-            <div class="flex items-center mb-8">
-                <div class="bg-indigo-500 p-3 rounded-full mr-4 text-white">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                </div>
-                <h2 class="text-3xl font-bold font-mono">3. Situações do Cotidiano Técnico</h2>
+<span class="comment"># A TABELA DE ROTEAMENTO (O "GPS" da Internet)</span>
+O Roteador não memoriza o endereço físico (MAC). Ele analisa o <span class="tag">IP de Destino</span>.
+Se o pacote for para um IP interno (ex: 192.168.1.X), ele deixa no Switch.
+Se o pacote for para o Google (ex: 8.8.8.8), o roteador despacha para a porta WAN (sua operadora).
             </div>
 
-            <p class="mb-10 text-indigo-100 text-lg font-light">Entenda como esses protocolos invisíveis afetam diretamente a sua experiência diária na tecnologia:</p>
+            <h2><i class="fas fa-satellite-dish"></i> 4. A Fronteira Óptica: ONU e ONT</h2>
+            <p>Com a substituição dos antigos cabos de telefone (ADSL) e cabos coaxiais pela Fibra Óptica, os equipamentos que recebem o link de internet nas residências e empresas também evoluíram. Eles são responsáveis por converter o sinal de <strong>luz</strong> (fotônico) em sinal <strong>elétrico</strong> (RJ45/Ethernet).</p>
 
-            <div class="space-y-6 text-indigo-950">
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">A</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">Por que os Jogos Online usam UDP e não TCP?</h4>
-                        <p class="text-sm text-slate-600 font-medium">O **TCP** preza pela precisão: se um bit falhar, ele para tudo e reenvia. Em jogos de tiro ou futebol online, esperar um bit perdido causaria travamentos (Lags). Por isso, os jogos usam o irmão mais rápido do TCP, o **UDP**. Ele simplesmente empurra os dados o mais rápido possível sem checar nada. Se um pacote sumir, o jogo apenas "pula" para o próximo frame.</p>
-                    </div>
-                </div>
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-indigo-500">
-                    <span class="bg-indigo-100 text-indigo-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">B</span>
-                    <div>
-                        <h4 class="font-bold text-indigo-900 mb-1">A Tempestade de Broadcast</h4>
-                        <p class="text-sm text-slate-600 font-medium">Como o pacote de **Broadcast** vai para todas as placas da rede, se houver um erro de loop físico (por exemplo, conectar as duas pontas de um mesmo cabo de rede no mesmo switch), os pacotes ficam rodando em círculos infinitamente. Isso sobrecarrega os processadores de todas as máquinas conectadas, derrubando a rede da escola inteira em poucos segundos.</p>
-                    </div>
-                </div>
+            <ul>
+                <li><strong>ONU (Optical Network Unit):</strong> Unidade Óptica de Rede. É o equipamento passivo que fica na ponta do provedor ou na caixa do poste, recebendo a luz principal e dividindo para os clientes finais da rua.</li>
+                <li><strong>ONT (Optical Network Terminal):</strong> Terminal Óptico. É o aparelhinho que a provedora de internet instala dentro da <strong>sua casa</strong>. Hoje em dia, para baratear custos, as operadoras instalam um equipamento "Combo": ele possui a porta de fibra (ONT), um Roteador (que disca a conexão) e antenas Wi-Fi em um único aparelho.</li>
+            </ul>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-lightbulb"></i> Resumo Prático para Provas</strong>
+                <p><strong>HUB:</strong> Camada 1. Burro, espalha a informação para todos (Gera Colisão).<br>
+                   <strong>SWITCH:</strong> Camada 2. Inteligente, entrega direto ao destinatário lendo o MAC Address.<br>
+                   <strong>ROTEADOR:</strong> Camada 3. Interliga redes diferentes lendo o IP de destino.<br>
+                   <strong>ONT/ONU:</strong> Interface física que converte o feixe de luz da fibra óptica em dados legíveis pelo Roteador.</p>
             </div>
-        </section>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula3_redes.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula5_redes.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
 
     </main>
-
-    <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
-        <p class="max-w-4xl mx-auto">
-            Módulo de Redes e Protocolos concluído com sucesso!<br>
-            Pronto para avançar. Próxima paragem: <strong>Desenho e Arquitetura de Interfaces Web Avançadas</strong>.
-        </p>
-    </footer>
 
 </body>
 </html>
