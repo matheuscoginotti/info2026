@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 06 - Redes Sem Fio e RF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Fundo de Grade Estático */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        /* --- Cabeçalho Fixo --- */
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: color 0.3s ease;
+        }
+
+        .btn-back:hover {
+            color: var(--text-primary);
+        }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-align: center;
+        }
+
+        .header-spacer { width: 80px; }
+
+        /* --- Área de Leitura --- */
+        .lesson-container {
+            width: 100%;
+            max-width: 850px;
+            padding: 3rem 20px;
+            z-index: 2;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 3rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        /* Tipografia do Conteúdo */
+        .content {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #cbd5e1;
+        }
+
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3.5rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 10px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 2rem;
+        }
+
+        .content li {
+            margin-bottom: 0.8rem;
+        }
+
+        /* --- Caixas de Destaque --- */
+        .highlight-box {
+            background: rgba(56, 189, 248, 0.1);
+            border-left: 4px solid var(--accent-blue);
+            padding: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+
+        .highlight-box.warning {
+            background: rgba(212, 175, 55, 0.1);
+            border-left-color: var(--accent-gold);
+        }
+
+        .highlight-box.danger {
+            background: rgba(220, 38, 38, 0.1);
+            border-left-color: #ef4444;
+        }
+
+        .highlight-box.success {
+            background: rgba(16, 185, 129, 0.1);
+            border-left-color: var(--accent-green);
+        }
+
+        .highlight-box strong {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            color: var(--text-primary);
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Bloco de Código Customizado */
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.8);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 2rem 0;
+            color: #d4d4d4;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+        .code-container .val { color: #4fc1ff; }
+
+        /* Estilo para Tabela */
+        .tech-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: rgba(15, 23, 42, 0.5);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .tech-table th, .tech-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-tech);
+        }
+
+        .tech-table th {
+            background: rgba(56, 189, 248, 0.15);
+            color: var(--text-primary);
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        /* --- Botões de Navegação Inferior --- */
+        .lesson-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-tech);
+        }
+
+        .btn-nav {
+            padding: 0.8rem 1.5rem;
+            background: var(--card-bg);
+            color: var(--text-primary);
+            border: 1px solid var(--border-tech);
+            border-radius: 8px;
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-nav:hover {
+            background: var(--accent-blue);
+            color: #0f172a;
+            border-color: var(--accent-blue);
+        }
+
+        /* Responsividade */
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.2rem; }
+            .lesson-title { font-size: 2.2rem; }
+            .content { font-size: 1rem; }
+            .lesson-nav { flex-direction: column; gap: 1rem; }
+            .btn-nav { justify-content: center; }
+            .header-spacer { display: none; }
+            .tech-table { display: block; overflow-x: auto; white-space: nowrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="..redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 06: Redes Sem Fio, RF e Padrões Wi-Fi</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 1 • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Seja no celular, no notebook ou em dispositivos IoT, as redes sem fio dominam a nossa conexão com a internet. Mas para cortar o cabo e transmitir dados pelo ar, precisamos usar a <strong>Radiofrequência (RF)</strong> — que nada mais é do que o uso de ondas eletromagnéticas invisíveis para transportar informação.</p>
+
+            <h2><i class="fas fa-wave-square"></i> 1. A Batalha das Frequências: 2.4 GHz vs 5 GHz</h2>
+            <p>Os roteadores modernos são "Dual Band", ou seja, transmitem o Wi-Fi em duas frequências diferentes ao mesmo tempo. É fundamental para um técnico de TI saber quando recomendar cada uma:</p>
+
+            <div class="code-container">
+<span class="comment"># REGRA DE OURO DA FÍSICA PARA REDES SEM FIO</span>
+"Quanto MENOR a frequência, MAIOR o alcance e MENOR a velocidade."
+"Quanto MAIOR a frequência, MENOR o alcance e MAIOR a velocidade."
+            </div>
+
+            <ul>
+                <li><strong>Rede 2.4 GHz (O Caminhão):</strong> Suporta velocidades mais baixas e sofre com muita interferência, mas possui ondas "compridas" que conseguem atravessar paredes pesadas e viajar longas distâncias pela casa.</li>
+                <li><strong>Rede 5 GHz (O Carro Esportivo):</strong> Permite altíssimas velocidades (ideal para vídeos 4K e downloads pesados), mas tem ondas "curtas". Isso significa que qualquer parede ou obstáculo físico faz o sinal despencar rapidamente.</li>
+            </ul>
+
+            <h2><i class="fas fa-wifi"></i> 2. Os Padrões IEEE 802.11 (Tipos de Wi-Fi)</h2>
+            <p>O Instituto de Engenheiros Eletricistas e Eletrônicos (IEEE) criou o padrão "802.11" para definir como as placas de rede sem fio devem ser fabricadas para que um celular da Apple consiga falar com um Roteador da TP-Link. Com a evolução da tecnologia, novas letras foram adicionadas ao padrão:</p>
+
+            <table class="tech-table">
+                <thead>
+                    <tr>
+                        <th>Padrão IEEE</th>
+                        <th>Nome Comercial</th>
+                        <th>Frequência</th>
+                        <th>Características Principais</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>802.11n</strong></td>
+                        <td>Wi-Fi 4</td>
+                        <td>2.4GHz / 5GHz</td>
+                        <td>Popularizou as múltiplas antenas (MIMO) para melhorar o sinal. Focado em estabilidade.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>802.11ac</strong></td>
+                        <td>Wi-Fi 5</td>
+                        <td>Apenas 5GHz</td>
+                        <td>Trouxe altas velocidades (Gigabit sem fio) para streaming pesado. Muito comum hoje.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>802.11ax</strong></td>
+                        <td>Wi-Fi 6</td>
+                        <td>2.4GHz / 5GHz</td>
+                        <td>O padrão moderno. Não apenas mais rápido, mas projetado para ambientes muito lotados (casas inteligentes e IoT).</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2><i class="fas fa-bolt"></i> 3. Ruídos, Interferências e Obstáculos</h2>
+            <p>O ar é um meio compartilhado e caótico. Diferente de um cabo fechado, as ondas de RF do Wi-Fi são constantemente agredidas pelo ambiente. Existem dois motivos principais que destroem a qualidade do sinal:</p>
+
+            <h3>Atenuação por Obstáculos Físicos</h3>
+            <p>Onda de rádio não gosta de massa. Cada material absorve ou reflete o sinal de uma forma:</p>
+            <ul>
+                <li><strong>Gesso e Madeira:</strong> Atenuação baixa (o sinal passa quase ileso).</li>
+                <li><strong>Tijolo e Concreto:</strong> Atenuação alta (o sinal perde muita força).</li>
+                <li><strong>Água e Espelhos (Metal):</strong> Pior cenário. A água absorve a radiofrequência e superfícies metálicas (como espelhos grandes ou portões de garagem) rebatem o sinal de volta, gerando zonas "mortas".</li>
+            </ul>
+
+            <h3>Interferência Eletromagnética (EMI)</h3>
+            <p>Outros aparelhos na sua casa emitem ondas que "trombam" e corrompem as ondas do seu roteador.</p>
+
+            <div class="highlight-box danger">
+                <strong><i class="fas fa-radiation"></i> O Vilão Inesperado: O Micro-ondas</strong>
+                <p>Os fornos micro-ondas aquecem a comida agitando moléculas de água. Para fazer isso, o núcleo magnético (magnetron) deles opera exatamente na frequência de <strong>2.45 GHz</strong>. Como essa é a mesma frequência da rede Wi-Fi comum, ligar o micro-ondas perto de um roteador cega a rede de todos os celulares da casa enquanto ele estiver funcionando.</p>
+            </div>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-signal"></i> A Guerra dos Canais (Co-Channel Interference)</strong>
+                <p>Muitas vezes, a interferência não vem de aparelhos domésticos, mas do roteador do seu vizinho de parede. A faixa de 2.4 GHz é dividida em "Canais" (geralmente do 1 ao 11). Se você e seu vizinho estiverem transmitindo no mesmo canal, as redes competem pelo mesmo espaço no ar.</p>
+                <p><strong>A Solução:</strong> O técnico de suporte sempre deve acessar as configurações do roteador do cliente e mudar o Canal para um que esteja menos congestionado, dando preferência aos canais não sobrepostos: <strong>1, 6 ou 11</strong>.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula5.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula7.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
