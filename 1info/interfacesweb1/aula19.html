@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Aula 19 - JavaScript II: Domando Formulários e Eventos</title>
+    <title>Aula 19 - Responsividade e Media Queries</title>
     <!-- Tailwind CSS para manter a consistência visual do material didático -->
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
@@ -26,12 +26,12 @@
         .tag { color: #569cd6; }
         .attr { color: #9cdcfe; }
         .string { color: #ce9178; }
-        .keyword { color: #c586c0; font-weight: bold; }
-        .js-function { color: #dcdcaa; }
-        .js-variable { color: #9cdcfe; }
+        .css-prop { color: #9cdcfe; }
+        .css-val { color: #ce9178; }
+        .css-selector { color: #d7ba7d; }
         .syntax-box {
-            background-color: #fffbeb; /* amber-50 */
-            border-left: 4px solid #f59e0b; /* amber-500 */
+            background-color: #eff6ff; /* blue-50 */
+            border-left: 4px solid #3b82f6; /* blue-500 */
             padding: 16px;
             margin-top: 12px;
             border-radius: 0 8px 8px 0;
@@ -44,11 +44,11 @@
 <body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
 
     <!-- Cabeçalho -->
-    <header class="bg-amber-600 text-white py-20 px-6 shadow-xl text-center md:text-left">
+    <header class="bg-blue-600 text-white py-20 px-6 shadow-xl text-center md:text-left">
         <div class="max-w-4xl mx-auto">
-            <span class="bg-amber-400 text-amber-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 4: Ação e Dinamismo</span>
-            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 19: Domando o Formulário</h1>
-            <p class="text-2xl text-amber-100 opacity-90">Prevenindo recarregamentos e Validações Avançadas</p>
+            <span class="bg-blue-400 text-blue-950 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest">Módulo 5: Layouts Modernos</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Aula 19: O Design Mutante</h1>
+            <p class="text-2xl text-blue-100 opacity-90">Responsividade, Media Queries e Mobile-First</p>
         </div>
     </header>
 
@@ -57,26 +57,25 @@
         <!-- INTRODUÇÃO TEÓRICA DETALHADA -->
         <section class="mb-20 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
             <div class="flex items-center mb-8">
-                <div class="bg-amber-100 p-4 rounded-2xl mr-5">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-amber-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                <div class="bg-blue-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-800 font-mono">O Problema do Botão vs Formulário</h2>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Um Site, Múltiplos Ecrãs</h2>
             </div>
 
             <p class="text-lg text-slate-700 mb-6 font-medium">
-                Nas Aulas 16, 17 e 18 construímos a "carroceria" do nosso carro: um formulário Flexbox lindo e um Dashboard Grid. Na Aula 15, criámos o motor inicial: a lógica do "Segurança". Agora, vamos unir os dois!
+                Pense no nosso Projeto Final (O Sistema de Login e Dashboard). Ele precisa de funcionar no monitor gigante do laboratório da escola, mas também no telemóvel do utilizador no meio do autocarro.
             </p>
 
-            <p class="text-slate-600 mb-6">
-                Mas há um problema gigante. Na Aula 15, tínhamos um <code>&lt;button&gt;</code> solto na página. No mundo real (como fizemos na Aula 17), os campos estão dentro de uma tag <code>&lt;form&gt;</code>. O problema é que, por natureza, um formulário HTML tenta <strong>recarregar a página inteira</strong> (dar F5) quando você clica em Entrar. Se ele recarregar, o nosso código JavaScript morre antes de validar a senha!
-            </p>
-
-            <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-amber-500 shadow-sm mt-8">
-                <h3 class="text-xl font-bold text-amber-700 mb-2">A Solução: Tirar o Poder do HTML 🚫🔄</h3>
+            <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-blue-500 shadow-sm mt-8">
+                <h3 class="text-xl font-bold text-blue-700 mb-2">A Analogia da Água 💧</h3>
+                <p class="text-sm text-slate-600 mb-3">
+                    Como dizia Bruce Lee: <em>"Se colocar água num copo, ela torna-se no copo. Se colocar numa garrafa, torna-se na garrafa."</em> 
+                </p>
                 <p class="text-sm text-slate-600">
-                    O nosso objetivo hoje é dizer ao navegador: "Ei, não atualizes a página quando este formulário for enviado. Deixa que o meu JavaScript toma conta e avalia os dados". Este é o <strong>passo mais importante</strong> para quando formos integrar o nosso site com o Firebase (banco de dados real).
+                    O nosso site deve ser como a água. Chamamos a isso <strong>Design Responsivo</strong>. Em vez de criar um site para computador e outro site diferente para telemóvel, nós criamos <strong>um único código CSS</strong> que deteta o tamanho da tela e muda a sua forma automaticamente!
                 </p>
             </div>
         </section>
@@ -89,34 +88,33 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                     </svg>
                 </div>
-                <h2 class="text-2xl font-bold text-slate-900 font-mono">1. O Dicionário de Validação (Sintaxe)</h2>
+                <h2 class="text-2xl font-bold text-slate-900 font-mono">1. O Dicionário da Responsividade</h2>
             </div>
             
-            <p class="text-slate-600 mb-6">Três ferramentas essenciais para transformar um formulário comum num sistema profissional de validação de dados:</p>
+            <p class="text-slate-600 mb-6">Como o nosso CSS deteta o tamanho da tela? Usando os "Radares de Tela" chamados <strong>Media Queries</strong>.</p>
 
             <div class="grid md:grid-cols-2 gap-6 text-sm">
                 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-amber-500">
-                    <h3 class="font-bold text-amber-700 mb-2"><code>submit</code> (O Evento Correto)</h3>
-                    <p class="text-slate-600 mb-2">Em vez de ouvirmos um simples <code>click</code> num botão, vamos aplicar o <code>addEventListener</code> no <strong>formulário inteiro</strong> a ouvir o evento <code>submit</code>. Isso permite que o utilizador faça login até apertando a tecla <em>Enter</em> no teclado!</p>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
+                    <h3 class="font-bold text-blue-700 mb-2">A Tag <code>viewport</code></h3>
+                    <p class="text-slate-600 mb-2">Lembra-se da Aula 1? Essa tag invisível no HTML é obrigatória. Sem ela, o telemóvel tenta encolher o site inteiro em vez de usar as regras responsivas.</p>
+                    <div class="syntax-box">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-amber-500">
-                    <h3 class="font-bold text-amber-700 mb-2"><code>event.preventDefault()</code> (O Bloqueador)</h3>
-                    <p class="text-slate-600 mb-2">Esta é a frase mágica. Quando colocamos isso dentro da função de submissão, impedimos a página de recarregar, permitindo que a nossa lógica do "Segurança" seja ativada no JS.</p>
-                    <div class="syntax-box">function(event) { event.preventDefault(); }</div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
+                    <h3 class="font-bold text-blue-700 mb-2"><code>@media</code> (O Radar)</h3>
+                    <p class="text-slate-600 mb-2">É um bloco condicional dentro do CSS. Funciona como o 'If/Else' do JavaScript, mas para estilos visuais.</p>
+                    <div class="syntax-box">@media (regra-de-tamanho) {<br>&nbsp;&nbsp;/* Novo CSS aqui */<br>}</div>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-amber-500">
-                    <h3 class="font-bold text-amber-700 mb-2"><code>&&</code> (O Operador "E")</h3>
-                    <p class="text-slate-600 mb-2">Na Aula 15, validámos apenas uma senha. No mundo real, você precisa do email correto <strong>E</strong> da senha correta. O <code>&&</code> une duas ou mais perguntas dentro do <code>if</code>.</p>
-                    <div class="syntax-box">if (email === "a@a.com" && senha === "123")</div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
+                    <h3 class="font-bold text-blue-700 mb-2"><code>max-width: 768px</code></h3>
+                    <p class="text-slate-600 mb-2">Lê-se: "Se a tela tiver <strong>no máximo</strong> 768px (tamanho de um tablet ou menor), aplique este estilo". É usado para adaptar um site de PC para Telemóvel.</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-amber-500">
-                    <h3 class="font-bold text-amber-700 mb-2"><code>window.location.href</code> (Redirecionamento)</h3>
-                    <p class="text-slate-600 mb-2">Se a validação estiver perfeita (o login for um sucesso), usamos este comando para enviar o utilizador para outra página HTML (como o Dashboard da Aula 18).</p>
-                    <div class="syntax-box">window.location.href = "dashboard.html";</div>
+                <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
+                    <h3 class="font-bold text-blue-700 mb-2"><code>min-width: 768px</code> (Mobile-First)</h3>
+                    <p class="text-slate-600 mb-2">Lê-se: "Se a tela tiver <strong>no mínimo</strong> 768px, aplique este estilo". No mundo profissional, criamos o site primeiro para telemóvel e usamos isto para adaptá-lo para PC depois!</p>
                 </div>
 
             </div>
@@ -125,102 +123,125 @@
         <!-- PRÁTICA EXPLICADA (O CÓDIGO FINAL) -->
         <section class="mb-20">
             <div class="flex items-center mb-8">
-                <div class="bg-emerald-100 p-3 rounded-full mr-4 text-emerald-700">
+                <div class="bg-blue-500 p-3 rounded-full mr-4 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Formulário Inteligente</h2>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Dashboard Mutante</h2>
             </div>
 
-            <p class="mb-8 text-slate-600 text-lg font-light">Vamos combinar o CSS Flexbox da Aula 17 com a Lógica Preventiva de JS. Este é o código que precederá o Firebase.</p>
+            <p class="mb-8 text-slate-600 text-lg font-light">Vamos pegar o nosso painel Grid da Aula 18 e fazê-lo "dobrar-se" para caber perfeitamente no telemóvel.</p>
 
             <div class="code-container">
 <pre><code><span class="comment">&lt;!-- =========================================================
-    ARQUIVO: index.html (Formulário da Aula 17 com IDs novos)
+    ARQUIVO 1: index.html
 ========================================================= --&gt;</span>
-<span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"caixa-login"</span><span class="tag">&gt;</span>
-    <span class="tag">&lt;h2&gt;</span>Sistema Central<span class="tag">&lt;/h2&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="comment">&lt;!-- Sem esta tag, o telemóvel ignora a responsividade! --&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="comment">&lt;!-- A mesma estrutura da Aula 18 --&gt;</span>
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"grid-container"</span><span class="tag">&gt;</span>
+        <span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="string">"menu-lateral"</span><span class="tag">&gt;</span>Menu Sistema<span class="tag">&lt;/nav&gt;</span>
+        <span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="string">"cabecalho"</span><span class="tag">&gt;</span>Bem-vindo!<span class="tag">&lt;/header&gt;</span>
+        <span class="tag">&lt;main</span> <span class="attr">class</span>=<span class="string">"conteudo-principal"</span><span class="tag">&gt;</span>Os meus gráficos e dados...<span class="tag">&lt;/main&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+
+
+<span class="comment">/* =========================================================
+    ARQUIVO 2: style.css (Abordagem PC -> Telemóvel)
+========================================================= */</span>
+<span class="css-selector">body</span> { <span class="css-prop">margin</span>: <span class="css-val">0</span>; <span class="css-prop">font-family</span>: <span class="css-val">sans-serif</span>; }
+
+<span class="comment">/* 1. LAYOUT PADRÃO (Para Ecrãs Grandes / PC) */</span>
+<span class="css-selector">.grid-container</span> {
+    <span class="css-prop">display</span>: <span class="css-val">grid</span>;
+    <span class="css-prop">grid-template-columns</span>: <span class="css-val">250px 1fr</span>; <span class="comment">/* Menu à esquerda, resto do site à direita */</span>
+    <span class="css-prop">grid-template-rows</span>: <span class="css-val">70px 1fr</span>;
+    <span class="css-prop">height</span>: <span class="css-val">100vh</span>;
+}
+
+<span class="css-selector">.menu-lateral</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#1e293b</span>;
+    <span class="css-prop">color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+    <span class="css-prop">grid-row</span>: <span class="css-val">1 / 3</span>; 
+    <span class="css-prop">grid-column</span>: <span class="css-val">1 / 2</span>;
+}
+
+<span class="css-selector">.cabecalho</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">white</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">20px</span>;
+    <span class="css-prop">box-shadow</span>: <span class="css-val">0 2px 5px rgba(0,0,0,0.1)</span>;
+}
+
+<span class="css-selector">.conteudo-principal</span> {
+    <span class="css-prop">background-color</span>: <span class="css-val">#f1f5f9</span>;
+    <span class="css-prop">padding</span>: <span class="css-val">30px</span>;
+}
+
+<span class="comment">/* ----------------------------------------------------
+   2. O RADAR MÁGICO (Media Query para Telemóveis)
+---------------------------------------------------- */</span>
+<span class="comment">/* Se a tela encolher para 768px ou menos... */</span>
+<span class="css-selector">@media (max-width: 768px)</span> {
     
-    <span class="comment">&lt;!-- IMPORTANTE: O formulário tem um ID agora --&gt;</span>
-    <span class="tag">&lt;form</span> <span class="attr">id</span>=<span class="string">"form-login"</span> <span class="attr">class</span>=<span class="string">"form-flex"</span><span class="tag">&gt;</span>
-        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"email"</span> <span class="attr">id</span>=<span class="string">"campo-email"</span> <span class="attr">class</span>=<span class="string">"meu-input"</span> <span class="attr">placeholder</span>=<span class="string">"E-mail"</span><span class="tag">&gt;</span>
-        <span class="tag">&lt;input</span> <span class="attr">type</span>=<span class="string">"password"</span> <span class="attr">id</span>=<span class="string">"campo-senha"</span> <span class="attr">class</span>=<span class="string">"meu-input"</span> <span class="attr">placeholder</span>=<span class="string">"Senha secreta"</span><span class="tag">&gt;</span>
+    <span class="comment">/* Redefinimos as regras do Container Pai */</span>
+    <span class="css-selector">.grid-container</span> {
+        <span class="comment">/* Tira as duas colunas. Fica apenas 1 coluna inteira (1fr)! */</span>
+        <span class="css-prop">grid-template-columns</span>: <span class="css-val">1fr</span>;
         
-        <span class="tag">&lt;button</span> <span class="attr">type</span>=<span class="string">"submit"</span> <span class="attr">class</span>=<span class="string">"meu-botao"</span><span class="tag">&gt;</span>Entrar<span class="tag">&lt;/button&gt;</span>
-    <span class="tag">&lt;/form&gt;</span>
-    
-    <span class="comment">&lt;!-- A nossa mensagem de feedback --&gt;</span>
-    <span class="tag">&lt;p</span> <span class="attr">id</span>=<span class="string">"mensagem-erro"</span> <span class="attr">style</span>=<span class="string">"color: red;"</span><span class="tag">&gt;&lt;/p&gt;</span>
-<span class="tag">&lt;/div&gt;</span>
-
-
-<span class="comment">// =========================================================
-//  ARQUIVO: script.js (A Lógica Profissional)
-// =========================================================</span>
-
-<span class="comment">// 1. PESCAR O FORMULÁRIO INTEIRO (Não apenas o botão!)</span>
-<span class="keyword">const</span> <span class="js-variable">formulario</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'#form-login'</span>);
-
-<span class="comment">// 2. OUVIR O EVENTO 'SUBMIT' DO FORMULÁRIO</span>
-<span class="comment">// Repare na palavra 'evento' sendo capturada na função</span>
-<span class="js-variable">formulario</span>.<span class="js-function">addEventListener</span>(<span class="string">'submit'</span>, <span class="keyword">function</span>(<span class="js-variable">evento</span>) {
-    
-    <span class="comment">// A FRASE MÁGICA: Impede o recarregamento da página</span>
-    <span class="js-variable">evento</span>.<span class="js-function">preventDefault</span>();
-    
-    <span class="comment">// Pescar os valores digitados NAQUELE MOMENTO</span>
-    <span class="keyword">let</span> <span class="js-variable">email</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'#campo-email'</span>).value;
-    <span class="keyword">let</span> <span class="js-variable">senha</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'#campo-senha'</span>).value;
-    <span class="keyword">const</span> <span class="js-variable">msgBox</span> = <span class="js-variable">document</span>.<span class="js-function">querySelector</span>(<span class="string">'#mensagem-erro'</span>);
-
-    <span class="comment">// 3. A LÓGICA DE VALIDAÇÃO DUPLA (E-mail e Senha)</span>
-    <span class="keyword">if</span> (<span class="js-variable">email</span> === <span class="string">"admin@etec.sp.gov.br"</span> && <span class="js-variable">senha</span> === <span class="string">"123456"</span>) {
-        
-        <span class="comment">// Sucesso! Oculta a mensagem de erro</span>
-        <span class="js-variable">msgBox</span>.textContent = <span class="string">""</span>;
-        
-        <span class="comment">// E redireciona para a página do Dashboard (Aula 18)</span>
-        <span class="js-variable">window</span>.<span class="js-variable">location</span>.<span class="js-variable">href</span> = <span class="string">"dashboard.html"</span>;
-        
-    } <span class="keyword">else</span> {
-        
-        <span class="comment">// Erro: Se uma das duas coisas estiver errada, exibe aviso</span>
-        <span class="js-variable">msgBox</span>.textContent = <span class="string">"Acesso negado! Credenciais inválidas."</span>;
-        
+        <span class="comment">/* Agora temos 3 linhas: Menu(topo), Cabeçalho(meio), Conteúdo(fundo) */</span>
+        <span class="css-prop">grid-template-rows</span>: <span class="css-val">auto auto 1fr</span>;
     }
-});
+
+    <span class="comment">/* O Menu Lateral, que ocupava 2 linhas de altura, agora ocupa apenas a sua */</span>
+    <span class="css-selector">.menu-lateral</span> {
+        <span class="css-prop">grid-row</span>: <span class="css-val">1 / 2</span>;
+        <span class="css-prop">grid-column</span>: <span class="css-val">1 / 2</span>;
+        <span class="css-prop">text-align</span>: <span class="css-val">center</span>; <span class="comment">/* Centraliza o texto no telemóvel */</span>
+    }
+}
 </code></pre>
             </div>
         </section>
 
         <!-- ATIVIDADE DE MODIFICAÇÃO -->
-        <section class="bg-amber-900 p-12 rounded-3xl text-white shadow-2xl">
+        <section class="bg-blue-900 p-12 rounded-3xl text-white shadow-2xl">
             <div class="flex items-center mb-8">
-                <div class="bg-amber-500 p-3 rounded-full mr-4 text-white">
+                <div class="bg-blue-500 p-3 rounded-full mr-4 text-white">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold font-mono text-amber-100">3. Atividade: O Inspetor de Dados</h2>
+                <h2 class="text-3xl font-bold font-mono text-blue-100">3. Atividade: O Inspetor de Telas</h2>
             </div>
 
-            <p class="mb-10 text-amber-100 text-lg font-light italic">Quebre e repare o código para dominar os formulários!</p>
+            <p class="mb-10 text-blue-100 text-lg font-light italic">Para testar isto, abra o seu site e redimensione a janela do navegador arrastando a borda, ou pressione F12 e clique no ícone de telemóvel!</p>
 
-            <div class="space-y-6 text-amber-950">
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
-                    <p class="font-medium"><strong>O F5 Maldito:</strong> No JS, comente a linha <code>// evento.preventDefault();</code> colocando duas barras na frente. Tente fazer o login e perceba como a tela "pisca" (recarrega) e a sua mensagem de erro desaparece instantaneamente. Depois, descomente a linha para consertar.</p>
+            <div class="space-y-6 text-blue-950">
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
+                    <p class="font-medium"><strong>Mudança de Cor:</strong> Dentro do bloco do <code>@media</code>, adicione uma regra para mudar a cor de fundo (<code>background-color</code>) do <code>.cabecalho</code> para azul claro. Veja como a cor muda sozinha quando você encolhe a tela!</p>
                 </div>
                 
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
-                    <p class="font-medium"><strong>Validação Inteligente:</strong> Adicione um <code>if</code> extra (antes da validação da senha) para verificar se o campo está vazio: <code>if (email === "") { msgBox.textContent = "Preencha o e-mail!"; }</code>. Isso evitará requisições inúteis ao banco de dados depois.</p>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">2</span>
+                    <p class="font-medium"><strong>Esconder Elementos:</strong> É muito comum escondermos coisas pesadas no telemóvel. Crie um parágrafo longo dentro do <code>main</code> com a classe <code>.texto-pesado</code>. Dentro do <code>@media</code>, adicione a regra <code>.texto-pesado { display: none; }</code>. O texto vai sumir apenas no mobile!</p>
                 </div>
 
-                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-amber-500 relative">
-                    <span class="bg-amber-100 text-amber-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
-                    <p class="font-medium"><strong>Teste de Segurança:</strong> Em vez do operador E (<code>&&</code>), mude a validação para o operador OU (<code>||</code>). Tente fazer o login colocando o email certo, mas a senha de outra pessoa. O sistema bloqueia ou permite? Por que o operador OU é perigoso em logins?</p>
+                <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
+                    <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
+                    <p class="font-medium"><strong>Invertendo o Layout:</strong> O menu lateral no telemóvel foi para o topo (linha 1). Consegue alterar a lógica do Grid dentro do <code>@media</code> para que ele vá para o rodapé (linha 3), ficando abaixo do conteúdo principal?</p>
                 </div>
             </div>
         </section>
@@ -229,8 +250,8 @@
 
     <footer class="bg-slate-900 text-slate-400 text-center py-16 px-6">
         <p class="max-w-4xl mx-auto">
-            Aula 19 concluída. O formulário não pisca e os dados estão controlados!<br>
-            A Caminho do <strong>Projeto Final: Integração total com Firebase e Deploy</strong>.
+            Aula 19 concluída. O seu site agora é fluido e sobrevive em qualquer aparelho!<br>
+            A Caminho do <strong>Projeto Final: JS Avançado e Tratamento de Formulários</strong>.
         </p>
     </footer>
 
