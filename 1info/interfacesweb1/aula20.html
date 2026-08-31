@@ -62,11 +62,11 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z" />
                     </svg>
                 </div>
-                <h2 class="text-3xl font-bold text-slate-800 font-mono">Um Site, Múltiplos Ecrãs</h2>
+                <h2 class="text-3xl font-bold text-slate-800 font-mono">Um Site, Múltiplas Telas</h2>
             </div>
 
             <p class="text-lg text-slate-700 mb-6 font-medium">
-                Pense no nosso Projeto Final (O Sistema de Login e Dashboard). Ele precisa de funcionar no monitor gigante do laboratório da escola, mas também no telemóvel do utilizador no autocarro, ou no ecrã de um tablet de 10 polegadas.
+                Pense no nosso Projeto Final (O Sistema de Login e Dashboard). Ele precisa de funcionar no monitor gigante do laboratório da escola, mas também no Smartphone do utilizador, ou na tela de um tablet de 10 polegadas.
             </p>
 
             <div class="bg-slate-50 p-6 rounded-2xl border-l-4 border-blue-500 shadow-sm mt-8 mb-8">
@@ -75,17 +75,17 @@
                     Como dizia Bruce Lee: <em>"Se colocar água num copo, ela torna-se no copo. Se colocar numa garrafa, torna-se na garrafa."</em> 
                 </p>
                 <p class="text-sm text-slate-600">
-                    O nosso site deve ser como a água. Chamamos a isso <strong>Design Responsivo</strong>. Em vez de criar um site para computador e outro site diferente para telemóvel (como se fazia nos anos 2000), nós criamos <strong>um único código CSS</strong> com "radares" que detetam o tamanho da tela e mudam o layout em tempo real!
+                    O nosso site deve ser como a água. Chamamos a isso <strong>Design Responsivo</strong>. Em vez de criar um site para computador e outro site diferente para SmartPhone (como se fazia nos anos 2000), nós criamos <strong>um único código CSS</strong> com "radares" que detetam o tamanho da tela e mudam o layout em tempo real!
                 </p>
             </div>
 
             <h3 class="text-2xl font-bold text-slate-800 font-mono mb-4 border-b pb-2">Mobile-First vs Desktop-First</h3>
             <p class="text-slate-600 mb-4">
-                Existem duas formas de escrever a responsividade. A mentalidade moderna dita que devemos desenhar para a tela mais difícil primeiro: o telemóvel.
+                Existem duas formas de escrever a responsividade. A mentalidade moderna dita que devemos desenhar para a tela mais difícil primeiro: o SmartPhone.
             </p>
             <ul class="list-disc pl-6 text-slate-600 space-y-2">
                 <li><strong>Desktop-First (max-width):</strong> Você constrói o site para o PC. Depois, diz ao CSS: "Se a tela tiver <em>no máximo</em> 768px, aplique estas restrições". O código tende a ficar cheio de "remendos".</li>
-                <li><strong>Mobile-First (min-width):</strong> Você constrói o CSS padrão pensando num ecrã pequeno e numa só coluna. Depois, você diz: "Se a tela crescer e tiver <em>no mínimo</em> 1024px, coloque as colunas lado a lado". É mais rápido, mais leve e é o padrão da indústria.</li>
+                <li><strong>Mobile-First (min-width):</strong> Você constrói o CSS padrão pensando numa tela pequena e numa só coluna. Depois, você diz: "Se a tela crescer e tiver <em>no mínimo</em> 1024px, coloque as colunas lado a lado". É mais rápido, mais leve e é o padrão da indústria.</li>
             </ul>
         </section>
 
@@ -106,7 +106,7 @@
                 
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
                     <h3 class="font-bold text-blue-700 mb-2">A Tag <code>viewport</code></h3>
-                    <p class="text-slate-600 mb-2">Fundamental! Sem ela, o telemóvel tentará "espremer" o site de desktop para caber na tela, ignorando os nossos Media Queries.</p>
+                    <p class="text-slate-600 mb-2">Fundamental! Sem ela, o SmartPhone tentará "espremer" o site de desktop para caber na tela, ignorando os nossos Media Queries.</p>
                     <div class="syntax-box">&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</div>
                 </div>
 
@@ -118,7 +118,7 @@
 
                 <div class="bg-white p-6 rounded-xl shadow-sm border border-slate-200 border-l-4 border-blue-500">
                     <h3 class="font-bold text-blue-700 mb-2">A Matemática dos Espaços</h3>
-                    <p class="text-slate-600 mb-2">Responsividade não é só empilhar colunas. Num telemóvel, <code>padding: 50px</code> é um desperdício enorme de tela! Devemos sempre reduzir os espaçamentos internos.</p>
+                    <p class="text-slate-600 mb-2">Responsividade não é só empilhar colunas. Num SmartPhone, <code>padding: 50px</code> é um desperdício enorme de tela! Devemos sempre reduzir os espaçamentos internos.</p>
                     <div class="syntax-box">.caixa { padding: 15px; } /* no mobile */</div>
                 </div>
 
@@ -126,7 +126,7 @@
                     <h3 class="font-bold text-blue-700 mb-2">Breakpoints Clássicos do Mercado</h3>
                     <p class="text-slate-600 mb-2">Estes são os valores mais utilizados pelas empresas na hora de criar radares responsivos:</p>
                     <ul class="list-disc pl-4 text-slate-500 mt-2">
-                        <li><strong>480px:</strong> Telemóveis pequenos.</li>
+                        <li><strong>480px:</strong> SmartPhones pequenos.</li>
                         <li><strong>768px:</strong> Tablets (ex: iPad) em pé.</li>
                         <li><strong>1024px:</strong> Tablets deitados / Laptops.</li>
                     </ul>
@@ -146,7 +146,7 @@
                 <h2 class="text-3xl font-bold text-slate-900 font-mono">2. Prática: O Dashboard Mutante</h2>
             </div>
 
-            <p class="mb-8 text-slate-600 text-lg font-light">Vamos pegar no painel Grid da Aula 18 e fazê-lo "dobrar-se" para caber perfeitamente no telemóvel usando a estratégia <strong>Desktop-First</strong> (para entenderem como desconstruir o layout).</p>
+            <p class="mb-8 text-slate-600 text-lg font-light">Vamos pegar no painel Grid da Aula 18 e fazê-lo "dobrar-se" para caber perfeitamente no SmartPhone usando a estratégia <strong>Desktop-First</strong> (para entenderem como desconstruir o layout).</p>
 
             <div class="code-container">
 <pre><code><span class="comment">&lt;!-- =========================================================
@@ -155,7 +155,7 @@
 <span class="tag">&lt;!DOCTYPE html&gt;</span>
 <span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;head&gt;</span>
-    <span class="comment">&lt;!-- Sem esta tag, o telemóvel ignora a responsividade! --&gt;</span>
+    <span class="comment">&lt;!-- Sem esta tag, o SmartPhone ignora a responsividade! --&gt;</span>
     <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
     <span class="tag">&lt;link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"style.css"</span><span class="tag">&gt;</span>
 <span class="tag">&lt;/head&gt;</span>
@@ -183,7 +183,7 @@
 ========================================================= */</span>
 <span class="css-selector">body</span> { <span class="css-prop">margin</span>: <span class="css-val">0</span>; <span class="css-prop">font-family</span>: <span class="css-val">sans-serif</span>; }
 
-<span class="comment">/* 1. LAYOUT BASE (Desenhado para Ecrãs Grandes) */</span>
+<span class="comment">/* 1. LAYOUT BASE (Desenhado para Telas Grandes) */</span>
 <span class="css-selector">.grid-container</span> {
     <span class="css-prop">display</span>: <span class="css-val">grid</span>;
     <span class="css-prop">grid-template-columns</span>: <span class="css-val">250px 1fr</span>; <span class="comment">/* Menu à esquerda */</span>
@@ -219,7 +219,7 @@
 }
 
 <span class="comment">/* ----------------------------------------------------
-   2. O RADAR MÁGICO (Media Query para Telemóveis)
+   2. O RADAR MÁGICO (Media Query para SmartPhones)
 ---------------------------------------------------- */</span>
 <span class="comment">/* Se a tela encolher para 768px (Tablet) ou menos... */</span>
 <span class="css-selector">@media (max-width: 768px)</span> {
@@ -257,7 +257,7 @@
                 
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
                     <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">1</span>
-                    <p class="font-medium"><strong>O Sumiço Espacial (Ocultar):</strong> O elemento <code>.aviso-pc</code> ocupa muito espaço na pequena tela do telemóvel e não é vital. Escreva uma regra <strong>dentro do bloco @media</strong> para ocultá-lo completamente usando a propriedade de display correta.</p>
+                    <p class="font-medium"><strong>O Sumiço Espacial (Ocultar):</strong> O elemento <code>.aviso-pc</code> ocupa muito espaço na pequena tela do SmartPhone e não é vital. Escreva uma regra <strong>dentro do bloco @media</strong> para ocultá-lo completamente usando a propriedade de display correta.</p>
                 </div>
                 
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
@@ -267,7 +267,7 @@
 
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
                     <span class="bg-blue-100 text-blue-800 w-8 h-8 rounded-full flex items-center justify-center mr-4 shrink-0 font-bold">3</span>
-                    <p class="font-medium"><strong>Dança das Cadeiras (Grid Row):</strong> O Menu Lateral saltou para o topo do telemóvel. No entanto, é melhor a nível de navegação que ele fique na parte inferior do ecrã (perto do polegar). Altere a propriedade <code>grid-row</code> do <code>.menu-lateral</code> dentro do @media para que ele vá para a última linha do container, e suba o cabeçalho e conteúdo.</p>
+                    <p class="font-medium"><strong>Dança das Cadeiras (Grid Row):</strong> O Menu Lateral saltou para o topo do SmartPhone. No entanto, é melhor a nível de navegação que ele fique na parte inferior da tela (perto do polegar). Altere a propriedade <code>grid-row</code> do <code>.menu-lateral</code> dentro do @media para que ele vá para a última linha do container, e suba o cabeçalho e conteúdo.</p>
                 </div>
 
                 <div class="bg-white p-6 rounded-xl shadow-md flex items-start border-l-8 border-blue-500">
@@ -282,7 +282,7 @@
                         <p class="text-slate-300 text-sm mb-3">Até agora criámos o site grande e cortámo-lo com o <code>max-width</code>. Isso está obsoleto! Inverta a lógica.</p>
                         <ul class="text-slate-300 text-sm space-y-1 list-disc ml-5">
                             <li>Remova todos os <code>@media</code>.</li>
-                            <li>Escreva o CSS padrão (fora dos @media) para que ele seja a visualização em 1 só coluna (Telemóvel).</li>
+                            <li>Escreva o CSS padrão (fora dos @media) para que ele seja a visualização em 1 só coluna (SmartPhone).</li>
                             <li>Crie um <strong>novo</strong> <code>@media (min-width: 768px)</code> e coloque dentro dele apenas o código necessário para esticar a tela de volta a 2 colunas para o Desktop!</li>
                         </ul>
                     </div>
