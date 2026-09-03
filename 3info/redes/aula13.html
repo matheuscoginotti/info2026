@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 13 - Instalando o VirtualBox e Criando a VM</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-image: 
+                linear-gradient(var(--border-tech) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border-tech) 1px, transparent 1px);
+            background-size: 50px 50px;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky; top: 0; z-index: 10;
+            display: flex; align-items: center; justify-content: space-between;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600; font-size: 1.1rem;
+            text-transform: uppercase; letter-spacing: 1px;
+            display: flex; align-items: center; gap: 8px;
+            transition: color 0.3s ease;
+        }
+        .btn-back:hover { color: var(--text-primary); }
+
+        header h1 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.5rem; color: var(--text-primary);
+            text-transform: uppercase; letter-spacing: 1px; text-align: center;
+        }
+        .header-spacer { width: 80px; }
+
+        .lesson-container { width: 100%; max-width: 850px; padding: 3rem 20px; z-index: 2; }
+        .lesson-title { font-family: 'Rajdhani', sans-serif; font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem; line-height: 1.1; }
+        .lesson-meta { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border-tech); padding-bottom: 1rem; }
+
+        .content { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+        .content h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; color: var(--accent-blue); margin-top: 3.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-tech); padding-bottom: 10px; }
+        .content p { margin-bottom: 1.5rem; }
+        .content ul { margin-bottom: 1.5rem; padding-left: 2rem; }
+        .content li { margin-bottom: 0.8rem; }
+
+        .highlight-box { background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-blue); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; }
+        .highlight-box.success { background: rgba(16, 185, 129, 0.1); border-left-color: var(--accent-green); }
+        .highlight-box strong { display: block; margin-bottom: 0.5rem; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: var(--text-primary); text-transform: uppercase; display: flex; align-items: center; gap: 8px; }
+
+        .code-container { background-color: rgba(15, 23, 42, 0.8); border: 1px solid var(--border-tech); border-left: 4px solid var(--accent-green); padding: 1.5rem; border-radius: 8px; font-family: 'Consolas', monospace; font-size: 0.95rem; overflow-x: auto; margin: 2rem 0; color: #d4d4d4; box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+        .code-container .comment { color: #6a9955; font-style: italic; }
+        .code-container .tag { color: #569cd6; font-weight: bold; }
+
+        .lesson-nav { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-tech); }
+        .btn-nav { padding: 0.8rem 1.5rem; background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-tech); border-radius: 8px; text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; }
+        .btn-nav:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
+    </header>
+
+    <main class="lesson-container">
+        
+        <h1 class="lesson-title">Aula 13: Instalando o VirtualBox e Criando a VM</h1>
+        <div class="lesson-meta">
+            <i class="far fa-calendar-alt"></i> Módulo 3 • Professor: Matheus M. Coginotti
+        </div>
+
+        <div class="content">
+            
+            <p>Para testar um ambiente corporativo sem precisar comprar um computador físico dedicado, utilizamos a <strong>Virtualização</strong>. O <strong>Oracle VM VirtualBox</strong> é a ferramenta padrão de mercado que nos permite criar um "computador dentro do computador".</p>
+
+            <h2><i class="fas fa-laptop-code"></i> 1. O que é uma Máquina Virtual (VM)?</h2>
+            <p>Uma Máquina Virtual é um software que emula um hardware completo (Processador, Memória RAM, Placa de Vídeo e HD) rodando isoladamente dentro do seu sistema operacional principal. Ela consegue rodar um sistema operacional separado (como o Windows Server) usando os recursos compartilhados do seu PC real.</p>
+
+            <h2><i class="fas fa-cogs"></i> 2. Parâmetros Recomendados para a VM</h2>
+            <ul>
+                <li><strong>Nome da Máquina:</strong> <code>DC-InovaTech</code> (Controlador de Domínio).</li>
+                <li><strong>Imagem ISO:</strong> Selecione o arquivo ISO oficial de instalação do Windows Server.</li>
+                <li><strong>Memória RAM:</strong> Aloque de <strong>2 GB a 4 GB (2048 MB a 4096 MB)</strong>.</li>
+                <li><strong>Processadores (CPU):</strong> Defina pelo menos <strong>2 núcleos</strong>.</li>
+                <li><strong>Disco Rígido Virtual (VHD):</strong> Crie um disco dinâmico de <strong>50 GB</strong>.</li>
+            </ul>
+
+            <div class="code-container">
+<span class="comment"># DICA DE REDE NO VIRTUALBOX PARA SERVIDORES</span>
+Antes de ligar a máquina recém-criada, vá nas <strong>Configurações da VM > Rede</strong>.
+Mude o modo de conexão de <em>NAT</em> para <span class="tag">Placa em Modo Bridge (Modo Promíscuo)</span>.
+Isso fará com que o Windows Server receba um IP direto da rede real, permitindo comunicação com outras máquinas!
+            </div>
+
+            <div class="highlight-box success">
+                <strong><i class="fas fa-check-circle"></i> Mão na Massa</strong>
+                <p>Abra o VirtualBox, crie a VM com os parâmetros acima, insira a ISO do Windows Server e deixe a máquina pronta para iniciar a instalação.</p>
+            </div>
+
+        </div>
+
+        <!-- Navegação -->
+        <div class="lesson-nav">
+            <a href="aula12.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula14.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+
+    </main>
+
+</body>
+</html>
