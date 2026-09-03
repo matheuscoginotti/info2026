@@ -265,36 +265,36 @@
 
         <div class="content">
             
-            <p>Chegou a hora de unirmos toda a teoria de redes, protocolos e segurança em um grande projeto corporativo prático! Vamos simular a implantação de uma infraestrutura de TI completa utilizando o <strong>Windows Server</strong>, o <strong>Active Directory (AD)</strong> e as políticas de controle empresarial.</p>
+            <p>Chegou a hora de unirmos toda a teoria de redes, protocolos e segurança em um grande projeto prático! Vamos simular a implantação de uma infraestrutura corporativa completa utilizando o <strong>Windows Server</strong>, o <strong>Active Directory (AD)</strong> e as políticas de controle empresarial.</p>
 
-            <h2><i class="fas fa-building"></i> 1. O Cenário: Conhecendo a "InovaTech Soluções"</h2>
-            <p>Cada aluno criará uma empresa fictícia de tecnologia chamada <strong>InovaTech Soluções Ltda.</strong> (com o domínio de rede <code>inovatech.local</code>). O objetivo é estruturar o ambiente para que os funcionários trabalhem de forma segura e organizada.</p>
+            <h2><i class="fas fa-building"></i> 1. A Escolha da Empresa Fictícia (Livre Escolha)</h2>
+            <p>O primeiro passo do projeto é a concepção da sua própria organização. O tema é de <strong>livre escolha</strong>: você pode criar uma empresa de desenvolvimento de software, uma rede de lojas de roupas, uma fintech, um estúdio de design, um hospital ou qualquer outro modelo de negócio.</p>
             
-            <p>Para isso, a empresa possui divisões departamentais reais que precisam de restrições e acessos controlados:</p>
+            <p>Cada aluno deve definir:</p>
             <ul>
-                <li><strong>Diretoria:</strong> Acesso total a pastas confidenciais e privilégios administrativos.</li>
-                <li><strong>Financeiro:</strong> Setor com restrições rígidas de navegação e salvamento exclusivo de arquivos no servidor corporativo.</li>
-                <li><strong>TI (Suporte):</strong> Usuários com permissões avançadas de suporte técnico local.</li>
+                <li><strong>Nome da Empresa e Domínio:</strong> Ex: <code>minhaempresa.local</code>.</li>
+                <li><strong>Ramo de Atuação:</strong> O que a empresa faz e quais são os seus ativos de informação mais valiosos (ex: código-fonte, dados de clientes, planilhas financeiras).</li>
+                <li><strong>Departamentos Principais:</strong> As divisões de trabalho que necessitarão de acessos isolados (ex: Diretoria, Financeiro, Desenvolvimento, Atendimento).</li>
             </ul>
 
-            <h2><i class="fas fa-sitemap"></i> 2. O Planejamento das OUs (Organizational Units)</h2>
-            <p>No Active Directory, não jogamos todos os usuários e computadores em um único lugar bagunçado. Criamos <strong>Unidades Organizacionais (OUs)</strong>, que funcionam como pastas hierárquicas dentro da empresa para organizar e aplicar regras em lote.</p>
+            <h2><i class="fas fa-sitemap"></i> 2. Estruturando as OUs (Unidades Organizacionais)</h2>
+            <p>Com base na proposta da sua empresa, criaremos as <strong>OUs</strong> no Active Directory. Elas funcionam como pastas hierárquicas que agruparão os usuários e computadores de cada setor para facilitar a administração.</p>
 
             <div class="code-container">
-<span class="comment"># ESTRUTURA HIERÁRQUICA DA EMPRESA (OUs)</span>
-inovatech.local (Domínio Principal)
-├── 📂 <span class="tag">Diretoria</span> (Contém os usuários diretores e suas máquinas)
-├── 📂 <span class="tag">Financeiro</span> (Contém os analistas de contas e PCs do setor)
-├── 📂 <span class="tag">TI</span> (Contém os técnicos e administradores de rede)
-└── 📂 <span class="tag">Computadores_Gerais</span> (Estações de trabalho comuns)
+<span class="comment"># EXEMPLO DE HIERARQUIA DE OUs PARA O PROJETO</span>
+suaempresa.local (Domínio Principal)
+├── 📂 <span class="tag">Diretoria</span> (Acesso irrestrito e gerencial)
+├── 📂 <span class="tag">Financeiro</span> (Controle rígido de dados e bloqueios)
+├── 📂 <span class="tag">Operacional / Setor Técnico</span> (Estações de trabalho padrão)
+└── 📂 <span class="tag">Computadores</span> (Recursos de hardware da rede)
             </div>
 
-            <h2><i class="fas fa-shield-alt"></i> 3. O Papel das GPOs (Group Policy Objects)</h2>
-            <p>Com as OUs estruturadas, aplicaremos as <strong>GPOs</strong> para automatizar a segurança, como bloquear o painel de controle ou forçar papel de parede corporativo padronizado.</p>
+            <h2><i class="fas fa-shield-alt"></i> 3. O Propósito Real das GPOs (Group Policy Objects)</h2>
+            <p>A grande sacada deste projeto é que <strong>as GPOs não serão criadas de forma aleatória</strong>. Elas devem ser justificadas pela proposta e pelos riscos do negócio da sua empresa escolhida.</p>
 
             <div class="highlight-box success">
-                <strong><i class="fas fa-tasks"></i> Etapa 1 do Projeto (Planejamento)</strong>
-                <p>Defina o nome da sua empresa fictícia, crie a árvore com pelo menos 3 OUs departamentais e liste 1 usuário fictício para cada setor que será cadastrado no AD nas próximas aulas.</p>
+                <strong><i class="fas fa-lightbulb"></i> GPOs Personalizadas pela Proposta da Empresa</strong>
+                <p>Se o aluno escolheu uma clínica médica, por exemplo, a GPO do setor de recepção pode exigir bloqueio de tela rápido e proibição de USBs. Se escolheu uma agência de publicidade, o foco pode ser outro. O aluno deve planejar quais restrições de segurança cada departamento precisa ter com base na realidade da sua empresa fictícia.</p>
             </div>
 
         </div>
