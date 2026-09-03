@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projeto Prático - Infraestrutura Corporativa com Windows Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-color: #0f172a; 
+            --card-bg: rgba(30, 41, 59, 0.85);
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-gold: #d4af37;
+            --accent-blue: #38bdf8;
+            --accent-green: #10b981;
+            --border-tech: rgba(148, 163, 184, 0.2);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        header {
+            width: 100%;
+            background: rgba(15, 23, 42, 0.95);
+            border-bottom: 1px solid var(--accent-blue);
+            padding: 1.5rem 20px;
+            position: sticky; top: 0; z-index: 10;
+            display: flex; align-items: center; justify-content: space-between;
+            backdrop-filter: blur(10px);
+        }
+
+        .btn-back {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-family: 'Rajdhani', sans-serif;
+            font-weight: 600; font-size: 1.1rem;
+            text-transform: uppercase;
+            display: flex; align-items: center; gap: 8px;
+        }
+
+        .lesson-container {
+            width: 100%; max-width: 850px; padding: 3rem 20px;
+        }
+
+        .lesson-title {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2.8rem;
+            color: var(--accent-gold);
+            margin-bottom: 1rem;
+        }
+
+        .lesson-meta {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 3rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 1rem;
+        }
+
+        .content { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+        .content h2 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 2rem;
+            color: var(--accent-blue);
+            margin-top: 3rem; margin-bottom: 1rem;
+            border-bottom: 1px solid var(--border-tech);
+            padding-bottom: 8px;
+        }
+
+        .content h3 {
+            font-family: 'Rajdhani', sans-serif;
+            font-size: 1.35rem;
+            color: var(--text-primary);
+            margin-top: 2rem; margin-bottom: 0.8rem;
+        }
+
+        .content p { margin-bottom: 1.5rem; }
+        .content ul { margin-bottom: 1.5rem; padding-left: 2rem; }
+        .content li { margin-bottom: 0.8rem; }
+
+        .code-container {
+            background-color: rgba(15, 23, 42, 0.9);
+            border: 1px solid var(--border-tech);
+            border-left: 4px solid var(--accent-green);
+            padding: 1.5rem;
+            border-radius: 8px;
+            font-family: 'Consolas', monospace;
+            font-size: 0.95rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            color: #d4d4d4;
+        }
+
+        .exercise-box {
+            background: rgba(212, 175, 55, 0.1);
+            border-left: 4px solid var(--accent-gold);
+            padding: 1.5rem; border-radius: 0 8px 8px 0;
+            margin: 2rem 0;
+        }
+        .exercise-box strong {
+            display: block; font-family: 'Rajdhani', sans-serif;
+            font-size: 1.2rem; color: var(--text-primary);
+            text-transform: uppercase; margin-bottom: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar ao Módulo</a>
+        <h1>Redes & Segurança • Projeto Prático</h1>
+        <div style="width: 80px;"></div>
+    </header>
+
+    <main class="lesson-container">
+        <h1 class="lesson-title">Projeto Prático: O Cenário da Empresa Fictícia e OUs</h1>
+        <div class="lesson-meta"><i class="far fa-calendar-alt"></i> Repositório Info 2026 • Professor: Matheus M. Coginotti</div>
+
+        <div class="content">
+            <p>Chegou a hora de unirmos toda a teoria de redes, protocolos, portas e segurança em um grande projeto corporativo prático! Vamos simular a implantação de uma infraestrutura de TI completa utilizando o <strong>Windows Server</strong>, o <strong>Active Directory (AD)</strong> e as políticas de controle empresarial.</p>
+
+            <h2><i class="fas fa-building"></i> 1. O Cenário: Conhecendo a "InovaTech Soluções"</h2>
+            <p>Cada aluno (ou dupla) criará uma empresa fictícia de tecnologia chamada <strong>InovaTech Soluções Ltda.</strong> (com o domínio de rede <code>inovatech.local</code>). O objetivo é estruturar o ambiente para que os funcionários trabalhem de forma segura e organizada.</p>
+            
+            <p>Para isso, a empresa possui divisões departamentais reais que precisam de restrições e acessos controlados:</p>
+            <ul>
+                <li><strong>Diretoria:</strong> Acesso total a pastas confidenciais e privilégios administrativos.</li>
+                <li><strong>Financeiro:</strong> Setor com restrições rígidas de navegação na internet e salvamento exclusivo de planilhas no servidor corporativo.</li>
+                <li><strong>TI (Suporte):</strong> Usuários com permissões avançadas de suporte técnico local.</li>
+            </ul>
+
+            <h2><i class="fas fa-sitemap"></i> 2. O Planejamento das OUs (Organizational Units)</h2>
+            <p>No Active Directory, não jogamos todos os usuários e computadores em um único lugar bagunçado. Criamos <strong>Unidades Organizacionais (OUs)</strong>, que funcionam como pastas hierárquicas dentro da empresa para organizar e aplicar regras em lote.</p>
+
+            <div class="code-container">
+<span style="color: #6a9955;"># ESTRUTURA HIERÁRQUICA DA EMPRESA (OUs)</span><br>
+inovatech.local (Domínio Principal)<br>
+├── 📂 <strong>Diretoria</strong> (Contém os usuários diretores e suas máquinas)<br>
+├── 📂 <strong>Financeiro</strong> (Contém os analistas de contas e PCs do setor)<br>
+├── 📂 <strong>TI</strong> (Contém os técnicos e administradores de rede)<br>
+└── 📂 <strong>Computadores_Gerais</strong> (Estações de trabalho comuns)
+            </div>
+
+            <h2><i class="fas fa-shield-alt"></i> 3. O Papel das GPOs (Group Policy Objects)</h2>
+            <p>Com as OUs estruturadas, aplicaremos as <strong>GPOs</strong> para automatizar a segurança. Por exemplo: criaremos uma diretiva que obriga o bloqueio automático de tela após 5 minutos de inatividade para o setor Financeiro, ou que oculta o Painel de Controle de computadores comuns.</p>
+
+            <div class="exercise-box">
+                <strong><i class="fas fa-tasks"></i> Etapa 1 do Projeto (No Caderno ou Documento)</strong>
+                <ol style="margin-left: 20px; line-height: 1.8;">
+                    <li>Defina o nome da sua própria empresa fictícia e qual será o sufixo do seu domínio de rede (ex: <code>suaempresa.local</code>).</li>
+                    <li>Desenhe a estrutura de pelo menos <strong>3 OUs (Departamentos)</strong> que sua empresa terá.</li>
+                    <li>Crie uma lista com o nome de 1 usuário fictício para cada departamento que será cadastrado posteriormente no Active Directory.</li>
+                </ol>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
