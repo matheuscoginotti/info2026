@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 17 - DNS no Windows Server</title>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root { --bg-color: #0f172a; --card-bg: rgba(30, 41, 59, 0.85); --text-primary: #f1f5f9; --text-secondary: #94a3b8; --accent-gold: #d4af37; --accent-blue: #38bdf8; --accent-green: #10b981; --border-tech: rgba(148, 163, 184, 0.2); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { background-color: var(--bg-color); color: var(--text-primary); font-family: 'Roboto', sans-serif; min-height: 100vh; display: flex; flex-direction: column; align-items: center; overflow-x: hidden; position: relative; }
+        body::before { content: ''; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(var(--border-tech) 1px, transparent 1px), linear-gradient(90deg, var(--border-tech) 1px, transparent 1px); background-size: 50px 50px; opacity: 0.15; z-index: -1; pointer-events: none; }
+        header { width: 100%; background: rgba(15, 23, 42, 0.95); border-bottom: 1px solid var(--accent-blue); padding: 1.5rem 20px; position: sticky; top: 0; z-index: 10; display: flex; align-items: center; justify-content: space-between; backdrop-filter: blur(10px); box-shadow: 0 4px 20px rgba(0,0,0,0.5); }
+        .btn-back { color: var(--accent-blue); text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 600; font-size: 1.1rem; text-transform: uppercase; letter-spacing: 1px; display: flex; align-items: center; gap: 8px; transition: color 0.3s ease; }
+        .btn-back:hover { color: var(--text-primary); }
+        header h1 { font-family: 'Rajdhani', sans-serif; font-size: 1.5rem; color: var(--text-primary); text-transform: uppercase; letter-spacing: 1px; text-align: center; }
+        .header-spacer { width: 80px; }
+        .lesson-container { width: 100%; max-width: 850px; padding: 3rem 20px; z-index: 2; }
+        .lesson-title { font-family: 'Rajdhani', sans-serif; font-size: 3rem; color: var(--accent-gold); margin-bottom: 1rem; line-height: 1.1; }
+        .lesson-meta { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 3rem; border-bottom: 1px solid var(--border-tech); padding-bottom: 1rem; }
+        .content { font-size: 1.1rem; line-height: 1.8; color: #cbd5e1; }
+        .content h2 { font-family: 'Rajdhani', sans-serif; font-size: 2rem; color: var(--accent-blue); margin-top: 3.5rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 10px; border-bottom: 1px solid var(--border-tech); padding-bottom: 10px; }
+        .content p, .content ul { margin-bottom: 1.5rem; }
+        .content ul { padding-left: 2rem; }
+        .content li { margin-bottom: 0.8rem; }
+        .highlight-box { background: rgba(56, 189, 248, 0.1); border-left: 4px solid var(--accent-blue); padding: 1.5rem; border-radius: 0 8px 8px 0; margin: 2rem 0; }
+        .highlight-box.warning { background: rgba(212, 175, 55, 0.1); border-left-color: var(--accent-gold); }
+        .highlight-box strong { display: flex; align-items: center; gap: 8px; margin-bottom: 0.5rem; font-family: 'Rajdhani', sans-serif; font-size: 1.2rem; letter-spacing: 1px; color: var(--text-primary); text-transform: uppercase; }
+        .lesson-nav { display: flex; justify-content: space-between; margin-top: 4rem; padding-top: 2rem; border-top: 1px solid var(--border-tech); }
+        .btn-nav { padding: 0.8rem 1.5rem; background: var(--card-bg); color: var(--text-primary); border: 1px solid var(--border-tech); border-radius: 8px; text-decoration: none; font-family: 'Rajdhani', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; transition: all 0.3s ease; display: flex; align-items: center; gap: 10px; }
+        .btn-nav:hover { background: var(--accent-blue); color: #0f172a; border-color: var(--accent-blue); }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="../redes.html" class="btn-back"><i class="fas fa-arrow-left"></i> Voltar</a>
+        <h1>Informática para Internet</h1>
+        <div class="header-spacer"></div>
+    </header>
+    <main class="lesson-container">
+        <h1 class="lesson-title">Aula 17: O Coração da Rede - DNS</h1>
+        <div class="lesson-meta"><i class="far fa-calendar-alt"></i> Módulo 3 • Professor: Matheus M. Coginotti</div>
+        <div class="content">
+            <p>Antes de promovermos o nosso Windows Server a um Controlador de Domínio, precisamos entender o serviço mais vital de toda a infraestrutura Microsoft: o <strong>DNS (Domain Name System)</strong>.</p>
+            
+            <h2><i class="fas fa-globe"></i> 1. O Tradutor da Internet e da Rede Local</h2>
+            <p>Os computadores se comunicam através de endereços IP (ex: `192.168.1.10`), mas humanos são péssimos em decorar números. O DNS funciona como uma "Lista Telefônica": ele traduz um nome amigável (como <code>google.com</code> ou <code>suaempresa.local</code>) para o endereço IP correspondente que a máquina entende.</p>
+
+            <h2><i class="fas fa-project-diagram"></i> 2. Por que o Active Directory DEPENDE do DNS?</h2>
+            <p>No ambiente corporativo, o DNS faz muito mais do que apenas traduzir sites. Ele possui **Registros de Serviço (SRV)**. Quando um computador cliente liga na rede da sua empresa fictícia, ele "grita" na rede perguntando: <em>"Quem é o servidor que valida senhas por aqui?"</em></p>
+            <p>É o servidor DNS local (que rodará dentro do próprio Windows Server) que responde apontando para o endereço IP do seu Controlador de Domínio.</p>
+
+            <div class="highlight-box warning">
+                <strong><i class="fas fa-exclamation-triangle"></i> Sem DNS, Sem Rede!</strong>
+                <p>Se o DNS cair em uma empresa, os usuários não conseguem fazer login nos PCs, as pastas mapeadas param de funcionar e as GPOs não são aplicadas. É por isso que, durante a instalação do Active Directory (na próxima aula), o Windows faz questão de instalar e configurar a função de Servidor DNS automaticamente no mesmo momento!</p>
+            </div>
+        </div>
+        <div class="lesson-nav">
+            <a href="aula16.html" class="btn-nav"><i class="fas fa-chevron-left"></i> Aula Anterior</a>
+            <a href="aula18.html" class="btn-nav">Próxima Aula <i class="fas fa-chevron-right"></i></a>
+        </div>
+    </main>
+</body>
+</html>
