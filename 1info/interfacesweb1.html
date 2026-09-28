@@ -314,11 +314,15 @@
         const lessonList = [];
         for (let i = 1; i <= 30; i++) {
             lessonList.push(i.toString());
-            // Injeta as aulas auxiliares e a avaliação logo após a aula 13
+            // Injeta as aulas auxiliares e a primeira avaliação logo após a aula 13
             if (i === 13) {
                 lessonList.push('13.A');
                 lessonList.push('13.B');
                 lessonList.push('AVALIAÇÃO');
+            }
+            // Injeta a segunda avaliação logo após a aula 21
+            if (i === 21) {
+                lessonList.push('AVALIAÇÃO 2');
             }
         }
 
@@ -343,10 +347,12 @@
             
             console.log(`Inicializando Módulo ${lessonId}...`);
             
-            // Tratamento especial para o nome do arquivo, evitando acentos em "AVALIAÇÃO"
+            // Tratamento especial para o nome do arquivo, evitando acentos e espaços
             let fileName = `aula${lessonId}.html`;
             if (lessonId === 'AVALIAÇÃO') {
                 fileName = 'avaliacao.html';
+            } else if (lessonId === 'AVALIAÇÃO 2') {
+                fileName = 'avaliacao2.html';
             }
             
             // Redirecionamento
@@ -364,10 +370,10 @@
                 const lessonItem = document.createElement('div');
                 lessonItem.className = `lesson-item ${hasAccess ? 'accessed' : ''}`;
 
-                // Ajuste dinâmico de fonte para comportar "13.A", "13.B" e a palavra "AVALIAÇÃO"
+                // Ajuste dinâmico de fonte para comportar "13.A", "13.B" e as palavras de "AVALIAÇÃO"
                 let fontSize = '2rem';
-                if (lessonId === 'AVALIAÇÃO') {
-                    fontSize = '0.80rem'; // Letra menor para caber no polígono
+                if (lessonId === 'AVALIAÇÃO' || lessonId === 'AVALIAÇÃO 2') {
+                    fontSize = '0.70rem'; // Letra um pouco menor para caber "AVALIAÇÃO 2" no polígono
                 } else if (lessonId.includes('.')) {
                     fontSize = '1.4rem';
                 }
