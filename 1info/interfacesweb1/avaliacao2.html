@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação: Dashboard Freelance (Aulas 15 a 20)</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Fira+Code:wght@400;500&display=swap');
+        
+        body { font-family: 'Inter', sans-serif; }
+        code, pre { font-family: 'Fira Code', monospace; }
+        
+        .code-container {
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            border-radius: 12px;
+            padding: 24px;
+            overflow-x: auto;
+            border: 1px solid #333;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .tag { color: #569cd6; font-family: 'Fira Code', monospace; }
+        .attr { color: #9cdcfe; font-family: 'Fira Code', monospace;}
+        .string { color: #ce9178; font-family: 'Fira Code', monospace;}
+        .css-prop { color: #9cdcfe; font-family: 'Fira Code', monospace;}
+        
+        /* ========================================================
+           ESTILOS DO RESULTADO AO VIVO (BLINDADO)
+        ======================================================== */
+        .live-preview-section {
+            background-image: linear-gradient(135deg, #0f172a, #4338ca);
+            color: #334155;
+            padding: 40px 20px;
+            border-radius: 24px;
+            margin-top: 40px;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.2);
+        }
+
+        .live-preview-section header {
+            text-align: center;
+            color: white;
+            padding: 0 20px 30px;
+        }
+
+        .live-preview-section header h1 {
+            margin: 0;
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.4);
+        }
+
+        .iframe-container {
+            max-width: 900px;
+            margin: 0 auto;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+            border: 4px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        iframe {
+            width: 100%;
+            height: 600px;
+            border: none;
+            background-color: #ffffff;
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 leading-relaxed font-light">
+
+    <header class="bg-indigo-900 text-white py-20 px-6 shadow-xl text-center md:text-left">
+        <div class="max-w-5xl mx-auto">
+            <span class="bg-indigo-500 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-widest text-indigo-50">Atividade Avaliativa (Aulas 15 a 20)</span>
+            <h1 class="text-5xl font-extrabold mt-4 mb-4">Dashboard Tech-Freela</h1>
+            <p class="text-2xl text-indigo-200 opacity-90 font-light">Desenvolvimento de Interface, Responsividade e Interação</p>
+        </div>
+    </header>
+
+    <main class="max-w-5xl mx-auto py-16 px-6">
+        
+        <!-- OBJETIVOS -->
+        <section class="mb-16 bg-white p-10 rounded-3xl shadow-sm border border-slate-200">
+            <div class="flex items-center mb-6">
+                <div class="bg-indigo-100 p-4 rounded-2xl mr-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-indigo-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-800">Objetivo e Instruções</h2>
+            </div>
+            
+            <div class="mb-8 p-6 bg-slate-50 rounded-2xl border-l-4 border-indigo-600">
+                <p class="text-lg text-slate-700">
+                    Você foi contratado(a) como Desenvolvedor Front-End freelancer para construir o Painel de Controle de uma startup. O designer enviou a estrutura HTML base. A sua missão é criar os arquivos <code>style.css</code> e <code>script.js</code> aplicando todo o conhecimento das Aulas 15 a 20 para estilizar o layout com Flexbox, torná-lo responsivo para telemóveis e adicionar a função do Modo Escuro com JavaScript.
+                </p>
+            </div>
+
+            <h3 class="text-xl font-bold text-slate-800 mb-4">Regras de Ouro:</h3>
+            <ul class="space-y-3 text-slate-600">
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-indigo-500 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    Você <strong>não pode</strong> alterar as classes ou os IDs do arquivo HTML fornecido abaixo.
+                </li>
+                <li class="flex items-start">
+                    <svg class="h-6 w-6 text-indigo-500 mr-2 shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg>
+                    A consulta aos materiais das Aulas 15 a 20 é totalmente permitida.
+                </li>
+            </ul>
+        </section>
+
+        <!-- REQUISITOS (10 MISSÕES) -->
+        <section class="mb-16">
+            <div class="flex items-center mb-8">
+                <div class="bg-slate-200 p-3 rounded-full mr-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8 text-slate-700" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900">Requisitos Técnicos (10 Tarefas)</h2>
+            </div>
+
+            <!-- FASE 1 -->
+            <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 mb-8">
+                <h3 class="text-2xl font-bold text-indigo-700 mb-6 flex items-center">
+                    <span class="bg-indigo-100 text-indigo-800 w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">1</span>
+                    Fase 1: O Esqueleto e Flexbox Base
+                </h3>
+                
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p class="font-bold text-slate-800">T1. O Reset Base</p>
+                        <p class="text-sm text-slate-600 mt-1">Selecione o <span class="tag">body</span>, zere a margem externa (<span class="css-prop">margin: 0</span>) e defina a fonte da página (<span class="css-prop">font-family: sans-serif</span>).</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p class="font-bold text-slate-800">T2. Estrutura Principal</p>
+                        <p class="text-sm text-slate-600 mt-1">A classe <span class="tag">.container-principal</span> deve usar <span class="css-prop">display: flex</span>. O Menu Lateral terá largura de <span class="css-prop">250px</span>, e o Conteúdo deve preencher o resto (<span class="css-prop">flex: 1</span>).</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p class="font-bold text-slate-800">T3. Menu Empilhado</p>
+                        <p class="text-sm text-slate-600 mt-1">Use Flexbox no <span class="tag">.menu-lateral</span> com direção em coluna (<span class="css-prop">flex-direction: column</span>). Adicione espaçamento (<span class="css-prop">gap</span>).</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100">
+                        <p class="font-bold text-slate-800">T4. Cabeçalho Extremos</p>
+                        <p class="text-sm text-slate-600 mt-1">No <span class="tag">.cabecalho-flex</span>, separe o título e o botão nos extremos usando <span class="css-prop">justify-content: space-between</span> e alinhe-os ao centro verticalmente.</p>
+                    </div>
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-100 md:col-span-2">
+                        <p class="font-bold text-slate-800">T5. Cartões com Flex Wrap</p>
+                        <p class="text-sm text-slate-600 mt-1">A <span class="tag">.area-cartoes</span> precisa de <span class="css-prop">display: flex</span> e <span class="css-prop">flex-wrap: wrap</span> para os cartões descerem de linha se a tela encolher. Aplique um <span class="css-prop">gap: 20px</span>.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FASE 2 -->
+            <div class="bg-indigo-900 p-8 rounded-2xl shadow-xl text-white mb-16">
+                <h3 class="text-2xl font-bold text-white mb-6 flex items-center">
+                    <span class="bg-indigo-500 text-white w-10 h-10 rounded-full flex items-center justify-center mr-4 text-xl">2</span>
+                    Fase 2: Interatividade e Responsividade
+                </h3>
+                
+                <div class="space-y-6">
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-indigo-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-indigo-100 text-lg">T6. Interação Hover:</p>
+                            <p class="text-indigo-200 mt-1 text-sm">Ao passar o mouse ( <span class="tag">:hover</span> ) sobre um <span class="tag">.cartao</span>, faça-o subir levemente (<span class="css-prop">transform: translateY(-5px)</span>) e aumente a sombra.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-indigo-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-indigo-100 text-lg">T7 e T8. Breakpoint e Inversão Mobile:</p>
+                            <p class="text-indigo-200 mt-1 text-sm">Crie um radar <strong><span class="tag">@media (max-width: 768px)</span></strong>. Dentro dele, altere a direção da <span class="tag">.container-principal</span> para <span class="css-prop">column</span>, forçando o menu a ficar no topo. Em seguida, mude a largura do menu para 100%.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-indigo-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-indigo-100 text-lg">T9. Escondendo Elementos (Mobile):</p>
+                            <p class="text-indigo-200 mt-1 text-sm">Ainda dentro do Media Query, selecione a classe <span class="tag">.aviso-desktop</span> e use <span class="css-prop">display: none</span> para que a frase não apareça no telemóvel.</p>
+                        </div>
+                    </div>
+                    <div class="flex items-start">
+                        <div class="w-3 h-3 rounded-full bg-amber-400 mt-1.5 mr-4 shrink-0"></div>
+                        <div>
+                            <p class="font-bold text-amber-200 text-lg">T10. Motor JavaScript (Modo Escuro):</p>
+                            <p class="text-indigo-100 mt-1 text-sm">No arquivo <code>script.js</code>, selecione o <span class="tag">#btn-escuro</span>. Adicione um ouvinte de evento (<span class="css-prop">click</span>) que injete uma classe no body (ou modifique diretamente o style) para escurecer o fundo do <span class="tag">.conteudo</span>.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- HTML BASE -->
+            <div class="flex items-center mb-6">
+                <div class="bg-slate-800 p-3 rounded-full mr-4 text-white">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-bold text-slate-900 font-mono">HTML de Partida</h2>
+            </div>
+            <p class="mb-6 text-slate-600 text-lg">Copie este código para o seu <code>index.html</code>. Link os seus próprios arquivos CSS e JS a ele.</p>
+
+            <div class="code-container">
+<pre><code><span class="comment">&lt;!-- index.html (ESTRUTURA INTOCÁVEL) --&gt;</span>
+<span class="tag">&lt;!DOCTYPE html&gt;</span>
+<span class="tag">&lt;html</span> <span class="attr">lang</span>=<span class="string">"pt-br"</span><span class="tag">&gt;</span>
+<span class="tag">&lt;head&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;meta</span> <span class="attr">name</span>=<span class="string">"viewport"</span> <span class="attr">content</span>=<span class="string">"width=device-width, initial-scale=1.0"</span><span class="tag">&gt;</span>
+    <span class="tag">&lt;title&gt;</span>Painel Freelance<span class="tag">&lt;/title&gt;</span>
+    <span class="comment">&lt;!-- DICA: Link o seu style.css aqui --&gt;</span>
+<span class="tag">&lt;/head&gt;</span>
+<span class="tag">&lt;body&gt;</span>
+
+    <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"container-principal"</span><span class="tag">&gt;</span>
+        
+        <span class="tag">&lt;nav</span> <span class="attr">class</span>=<span class="string">"menu-lateral"</span><span class="tag">&gt;</span>
+            <span class="tag">&lt;h2&gt;</span>TechFreela<span class="tag">&lt;/h2&gt;</span>
+            <span class="tag">&lt;ul&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Dashboard<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Relatórios<span class="tag">&lt;/li&gt;</span>
+                <span class="tag">&lt;li&gt;</span>Configurações<span class="tag">&lt;/li&gt;</span>
+            <span class="tag">&lt;/ul&gt;</span>
+            <span class="tag">&lt;button</span> <span class="attr">id</span>=<span class="string">"btn-escuro"</span> <span class="attr">class</span>=<span class="string">"btn-modo-escuro"</span><span class="tag">&gt;</span>Modo Escuro<span class="tag">&lt;/button&gt;</span>
+        <span class="tag">&lt;/nav&gt;</span>
+
+        <span class="tag">&lt;main</span> <span class="attr">class</span>=<span class="string">"conteudo"</span> <span class="attr">id</span>=<span class="string">"alvo-escuro"</span><span class="tag">&gt;</span>
+            
+            <span class="tag">&lt;header</span> <span class="attr">class</span>=<span class="string">"cabecalho-flex"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;h1&gt;</span>Bem-vindo<span class="tag">&lt;/h1&gt;</span>
+                <span class="tag">&lt;button</span> <span class="attr">class</span>=<span class="string">"btn-sair"</span><span class="tag">&gt;</span>Sair<span class="tag">&lt;/button&gt;</span>
+            <span class="tag">&lt;/header&gt;</span>
+
+            <span class="tag">&lt;p</span> <span class="attr">class</span>=<span class="string">"aviso-desktop"</span><span class="tag">&gt;</span>Aviso: Acessando a partir de um Computador Desktop.<span class="tag">&lt;/p&gt;</span>
+
+            <span class="tag">&lt;section</span> <span class="attr">class</span>=<span class="string">"area-cartoes"</span><span class="tag">&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"cartao"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;h3&gt;</span>Vendas Mensais<span class="tag">&lt;/h3&gt;</span>
+                    <span class="tag">&lt;p&gt;</span>R$ 4.500<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"cartao"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;h3&gt;</span>Novos Clientes<span class="tag">&lt;/h3&gt;</span>
+                    <span class="tag">&lt;p&gt;</span>32 Registros<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+                <span class="tag">&lt;div</span> <span class="attr">class</span>=<span class="string">"cartao"</span><span class="tag">&gt;</span>
+                    <span class="tag">&lt;h3&gt;</span>Taxa de Conversão<span class="tag">&lt;/h3&gt;</span>
+                    <span class="tag">&lt;p&gt;</span>18%<span class="tag">&lt;/p&gt;</span>
+                <span class="tag">&lt;/div&gt;</span>
+            <span class="tag">&lt;/section&gt;</span>
+
+        <span class="tag">&lt;/main&gt;</span>
+    <span class="tag">&lt;/div&gt;</span>
+
+    <span class="comment">&lt;!-- DICA: Link o seu script.js aqui --&gt;</span>
+<span class="tag">&lt;/body&gt;</span>
+<span class="tag">&lt;/html&gt;</span>
+</code></pre>
+            </div>
+
+            <!-- RESULTADO AO VIVO BLINDADO -->
+            <div class="live-preview-section">
+                <header>
+                    <h1>Resultado "Ao Vivo" Esperado</h1>
+                    <p class="text-indigo-200 mt-2 font-medium">Você pode testar a responsividade arrastando a janela ou usando o botão de Modo Escuro.</p>
+                </header>
+                
+                <div class="iframe-container">
+                    <!-- O código do iframe está codificado em base64. Se o aluno olhar o código fonte desta página, 
+                         ele verá apenas o hash, impedindo que copie o CSS pronto! -->
+                    <iframe src="data:text/html;base64,PCFET0NUWVBFIGh0bWw+CjxodG1sIGxhbmc9InB0LWJyIj4KPGhlYWQ+CjxtZXRhIGNoYXJzZXQ9IlVURi04Ij4KPG1ldGEgbmFtZT0idmlld3BvcnQiIGNvbnRlbnQ9IndpZHRoPWRldmljZS13aWR0aCwgaW5pdGlhbC1zY2FsZT0xLjAiPgo8c3R5bGU+CiogeyBtYXJnaW46IDA7IHBhZGRpbmc6IDA7IGJveC1zaXppbmc6IGJvcmRlci1ib3g7IGZvbnQtZmFtaWx5OiBzYW5zLXNlcmlmOyB9Ci5jb250YWluZXItcHJpbmNpcGFsIHsgZGlzcGxheTogZmxleDsgbWluLWhlaWdodDogMTAwdmg7IGJhY2tncm91bmQ6ICNmMWY1Zjk7IH0KLm1lbnUtbGF0ZXJhbCB7IHdpZHRoOiAyNTBweDsgYmFja2dyb3VuZDogIzFlMjkzYjsgY29sb3I6IHdoaXRlOyBwYWRkaW5nOiAyMHB4OyBkaXNwbGF5OiBmbGV4OyBmbGV4LWRpcmVjdGlvbjogY29sdW1uOyBnYXA6IDE1cHg7IH0KLm1lbnUtbGF0ZXJhbCB1bCB7IGxpc3Qtc3R5bGU6IG5vbmU7IGRpc3BsYXk6IGZsZXg7IGZsZXgtZGlyZWN0aW9uOiBjb2x1bW47IGdhcDogMTBweDsgfQouYnRuLW1vZG8tZXNjdXJvIHsgcGFkZGluZzogMTBweDsgYmFja2dyb3VuZDogIzhiNWNmNjsgY29sb3I6IHdoaXRlOyBib3JkZXI6IG5vbmU7IGJvcmRlci1yYWRpdXM6IDVweDsgY3Vyc29yOiBwb2ludGVyOyB9Ci5jb250ZXVkbyB7IGZsZXg6IDE7IHBhZGRpbmc6IDQwcHg7IHRyYW5zaXRpb246IGJhY2tncm91bmQgMC4zczsgfQouY2FiZWNhbGhvLWZsZXggeyBkaXNwbGF5OiBmbGV4OyBqdXN0aWZ5LWNvbnRlbnQ6IHNwYWNlLWJldHdlZW47IGFsaWduLWl0ZW1zOiBjZW50ZXI7IGJhY2tncm91bmQ6IHdoaXRlOyBwYWRkaW5nOiAyMHB4OyBib3JkZXItcmFkaXVzOiA4cHg7IG1hcmdpbi1ib3R0b206IDIwcHg7IGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsMCwwLDAuMDUpOyB9Ci5idG4tc2FpciB7IHBhZGRpbmc6IDhweCAxNXB4OyBiYWNrZ3JvdW5kOiAjZWY0NDQ0OyBjb2xvcjogd2hpdGU7IGJvcmRlcjogbm9uZTsgYm9yZGVyLXJhZGl1czogNXB4OyBjdXJzb3I6IHBvaW50ZXI7IH0KLmF2aXNvLWRlc2t0b3AgeyBiYWNrZ3JvdW5kOiAjZmRlMDQ3OyBwYWRkaW5nOiAxMHB4OyBib3JkZXItcmFkaXVzOiA1cHg7IG1hcmdpbi1ib3R0b206IDIwcHg7IGNvbG9yOiAjODU0ZDBlOyBmb250LXdlaWdodDogYm9sZDsgfQouYXJlYS1jYXJ0b2VzIHsgZGlzcGxheTogZmxleDsgZmxleC13cmFwOiB3cmFwOyBnYXA6IDIwcHg7IH0KLmNhcnRhbyB7IGJhY2tncm91bmQ6IHdoaXRlOyBwYWRkaW5nOiAyMHB4OyBib3JkZXItcmFkaXVzOiA4cHg7IGZsZXg6IDE7IG1pbi13aWR0aDogMjAwcHg7IGJveC1zaGFkb3c6IDAgMnB4IDRweCByZ2JhKDAsMCwwLDAuMDUpOyB0cmFuc2l0aW9uOiB0cmFuc2Zvcm0gMC4zcywgYm94LXNoYWRvdyAwLjNzOyB9Ci5jYXJ0YW86aG92ZXIgeyB0cmFuc2Zvcm06IHRyYW5zbGF0ZVkoLTVweCk7IGJveC1zaGFkb3c6IDAgMTBweCAxNXB4IHJnYmEoMCwwLDAsMC4xKTsgfQpAbWVkaWEgKG1heC13aWR0aDogNzY4cHgpIHsKICAgIC5jb250YWluZXItcHJpbmNpcGFsIHsgZmxleC1kaXJlY3Rpb246IGNvbHVtbjsgfQogICAgLm1lbnUtbGF0ZXJhbCB7IHdpZHRoOiAxMDAlOyBoZWlnaHQ6IGF1dG87IH0KICAgIC5hdmlzby1kZXNrdG9wIHsgZGlzcGxheTogbm9uZTsgfQogICAgLmNvbnRldWRvIHsgcGFkZGluZzogMTVweDsgfQp9Ci8qIEpTIHRhcmdldCBjbGFzc2VzICovCi5tb2RvLWVzY3VybyB7IGJhY2tncm91bmQtY29sb3I6ICMwZjE3MmEgIWltcG9ydGFudDsgY29sb3I6ICNmOGZhZmMgIWltcG9ydGFudDsgfQoubW9kby1lc2N1cm8gLmNhcnRhbywgLm1vZG8tZXNjdXJvIC5jYWJlY2FsaG8tZmxleCB7IGJhY2tncm91bmQtY29sb3I6ICMxZTI5M2IgIWltcG9ydGFudDsgY29sb3I6IHdoaXRlICFpbXBvcnRhbnQ7IH0KPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KPGRpdiBjbGFzcz0iY29udGFpbmVyLXByaW5jaXBhbCI+CiAgICA8bmF2IGNsYXNzPSJtZW51LWxhdGVyYWwiPgogICAgICAgIDxoMj5UZWNoRnJlZWxhPC9oMj4KICAgICAgICA8dWw+PGxpPkRhc2hib2FyZDwvbGk+PGxpPlJlbGF0w7NyaW9zPC9saT48bGk+Q29uZmlndXJhw6fDtWVzPC9saT48L3VsPgogICAgICAgIDxidXR0b24gaWQ9ImJ0bi1lc2N1cm8iIGNsYXNzPSJidG4tbW9kby1lc2N1cm8iPkF0aXZhciBNb2RvIEVzY3VybzwvYnV0dG9uPgogICAgPC9uYXY+CiAgICA8bWFpbiBjbGFzcz0iY29udGV1ZG8iIGlkPSJhbHZvLWVzY3VybyI+CiAgICAgICAgPGhlYWRlciBjbGFzcz0iY2FiZWNhbGhvLWZsZXgiPgogICAgICAgICAgICA8aDE+QmVtLXZpbmRvPC9oMT4KICAgICAgICAgICAgPGJ1dHRvbiBjbGFzcz0iYnRuLXNhaXIiPlNhaXI8L2J1dHRvbj4KICAgICAgICA8L2hlYWRlcj4KICAgICAgICA8cCBjbGFzcz0iYXZpc28tZGVza3RvcCI+QXZpc286IEFjZXNzYW5kbyB2aWEgQ29tcHV0YWRvciBEZXNrdG9wLjwvcD4KICAgICAgICA8c2VjdGlvbiBjbGFzcz0iYXJlYS1jYXJ0b2VzIj4KICAgICAgICAgICAgPGRpdiBjbGFzcz0iY2FydGFvIj48aDM+VmVuZGFzIE1lbnNhaXM8L2gzPjxwPlIkIDQuNTAwPC9wPjwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJjYXJ0YW8iPjxoMz5Ob3ZvcyBDbGllbnRlczwvaDM+PHA+MzIgUmVnaXN0cm9zPC9wPjwvZGl2PgogICAgICAgICAgICA8ZGl2IGNsYXNzPSJjYXJ0YW8iPjxoMz5UYXhhIGRlIENvbnZlcnPDo288L2gzPjxwPjE4JTwvcD48L2Rpdj4KICAgICAgICA8L3NlY3Rpb24+CiAgICA8L21haW4+CjwvZGl2Pgo8c2NyaXB0PgogICAgZG9jdW1lbnQuZ2V0RWxlbWVudEJ5SWQoJ2J0bi1lc2N1cm8nKS5hZGRFdmVudExpc3RlbmVyKCdjbGljaycsIGZ1bmN0aW9uKCkgewogICAgICAgIGRvY3VtZW50LmdldEVsZW1lbnRCeUlkKCdhbHZvLWVzY3VybycpLmNsYXNzTGlzdC50b2dnbGUoJ21vZG8tZXNjdXJvJyk7CiAgICB9KTsKPC9zY3JpcHQ+CjwvYm9keT4KPC9odG1sPg=="></iframe>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <footer class="bg-slate-900 text-slate-400 text-center py-12 px-6">
+        <p class="max-w-4xl mx-auto text-sm">
+            Avaliação Prática - Módulos 4 e 5<br>
+            Leia os requisitos com atenção e utilize os materiais de consulta se necessário. Bom trabalho!
+        </p>
+    </footer>
+
+</body>
+</html>
